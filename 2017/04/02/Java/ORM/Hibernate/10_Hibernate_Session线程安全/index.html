@@ -22,7 +22,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>project | mortalLiao</title>
+<title>Hibernate_Session线程安全问题 | mortalLiao</title>
 
 <link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
 
@@ -31,7 +31,7 @@
 
     
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/othersPages.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/solarized-light.css">
     <!--script-->
@@ -145,145 +145,145 @@
 
 
         <div id="main">
+    <article id="post">
+        <div id="post-header">
 
+            <h1 id="Hibernate_Session线程安全问题">
+                
+                Hibernate_Session线程安全问题
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session线程安全/" data-thread-key="/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session线程安全/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="Hibernate_Session线程安全问题"
+              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session线程安全/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
 
-    <div id="demo">
-
-        <div class="demo-wrap">
-
-            <h2 class="demo-title"><i class="fa fa-desktop"></i>
-                Netease
-
-                <span class="warning">此作品集为挑选部分，仅作为学习和展示使用，请勿用于商业用途。本人只负责<strong>PC端</strong>页面实现，插件、初始代码、设计稿、顶部、尾部以及分享按钮均来自网易，特此声明！</span>
-
-            </h2>
-            <ul class="demo-list">
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/wysyzs/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_223319_0004.jpg);"></div>
-                        <h3 class="demo-item-title">网易手游助手</h3>
-                        <p class="demo-item-desc">网易手游助手，全手游通用免费模拟器</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/xyq-zt-11yfqh/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224222_0005.jpg);"></div>
-                        <h3 class="demo-item-title">梦幻西游</h3>
-                        <p class="demo-item-desc">初雪掩金碧，落梅引寒霜</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/dh3jsng/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224340_0007.jpg);"></div>
-                        <h3 class="demo-item-title">新大话西游-金色南国</h3>
-                        <p class="demo-item-desc">走进神秘天竺国度，感受奇妙西域世界</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/dhhzl/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224410_0008.jpg);"></div>
-                        <h3 class="demo-item-title">大航海之路</h3>
-                        <p class="demo-item-desc">我们的征途是星辰大海</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/dtwslldpp/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224432_0009.jpg);"></div>
-                        <h3 class="demo-item-title">大唐无双零</h3>
-                        <p class="demo-item-desc">六大品牌联合献礼，百万福利贺岁</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/ldxydfdj/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224459_0010.jpg);"></div>
-                        <h3 class="demo-item-title">乱斗西游--S3超级联赛</h3>
-                        <p class="demo-item-desc">乱斗西游--S3超级联赛</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/lwjhldl/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224528_0011.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">梦幻西游-老玩家回流大礼</h3>
-                        <p class="demo-item-desc">梦幻西游-老玩家回流大礼</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/mhxydsjzt/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224549_0012.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">梦幻西游-2016单身节活动</h3>
-                        <p class="demo-item-desc">佳人影独立，怡然待君来</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/mhxywstgj2/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224615_0013.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">梦幻西游-第二届武神坛冠军介绍</h3>
-                        <p class="demo-item-desc">梦幻西游-第二届武神坛冠军介绍</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/tx3zqty/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224700_0014.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">天下3--中秋团圆，聚在义起</h3>
-                        <p class="demo-item-desc">天下3--中秋团圆，聚在义起</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/wh2ljjs/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224722_0015.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">武魂2--狼骑降世</h3>
-                        <p class="demo-item-desc">攻与守之间的生死博弈，胜负即荣辱</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/wh-zt-qing/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224740_0016.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">武魂2--五周年庆典</h3>
-                        <p class="demo-item-desc">武魂2--五周年庆典</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/yxsgyhwm/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224815_0017.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">英雄三国</h3>
-                        <p class="demo-item-desc">抢英三联动豪礼</p>
-                    </a>
-                </li>
-
-            </ul>
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
+<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>第二步：编程部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:session不需自己关闭.</p>
+</blockquote>
 
         </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                <a href="javascript:void(0)" class="high-song">high起来 &#128541;</a>
+                
+                
+                <a href="javascript:void(0)" class="donate fa">赠我一杯 &#128536;</a>
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">yujian.liao</a>
+                </li>
+                <li>发表日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/后端开发/">后端开发</a>
+                    
+                    <a href="/categories/后端开发/Java/">Java</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/">ORM</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/Hibernate/">Hibernate</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Hibernate/">Hibernate</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但未经作者同意必须在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/02/Java/ORM/Hibernate/05_Hibernate_JPA注解/" class="pre-post fa fa-caret-left">Hibernate_JPA注解</a>
+        
+        
+        <a href="/2017/04/02/Java/ORM/Hibernate/09_Hibernate_查询缓存/" class="next-post fa">Hibernate_查询缓存</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
 
     </div>
-
+    
 </div>
+
 
     </div>
     <footer id="footer">
@@ -318,6 +318,8 @@
     <ul id="tools">
     <li class="totop-btn fa fa-angle-up"></li>
     
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -337,6 +339,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate-Session线程安全问题"><span class="toc-number">1.</span> <span class="toc-text">Hibernate_Session线程安全问题:</span></a></li></ol>
 
 
     <script src="/js/highsong.js"></script>

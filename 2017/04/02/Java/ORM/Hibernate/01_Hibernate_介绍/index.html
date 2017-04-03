@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>Hibernate框架介绍 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/solarized-light.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="https://github.com/mortalliao"
+            title="fork me" target="_blank">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Mybatis/"><i class="fa" aria-hidden="true">Mybatis</i></a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">12</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="Hibernate框架介绍">
+                
+                Hibernate框架介绍
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/01_Hibernate_介绍/" data-thread-key="/2017/04/02/Java/ORM/Hibernate/01_Hibernate_介绍/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="Hibernate框架介绍"
+              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/01_Hibernate_介绍/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="Hibernate框架介绍"><a href="#Hibernate框架介绍" class="headerlink" title="Hibernate框架介绍:"></a>Hibernate框架介绍:</h1><p>Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，<br>能够让程序员以面向对象的方式来操作数据库，从而简化持久层的开发.</p>
+<p>直接把一个对象保存到数据库.</p>
+<p>持久层(数据访问层).</p>
+<p><strong>ORM:Object Relation Mapping 对象关系映射.</strong></p>
+<ul>
+<li>Object: 对象指得是面向对象的编程语言.</li>
+<li>Relation: 关系指得是关系型数据库.</li>
+<li>Mapping: 面向对象的编程语言与关系型数据库之间的映射.</li>
+</ul>
+<p><strong>ORM映射思想:</strong></p>
+<table>
+<thead>
+<tr>
+<th>面向对象的编程语言(java)</th>
+<th>关系型数据库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类</td>
+<td>表</td>
+</tr>
+<tr>
+<td>对象</td>
+<td>一行数据</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>列名</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Hibernate框架优缺点"><a href="#Hibernate框架优缺点" class="headerlink" title="Hibernate框架优缺点:"></a>Hibernate框架优缺点:</h2><ul>
+<li><p>优点:简化持化层的开发.<br> 它底层可以跨数据库.</p>
+</li>
+<li><p>缺点:性能比JDBC差.</p>
+</li>
+</ul>
+<p><strong>JPA: Java Persistence Api: java持久化api.</strong></p>
+<ul>
+<li>它是sun公司根据ORM思想制订出来的持久层的规范.</li>
+</ul>
+<p><strong>JDBC: Java DataBase Connection java数据库连接的规范.</strong></p>
+<p>ORM –&gt; JPA –&gt; (Hibernate、TopLink、Jdo).</p>
+<p>Hibernate框架下载与安装(了解):</p>
+<blockquote>
+<p>官方网站:<a href="http://www.hibernate.org" target="_blank" rel="external">http://www.hibernate.org</a><br>公司:jboss公司的产品.</p>
+</blockquote>
+<p>解压后文件夹说明:  </p>
+<ul>
+<li><p>documentation:存放了Hibernate所有的文档.<br> devguide : 开发指导<br> javadocs: api文档<br> manual: 开发指南<br> quickstart: 快速入门  </p>
+</li>
+<li><p>lib:存放了所有的jar.<br> required : 必须的<br> jpa : jpa实现jar包.<br> optional:  可选的<br> c3p0: 连接池.<br> ehcache: 缓存.</p>
+</li>
+<li><p>project: 项目的源码、示例、测试</p>
+</li>
+<li>etc : 存放了配置文件的模版.</li>
+</ul>
+<h2 id="Hibernate快速开始"><a href="#Hibernate快速开始" class="headerlink" title="Hibernate快速开始:"></a>Hibernate快速开始:</h2><h3 id="写Hibernate的核心配置文件"><a href="#写Hibernate的核心配置文件" class="headerlink" title="写Hibernate的核心配置文件"></a>写Hibernate的核心配置文件</h3><p>src/hibernate.cfg.xml:<br>cfg: configuration  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置数据库方言(告诉Hibernate4底层用得是什么样的数据库) --&gt;</div><div class="line">&lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQL5InnoDBDialect&lt;/property&gt;</div><div class="line">&lt;!-- 配置Hibernate4是否支持自动创建表 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的信息 --&gt;</div><div class="line">&lt;!-- 配置连接数据库驱动类 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的URL --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql://localhost:3306/hibernate4&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的用户名 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的用户名 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.password&quot;&gt;root&lt;/property&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>hibernate-release-4.3.8.Final\project\etc\hibernate.cfg.xml<br>hibernate-release-4.3.8.Final\project\etc\hibernate.properties(参考属性文件)</p>
+<p>配置(myeclipse提示): hibernate-configuration-3.0.dtd<br>dtd位置:<br>hibernate-release-4.3.8.Final\project\hibernate-core\src\main\resources\org\hibernate\hibernate-configuration-3.0.dtd</p>
+</blockquote>
+<h3 id="写持久化类"><a href="#写持久化类" class="headerlink" title="写持久化类"></a>写持久化类</h3><p>持久化类 = 普通java类(pojo) + xxx.hbm.xml(老的方式)<br>持久化类 = 普通java类(pojo) + jpa注解@Entity<br><br>HBM: hibernate-mapping<br><br>持久化类必须有一个唯一的属性(唯一标识符): @Id<br>也就是哪个属性生成表中的主键列.<br>Hibernate生成的表必须要有主键列.<br><br>xxx.hbm.xml:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!-- class:配置类转换成表的相关信息 --&gt;</div><div class="line">&lt;class name=&quot;cn.itcast.hibernate.entity.User&quot; table=&quot;USER_INFO&quot;&gt;</div><div class="line">&lt;!-- id: 主键映射 --&gt;</div><div class="line">&lt;id name=&quot;id&quot; column=&quot;ID&quot;/&gt;</div><div class="line">&lt;!-- 基本的列 --&gt;</div><div class="line">&lt;property name=&quot;name&quot; column=&quot;NAME&quot;/&gt;</div><div class="line">&lt;!-- 基本的列 --&gt;</div><div class="line">&lt;property name=&quot;age&quot; column=&quot;AGE&quot;/&gt;	</div><div class="line">&lt;/class&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="在hibernate-cfg-xml文件中配置持久化类"><a href="#在hibernate-cfg-xml文件中配置持久化类" class="headerlink" title="在hibernate.cfg.xml文件中配置持久化类"></a>在hibernate.cfg.xml文件中配置持久化类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置持久化类 --&gt;</div><div class="line">&lt;mapping class=&quot;cn.itcast.hibernate.entity.User&quot;/&gt;</div></pre></td></tr></table></figure>
+<h3 id="Hibernate编程部分"><a href="#Hibernate编程部分" class="headerlink" title="Hibernate编程部分"></a>Hibernate编程部分</h3><ol>
+<li><p>Configuration: 专门负责加载hibernate.cfg.xml文件，产生SessionFactory.</p>
+</li>
+<li><p>SessionFactory: 会话工厂</p>
+</li>
+<li><p>Session: 会话</p>
+</li>
+<li><p>Transaction: 事务管理</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/** 第一步 : 创建Configuration加载hibernate.cfg.xml */</div><div class="line">Configuration configuration = new Configuration() // 加载hibernate.properties</div><div class="line">.configure(); // 加载hibernate.cfg.xml</div><div class="line">/** 第二步:构建SessionFactory */</div><div class="line">SessionFactory sessionFactory = configuration.buildSessionFactory();</div><div class="line">/** 第三步:打开Session */</div><div class="line">Session session = sessionFactory.openSession();</div><div class="line">/** 第四步:开启事务得到事务对象(事务默认是开启的) */</div><div class="line">Transaction transaction = session.beginTransaction();</div><div class="line">/** 第五步:利用Session完成所有的持久化操作(CRUD) */</div><div class="line">User user = new User();</div><div class="line">user.setId(1);</div><div class="line">user.setAge(19);</div><div class="line">user.setName(&quot;名字&quot;);</div><div class="line">session.save(user);</div><div class="line">/** 第六步:事务提交 */</div><div class="line">transaction.commit();</div><div class="line">/** 第七步:关闭Session与SessionFactory */</div><div class="line">session.close();</div><div class="line">sessionFactory.close();</div></pre></td></tr></table></figure>
+<p>总结:基本运行流程<br>Configuration –&gt; hibernate.cfg.xml文件 –&gt; 创建DataSource.<br>SessionFactory sessionFactory = Configuration.buildSessionFactory();<br>开启事务、利用Session所有的CRUD操作.</p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                <a href="javascript:void(0)" class="high-song">high起来 &#128541;</a>
+                
+                
+                <a href="javascript:void(0)" class="donate fa">赠我一杯 &#128536;</a>
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">yujian.liao</a>
+                </li>
+                <li>发表日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/后端开发/">后端开发</a>
+                    
+                    <a href="/categories/后端开发/Java/">Java</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/">ORM</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/Hibernate/">Hibernate</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Hibernate/">Hibernate</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但未经作者同意必须在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/02/Java/ORM/Hibernate/03_Hibernate_CRUD/" class="pre-post fa fa-caret-left">Hibernate实现CRUD操作</a>
+        
+        
+        <a href="/2017/04/02/Java/ORM/Mybatis/Mybatis/" class="next-post fa">Mybatis</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">yujian.liao</a>&copy;2017 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate框架介绍"><span class="toc-number">1.</span> <span class="toc-text">Hibernate框架介绍:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hibernate框架优缺点"><span class="toc-number">1.1.</span> <span class="toc-text">Hibernate框架优缺点:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hibernate快速开始"><span class="toc-number">1.2.</span> <span class="toc-text">Hibernate快速开始:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#写Hibernate的核心配置文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">写Hibernate的核心配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写持久化类"><span class="toc-number">1.2.2.</span> <span class="toc-text">写持久化类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在hibernate-cfg-xml文件中配置持久化类"><span class="toc-number">1.2.3.</span> <span class="toc-text">在hibernate.cfg.xml文件中配置持久化类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hibernate编程部分"><span class="toc-number">1.2.4.</span> <span class="toc-text">Hibernate编程部分</span></a></li></ol></li></ol></li></ol>
+
+
+    <script src="/js/highsong.js"></script>
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

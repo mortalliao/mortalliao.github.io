@@ -22,7 +22,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>project | mortalLiao</title>
+<title>mortalLiao</title>
 
 <link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
 
@@ -31,7 +31,7 @@
 
     
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/othersPages.css">
+<link rel="stylesheet" href="/css/pages/article-exp.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/solarized-light.css">
     <!--script-->
@@ -61,7 +61,7 @@
 <![endif]-->
 
 <div id="wrap">
-    <header  style="position: absolute;" >
+    <header >
     <div id="site-meta">
         <a href="/" id="logo">
             <h1 class="title">mortalLiao</h1>
@@ -144,146 +144,174 @@
 </ul>
 
 
-        <div id="main">
+        <ul id="main">
+    
 
+    
+    
+    
+    
+    
+    
+    
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Java/ORM/Hibernate/08_Hibernate_二级缓存/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242360143&di=25a23cf5c48b249edd1951cdde79003a&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140325%2F235100-14032502205024.jpg>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/04/02/Java/ORM/Hibernate/08_Hibernate_二级缓存/">
+                <h2 class="article-title">Hibernate_二级缓存</h2>
+            </a>
+            
+            <p class="article-content">
+                Hibernate_二级缓存:
+缓存的是对象.
+作用：提高Hibernate4的查询性能.
+二级缓存默认是关闭的.(因为它是与SessionFactory与关),SessionFactory存活的时间很长.
 
-    <div id="demo">
+使用二级缓存的步骤:
+第一步：拷贝jar (4个jar包)lib\optional\ehcache\ehcache-core-2.4.3.jarlib\optional\ehcache\hibernate-ehcache-4.3.8.Final.jarslf4j-api-1.7.2.jarslf4j-jdk14-1.7.2.jarslf4j: Simple Logging Fade for Java : 简单的java日志门面.
+第二步：在hibernate.cfg.xml文件配置开启二级缓存.
 
-        <div class="demo-wrap">
-
-            <h2 class="demo-title"><i class="fa fa-desktop"></i>
-                Netease
-
-                <span class="warning">此作品集为挑选部分，仅作为学习和展示使用，请勿用于商业用途。本人只负责<strong>PC端</strong>页面实现，插件、初始代码、设计稿、顶部、尾部以及分享按钮均来自网易，特此声明！</span>
-
-            </h2>
-            <ul class="demo-list">
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/wysyzs/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_223319_0004.jpg);"></div>
-                        <h3 class="demo-item-title">网易手游助手</h3>
-                        <p class="demo-item-desc">网易手游助手，全手游通用免费模拟器</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/xyq-zt-11yfqh/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224222_0005.jpg);"></div>
-                        <h3 class="demo-item-title">梦幻西游</h3>
-                        <p class="demo-item-desc">初雪掩金碧，落梅引寒霜</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/dh3jsng/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224340_0007.jpg);"></div>
-                        <h3 class="demo-item-title">新大话西游-金色南国</h3>
-                        <p class="demo-item-desc">走进神秘天竺国度，感受奇妙西域世界</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/dhhzl/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224410_0008.jpg);"></div>
-                        <h3 class="demo-item-title">大航海之路</h3>
-                        <p class="demo-item-desc">我们的征途是星辰大海</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/dtwslldpp/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224432_0009.jpg);"></div>
-                        <h3 class="demo-item-title">大唐无双零</h3>
-                        <p class="demo-item-desc">六大品牌联合献礼，百万福利贺岁</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/ldxydfdj/">
-                        <div class="demo-item-bg img-ajax" style="background-image: url(http://olpvawdcl.bkt.clouddn.com/2017-02-23_224459_0010.jpg);"></div>
-                        <h3 class="demo-item-title">乱斗西游--S3超级联赛</h3>
-                        <p class="demo-item-desc">乱斗西游--S3超级联赛</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/lwjhldl/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224528_0011.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">梦幻西游-老玩家回流大礼</h3>
-                        <p class="demo-item-desc">梦幻西游-老玩家回流大礼</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/mhxydsjzt/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224549_0012.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">梦幻西游-2016单身节活动</h3>
-                        <p class="demo-item-desc">佳人影独立，怡然待君来</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/mhxywstgj2/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224615_0013.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">梦幻西游-第二届武神坛冠军介绍</h3>
-                        <p class="demo-item-desc">梦幻西游-第二届武神坛冠军介绍</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/tx3zqty/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224700_0014.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">天下3--中秋团圆，聚在义起</h3>
-                        <p class="demo-item-desc">天下3--中秋团圆，聚在义起</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/wh2ljjs/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224722_0015.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">武魂2--狼骑降世</h3>
-                        <p class="demo-item-desc">攻与守之间的生死博弈，胜负即荣辱</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/wh-zt-qing/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224740_0016.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">武魂2--五周年庆典</h3>
-                        <p class="demo-item-desc">武魂2--五周年庆典</p>
-                    </a>
-                </li>
-
-                <li class="demo-list-item">
-                    <a href="/demo/Netease/yxsgyhwm/">
-                        <div class="demo-item-bg img-ajax" data-src="http://olpvawdcl.bkt.clouddn.com/2017-02-23_224815_0017.jpg">
-                            <i class="fa fa-pulse fa-spinner"></i>
-                        </div>
-                        <h3 class="demo-item-title">英雄三国</h3>
-                        <p class="demo-item-desc">抢英三联动豪礼</p>
-                    </a>
-                </li>
-
-            </ul>
+12345&lt;!-- 配置开启二级缓存 --&gt;&lt;property...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="Hibernate_二级缓存"
+              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/08_Hibernate_二级缓存/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/04/02/Java/ORM/Hibernate/08_Hibernate_二级缓存/" class="read-article">阅读全文</a>
+    
+</div>
 
         </div>
+        
+    </li>
+    
+    
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Java/ORM/Hibernate/Hibernate/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242360143&di=25a23cf5c48b249edd1951cdde79003a&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140325%2F235100-14032502205024.jpg>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/04/02/Java/ORM/Hibernate/Hibernate/">
+                <h2 class="article-title">Hibernate</h2>
+            </a>
+            
+            <p class="article-content">
+                Hibernate框架介绍:Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，能够让程序员以面向对象的方式来操作数据库，从而简化持久层的开发.
+直接把一个对象保存到数据库.
+持久层(数据访问层).
+ORM:Object Relation Mapping 对象关系映射.
 
-    </div>
+Object: 对象指得是面向对象的编程语言.
+Relation: 关系指得是关系型数据库.
+Mapping: 面向对象的编程语言与关系型数据库之间的映射.
 
+ORM映射思想:
+
+
+
+面向对象的编程语言(java)
+关系型数据库
+
+
+
+
+类
+表
+
+
+对象
+一行数据
+
+
+属性
+列名
+
+
+
+Hibernate框架优缺点:
+优点:简化持化层的开发. 它底层可以跨数据库.
+
+缺点:性能比JDBC差.
+
+
+JPA: Java Persistence Api: java持久化api.
+...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="Hibernate"
+              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/Hibernate/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/04/02/Java/ORM/Hibernate/Hibernate/" class="read-article">阅读全文</a>
+    
 </div>
+
+        </div>
+        
+    </li>
+    
+    
+
+</ul>
 
     </div>
     <footer id="footer">
