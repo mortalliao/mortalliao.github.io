@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/</loc>
+    <loc>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/Hibernate/</loc>
     
     <lastmod>2017-04-02T13:46:07.000Z</lastmod>
     
@@ -30,7 +30,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/04/02/Java/ORM/Mybatis/</loc>
+    <loc>http://yoursite.com/2017/04/02/Java/ORM/Mybatis/Mybatis/</loc>
     
     <lastmod>2017-01-24T13:46:07.000Z</lastmod>
     
