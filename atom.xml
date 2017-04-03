@@ -43,26 +43,161 @@
   </entry>
   
   <entry>
-    <title>one</title>
-    <link href="http://yoursite.com/2016/01/24/one/"/>
-    <id>http://yoursite.com/2016/01/24/one/</id>
-    <published>2016-01-24T13:46:07.000Z</published>
+    <title>Hibernate</title>
+    <link href="http://yoursite.com/2017/04/02/one/"/>
+    <id>http://yoursite.com/2017/04/02/one/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
     <updated>2017-01-24T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="#introduce">Hibernate框架介绍</a><br><a href="#jump">持久化对象的状态</a></p>
+<h1 id="Hibernate框架介绍："><a href="#Hibernate框架介绍：" class="headerlink" title="Hibernate框架介绍："></a><span id="introduce">Hibernate框架介绍：</span></h1><p>Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，<br>能够让程序员以面向对象的方式来操作数据库，从而简化持久层的开发.</p>
+<p>直接把一个对象保存到数据库.</p>
+<p>持久层(数据访问层).</p>
+<p><strong>ORM:Object Relation Mapping 对象关系映射.</strong></p>
+<ul>
+<li>Object: 对象指得是面向对象的编程语言.</li>
+<li>Relation: 关系指得是关系型数据库.</li>
+<li>Mapping: 面向对象的编程语言与关系型数据库之间的映射.</li>
+</ul>
+<p><strong>ORM映射思想：</strong></p>
+<table>
+<thead>
+<tr>
+<th>面向对象的编程语言(java)</th>
+<th>关系型数据库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类</td>
+<td>表</td>
+</tr>
+<tr>
+<td>对象</td>
+<td>一行数据</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>列名</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Hibernate框架优缺点："><a href="#Hibernate框架优缺点：" class="headerlink" title="Hibernate框架优缺点："></a>Hibernate框架优缺点：</h2><ul>
+<li><p>优点：简化持化层的开发.<br> 它底层可以跨数据库.</p>
+</li>
+<li><p>缺点：性能比JDBC差.</p>
+</li>
+</ul>
+<p><strong>JPA: Java Persistence Api: java持久化api.</strong></p>
+<ul>
+<li>它是sun公司根据ORM思想制订出来的持久层的规范.</li>
+</ul>
+<p><strong>JDBC: Java DataBase Connection java数据库连接的规范.</strong></p>
+<p>ORM –&gt; JPA –&gt; (Hibernate、TopLink、Jdo).</p>
+<p>Hibernate框架下载与安装(了解)：</p>
+<blockquote>
+<p>官方网站：<a href="http://www.hibernate.org" target="_blank" rel="external">http://www.hibernate.org</a><br>公司：jboss公司的产品.</p>
+</blockquote>
+<p>解压后文件夹说明：  </p>
+<ul>
+<li><p>documentation：存放了Hibernate所有的文档.<br> devguide : 开发指导<br> javadocs: api文档<br> manual: 开发指南<br> quickstart: 快速入门  </p>
+</li>
+<li><p>lib:存放了所有的jar.<br> required : 必须的<br> jpa : jpa实现jar包.<br> optional:  可选的<br> c3p0: 连接池.<br> ehcache: 缓存.</p>
+</li>
+<li><p>project: 项目的源码、示例、测试</p>
+</li>
+<li>etc : 存放了配置文件的模版.</li>
+</ul>
+<h2 id="Hibernate快速开始"><a href="#Hibernate快速开始" class="headerlink" title="Hibernate快速开始:"></a>Hibernate快速开始:</h2><ul>
+<li>写Hibernate的核心配置文件:<br>src/hibernate.cfg.xml:<br>cfg: configuration  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置数据库方言(告诉Hibernate4底层用得是什么样的数据库) --&gt;</div><div class="line">&lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQL5InnoDBDialect&lt;/property&gt;</div><div class="line">&lt;!-- 配置Hibernate4是否支持自动创建表 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;</div><div class="line"></div><div class="line">&lt;!-- 配置连接数据库的信息 --&gt;</div><div class="line">&lt;!-- 配置连接数据库驱动类 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的URL --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql://localhost:3306/hibernate4&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的用户名 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的用户名 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.password&quot;&gt;root&lt;/property&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>hibernate-release-4.3.8.Final\project\etc\hibernate.cfg.xml<br>hibernate-release-4.3.8.Final\project\etc\hibernate.properties(参考属性文件)</p>
+<p>配置(myeclipse提示): hibernate-configuration-3.0.dtd<br>dtd位置：<br>hibernate-release-4.3.8.Final\project\hibernate-core\src\main\resources\org\hibernate\hibernate-configuration-3.0.dtd</p>
+</blockquote>
+<ul>
+<li><p>写持久化类:<br>持久化类 = 普通java类(pojo) + xxx.hbm.xml(老的方式)<br>持久化类 = 普通java类(pojo) + jpa注解@Entity<br><br>HBM: hibernate-mapping<br><br>持久化类必须有一个唯一的属性(唯一标识符): @Id<br>也就是哪个属性生成表中的主键列.<br>Hibernate生成的表必须要有主键列.<br><br>xxx.hbm.xml:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!-- class:配置类转换成表的相关信息 --&gt;</div><div class="line">&lt;class name=&quot;cn.itcast.hibernate.entity.User&quot; table=&quot;USER_INFO&quot;&gt;</div><div class="line">&lt;!-- id: 主键映射 --&gt;</div><div class="line">&lt;id name=&quot;id&quot; column=&quot;ID&quot;/&gt;</div><div class="line">&lt;!-- 基本的列 --&gt;</div><div class="line">&lt;property name=&quot;name&quot; column=&quot;NAME&quot;/&gt;</div><div class="line">&lt;!-- 基本的列 --&gt;</div><div class="line">&lt;property name=&quot;age&quot; column=&quot;AGE&quot;/&gt;	</div><div class="line">&lt;/class&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在hibernate.cfg.xml文件中配置持久化类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置持久化类 --&gt;</div><div class="line">&lt;mapping class=&quot;cn.itcast.hibernate.entity.User&quot;/&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Hibernate编程部分："><a href="#Hibernate编程部分：" class="headerlink" title="Hibernate编程部分："></a>Hibernate编程部分：</h3><ol>
+<li><p>Configuration: 专门负责加载hibernate.cfg.xml文件，产生SessionFactory.</p>
+</li>
+<li><p>SessionFactory: 会话工厂</p>
+</li>
+<li><p>Session: 会话</p>
+</li>
+<li><p>Transaction: 事务管理</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">/** 第一步 : 创建Configuration加载hibernate.cfg.xml */</div><div class="line">Configuration configuration = new Configuration() // 加载hibernate.properties</div><div class="line">.configure(); // 加载hibernate.cfg.xml</div><div class="line"></div><div class="line">/** 第二步：构建SessionFactory */</div><div class="line">SessionFactory sessionFactory = configuration.buildSessionFactory();</div><div class="line"></div><div class="line">/** 第三步：打开Session */</div><div class="line">Session session = sessionFactory.openSession();</div><div class="line"></div><div class="line">/** 第四步：开启事务得到事务对象(事务默认是开启的) */</div><div class="line">Transaction transaction = session.beginTransaction();</div><div class="line"></div><div class="line">/** 第五步：利用Session完成所有的持久化操作(CRUD) */</div><div class="line">User user = new User();</div><div class="line">user.setId(1);</div><div class="line">user.setAge(19);</div><div class="line">user.setName(&quot;名字&quot;);</div><div class="line"></div><div class="line">session.save(user);</div><div class="line"></div><div class="line">/** 第六步：事务提交 */</div><div class="line">transaction.commit();</div><div class="line"></div><div class="line">/** 第七步：关闭Session与SessionFactory */</div><div class="line">session.close();</div><div class="line">sessionFactory.close();</div></pre></td></tr></table></figure>
+<p>总结：基本运行流程<br>Configuration –&gt; hibernate.cfg.xml文件 –&gt; 创建DataSource.<br>SessionFactory sessionFactory = Configuration.buildSessionFactory();<br>开启事务、利用Session所有的CRUD操作.</p>
+<h1 id="持久化对象的状态-记忆-："><a href="#持久化对象的状态-记忆-：" class="headerlink" title="持久化对象的状态(记忆)："></a><span id="jump">持久化对象的状态(记忆)：</span></h1><blockquote>
+<p>持久化类 持久化对象 = new 持久化类();</p>
+</blockquote>
+<ul>
+<li><p>Transient(瞬态): 从未与Session关联过.</p>
+</li>
+<li><p>Persistent(持久化状态): 正在被Session管理，也就是这个对象正在Session的一级缓中.<br>一个持久化对象属于持久化状态时，你调用它的setXxx方法，会影响数据库表中的数据.<br>当事务提交时，它会把这个对象同步到底层数据库表中.</p>
+</li>
+<li><p>Detached(脱管状态、分离状态)： 脱离Session的管理，曾经被Session管理过.</p>
+</li>
+</ul>
+<p>持久化对象的状态转换：<br>User user = new User(); // 瞬态<br>user.setId(1); // 脱管</p>
+<p>持久化对象的三种状态：</p>
+<ol>
+<li>瞬态：user对象没有主键id值，并且也不在一级缓存中.</li>
+<li>脱管：user对象有id属性值跟好与数据库中的一行数据的主键id值对应, 并且它也不在一级缓存中.</li>
+<li>持久化状态：在session的一级缓存中.</li>
+</ol>
+<h1 id="Hibernate框架的核心api"><a href="#Hibernate框架的核心api" class="headerlink" title="Hibernate框架的核心api."></a>Hibernate框架的核心api.</h1><ol>
+<li>Configuration : 负责加载全局的配置文件产生SessionFactory.<br><br></li>
+<li><p>SessionFactory: 它存活的时间很长.随tomcat开启就存在，tomcat关闭它才关闭.</p>
+<ul>
+<li>它是线程安全的.</li>
+<li>它是创建Session的工厂.</li>
+<li>它底层封装了数据源(DataSource).</li>
+<li>它包含了一个二级缓存. (默认是关闭的)<br><br></li>
+</ul>
+</li>
+<li><p>Session: 它是应用程序与数据库表交互的对象.  </p>
+<ul>
+<li>它是单线程对象(它是线程不安全).</li>
+<li>它底层封装了数据库连接.</li>
+<li>它存活比较短(Connection用完就需要关闭). </li>
+<li>它是事务的工厂.</li>
+<li>它包含了一级缓存(内存).(默认是开启的)<br><br></li>
+</ul>
+</li>
+<li>Transaction: 事务管理对象. connection.setAutoCommit(false);<ul>
+<li>transaction.commit(); 事务提交</li>
+<li>transaction.rollback(); 事务回滚</li>
+</ul>
+</li>
+</ol>
+]]></content>
     
     <summary type="html">
     
+      &lt;p&gt;&lt;a href=&quot;#introduce&quot;&gt;Hibernate框架介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;#jump&quot;&gt;持久化对象的状态&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Hibernate框架介绍：&quot;&gt;&lt;a href=&quot;#Hibernate框架介绍：&quot; class=&quot;heade
+    
     </summary>
     
-      <category term="OK" scheme="http://yoursite.com/categories/OK/"/>
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
-      <category term="i" scheme="http://yoursite.com/categories/OK/i/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
     
-      <category term="o" scheme="http://yoursite.com/categories/OK/i/o/"/>
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
     
     
-      <category term="a" scheme="http://yoursite.com/tags/a/"/>
-    
-      <category term="b" scheme="http://yoursite.com/tags/b/"/>
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
     
   </entry>
   
