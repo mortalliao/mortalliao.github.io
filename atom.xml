@@ -16,25 +16,51 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>查询缓存</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/09_Hibernate_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/09_Hibernate_查询缓存/</id>
+    <title>二级缓存</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/08_Hibernate_%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/08_Hibernate_二级缓存/</id>
     <published>2017-04-02T13:46:07.000Z</published>
     <updated>2017-04-02T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Hibernate-查询缓存"><a href="#Hibernate-查询缓存" class="headerlink" title="Hibernate_查询缓存:"></a>Hibernate_查询缓存:</h1><ol>
-<li>默认是关闭的.</li>
-<li>它缓存得是hql语句.(内存中)</li>
+    <content type="html"><![CDATA[<h1 id="Hibernate-二级缓存"><a href="#Hibernate-二级缓存" class="headerlink" title="Hibernate_二级缓存:"></a>Hibernate_二级缓存:</h1><ol>
+<li>缓存的是对象.</li>
+<li>作用：提高Hibernate4的查询性能.</li>
+<li>二级缓存默认是关闭的.<br>(因为它是与SessionFactory与关),<br>SessionFactory存活的时间很长.</li>
 </ol>
-<p>使用查询缓存的步骤:<br>第一步：配置开启查询缓存(hibernate.cfg.xml)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启查询缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_query_cache&quot;&gt;true&lt;/property&gt;</div></pre></td></tr></table></figure></p>
-<p>第二步：查询时需要指定哪些hql语句存入查询缓存中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">session.createQuery(hql)</div><div class="line">.setCacheable(true) // 存入查询缓存</div><div class="line">.list(); // 把所有的学生存入一级缓存</div></pre></td></tr></table></figure></p>
-<p>缓存格式：<br>Map<string, list<string="">&gt;<br>key : hql语句<br>value: [“cn.mortalliao.entity.Student#1”, “cn.mortalliao.entity.Student#2”]</string,></p>
+<h2 id="使用二级缓存的步骤"><a href="#使用二级缓存的步骤" class="headerlink" title="使用二级缓存的步骤:"></a>使用二级缓存的步骤:</h2><ul>
+<li>第一步：拷贝jar (4个jar包)<br>lib\optional\ehcache\ehcache-core-2.4.3.jar<br>lib\optional\ehcache\hibernate-ehcache-4.3.8.Final.jar<br>slf4j-api-1.7.2.jar<br>slf4j-jdk14-1.7.2.jar<br><strong>slf4j: Simple Logging Fade for Java : 简单的java日志门面.</strong></li>
+<li>第二步：在hibernate.cfg.xml文件配置开启二级缓存.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启二级缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_second_level_cache&quot;&gt;true&lt;/property&gt;</div><div class="line"></div><div class="line">&lt;!-- 配置二级缓存的实现商 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.region.factory_class&quot;&gt;org.hibernate.cache.ehcache.EhCacheRegionFactory&lt;/property&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>第三步：在src/ehcache.xml是Ehcache框架默认需要加载的配置文件.<br>主要在ehcache.xml文件中配置二级缓存中的<br>对象在内存中存放的最大数据<br>超出了内存中最大数据就写入磁盘.<br>hibernate-release-4.3.8.Final\project\etc\ehcache.xml</p>
+</li>
+<li><p>第四步：配置哪些持久化类产生的对象存入二级缓存</p>
+</li>
+</ul>
+<p>hibernate.cfg.xml:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!--  </div><div class="line">配置哪些持久化类产生的对象存入二级缓存</div><div class="line">usage: 使用缓存的策略 read-only: 查询 | read-write: CRUD</div><div class="line">class: 指定持久化类</div><div class="line">--&gt;</div><div class="line">&lt;class-cache usage=&quot;read-write&quot; class=&quot;cn.moartalliao.hibernate.entity.Student&quot;/&gt;</div><div class="line"></div><div class="line">在持久化类上加注解：</div><div class="line">@Cache(usage=CacheConcurrencyStrategy.READ_WRITE) // 使用二级缓存(默认的缓存区)</div><div class="line"></div><div class="line">@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region=&quot;itCache&quot;) // 使用二级缓存</div></pre></td></tr></table></figure></p>
+<h2 id="操作二级缓存："><a href="#操作二级缓存：" class="headerlink" title="操作二级缓存："></a>操作二级缓存：</h2><ul>
+<li><p>获取二级缓存的操作对象.<br>Cache cache = SessionFactory.getCache();</p>
+</li>
+<li><p>清空二级缓存：<br>cache.evictAllRegions();</p>
+</li>
+<li><p>从二级缓存中逐出单个对象.<br>cache.evictEntity(Class entityClass, Serializable identifier);</p>
+</li>
+<li><p>从二级缓存中逐出指定类型的所有对象.<br>cache.evictEntityRegion(Class entityClass);</p>
+</li>
+<li><p>判断二级缓存中是否包含一个指定的对象.<br>cache.containsEntity(Class entityClass, Serializable identifier)</p>
+</li>
+</ul>
+<p>Map<string, object=""> : map集合<br>key : 包名.类名#主键id属性值<br>value : 对象的值</string,></p>
+<p>Map<string, object=""> maps = new HashMap&lt;&gt;();<br>maps.put(“cn.moartalliao.entity.Student#1”, “”);<br>maps.put(“cn.moartalliao.entity.Student#2”, “”);<br>maps.put(“cn.moartalliao.entity.Student#3”, “”);</string,></p>
+<p>Hibernate找查询对象的步骤：<br>Session的一级缓存中找  –&gt; 二级缓存中找  –&gt; 数据库中查找.</p>
+<p>一级缓存中的对象会影响数据库表(setXxx)<br>二级缓存中的对象不会影响数据库表.</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Hibernate-查询缓存&quot;&gt;&lt;a href=&quot;#Hibernate-查询缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_查询缓存:&quot;&gt;&lt;/a&gt;Hibernate_查询缓存:&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;默认是关闭的.&lt;/li&gt;
+      &lt;h1 id=&quot;Hibernate-二级缓存&quot;&gt;&lt;a href=&quot;#Hibernate-二级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_二级缓存:&quot;&gt;&lt;/a&gt;Hibernate_二级缓存:&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;缓存的是对象.&lt;/li&gt;
 &lt;
     
     </summary>
@@ -53,26 +79,63 @@
   </entry>
   
   <entry>
-    <title>Mybatis</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Mybatis/Mybatis/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Mybatis/Mybatis/</id>
+    <title>持久化状态</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/02_Hibernate_%E6%8C%81%E4%B9%85%E5%8C%96%E7%8A%B6%E6%80%81/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/02_Hibernate_持久化状态/</id>
     <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-01-24T13:46:07.000Z</updated>
+    <updated>2017-04-02T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <content type="html"><![CDATA[<h1 id="Hibernate-持久化状态："><a href="#Hibernate-持久化状态：" class="headerlink" title="Hibernate_持久化状态："></a>Hibernate_持久化状态：</h1><blockquote>
+<p>持久化类 持久化对象 = new 持久化类();</p>
+</blockquote>
+<ul>
+<li><p>Transient(瞬态): 从未与Session关联过.</p>
+</li>
+<li><p>Persistent(持久化状态): 正在被Session管理，也就是这个对象正在Session的一级缓中.<br>一个持久化对象属于持久化状态时，你调用它的setXxx方法，会影响数据库表中的数据.<br>当事务提交时，它会把这个对象同步到底层数据库表中.</p>
+</li>
+<li><p>Detached(脱管状态、分离状态)： 脱离Session的管理，曾经被Session管理过.</p>
+</li>
+</ul>
+<p>持久化对象的状态转换：<br>User user = new User(); // 瞬态<br>user.setId(1); // 脱管</p>
+<p>持久化对象的三种状态：</p>
+<ol>
+<li>瞬态：user对象没有主键id值，并且也不在一级缓存中.</li>
+<li>脱管：user对象有id属性值跟好与数据库中的一行数据的主键id值对应, 并且它也不在一级缓存中.</li>
+<li>持久化状态：在session的一级缓存中.</li>
+</ol>
+<h1 id="Hibernate框架的核心api"><a href="#Hibernate框架的核心api" class="headerlink" title="Hibernate框架的核心api."></a>Hibernate框架的核心api.</h1><ol>
+<li><p>Configuration : 负责加载全局的配置文件产生SessionFactory.</p>
+</li>
+<li><p>SessionFactory: 它存活的时间很长.随tomcat开启就存在，tomcat关闭它才关闭.</p>
+<ul>
+<li>它是线程安全的.</li>
+<li>它是创建Session的工厂.</li>
+<li>它底层封装了数据源(DataSource).</li>
+<li>它包含了一个二级缓存. (默认是关闭的)  </li>
+</ul>
+</li>
+<li><p>Session: 它是应用程序与数据库表交互的对象.  </p>
+<ul>
+<li>它是单线程对象(它是线程不安全).</li>
+<li>它底层封装了数据库连接.</li>
+<li>它存活比较短(Connection用完就需要关闭). </li>
+<li>它是事务的工厂.</li>
+<li>它包含了一级缓存(内存).(默认是开启的)</li>
+</ul>
+</li>
+<li><p>Transaction: 事务管理对象. connection.setAutoCommit(false);</p>
+<ul>
+<li>transaction.commit(); 事务提交</li>
+<li>transaction.rollback(); 事务回滚</li>
+</ul>
+</li>
+</ol>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;h1 id=&quot;Hibernate-持久化状态：&quot;&gt;&lt;a href=&quot;#Hibernate-持久化状态：&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_持久化状态：&quot;&gt;&lt;/a&gt;Hibernate_持久化状态：&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;持
     
     </summary>
     
@@ -82,10 +145,10 @@
     
       <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
     
-      <category term="Mybatis" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Mybatis/"/>
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
     
     
-      <category term="Mybatis" scheme="http://yoursite.com/tags/Mybatis/"/>
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
     
   </entry>
   
@@ -196,46 +259,83 @@
   </entry>
   
   <entry>
-    <title>一级缓存</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/04_Hibernate_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/04_Hibernate_一级缓存/</id>
+    <title>实现CRUD操作</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/03_Hibernate_CRUD/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/03_Hibernate_CRUD/</id>
     <published>2017-04-02T13:46:07.000Z</published>
     <updated>2017-04-02T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Hibernate的一级缓存"><a href="#Hibernate的一级缓存" class="headerlink" title="Hibernate的一级缓存."></a>Hibernate的一级缓存.</h1><ol>
-<li>一级缓存，默认是开启的.</li>
-<li>它是跟Session相关(一级缓存是放在Session对象中).</li>
-<li>一级缓存是存放在内存中.<br>因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.</li>
-</ol>
-<ul>
-<li><p>一级缓存的作用：<br>提高Hibernate的执行效率.</p>
+    <content type="html"><![CDATA[<h1 id="Hibernate实现CRUD操作-运用-："><a href="#Hibernate实现CRUD操作-运用-：" class="headerlink" title="Hibernate实现CRUD操作(运用)："></a>Hibernate实现CRUD操作(运用)：</h1><h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h2><ol>
+<li><p>第一种方式(不需要设置id属性值)：<br>Serializable save(User user); // user : 持久化状态<br>– save方法做保存，返回主键id的值 </p>
 </li>
-<li><p>如何提高Hibernate的执行效率:<br>因为它会把查询出来的对象先存放在内存中(一级缓存中).<br>当你调用该对象的set方法时它不会立即发出update语句<br>当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,<br>如果对象的属性值没有发生改变就不会生成update语句.</p>
+<li><p>第二种方式(不需要设置id属性值)：<br>void saveOrUpdate(User user): 它集成添加与修改. // user : 持久化状态<br>如果持久化对象的主键属性有值就做修改，(找不到主键值就报错)<br>不给主键属性值就做添加.</p>
+</li>
+<li><p>第三种方式(不需要设置id属性值)：<br>User user = new User();<br>void session.persist(user); // user : 持久化状态</p>
+</li>
+<li><p>第四种方式(不需要设置id属性值)：<br>/<em>* merge它集成了添加与修改 </em>/<br>User u = (User)session.merge(user);  //user:不是持久化状态、u:才是持久化状态</p>
+<ul>
+<li><p>什么时候做添加：<br>第一种情况：user对象没有设置id属性值.<br>第二种情况：设置了user对象的id属性值， 但是数据库表中没有主键列值与它对应.</p>
+</li>
+<li><p>什么时候做修改：<br>设置了user对象的id属性值，<br>而且数据库表中有主键列值与它对应。</p>
 </li>
 </ul>
+</li>
+</ol>
+<p>save与persist方法的区别：</p>
+<ul>
+<li><p>save()有返主键id值、persist()没有返回值</p>
+</li>
+<li><p>save()跟事务是否开启没有关系(立即生成insert语句向数据库内存插入数据).<br>跟事务是否提交有关系，因为先是存放在数据库的内存中.</p>
+</li>
+<li><p>persist()跟事务是否开启有关系，<br>没有开启的话,要等到开启事务并且事务提交时才会向数据库发送并插入insert语句.</p>
+</li>
+</ul>
+<p>save(): hibernate的框架的方法.(差)<br>persist(): jpa规范中的方法.(好)</p>
+<h2 id="根据主键id做查询："><a href="#根据主键id做查询：" class="headerlink" title="根据主键id做查询："></a>根据主键id做查询：</h2><p>Object get(class, Serializable id):<br>User u = (User)session.get(User.class, 5);  //u: 持久化状态</p>
+<p>Object load(class, Serializable id):<br>User u = (User)session.load(User.class, 5);  //u: 持久化状态</p>
+<p>get(): 立即向数据库发送sql语句查询数据.<br>load(): 延迟向数据库发送sql语句查询数据，刚开始返回的是代理对象，当你真正用到这个对象中的属性时才会去查询.</p>
+<p>注意：当你真正用到这个对象中的属性时，Session不能关闭.<br>因为Session封装了数据库connection.<br>报错:org.hibernate.LazyInitializationException: could not initialize proxy - no Session(Session已关闭)</p>
+<h2 id="修改："><a href="#修改：" class="headerlink" title="修改："></a>修改：</h2><ol>
+<li><p>在持久化状态下：<br>User user = session.get(User.class, 5);  // user: 持久化状态<br>user.setXxx();</p>
 <blockquote>
-<p>操作一级缓存的方法：</p>
+<p>注意：等到事务提交时就会修改该对象(生成update语句).<br>如果这个对象属性值没有发生改变，就不会生成update语句.</p>
 </blockquote>
-<ol>
-<li><p>session.contains(持久化对象);<br>判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态</p>
 </li>
-<li><p>void session.clear(): 清空Session中的一级缓存.(所有的持久化状态的对象都没有了).</p>
+<li><p>脱管状态下：  </p>
+<ul>
+<li>session.update(user);<ul>
+<li>user: 是持久化状态</li>
+<li>它是在事务提交时发出update语句.<br><br></li>
+</ul>
 </li>
-<li><p>void session.evict(Object object): 从Session一级缓存中删除一个指定的持久化状态的对象.</p>
+<li>session.saveOrUpdate(user);<ul>
+<li>user: 是持久化状态</li>
+<li>它是在事务提交时发出update语句.<br><br></li>
+</ul>
 </li>
-<li><p>void flush(): 把Session一级缓存中的对象同步到底层的数据库表中.(默认是事务提交时才同步)</p>
+<li>User u = (User)session.merge(user);<ul>
+<li>user: 不是持久化状态</li>
+<li>u: 是持久化状态</li>
+<li>首先要根据主键id先查询.有对象返回就做修改，没有对象返回就做添加.</li>
+</ul>
 </li>
-<li><p>void session.close(): 先清空Session中的一级缓存，再关闭数据库连接.</p>
+</ul>
 </li>
-<li><p>Session的一级缓存的生命周期：<br>Session session = SessionFactory.openSession(); 一级缓存开始<br>…..<br>session.close();  一级缓存结束</p>
+</ol>
+<blockquote>
+<p>sql: update 表名 set 列名 = ? where id = ?</p>
+</blockquote>
+<h2 id="删除："><a href="#删除：" class="headerlink" title="删除："></a>删除：</h2><ol>
+<li><p>在持久化状态下：<br>User user = Session.get(User.class, 5); // user : 持久化状态<br>session.delete(user); // user: 持久化状态 –&gt; 瞬态</p>
+</li>
+<li><p>脱管状态下：<br>User user = new User(); // 瞬态<br>user.setId(6); // 脱管<br>session.delete(user); // user:  脱管 –&gt; 瞬态</p>
 </li>
 </ol>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Hibernate的一级缓存&quot;&gt;&lt;a href=&quot;#Hibernate的一级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate的一级缓存.&quot;&gt;&lt;/a&gt;Hibernate的一级缓存.&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;一级缓存，默认是开启的.&lt;/
+      &lt;h1 id=&quot;Hibernate实现CRUD操作-运用-：&quot;&gt;&lt;a href=&quot;#Hibernate实现CRUD操作-运用-：&quot; class=&quot;headerlink&quot; title=&quot;Hibernate实现CRUD操作(运用)：&quot;&gt;&lt;/a&gt;Hibernate实现CRUD操作(运用
     
     </summary>
     
@@ -352,6 +452,218 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Hibernate-JPA注解&quot;&gt;&lt;a href=&quot;#Hibernate-JPA注解&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_JPA注解&quot;&gt;&lt;/a&gt;Hibernate_JPA注解&lt;/h1&gt;&lt;p&gt;注解的作用: 将持久化类转换成表的相
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>批量处理</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/07_Hibernate_%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/07_Hibernate_批量处理/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate-批量处理-Hibernate的性能调优"><a href="#Hibernate-批量处理-Hibernate的性能调优" class="headerlink" title="Hibernate_批量处理(Hibernate的性能调优):"></a>Hibernate_批量处理(Hibernate的性能调优):</h1><h2 id="批量添加："><a href="#批量添加：" class="headerlink" title="批量添加："></a>批量添加：</h2><p>假如有10w条数据需要用Hibernate这个框架实现批量添加的话，<br>有可能会出现内存溢出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/** </div><div class="line"> * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line"> * 这样内存中就要存放10w个对象 </div><div class="line"> */</div><div class="line">session.save(t); // t --&gt; 持久化状态</div><div class="line"></div><div class="line">/* 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line"> * 再调用clear()清空一级缓存，就释放内存 </div><div class="line"> */</div><div class="line">if (i % 20 == 0)&#123;</div><div class="line">    // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">    session.flush();</div><div class="line">    // 清空一级缓存，就释放内存</div><div class="line">    session.clear();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="批量修改："><a href="#批量修改：" class="headerlink" title="批量修改："></a>批量修改：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line">     * 这样内存中就要存放10w个对象 </div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    t.setAge(90);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line">     * 再调用clear()清空一级缓存，就释放内存 </div><div class="line">     */</div><div class="line">    if (i % 20 == 0)&#123;</div><div class="line">    // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">    session.flush(); // 就会有update语句</div><div class="line">    // 清空一级缓存，就释放内存</div><div class="line">    session.clear();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="批量删除："><a href="#批量删除：" class="headerlink" title="批量删除："></a>批量删除：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/** 利用Session完成所有的持久化操作 */</div><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中)</div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    // 调用了delete方法 t是瞬态</div><div class="line">    session.delete(t);</div><div class="line">    System.out.println(session.contains(t)); </div><div class="line">    // 调用flush方法所数据同步到数据库的内存中 (产生delete语句)</div><div class="line">    session.flush();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="QL批量处理："><a href="#QL批量处理：" class="headerlink" title="QL批量处理："></a>QL批量处理：</h2><p>Data Manipulation Language (DML) : insert、select、update、delete</p>
+<p>DDL: drop 、create</p>
+<p>DML语法格式：<br>( UPDATE | DELETE ) FROM? EntityName (WHERE where_conditions)?. </p>
+<p>操作步骤：</p>
+<ul>
+<li>获取Session</li>
+<li>定义DML风格的hql语句.</li>
+<li>调用Query query = session.createQuery(hql);<br>如果hql语句中有占位符?，调用query.setPrameter()设置参数值.</li>
+</ul>
+<p><code>int res = query.exeuteUpdate(); // 受影响的记录条数</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">修改(DML)：</div><div class="line">/** DML风格的update语句 */</div><div class="line">String hql = &quot;update Teacher set age = ?&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">.setParameter(0, 50)</div><div class="line">.executeUpdate();</div><div class="line"></div><div class="line">删除(DML)：</div><div class="line">/** DML风格的delete语句 */</div><div class="line">//String hql = &quot;delete Teacher&quot;;</div><div class="line">//String hql = &quot;delete from Teacher where id &lt; ?&quot;;</div><div class="line">String hql = &quot;delete from Teacher where id in(?,?,?)&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">.setParameter(0, 10000)</div><div class="line">.setParameter(1, 10001)</div><div class="line">.setParameter(2, 10002)</div><div class="line">.executeUpdate();</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate-批量处理-Hibernate的性能调优&quot;&gt;&lt;a href=&quot;#Hibernate-批量处理-Hibernate的性能调优&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_批量处理(Hibernate的性能调优):&quot;&gt;&lt;
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一级缓存</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/04_Hibernate_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/04_Hibernate_一级缓存/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate的一级缓存"><a href="#Hibernate的一级缓存" class="headerlink" title="Hibernate的一级缓存."></a>Hibernate的一级缓存.</h1><ol>
+<li>一级缓存，默认是开启的.</li>
+<li>它是跟Session相关(一级缓存是放在Session对象中).</li>
+<li>一级缓存是存放在内存中.<br>因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.</li>
+</ol>
+<ul>
+<li><p>一级缓存的作用：<br>提高Hibernate的执行效率.</p>
+</li>
+<li><p>如何提高Hibernate的执行效率:<br>因为它会把查询出来的对象先存放在内存中(一级缓存中).<br>当你调用该对象的set方法时它不会立即发出update语句<br>当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,<br>如果对象的属性值没有发生改变就不会生成update语句.</p>
+</li>
+</ul>
+<blockquote>
+<p>操作一级缓存的方法：</p>
+</blockquote>
+<ol>
+<li><p>session.contains(持久化对象);<br>判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态</p>
+</li>
+<li><p>void session.clear(): 清空Session中的一级缓存.(所有的持久化状态的对象都没有了).</p>
+</li>
+<li><p>void session.evict(Object object): 从Session一级缓存中删除一个指定的持久化状态的对象.</p>
+</li>
+<li><p>void flush(): 把Session一级缓存中的对象同步到底层的数据库表中.(默认是事务提交时才同步)</p>
+</li>
+<li><p>void session.close(): 先清空Session中的一级缓存，再关闭数据库连接.</p>
+</li>
+<li><p>Session的一级缓存的生命周期：<br>Session session = SessionFactory.openSession(); 一级缓存开始<br>…..<br>session.close();  一级缓存结束</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate的一级缓存&quot;&gt;&lt;a href=&quot;#Hibernate的一级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate的一级缓存.&quot;&gt;&lt;/a&gt;Hibernate的一级缓存.&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;一级缓存，默认是开启的.&lt;/
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>查询缓存</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/09_Hibernate_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/09_Hibernate_查询缓存/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate-查询缓存"><a href="#Hibernate-查询缓存" class="headerlink" title="Hibernate_查询缓存:"></a>Hibernate_查询缓存:</h1><ol>
+<li>默认是关闭的.</li>
+<li>它缓存得是hql语句.(内存中)</li>
+</ol>
+<p>使用查询缓存的步骤:<br>第一步：配置开启查询缓存(hibernate.cfg.xml)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启查询缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_query_cache&quot;&gt;true&lt;/property&gt;</div></pre></td></tr></table></figure></p>
+<p>第二步：查询时需要指定哪些hql语句存入查询缓存中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">session.createQuery(hql)</div><div class="line">.setCacheable(true) // 存入查询缓存</div><div class="line">.list(); // 把所有的学生存入一级缓存</div></pre></td></tr></table></figure></p>
+<p>缓存格式：<br>Map<string, list<string="">&gt;<br>key : hql语句<br>value: [“cn.mortalliao.entity.Student#1”, “cn.mortalliao.entity.Student#2”]</string,></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate-查询缓存&quot;&gt;&lt;a href=&quot;#Hibernate-查询缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_查询缓存:&quot;&gt;&lt;/a&gt;Hibernate_查询缓存:&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;默认是关闭的.&lt;/li&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mybatis</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Mybatis/Mybatis/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Mybatis/Mybatis/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-01-24T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Mybatis" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Mybatis/"/>
+    
+    
+      <category term="Mybatis" scheme="http://yoursite.com/tags/Mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Session线程安全问题</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session线程安全/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
+<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>第二步：编程部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:session不需自己关闭.</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate-Session线程安全问题&quot;&gt;&lt;a href=&quot;#Hibernate-Session线程安全问题&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_Session线程安全问题:&quot;&gt;&lt;/a&gt;Hibernate_Sessio
     
     </summary>
     
@@ -494,318 +806,6 @@
       &lt;h1 id=&quot;Hibernate-HQL&quot;&gt;&lt;a href=&quot;#Hibernate-HQL&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_HQL&quot;&gt;&lt;/a&gt;Hibernate_HQL&lt;/h1&gt;&lt;p&gt;Hibernate的三套查询: &lt;/p&gt;
 &lt;ol&gt;
 
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>持久化状态</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/02_Hibernate_%E6%8C%81%E4%B9%85%E5%8C%96%E7%8A%B6%E6%80%81/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/02_Hibernate_持久化状态/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-持久化状态："><a href="#Hibernate-持久化状态：" class="headerlink" title="Hibernate_持久化状态："></a>Hibernate_持久化状态：</h1><blockquote>
-<p>持久化类 持久化对象 = new 持久化类();</p>
-</blockquote>
-<ul>
-<li><p>Transient(瞬态): 从未与Session关联过.</p>
-</li>
-<li><p>Persistent(持久化状态): 正在被Session管理，也就是这个对象正在Session的一级缓中.<br>一个持久化对象属于持久化状态时，你调用它的setXxx方法，会影响数据库表中的数据.<br>当事务提交时，它会把这个对象同步到底层数据库表中.</p>
-</li>
-<li><p>Detached(脱管状态、分离状态)： 脱离Session的管理，曾经被Session管理过.</p>
-</li>
-</ul>
-<p>持久化对象的状态转换：<br>User user = new User(); // 瞬态<br>user.setId(1); // 脱管</p>
-<p>持久化对象的三种状态：</p>
-<ol>
-<li>瞬态：user对象没有主键id值，并且也不在一级缓存中.</li>
-<li>脱管：user对象有id属性值跟好与数据库中的一行数据的主键id值对应, 并且它也不在一级缓存中.</li>
-<li>持久化状态：在session的一级缓存中.</li>
-</ol>
-<h1 id="Hibernate框架的核心api"><a href="#Hibernate框架的核心api" class="headerlink" title="Hibernate框架的核心api."></a>Hibernate框架的核心api.</h1><ol>
-<li><p>Configuration : 负责加载全局的配置文件产生SessionFactory.</p>
-</li>
-<li><p>SessionFactory: 它存活的时间很长.随tomcat开启就存在，tomcat关闭它才关闭.</p>
-<ul>
-<li>它是线程安全的.</li>
-<li>它是创建Session的工厂.</li>
-<li>它底层封装了数据源(DataSource).</li>
-<li>它包含了一个二级缓存. (默认是关闭的)  </li>
-</ul>
-</li>
-<li><p>Session: 它是应用程序与数据库表交互的对象.  </p>
-<ul>
-<li>它是单线程对象(它是线程不安全).</li>
-<li>它底层封装了数据库连接.</li>
-<li>它存活比较短(Connection用完就需要关闭). </li>
-<li>它是事务的工厂.</li>
-<li>它包含了一级缓存(内存).(默认是开启的)</li>
-</ul>
-</li>
-<li><p>Transaction: 事务管理对象. connection.setAutoCommit(false);</p>
-<ul>
-<li>transaction.commit(); 事务提交</li>
-<li>transaction.rollback(); 事务回滚</li>
-</ul>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-持久化状态：&quot;&gt;&lt;a href=&quot;#Hibernate-持久化状态：&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_持久化状态：&quot;&gt;&lt;/a&gt;Hibernate_持久化状态：&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;持
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>实现CRUD操作</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/03_Hibernate_CRUD/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/03_Hibernate_CRUD/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate实现CRUD操作-运用-："><a href="#Hibernate实现CRUD操作-运用-：" class="headerlink" title="Hibernate实现CRUD操作(运用)："></a>Hibernate实现CRUD操作(运用)：</h1><h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h2><ol>
-<li><p>第一种方式(不需要设置id属性值)：<br>Serializable save(User user); // user : 持久化状态<br>– save方法做保存，返回主键id的值 </p>
-</li>
-<li><p>第二种方式(不需要设置id属性值)：<br>void saveOrUpdate(User user): 它集成添加与修改. // user : 持久化状态<br>如果持久化对象的主键属性有值就做修改，(找不到主键值就报错)<br>不给主键属性值就做添加.</p>
-</li>
-<li><p>第三种方式(不需要设置id属性值)：<br>User user = new User();<br>void session.persist(user); // user : 持久化状态</p>
-</li>
-<li><p>第四种方式(不需要设置id属性值)：<br>/<em>* merge它集成了添加与修改 </em>/<br>User u = (User)session.merge(user);  //user:不是持久化状态、u:才是持久化状态</p>
-<ul>
-<li><p>什么时候做添加：<br>第一种情况：user对象没有设置id属性值.<br>第二种情况：设置了user对象的id属性值， 但是数据库表中没有主键列值与它对应.</p>
-</li>
-<li><p>什么时候做修改：<br>设置了user对象的id属性值，<br>而且数据库表中有主键列值与它对应。</p>
-</li>
-</ul>
-</li>
-</ol>
-<p>save与persist方法的区别：</p>
-<ul>
-<li><p>save()有返主键id值、persist()没有返回值</p>
-</li>
-<li><p>save()跟事务是否开启没有关系(立即生成insert语句向数据库内存插入数据).<br>跟事务是否提交有关系，因为先是存放在数据库的内存中.</p>
-</li>
-<li><p>persist()跟事务是否开启有关系，<br>没有开启的话,要等到开启事务并且事务提交时才会向数据库发送并插入insert语句.</p>
-</li>
-</ul>
-<p>save(): hibernate的框架的方法.(差)<br>persist(): jpa规范中的方法.(好)</p>
-<h2 id="根据主键id做查询："><a href="#根据主键id做查询：" class="headerlink" title="根据主键id做查询："></a>根据主键id做查询：</h2><p>Object get(class, Serializable id):<br>User u = (User)session.get(User.class, 5);  //u: 持久化状态</p>
-<p>Object load(class, Serializable id):<br>User u = (User)session.load(User.class, 5);  //u: 持久化状态</p>
-<p>get(): 立即向数据库发送sql语句查询数据.<br>load(): 延迟向数据库发送sql语句查询数据，刚开始返回的是代理对象，当你真正用到这个对象中的属性时才会去查询.</p>
-<p>注意：当你真正用到这个对象中的属性时，Session不能关闭.<br>因为Session封装了数据库connection.<br>报错:org.hibernate.LazyInitializationException: could not initialize proxy - no Session(Session已关闭)</p>
-<h2 id="修改："><a href="#修改：" class="headerlink" title="修改："></a>修改：</h2><ol>
-<li><p>在持久化状态下：<br>User user = session.get(User.class, 5);  // user: 持久化状态<br>user.setXxx();</p>
-<blockquote>
-<p>注意：等到事务提交时就会修改该对象(生成update语句).<br>如果这个对象属性值没有发生改变，就不会生成update语句.</p>
-</blockquote>
-</li>
-<li><p>脱管状态下：  </p>
-<ul>
-<li>session.update(user);<ul>
-<li>user: 是持久化状态</li>
-<li>它是在事务提交时发出update语句.<br><br></li>
-</ul>
-</li>
-<li>session.saveOrUpdate(user);<ul>
-<li>user: 是持久化状态</li>
-<li>它是在事务提交时发出update语句.<br><br></li>
-</ul>
-</li>
-<li>User u = (User)session.merge(user);<ul>
-<li>user: 不是持久化状态</li>
-<li>u: 是持久化状态</li>
-<li>首先要根据主键id先查询.有对象返回就做修改，没有对象返回就做添加.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>sql: update 表名 set 列名 = ? where id = ?</p>
-</blockquote>
-<h2 id="删除："><a href="#删除：" class="headerlink" title="删除："></a>删除：</h2><ol>
-<li><p>在持久化状态下：<br>User user = Session.get(User.class, 5); // user : 持久化状态<br>session.delete(user); // user: 持久化状态 –&gt; 瞬态</p>
-</li>
-<li><p>脱管状态下：<br>User user = new User(); // 瞬态<br>user.setId(6); // 脱管<br>session.delete(user); // user:  脱管 –&gt; 瞬态</p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate实现CRUD操作-运用-：&quot;&gt;&lt;a href=&quot;#Hibernate实现CRUD操作-运用-：&quot; class=&quot;headerlink&quot; title=&quot;Hibernate实现CRUD操作(运用)：&quot;&gt;&lt;/a&gt;Hibernate实现CRUD操作(运用
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Session线程安全问题</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session线程安全/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
-<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>第二步：编程部分</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注意:session不需自己关闭.</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-Session线程安全问题&quot;&gt;&lt;a href=&quot;#Hibernate-Session线程安全问题&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_Session线程安全问题:&quot;&gt;&lt;/a&gt;Hibernate_Sessio
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>批量处理</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/07_Hibernate_%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/07_Hibernate_批量处理/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-批量处理-Hibernate的性能调优"><a href="#Hibernate-批量处理-Hibernate的性能调优" class="headerlink" title="Hibernate_批量处理(Hibernate的性能调优):"></a>Hibernate_批量处理(Hibernate的性能调优):</h1><h2 id="批量添加："><a href="#批量添加：" class="headerlink" title="批量添加："></a>批量添加：</h2><p>假如有10w条数据需要用Hibernate这个框架实现批量添加的话，<br>有可能会出现内存溢出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/** </div><div class="line"> * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line"> * 这样内存中就要存放10w个对象 </div><div class="line"> */</div><div class="line">session.save(t); // t --&gt; 持久化状态</div><div class="line"></div><div class="line">/* 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line"> * 再调用clear()清空一级缓存，就释放内存 </div><div class="line"> */</div><div class="line">if (i % 20 == 0)&#123;</div><div class="line">    // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">    session.flush();</div><div class="line">    // 清空一级缓存，就释放内存</div><div class="line">    session.clear();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="批量修改："><a href="#批量修改：" class="headerlink" title="批量修改："></a>批量修改：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line">     * 这样内存中就要存放10w个对象 </div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    t.setAge(90);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line">     * 再调用clear()清空一级缓存，就释放内存 </div><div class="line">     */</div><div class="line">    if (i % 20 == 0)&#123;</div><div class="line">    // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">    session.flush(); // 就会有update语句</div><div class="line">    // 清空一级缓存，就释放内存</div><div class="line">    session.clear();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="批量删除："><a href="#批量删除：" class="headerlink" title="批量删除："></a>批量删除：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/** 利用Session完成所有的持久化操作 */</div><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中)</div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    // 调用了delete方法 t是瞬态</div><div class="line">    session.delete(t);</div><div class="line">    System.out.println(session.contains(t)); </div><div class="line">    // 调用flush方法所数据同步到数据库的内存中 (产生delete语句)</div><div class="line">    session.flush();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="QL批量处理："><a href="#QL批量处理：" class="headerlink" title="QL批量处理："></a>QL批量处理：</h2><p>Data Manipulation Language (DML) : insert、select、update、delete</p>
-<p>DDL: drop 、create</p>
-<p>DML语法格式：<br>( UPDATE | DELETE ) FROM? EntityName (WHERE where_conditions)?. </p>
-<p>操作步骤：</p>
-<ul>
-<li>获取Session</li>
-<li>定义DML风格的hql语句.</li>
-<li>调用Query query = session.createQuery(hql);<br>如果hql语句中有占位符?，调用query.setPrameter()设置参数值.</li>
-</ul>
-<p><code>int res = query.exeuteUpdate(); // 受影响的记录条数</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">修改(DML)：</div><div class="line">/** DML风格的update语句 */</div><div class="line">String hql = &quot;update Teacher set age = ?&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">.setParameter(0, 50)</div><div class="line">.executeUpdate();</div><div class="line"></div><div class="line">删除(DML)：</div><div class="line">/** DML风格的delete语句 */</div><div class="line">//String hql = &quot;delete Teacher&quot;;</div><div class="line">//String hql = &quot;delete from Teacher where id &lt; ?&quot;;</div><div class="line">String hql = &quot;delete from Teacher where id in(?,?,?)&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">.setParameter(0, 10000)</div><div class="line">.setParameter(1, 10001)</div><div class="line">.setParameter(2, 10002)</div><div class="line">.executeUpdate();</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-批量处理-Hibernate的性能调优&quot;&gt;&lt;a href=&quot;#Hibernate-批量处理-Hibernate的性能调优&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_批量处理(Hibernate的性能调优):&quot;&gt;&lt;
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>二级缓存</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/08_Hibernate_%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/08_Hibernate_二级缓存/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-二级缓存"><a href="#Hibernate-二级缓存" class="headerlink" title="Hibernate_二级缓存:"></a>Hibernate_二级缓存:</h1><ol>
-<li>缓存的是对象.</li>
-<li>作用：提高Hibernate4的查询性能.</li>
-<li>二级缓存默认是关闭的.<br>(因为它是与SessionFactory与关),<br>SessionFactory存活的时间很长.</li>
-</ol>
-<h2 id="使用二级缓存的步骤"><a href="#使用二级缓存的步骤" class="headerlink" title="使用二级缓存的步骤:"></a>使用二级缓存的步骤:</h2><ul>
-<li>第一步：拷贝jar (4个jar包)<br>lib\optional\ehcache\ehcache-core-2.4.3.jar<br>lib\optional\ehcache\hibernate-ehcache-4.3.8.Final.jar<br>slf4j-api-1.7.2.jar<br>slf4j-jdk14-1.7.2.jar<br><strong>slf4j: Simple Logging Fade for Java : 简单的java日志门面.</strong></li>
-<li>第二步：在hibernate.cfg.xml文件配置开启二级缓存.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启二级缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_second_level_cache&quot;&gt;true&lt;/property&gt;</div><div class="line"></div><div class="line">&lt;!-- 配置二级缓存的实现商 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.region.factory_class&quot;&gt;org.hibernate.cache.ehcache.EhCacheRegionFactory&lt;/property&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>第三步：在src/ehcache.xml是Ehcache框架默认需要加载的配置文件.<br>主要在ehcache.xml文件中配置二级缓存中的<br>对象在内存中存放的最大数据<br>超出了内存中最大数据就写入磁盘.<br>hibernate-release-4.3.8.Final\project\etc\ehcache.xml</p>
-</li>
-<li><p>第四步：配置哪些持久化类产生的对象存入二级缓存</p>
-</li>
-</ul>
-<p>hibernate.cfg.xml:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!--  </div><div class="line">配置哪些持久化类产生的对象存入二级缓存</div><div class="line">usage: 使用缓存的策略 read-only: 查询 | read-write: CRUD</div><div class="line">class: 指定持久化类</div><div class="line">--&gt;</div><div class="line">&lt;class-cache usage=&quot;read-write&quot; class=&quot;cn.moartalliao.hibernate.entity.Student&quot;/&gt;</div><div class="line"></div><div class="line">在持久化类上加注解：</div><div class="line">@Cache(usage=CacheConcurrencyStrategy.READ_WRITE) // 使用二级缓存(默认的缓存区)</div><div class="line"></div><div class="line">@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region=&quot;itCache&quot;) // 使用二级缓存</div></pre></td></tr></table></figure></p>
-<h2 id="操作二级缓存："><a href="#操作二级缓存：" class="headerlink" title="操作二级缓存："></a>操作二级缓存：</h2><ul>
-<li><p>获取二级缓存的操作对象.<br>Cache cache = SessionFactory.getCache();</p>
-</li>
-<li><p>清空二级缓存：<br>cache.evictAllRegions();</p>
-</li>
-<li><p>从二级缓存中逐出单个对象.<br>cache.evictEntity(Class entityClass, Serializable identifier);</p>
-</li>
-<li><p>从二级缓存中逐出指定类型的所有对象.<br>cache.evictEntityRegion(Class entityClass);</p>
-</li>
-<li><p>判断二级缓存中是否包含一个指定的对象.<br>cache.containsEntity(Class entityClass, Serializable identifier)</p>
-</li>
-</ul>
-<p>Map<string, object=""> : map集合<br>key : 包名.类名#主键id属性值<br>value : 对象的值</string,></p>
-<p>Map<string, object=""> maps = new HashMap&lt;&gt;();<br>maps.put(“cn.moartalliao.entity.Student#1”, “”);<br>maps.put(“cn.moartalliao.entity.Student#2”, “”);<br>maps.put(“cn.moartalliao.entity.Student#3”, “”);</string,></p>
-<p>Hibernate找查询对象的步骤：<br>Session的一级缓存中找  –&gt; 二级缓存中找  –&gt; 数据库中查找.</p>
-<p>一级缓存中的对象会影响数据库表(setXxx)<br>二级缓存中的对象不会影响数据库表.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-二级缓存&quot;&gt;&lt;a href=&quot;#Hibernate-二级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_二级缓存:&quot;&gt;&lt;/a&gt;Hibernate_二级缓存:&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;缓存的是对象.&lt;/li&gt;
-&lt;
     
     </summary>
     
