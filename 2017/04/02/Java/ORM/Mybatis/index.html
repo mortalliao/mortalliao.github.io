@@ -22,7 +22,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Session线程安全问题 | mortalLiao</title>
+<title>Mybatis | mortalLiao</title>
 
 <link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
 
@@ -99,7 +99,7 @@
     
 <li class="widget widget-normal category">
     <h3 class="fa fa-th widget-title">分类</h3>
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Mybatis/"><i class="fa" aria-hidden="true">Mybatis</i></a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li></ul>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
 </li>
 
 
@@ -107,7 +107,7 @@
     
 <li class="widget widget-normal archive">
   <h3 class="fa fa-archive widget-title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">12</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li></ul>
 </li>
 
 
@@ -126,7 +126,7 @@
   <h3 class="fa fa-tags widget-title">标签云</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+      <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a> <a href="/tags/Hibernate/" style="font-size: 0.14rem; color: #69c">Hibernate</a>
   </div>
 </li>
 
@@ -150,9 +150,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="Session线程安全问题">
+            <h1 id="Mybatis">
                 
-                Session线程安全问题
+                Mybatis
                 
             </h1>
             <div class="article-meta">
@@ -160,7 +160,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>Hibernate</span>
+        <span>ORM</span>
     </span>
     
     
@@ -168,7 +168,7 @@
          <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            Hibernate
+            Mybatis
             
         </span>
     </span>
@@ -181,15 +181,15 @@
     
     <span  class=" fa-wrap">
         <i class="fa fa-comment-o"></i>
-        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session线程安全/" data-thread-key="/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session线程安全/"
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/02/Java/ORM/Mybatis/" data-thread-key="/2017/04/02/Java/ORM/Mybatis/"
            data-count-type="comments"></span>
     </span>
     
     
     <span class="fa-wrap">
             <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="Session线程安全问题"
-              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/10_Hibernate_Session线程安全/"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="hits hits-meta " data-leadcloud-title="Mybatis"
+              data-leadcloud-url="/2017/04/02/Java/ORM/Mybatis/"><i class="fa fa-spinner fa-spin"></i></span>
     </span>
     
     
@@ -200,17 +200,15 @@
         </div>
         
         <div id="post-body">
-            <h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
-<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>第二步：编程部分</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注意:session不需自己关闭.</p>
-</blockquote>
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
         </div>
         <div id="post-footer">
@@ -230,7 +228,7 @@
                 </li>
                 <li>发表日期: <span>2017-04-02  09:46:07</span></li>
                 
-                <li>最后编辑日期: <span>2017-04-02  09:46:07</span></li>
+                <li>最后编辑日期: <span>2017-01-24  09:46:07</span></li>
                 
                 <li class="post-category">
                     文章分类:
@@ -241,13 +239,11 @@
                     
                     <a href="/categories/后端开发/Java/ORM/">ORM</a>
                     
-                    <a href="/categories/后端开发/Java/ORM/Hibernate/">Hibernate</a>
-                    
                 </li>
                 <li class="post-tags">
                     文章标签:
                     
-                    <a href="/tags/Hibernate/">Hibernate</a>
+                    <a href="/tags/Mybatis/">Mybatis</a>
                     
                 </li>
                 
@@ -270,10 +266,8 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2017/04/02/Java/ORM/Mybatis/Mybatis/" class="pre-post fa fa-caret-left">Mybatis</a>
         
-        
-        <a href="/2017/04/02/Java/ORM/Hibernate/06_Hibernate_HQL/" class="next-post fa">HQL</a>
+        <a href="/2017/04/02/Java/ORM/Hibernate/" class="next-post fa">Hibernate</a>
         
     </div>
     
@@ -342,7 +336,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate-Session线程安全问题"><span class="toc-number">1.</span> <span class="toc-text">Hibernate_Session线程安全问题:</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
 
 
     <script src="/js/highsong.js"></script>
