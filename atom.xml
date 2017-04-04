@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-02T13:46:07.000Z</updated>
+  <updated>2017-01-24T13:46:07.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,103 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mybatis</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Mybatis/Mybatis/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Mybatis/Mybatis/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-01-24T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-MyBatis概述"><a href="#1-MyBatis概述" class="headerlink" title="1.    MyBatis概述"></a>1.    MyBatis概述</h1><h2 id="1-1-MyBatis简介"><a href="#1-1-MyBatis简介" class="headerlink" title="1.1.    MyBatis简介"></a>1.1.    MyBatis简介</h2><p>MyBatis 世界上流行最广泛的SQL 映射框架，由Clinton Begin 在2002 年创建，其后，捐献给了Apache基金会，成立了iBatis 项目。2010年这个项目从Apache迁移到Google Code改名为Mybatis 之后将版本升级到3.X，其曾经官网：<a href="http://blog.mybatis.org/，从3.2版本之后迁移到github(https://github.com/mybatis/mybatis-3)。" target="_blank" rel="external">http://blog.mybatis.org/，从3.2版本之后迁移到github(https://github.com/mybatis/mybatis-3)。</a><br>Mybatis是一个类似于Hibernate的ORM持久化框架，支持普通SQL查询，存储过程以及高级映射。Mybatis通过使用简单的XM<br>L或注解用于配置和原始映射，将接口和POJO(Plain Old Java Objects,普通的 Java对象)对象映射成数据库中的记录。<br>由于Mybatis是直接基于JDBC做了简单的映射包装，所有从性能角度来看：<br>JDBC &gt; Mybatis &gt; Hibernate</p>
+<p>下载地址（3.2.8）：<br><a href="https://github.com/mybatis/mybatis-3/releases" target="_blank" rel="external">https://github.com/mybatis/mybatis-3/releases</a><br>官方文档：<br><a href="http://mybatis.github.io/mybatis-3/" target="_blank" rel="external">http://mybatis.github.io/mybatis-3/</a><br>官方文档（中文版）：<br><a href="http://mybatis.github.io/mybatis-3/zh/index.html" target="_blank" rel="external">http://mybatis.github.io/mybatis-3/zh/index.html</a></p>
+<h2 id="1-2-MyBatis架构"><a href="#1-2-MyBatis架构" class="headerlink" title="1.2.    MyBatis架构"></a>1.2.    MyBatis架构</h2><p>接口层：提供给外部使用的接口API，开发人员通过这些本地API来操纵数据库。接口层一接收到调用请求就会调用数据处理层来完成具体的数据处理。</p>
+<p>数据处理层：负责具体的SQL查找、SQL解析、SQL执行和执行结果映射处理等。主要目的是根据调用的请求完成一次数据库操作。</p>
+<p>支撑层：负责最基础的功能支撑，包括连接管理、事务管理、配置加载和缓存处理，这些都是共用的东西。为上层的数据处理层提供最基础的支撑。</p>
+<h2 id="1-3-MyBatis执行流程"><a href="#1-3-MyBatis执行流程" class="headerlink" title="1.3.    MyBatis执行流程"></a>1.3.    MyBatis执行流程</h2><p>执行过程：<br>1、mybatis配置<br>mybatis-config.xml，名称可变，此文件作为mybatis的全局配置文件，配置了mybatis的运行环境等信息。mapper.xml文件即sql映射文件，文件中配置了操作数据库的sql语句。此文件需要在mybatis-config.xml中加载；<br>2、通过mybatis环境等配置信息构造SqlSessionFactory即会话工厂；<br>3、由会话工厂创建sqlSession即会话，操作数据库需要通过sqlSession进行；<br>4、mybatis底层自定义了Executor执行器接口操作数据库，Executor接口有两个实现，一个是基本执行器、一个是缓存执行器；<br>5、Mapped Statement也是mybatis一个底层封装对象，它包装了mybatis配置信息及sql映射信息等。mapper.xml文件中一个sql对应一个Mapped Statement对象，sql的id即是Mapped statement的id；<br>6、Mapped Statement对sql执行输入参数进行定义，包括HashMap、基本类型、pojo，Executor通过 Mapped Statement在执行sql前将输入的java对象映射至sql中，输入参数映射就是jdbc编程中对preparedStatement设置参数；<br>7、Mapped Statement对sql执行输出结果进行定义，包括HashMap、基本类型、pojo，Executor通过 Mapped Statement在执行sql后将输出结果映射至java对象中，输出结果映射过程相当于jdbc编程中对结果的解析处理过程。</p>
+<h2 id="1-4-与Hibernate的比较"><a href="#1-4-与Hibernate的比较" class="headerlink" title="1.4.    与Hibernate的比较"></a>1.4.    与Hibernate的比较</h2><p>MyBatis与Hibernate都是流行的持久层开发框架；两者之间各有优缺点，具体的比较详见《MyBatis与Hibernate的区别.doc》</p>
+<h1 id="2-MyBatis初体验"><a href="#2-MyBatis初体验" class="headerlink" title="2.    MyBatis初体验"></a>2.    MyBatis初体验</h1><h2 id="2-1-创建并配置项目"><a href="#2-1-创建并配置项目" class="headerlink" title="2.1.    创建并配置项目"></a>2.1.    创建并配置项目</h2><p>1．创建Maven Project</p>
+<h2 id="2．配置项目；打开pom-xml文件，添加编译、mysql的依赖坐标。"><a href="#2．配置项目；打开pom-xml文件，添加编译、mysql的依赖坐标。" class="headerlink" title="2．配置项目；打开pom.xml文件，添加编译、mysql的依赖坐标。"></a>2．配置项目；打开pom.xml文件，添加编译、mysql的依赖坐标。</h2><pre><code>&lt;dependencies&gt;
+
+    &lt;!-- 单元测试 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.10&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- MySql --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;5.1.32&lt;/version&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;
+
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;!-- java编译插件 --&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.2&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;source&gt;1.7&lt;/source&gt;
+                &lt;target&gt;1.7&lt;/target&gt;
+                &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre><h2 id="2-2-创建数据库表"><a href="#2-2-创建数据库表" class="headerlink" title="2.2.    创建数据库表"></a>2.2.    创建数据库表</h2><p>–创建数据库<br>CREATE DATABASE mybatis DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</p>
+<p>–创建用户表并插入数据<br>drop table if exists t_user;</p>
+<p>/<em>==============================================================</em>/<br>/<em> Table: t_user                                                </em>/<br>/<em>==============================================================</em>/<br>create table t_user<br>(<br>   id                   bigint not null auto_increment,<br>   account              varchar(20),<br>   password             varchar(20),<br>   user_name            varchar(20),<br>   gender               int,<br>   age                  int,<br>   birthday             datetime,<br>   create_time          datetime,<br>   primary key (id)<br>);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘lilei’, ‘123456’, ‘李雷’, 1, 15, ‘2001-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘hanmeimei’, ‘123456’, ‘韩梅梅’, 0, 14, ‘2002-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘lucy’, ‘123456’, ‘露西’, 0, 13, ‘2003-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘lily’, ‘123456’, ‘莉莉’, 0, 13, ‘2003-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘jim’, ‘123456’, ‘Jim Green’, 1, 14, ‘2002-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘unclewang’, ‘123456’, ‘王大叔’, 1, 43, ‘1973-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<h2 id="2-3-引入MyBatis及其配置"><a href="#2-3-引入MyBatis及其配置" class="headerlink" title="2.3.    引入MyBatis及其配置"></a>2.3.    引入MyBatis及其配置</h2><p>2.3.1.    MyBatis引入及配置<br>1．配置mybatis依赖包的坐标信息到pom.xml文件中；<br>        <dependency><br>            <groupid>org.mybatis</groupid><br>            <artifactid>mybatis</artifactid><br>            <version>3.2.8</version><br>        </dependency></p>
+<p>2．在MyBatis的说明文档中找到它的总配置文件的相关内容，创建对应的配置文件。创建src/main/resources/mybatis-config.xml文件，文件中的内容可如下：</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE configuration<br>  PUBLIC “-//mybatis.org//DTD Config 3.0//EN”<br>  “<a href="http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;" target="_blank" rel="external">http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</a></p>
+<p><configuration><br>    <!-- 引入外部配置文件 --><br>    <properties resource="jdbc.properties"></properties></configuration></p>
+<pre><code>&lt;environments default=&quot;development&quot;&gt;
+    &lt;!-- 开发环境 --&gt;
+    &lt;environment id=&quot;development&quot;&gt;
+        &lt;transactionManager type=&quot;JDBC&quot; /&gt;
+        &lt;dataSource type=&quot;POOLED&quot;&gt;
+            &lt;property name=&quot;driver&quot; value=&quot;${jdbc.driver}&quot; /&gt;
+            &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot; /&gt;
+            &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot; /&gt;
+            &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot; /&gt;
+        &lt;/dataSource&gt;
+    &lt;/environment&gt;
+&lt;/environments&gt;
+&lt;mappers&gt;
+&lt;/mappers&gt;
+</code></pre><p><br>【注意】如果在编辑配置文件或者mapper文件时没有提示，可以在mybatis的源代码包中搜索到两个对应的dtd文件，然后加入开发工具中即可。</p>
+<p>3．在配置文件中对应的jdbc.properties的文件内容可如下：<br>jdbc.driver=com.mysql.jdbc.Driver<br>jdbc.url=jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true&amp;characterEncoding=utf8<br>jdbc.username=root<br>jdbc.password=root<br>)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-MyBatis概述&quot;&gt;&lt;a href=&quot;#1-MyBatis概述&quot; class=&quot;headerlink&quot; title=&quot;1.    MyBatis概述&quot;&gt;&lt;/a&gt;1.    MyBatis概述&lt;/h1&gt;&lt;h2 id=&quot;1-1-MyBatis简介&quot;&gt;&lt;a hre
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+    
+      <category term="Mybatis" scheme="http://yoursite.com/tags/Mybatis/"/>
+    
+  </entry>
   
   <entry>
     <title>Hibernate</title>
@@ -444,7 +541,7 @@
 <h1 id="Hibernate-批量处理-Hibernate的性能调优"><a href="#Hibernate-批量处理-Hibernate的性能调优" class="headerlink" title="Hibernate_批量处理(Hibernate的性能调优):"></a>Hibernate_批量处理(Hibernate的性能调优):</h1><h2 id="批量添加："><a href="#批量添加：" class="headerlink" title="批量添加："></a>批量添加：</h2><p>假如有10w条数据需要用Hibernate这个框架实现批量添加的话，<br>有可能会出现内存溢出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/** </div><div class="line"> * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line"> * 这样内存中就要存放10w个对象 </div><div class="line"> */</div><div class="line">session.save(t); // t --&gt; 持久化状态</div><div class="line">/* 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line"> * 再调用clear()清空一级缓存，就释放内存 </div><div class="line"> */</div><div class="line">if (i % 20 == 0)&#123;</div><div class="line">    // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">    session.flush();</div><div class="line">    // 清空一级缓存，就释放内存</div><div class="line">    session.clear();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="批量修改："><a href="#批量修改：" class="headerlink" title="批量修改："></a>批量修改：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line">     * 这样内存中就要存放10w个对象 </div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    t.setAge(90);</div><div class="line">    /**</div><div class="line">     * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line">     * 再调用clear()清空一级缓存，就释放内存 </div><div class="line">     */</div><div class="line">    if (i % 20 == 0)&#123;</div><div class="line">    // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">    session.flush(); // 就会有update语句</div><div class="line">    // 清空一级缓存，就释放内存</div><div class="line">    session.clear();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="批量删除："><a href="#批量删除：" class="headerlink" title="批量删除："></a>批量删除：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/** 利用Session完成所有的持久化操作 */</div><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中)</div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    // 调用了delete方法 t是瞬态</div><div class="line">    session.delete(t);</div><div class="line">    System.out.println(session.contains(t)); </div><div class="line">    // 调用flush方法所数据同步到数据库的内存中 (产生delete语句)</div><div class="line">    session.flush();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="QL批量处理："><a href="#QL批量处理：" class="headerlink" title="QL批量处理："></a>QL批量处理：</h2><p>Data Manipulation Language (DML) : insert、select、update、delete</p>
+<h2 id="DML批量处理："><a href="#DML批量处理：" class="headerlink" title="DML批量处理："></a>DML批量处理：</h2><p>Data Manipulation Language (DML) : insert、select、update、delete</p>
 <p>DDL: drop 、create</p>
 <p>DML语法格式：<br>( UPDATE | DELETE ) FROM? EntityName (WHERE where_conditions)?. </p>
 <p>操作步骤：</p>
@@ -522,103 +619,6 @@
     
     
       <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mybatis</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Mybatis/Mybatis/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Mybatis/Mybatis/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-01-24T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-MyBatis概述"><a href="#1-MyBatis概述" class="headerlink" title="1.    MyBatis概述"></a>1.    MyBatis概述</h1><h2 id="1-1-MyBatis简介"><a href="#1-1-MyBatis简介" class="headerlink" title="1.1.    MyBatis简介"></a>1.1.    MyBatis简介</h2><p>MyBatis 世界上流行最广泛的SQL 映射框架，由Clinton Begin 在2002 年创建，其后，捐献给了Apache基金会，成立了iBatis 项目。2010年这个项目从Apache迁移到Google Code改名为Mybatis 之后将版本升级到3.X，其曾经官网：<a href="http://blog.mybatis.org/，从3.2版本之后迁移到github(https://github.com/mybatis/mybatis-3)。" target="_blank" rel="external">http://blog.mybatis.org/，从3.2版本之后迁移到github(https://github.com/mybatis/mybatis-3)。</a><br>Mybatis是一个类似于Hibernate的ORM持久化框架，支持普通SQL查询，存储过程以及高级映射。Mybatis通过使用简单的XM<br>L或注解用于配置和原始映射，将接口和POJO(Plain Old Java Objects,普通的 Java对象)对象映射成数据库中的记录。<br>由于Mybatis是直接基于JDBC做了简单的映射包装，所有从性能角度来看：<br>JDBC &gt; Mybatis &gt; Hibernate</p>
-<p>下载地址（3.2.8）：<br><a href="https://github.com/mybatis/mybatis-3/releases" target="_blank" rel="external">https://github.com/mybatis/mybatis-3/releases</a><br>官方文档：<br><a href="http://mybatis.github.io/mybatis-3/" target="_blank" rel="external">http://mybatis.github.io/mybatis-3/</a><br>官方文档（中文版）：<br><a href="http://mybatis.github.io/mybatis-3/zh/index.html" target="_blank" rel="external">http://mybatis.github.io/mybatis-3/zh/index.html</a></p>
-<h2 id="1-2-MyBatis架构"><a href="#1-2-MyBatis架构" class="headerlink" title="1.2.    MyBatis架构"></a>1.2.    MyBatis架构</h2><p>接口层：提供给外部使用的接口API，开发人员通过这些本地API来操纵数据库。接口层一接收到调用请求就会调用数据处理层来完成具体的数据处理。</p>
-<p>数据处理层：负责具体的SQL查找、SQL解析、SQL执行和执行结果映射处理等。主要目的是根据调用的请求完成一次数据库操作。</p>
-<p>支撑层：负责最基础的功能支撑，包括连接管理、事务管理、配置加载和缓存处理，这些都是共用的东西。为上层的数据处理层提供最基础的支撑。</p>
-<h2 id="1-3-MyBatis执行流程"><a href="#1-3-MyBatis执行流程" class="headerlink" title="1.3.    MyBatis执行流程"></a>1.3.    MyBatis执行流程</h2><p>执行过程：<br>1、mybatis配置<br>mybatis-config.xml，名称可变，此文件作为mybatis的全局配置文件，配置了mybatis的运行环境等信息。mapper.xml文件即sql映射文件，文件中配置了操作数据库的sql语句。此文件需要在mybatis-config.xml中加载；<br>2、通过mybatis环境等配置信息构造SqlSessionFactory即会话工厂；<br>3、由会话工厂创建sqlSession即会话，操作数据库需要通过sqlSession进行；<br>4、mybatis底层自定义了Executor执行器接口操作数据库，Executor接口有两个实现，一个是基本执行器、一个是缓存执行器；<br>5、Mapped Statement也是mybatis一个底层封装对象，它包装了mybatis配置信息及sql映射信息等。mapper.xml文件中一个sql对应一个Mapped Statement对象，sql的id即是Mapped statement的id；<br>6、Mapped Statement对sql执行输入参数进行定义，包括HashMap、基本类型、pojo，Executor通过 Mapped Statement在执行sql前将输入的java对象映射至sql中，输入参数映射就是jdbc编程中对preparedStatement设置参数；<br>7、Mapped Statement对sql执行输出结果进行定义，包括HashMap、基本类型、pojo，Executor通过 Mapped Statement在执行sql后将输出结果映射至java对象中，输出结果映射过程相当于jdbc编程中对结果的解析处理过程。</p>
-<h2 id="1-4-与Hibernate的比较"><a href="#1-4-与Hibernate的比较" class="headerlink" title="1.4.    与Hibernate的比较"></a>1.4.    与Hibernate的比较</h2><p>MyBatis与Hibernate都是流行的持久层开发框架；两者之间各有优缺点，具体的比较详见《MyBatis与Hibernate的区别.doc》</p>
-<h1 id="2-MyBatis初体验"><a href="#2-MyBatis初体验" class="headerlink" title="2.    MyBatis初体验"></a>2.    MyBatis初体验</h1><h2 id="2-1-创建并配置项目"><a href="#2-1-创建并配置项目" class="headerlink" title="2.1.    创建并配置项目"></a>2.1.    创建并配置项目</h2><p>1．创建Maven Project</p>
-<h2 id="2．配置项目；打开pom-xml文件，添加编译、mysql的依赖坐标。"><a href="#2．配置项目；打开pom-xml文件，添加编译、mysql的依赖坐标。" class="headerlink" title="2．配置项目；打开pom.xml文件，添加编译、mysql的依赖坐标。"></a>2．配置项目；打开pom.xml文件，添加编译、mysql的依赖坐标。</h2><pre><code>&lt;dependencies&gt;
-
-    &lt;!-- 单元测试 --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;junit&lt;/groupId&gt;
-        &lt;artifactId&gt;junit&lt;/artifactId&gt;
-        &lt;version&gt;4.10&lt;/version&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-
-    &lt;!-- MySql --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;mysql&lt;/groupId&gt;
-        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-        &lt;version&gt;5.1.32&lt;/version&gt;
-    &lt;/dependency&gt;
-
-&lt;/dependencies&gt;
-
-&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;!-- java编译插件 --&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-            &lt;version&gt;3.2&lt;/version&gt;
-            &lt;configuration&gt;
-                &lt;source&gt;1.7&lt;/source&gt;
-                &lt;target&gt;1.7&lt;/target&gt;
-                &lt;encoding&gt;UTF-8&lt;/encoding&gt;
-            &lt;/configuration&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;
-</code></pre><h2 id="2-2-创建数据库表"><a href="#2-2-创建数据库表" class="headerlink" title="2.2.    创建数据库表"></a>2.2.    创建数据库表</h2><p>–创建数据库<br>CREATE DATABASE mybatis DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</p>
-<p>–创建用户表并插入数据<br>drop table if exists t_user;</p>
-<p>/<em>==============================================================</em>/<br>/<em> Table: t_user                                                </em>/<br>/<em>==============================================================</em>/<br>create table t_user<br>(<br>   id                   bigint not null auto_increment,<br>   account              varchar(20),<br>   password             varchar(20),<br>   user_name            varchar(20),<br>   gender               int,<br>   age                  int,<br>   birthday             datetime,<br>   create_time          datetime,<br>   primary key (id)<br>);</p>
-<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘lilei’, ‘123456’, ‘李雷’, 1, 15, ‘2001-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
-<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘hanmeimei’, ‘123456’, ‘韩梅梅’, 0, 14, ‘2002-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
-<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘lucy’, ‘123456’, ‘露西’, 0, 13, ‘2003-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
-<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘lily’, ‘123456’, ‘莉莉’, 0, 13, ‘2003-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
-<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘jim’, ‘123456’, ‘Jim Green’, 1, 14, ‘2002-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
-<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘unclewang’, ‘123456’, ‘王大叔’, 1, 43, ‘1973-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
-<h2 id="2-3-引入MyBatis及其配置"><a href="#2-3-引入MyBatis及其配置" class="headerlink" title="2.3.    引入MyBatis及其配置"></a>2.3.    引入MyBatis及其配置</h2><p>2.3.1.    MyBatis引入及配置<br>1．配置mybatis依赖包的坐标信息到pom.xml文件中；<br>        <dependency><br>            <groupid>org.mybatis</groupid><br>            <artifactid>mybatis</artifactid><br>            <version>3.2.8</version><br>        </dependency></p>
-<p>2．在MyBatis的说明文档中找到它的总配置文件的相关内容，创建对应的配置文件。创建src/main/resources/mybatis-config.xml文件，文件中的内容可如下：</p>
-<p>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE configuration<br>  PUBLIC “-//mybatis.org//DTD Config 3.0//EN”<br>  “<a href="http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;" target="_blank" rel="external">http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</a></p>
-<p><configuration><br>    <!-- 引入外部配置文件 --><br>    <properties resource="jdbc.properties"></properties></configuration></p>
-<pre><code>&lt;environments default=&quot;development&quot;&gt;
-    &lt;!-- 开发环境 --&gt;
-    &lt;environment id=&quot;development&quot;&gt;
-        &lt;transactionManager type=&quot;JDBC&quot; /&gt;
-        &lt;dataSource type=&quot;POOLED&quot;&gt;
-            &lt;property name=&quot;driver&quot; value=&quot;${jdbc.driver}&quot; /&gt;
-            &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot; /&gt;
-            &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot; /&gt;
-            &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot; /&gt;
-        &lt;/dataSource&gt;
-    &lt;/environment&gt;
-&lt;/environments&gt;
-&lt;mappers&gt;
-&lt;/mappers&gt;
-</code></pre><p><br>【注意】如果在编辑配置文件或者mapper文件时没有提示，可以在mybatis的源代码包中搜索到两个对应的dtd文件，然后加入开发工具中即可。</p>
-<p>3．在配置文件中对应的jdbc.properties的文件内容可如下：<br>jdbc.driver=com.mysql.jdbc.Driver<br>jdbc.url=jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true&amp;characterEncoding=utf8<br>jdbc.username=root<br>jdbc.password=root<br>)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;1-MyBatis概述&quot;&gt;&lt;a href=&quot;#1-MyBatis概述&quot; class=&quot;headerlink&quot; title=&quot;1.    MyBatis概述&quot;&gt;&lt;/a&gt;1.    MyBatis概述&lt;/h1&gt;&lt;h2 id=&quot;1-1-MyBatis简介&quot;&gt;&lt;a hre
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-    
-      <category term="Mybatis" scheme="http://yoursite.com/tags/Mybatis/"/>
     
   </entry>
   
