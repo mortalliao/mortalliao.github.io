@@ -22,7 +22,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>about | mortalLiao</title>
+<title>Hibernate_一级缓存 | mortalLiao</title>
 
 <link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
 
@@ -31,7 +31,7 @@
 
     
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/othersPages.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
     <!--script-->
@@ -146,12 +146,158 @@
 </ul>
 
 
-         <div id="main">
-        <div id="about">
-            <figure class="highlight javascript"><figcaption><span>关于我</span><a href="./resume.html" target="_blank" rel="external">我的简历</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">"廖于坚"</span>,</div><div class="line">    <span class="attr">birthday</span>: <span class="string">"1993-09-10"</span>,</div><div class="line">    <span class="attr">gender</span>: <span class="string">"男"</span>,</div><div class="line">    <span class="attr">address</span>: <span class="string">"广东省广州市"</span>,</div><div class="line">    <span class="attr">education</span>: <span class="string">"本科 / 南昌工程学院"</span>,</div><div class="line">    <span class="attr">major</span>: <span class="string">"软件工程"</span>,</div><div class="line">    <span class="attr">Github</span>: <span class="string">"https://github.com/mortalliao"</span>,</div><div class="line">    <span class="attr">skills</span>: [<span class="string">"HTML"</span>, <span class="string">"CSS"</span>, <span class="string">"JavaScript"</span>, <span class="string">"jQuery"</span>, <span class="string">"Java"</span>, <span class="string">"Git"</span>],</div><div class="line">    <span class="attr">blog</span>: <span class="string">"http://mortalliao.win"</span>,</div><div class="line">    <span class="attr">Email</span>: <span class="string">"mortalliaoyujian@163.com"</span>,</div><div class="line">    <span class="attr">description</span>: [<span class="string">"认识自己的无知是认识世界的最可靠的方法。"</span>]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="Hibernate_一级缓存">
+                
+                Hibernate_一级缓存
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/03_Hibernate_一级缓存/" data-thread-key="/2017/04/02/Java/ORM/Hibernate/03_Hibernate_一级缓存/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="Hibernate_一级缓存"
+              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/03_Hibernate_一级缓存/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="Hibernate的一级缓存"><a href="#Hibernate的一级缓存" class="headerlink" title="Hibernate的一级缓存."></a>Hibernate的一级缓存.</h1><ol>
+<li>一级缓存，默认是开启的.</li>
+<li>它是跟Session相关(一级缓存是放在Session对象中).</li>
+<li>一级缓存是存放在内存中.<br>因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.  </li>
+</ol>
+<ul>
+<li><p>一级缓存的作用：<br>提高Hibernate的执行效率.  </p>
+</li>
+<li><p>如何提高Hibernate的执行效率:<br>因为它会把查询出来的对象先存放在内存中(一级缓存中).<br>当你调用该对象的set方法时它不会立即发出update语句<br>当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,<br>如果对象的属性值没有发生改变就不会生成update语句.  </p>
+</li>
+</ul>
+<blockquote>
+<p>操作一级缓存的方法：</p>
+</blockquote>
+<ol>
+<li><p>session.contains(持久化对象);<br>判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态</p>
+</li>
+<li><p>void session.clear(): 清空Session中的一级缓存.(所有的持久化状态的对象都没有了).</p>
+</li>
+<li><p>void session.evict(Object object): 从Session一级缓存中删除一个指定的持久化状态的对象.</p>
+</li>
+<li><p>void flush(): 把Session一级缓存中的对象同步到底层的数据库表中.(默认是事务提交时才同步)</p>
+</li>
+<li><p>void session.close(): 先清空Session中的一级缓存，再关闭数据库连接.</p>
+</li>
+<li><p>Session的一级缓存的生命周期：<br>Session session = SessionFactory.openSession(); 一级缓存开始<br>…..<br>session.close();  一级缓存结束</p>
+</li>
+</ol>
 
         </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/后端开发/">后端开发</a>
+                    
+                    <a href="/categories/后端开发/Java/">Java</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/">ORM</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/Hibernate/">Hibernate</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Hibernate/">Hibernate</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/02/Java/ORM/Hibernate/01_Hibernate_介绍/" class="pre-post fa fa-caret-left">Hibernate框架介绍</a>
+        
+        
+        <a href="/2017/04/02/Java/ORM/Hibernate/02_Hibernate_CRUD/" class="next-post fa">Hibernate实现简单的CRUD操作</a>
+        
     </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
 
 
     </div>
@@ -187,6 +333,8 @@
     <ul id="tools">
     <li class="totop-btn fa fa-angle-up"></li>
     
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -206,6 +354,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate的一级缓存"><span class="toc-number">1.</span> <span class="toc-text">Hibernate的一级缓存.</span></a></li></ol>
 
 
 

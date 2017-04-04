@@ -22,7 +22,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>about | mortalLiao</title>
+<title>Hibernate_查询缓存 | mortalLiao</title>
 
 <link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
 
@@ -31,7 +31,7 @@
 
     
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/othersPages.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
     <!--script-->
@@ -146,12 +146,137 @@
 </ul>
 
 
-         <div id="main">
-        <div id="about">
-            <figure class="highlight javascript"><figcaption><span>关于我</span><a href="./resume.html" target="_blank" rel="external">我的简历</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">"廖于坚"</span>,</div><div class="line">    <span class="attr">birthday</span>: <span class="string">"1993-09-10"</span>,</div><div class="line">    <span class="attr">gender</span>: <span class="string">"男"</span>,</div><div class="line">    <span class="attr">address</span>: <span class="string">"广东省广州市"</span>,</div><div class="line">    <span class="attr">education</span>: <span class="string">"本科 / 南昌工程学院"</span>,</div><div class="line">    <span class="attr">major</span>: <span class="string">"软件工程"</span>,</div><div class="line">    <span class="attr">Github</span>: <span class="string">"https://github.com/mortalliao"</span>,</div><div class="line">    <span class="attr">skills</span>: [<span class="string">"HTML"</span>, <span class="string">"CSS"</span>, <span class="string">"JavaScript"</span>, <span class="string">"jQuery"</span>, <span class="string">"Java"</span>, <span class="string">"Git"</span>],</div><div class="line">    <span class="attr">blog</span>: <span class="string">"http://mortalliao.win"</span>,</div><div class="line">    <span class="attr">Email</span>: <span class="string">"mortalliaoyujian@163.com"</span>,</div><div class="line">    <span class="attr">description</span>: [<span class="string">"认识自己的无知是认识世界的最可靠的方法。"</span>]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="Hibernate_查询缓存">
+                
+                Hibernate_查询缓存
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/08_Hibernate_查询缓存/" data-thread-key="/2017/04/02/Java/ORM/Hibernate/08_Hibernate_查询缓存/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="Hibernate_查询缓存"
+              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/08_Hibernate_查询缓存/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="Hibernate-查询缓存"><a href="#Hibernate-查询缓存" class="headerlink" title="Hibernate_查询缓存:"></a>Hibernate_查询缓存:</h1><ol>
+<li>默认是关闭的.</li>
+<li>它缓存得是hql语句.(内存中)</li>
+</ol>
+<p>使用查询缓存的步骤:<br>第一步：配置开启查询缓存(hibernate.cfg.xml)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启查询缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_query_cache&quot;&gt;true&lt;/property&gt;</div></pre></td></tr></table></figure></p>
+<p>第二步：查询时需要指定哪些hql语句存入查询缓存中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">session.createQuery(hql)</div><div class="line">       .setCacheable(true) // 存入查询缓存</div><div class="line">       .list(); // 把所有的学生存入一级缓存</div></pre></td></tr></table></figure></p>
+<p>缓存格式：<br>Map<string, list<string="">&gt;<br>key : hql语句<br>value: [“cn.mortalliao.entity.Student#1”, “cn.mortalliao.entity.Student#2”]</string,></p>
 
         </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/后端开发/">后端开发</a>
+                    
+                    <a href="/categories/后端开发/Java/">Java</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/">ORM</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/Hibernate/">Hibernate</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Hibernate/">Hibernate</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/02/Java/ORM/Hibernate/05_Hibernate_HQL/" class="pre-post fa fa-caret-left">Hibernate_HQL</a>
+        
+        
+        <a href="/2017/04/02/Java/ORM/Hibernate/04_Hibernate_JPA注解/" class="next-post fa">Hibernate_JPA注解</a>
+        
     </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
 
 
     </div>
@@ -187,6 +312,8 @@
     <ul id="tools">
     <li class="totop-btn fa fa-angle-up"></li>
     
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -206,6 +333,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate-查询缓存"><span class="toc-number">1.</span> <span class="toc-text">Hibernate_查询缓存:</span></a></li></ol>
 
 
 
