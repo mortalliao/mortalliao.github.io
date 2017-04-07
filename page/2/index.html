@@ -156,8 +156,125 @@
     
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Java/ORM/Hibernate/08_Hibernate_查询缓存/">
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Java/ORM/Hibernate/07_Hibernate_二级缓存/">
         <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255109379&di=eeaee45b7dc274f830bc8af7c7392a9a&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Da5dda3cf7bf0f736d8ab44053f659f2f%2Fb03533fa828ba61ea66a5d9f4234970a314e59fd.jpg>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/04/02/Java/ORM/Hibernate/07_Hibernate_二级缓存/">
+                <h2 class="article-title">07_Hibernate_二级缓存</h2>
+            </a>
+            
+            <p class="article-content">
+                Hibernate_二级缓存:
+缓存的是对象.
+作用：提高Hibernate4的查询性能.
+二级缓存默认是关闭的.(因为它是与SessionFactory与关),SessionFactory存活的时间很长.
+
+使用二级缓存的步骤:
+第一步：拷贝jar (4个jar包)lib\optional\ehcache\ehcache-core-2.4.3.jarlib\optional\ehcache\hibernate-ehcache-4.3.8.Final.jarslf4j-api-1.7.2.jarslf4j-jdk14-1.7.2.jarslf4j: Simple Logging Fade for Java : 简单的java日志门面.
+第二步：在hibernate.cfg.xml文件配置开启二级缓存.
+
+1234&lt;!-- 配置开启二级缓存 --&gt;&lt;property ...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="07_Hibernate_二级缓存"
+              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/07_Hibernate_二级缓存/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/04/02/Java/ORM/Hibernate/07_Hibernate_二级缓存/" class="read-article">阅读全文</a>
+    
+</div>
+
+        </div>
+        
+    </li>
+    
+    
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Java/ORM/Hibernate/06_Hibernate_批量处理/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255041141&di=535a2307f77a955dfd56e8e5e661a7be&imgtype=0&src=http%3A%2F%2Fm.qqzhi.com%2Fupload%2Fimg_4_3412644905D657907529_23.jpg>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/04/02/Java/ORM/Hibernate/06_Hibernate_批量处理/">
+                <h2 class="article-title">06_Hibernate_批量处理</h2>
+            </a>
+            
+            <p class="article-content">
+                Hibernate_批量处理(Hibernate的性能调优):批量添加：假如有10w条数据需要用Hibernate这个框架实现批量添加的话，有可能会出现内存溢出。123456789101112131415/**  * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中), * 这样内存中就要存放10w个对象  */session.save(t); // t --&gt; 持久化状态/** * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中,  * 再调用clear()清空一级缓存，就释放内存  */if (i % 20 == 0)&#123;    // 把一级缓存中的对象同步到底层数据库表中    session.flush();    // 清空一级缓存，就释放内存    session.clear();&...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="06_Hibernate_批量处理"
+              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/06_Hibernate_批量处理/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/04/02/Java/ORM/Hibernate/06_Hibernate_批量处理/" class="read-article">阅读全文</a>
+    
+</div>
+
+        </div>
+        
+    </li>
+    
+    
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Java/ORM/Hibernate/08_Hibernate_查询缓存/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242360143&di=25a23cf5c48b249edd1951cdde79003a&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140325%2F235100-14032502205024.jpg>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -216,62 +333,8 @@
     </li>
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Java/ORM/Hibernate/06_Hibernate_批量处理/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255155249&di=ecb38db71be7b5de262d509aee8ed9a4&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D4019228056%2C1867106425%26fm%3D214%26gp%3D0.jpg>
-           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
-        </div>
-        <div class="article-excerpt">
-            
-            <a class="article-title-link" href="/2017/04/02/Java/ORM/Hibernate/06_Hibernate_批量处理/">
-                <h2 class="article-title">06_Hibernate_批量处理</h2>
-            </a>
-            
-            <p class="article-content">
-                Hibernate_批量处理(Hibernate的性能调优):批量添加：假如有10w条数据需要用Hibernate这个框架实现批量添加的话，有可能会出现内存溢出。123456789101112131415/**  * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中), * 这样内存中就要存放10w个对象  */session.save(t); // t --&gt; 持久化状态/** * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中,  * 再调用clear()清空一级缓存，就释放内存  */if (i % 20 == 0)&#123;    // 把一级缓存中的对象同步到底层数据库表中    session.flush();    // 清空一级缓存，就释放内存    session.clear();&...
-            </p>
-            <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Hibernate</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Hibernate
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2017/04/02</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-            <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="06_Hibernate_批量处理"
-              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/06_Hibernate_批量处理/"><i class="fa fa-spinner fa-spin"></i></span>
-    </span>
-    
-    
-    <a href="/2017/04/02/Java/ORM/Hibernate/06_Hibernate_批量处理/" class="read-article">阅读全文</a>
-    
-</div>
-
-        </div>
-        
-    </li>
-    
-    
     <li  class="article-excerpt-wrap " _href = "/2017/04/02/Java/ORM/Mybatis/Mybatis/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255109379&di=eeaee45b7dc274f830bc8af7c7392a9a&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Da5dda3cf7bf0f736d8ab44053f659f2f%2Fb03533fa828ba61ea66a5d9f4234970a314e59fd.jpg>
+        <div class="article-img img-ajax" data-src= /img/default-1.jpg>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -316,63 +379,6 @@
     
     
     <a href="/2017/04/02/Java/ORM/Mybatis/Mybatis/" class="read-article">阅读全文</a>
-    
-</div>
-
-        </div>
-        
-    </li>
-    
-    
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session线程安全/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255041141&di=535a2307f77a955dfd56e8e5e661a7be&imgtype=0&src=http%3A%2F%2Fm.qqzhi.com%2Fupload%2Fimg_4_3412644905D657907529_23.jpg>
-           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
-        </div>
-        <div class="article-excerpt">
-            
-            <a class="article-title-link" href="/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session线程安全/">
-                <h2 class="article-title">09_Hibernate_Session线程安全问题</h2>
-            </a>
-            
-            <p class="article-content">
-                Hibernate_Session线程安全问题:
-第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.org.hibernate.context.internal.JTASessionContext:JTA: Java Transaction Api java事务api. (全局事务)跨数据库(EJB容器) WebLogic(IBM)org.hibernate.context.internal.ThreadLocalSessionContext:JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)
-
-1234&lt;!-- 配置线程安全的Session thread: org.hibernate.context.internal.ThreadLocalSessionContextjpa:  org.hibernate.conte...
-            </p>
-            <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Hibernate</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Hibernate
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2017/04/02</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-            <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="09_Hibernate_Session线程安全问题"
-              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session线程安全/"><i class="fa fa-spinner fa-spin"></i></span>
-    </span>
-    
-    
-    <a href="/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session线程安全/" class="read-article">阅读全文</a>
     
 </div>
 
