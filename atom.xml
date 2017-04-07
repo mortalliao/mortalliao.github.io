@@ -16,6 +16,134 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>02_CSS的盒子模型</title>
+    <link href="http://yoursite.com/2017/04/07/CSS/02_CSS%E7%9A%84%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://yoursite.com/2017/04/07/CSS/02_CSS的盒子模型/</id>
+    <published>2017-04-07T13:46:07.000Z</published>
+    <updated>2017-04-07T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="盒子模型的概念"><a href="#盒子模型的概念" class="headerlink" title="盒子模型的概念"></a>盒子模型的概念</h1><p>所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。<br>每个矩形都由元素的内容、内边距（padding）、边框（border）和外边距（margin）组成。  </p>
+<ul>
+<li><p>网页就是多个盒子嵌套排列的结果。  </p>
+</li>
+<li><p>内边距出现在内容区域的周围，当给元素添加背景色或背景图像时，该元素的背景色或背景图像也将出现在内边距中。</p>
+</li>
+<li>外边距是该元素与相邻元素之间的距离。</li>
+<li>如果给元素定义边框属性，边框将出现在内边距和外边距之间。  </li>
+</ul>
+<blockquote>
+<p>注意：虽然盒子模型拥有内边距、边框、外边距、宽和高这些基本属性，但是并不要求每个元素都必须定义这些属性。</p>
+</blockquote>
+<h1 id="外边距"><a href="#外边距" class="headerlink" title="外边距"></a>外边距</h1><p>margin-top:上外边距<br>margin-right:右外边距<br>margin-bottom:下外边距<br>margin-left:上外边距<br>margin:上外边距 [右外边距  下外边距  左外边距]</p>
+<p><strong>对块元素应用宽度属性width，并将左右的外边距都设置为auto，可使块级元素水平居中，实际工作中常用这种方式进行网页布局</strong><br>示例代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.header&#123; width:960px; margin:0 auto;&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：使用margin定义块元素的垂直外边距时，可能会出现外边距的合并。  </p>
+</blockquote>
+<h2 id="外边距的合并"><a href="#外边距的合并" class="headerlink" title="外边距的合并"></a>外边距的合并</h2><h3 id="相邻块元素垂直外边距的合并"><a href="#相邻块元素垂直外边距的合并" class="headerlink" title="相邻块元素垂直外边距的合并:"></a>相邻块元素垂直外边距的合并:</h3><p><img src="../images/相邻块元素垂直外边距的合并.png" alt="相邻块元素垂直外边距的合并"><br>当上下相邻的两个块元素相遇时，如果上面的元素有下外边距margin-bottom，下面的元素有上外边距margin-top，则他们之间的垂直间距不是margin-bottom与margin-top之和，而是两者中的较大者。这种现象被称为相邻块元素垂直外边距的合并（也称外边距塌陷）。</p>
+<h3 id="嵌套块元素垂直外边距的合并"><a href="#嵌套块元素垂直外边距的合并" class="headerlink" title="嵌套块元素垂直外边距的合并:"></a>嵌套块元素垂直外边距的合并:</h3><p><img src="../images/嵌套块元素垂直外边距的合并.png" alt="嵌套块元素垂直外边距的合并">  </p>
+<ul>
+<li>对于两个嵌套关系的块元素，如果父元素没有上内边距及边框，则父元素的上外边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会发生合并。</li>
+<li>如果希望外边距不合并，可以为父元素定义1像素的上边框或上内边距。这里以定义父元素的上边框为例，在父<div>的CSS样式中增加如下代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-top:1px solid #FCC;/*定义父div的上边框*/</div></pre></td></tr></table></figure>
+</div></li>
+</ul>
+<h1 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h1><h2 id="边框样式（border-style）"><a href="#边框样式（border-style）" class="headerlink" title="边框样式（border-style）"></a>边框样式（border-style）</h2><p>样式：<br>border-top/right/bottom/left-style:;<br>border-style:top right bottom left;  </p>
+<p>边框样式用于定义页面中边框的风格，常用属性值如下：  </p>
+<ul>
+<li>none：没有边框即忽略所有边框的宽度（默认值）</li>
+<li>solid：边框为单实线</li>
+<li>dashed：边框为虚线</li>
+<li>dotted：边框为点线</li>
+<li>double：边框为双实线</li>
+</ul>
+<h2 id="边框宽度（border-width）"><a href="#边框宽度（border-width）" class="headerlink" title="边框宽度（border-width）"></a>边框宽度（border-width）</h2><p>宽度<br>border-top/right/bottom/left-width:;<br>border-width:top right bottom left;  </p>
+<h2 id="边框颜色（border-color）"><a href="#边框颜色（border-color）" class="headerlink" title="边框颜色（border-color）"></a>边框颜色（border-color）</h2><p>颜色<br>border-top/right/bottom/left-color:;<br>border-color:top right bottom left;  </p>
+<blockquote>
+<p>注意：设置边框颜色时同样必须设置边框样式，如果未设置样式或设置为none，则其他的边框属性无效。</p>
+</blockquote>
+<h2 id="综合设置边框-复合属性"><a href="#综合设置边框-复合属性" class="headerlink" title="综合设置边框(复合属性)"></a>综合设置边框(复合属性)</h2><p>border[-top right bottom left]:宽度 样式 颜色;  </p>
+<ul>
+<li>像border、border-top等这样，能够一个属性定义元素的多种样式，在CSS中称之为复合属性。</li>
+<li>常用的复合属性有font、border、margin、padding和background等。</li>
+<li>复合属性可以简化代码，提高页面的运行速度，但是如果只有一项值，最好不要应用复合属性，以免样式不被兼容。</li>
+</ul>
+<h2 id="多学几招"><a href="#多学几招" class="headerlink" title="多学几招"></a>多学几招</h2><ol>
+<li>表单的边框通常改为 0；<br><code>border:0 none;</code></li>
+<li>表格的细线边框<br><code>table { border-collapse:collapse; }</code></li>
+<li>轮廓 （链接有虚线 和  文本框  有 蓝色边框）<br><code>outline-style:none;</code></li>
+</ol>
+<p>在制作网页的过程中，如果涉及到了页面的宽高的问题，最好用width和height去解决，才用padding,最后才考虑margin.<br>因为margin在布局中会存在兼容性的问题</p>
+<h1 id="内边距属性"><a href="#内边距属性" class="headerlink" title="内边距属性"></a>内边距属性</h1><p>padding-top:上内边距<br>padding-right:右内边距<br>padding-bottom:下内边距<br>padding-left:左内边距<br>padding:上内边距[右内边距 下内边距  左内边距]  </p>
+<p>为了更方便地控制网页中的元素，制作网页时，可使用如下代码清除元素的默认内外边距：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*&#123;</div><div class="line">	padding:0;         /*清除内边距*/</div><div class="line">	margin:0;          /*清除外边距*/</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：行内元素尽量不要给上下的margin 和padding</p>
+</blockquote>
+<h1 id="盒子的宽与高"><a href="#盒子的宽与高" class="headerlink" title="盒子的宽与高"></a>盒子的宽与高</h1><ul>
+<li>使用宽度属性width和高度属性height可以对盒子的大小进行控制。</li>
+<li>width和height的属性值可以为不同单位的数值或相对于父元素的百分比%，实际工作中最常用的是像素值。</li>
+<li>大多数浏览器，如Firefox、IE6及以上版本都采用了W3C规范，符合CSS规范的盒子模型的总宽度和总高度的计算原则是：<br>盒子的总宽度= width+左右内边距之和+左右边框宽度之和+左右外边距之和<br>盒子的总高度= height+上下内边距之和+上下边框宽度之和+上下外边距之和</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>宽度属性width和高度属性height仅适用于块级元素，对行内元素无效<code>&lt;img /&gt;标记和&lt;input /&gt;除外</code></li>
+<li>计算盒子模型的总高度时，还应考虑上下两个盒子垂直外边距合并的情况</li>
+</ol>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;盒子模型的概念&quot;&gt;&lt;a href=&quot;#盒子模型的概念&quot; class=&quot;headerlink&quot; title=&quot;盒子模型的概念&quot;&gt;&lt;/a&gt;盒子模型的概念&lt;/h1&gt;&lt;p&gt;所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。&lt;br&gt;每个矩
+    
+    </summary>
+    
+      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>04_CSS的overflow</title>
+    <link href="http://yoursite.com/2017/04/07/CSS/04_CSS%E7%9A%84overflow/"/>
+    <id>http://yoursite.com/2017/04/07/CSS/04_CSS的overflow/</id>
+    <published>2017-04-07T13:46:07.000Z</published>
+    <updated>2017-04-07T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="CSS标签的显示和隐藏："><a href="#CSS标签的显示和隐藏：" class="headerlink" title="CSS标签的显示和隐藏："></a>CSS标签的显示和隐藏：</h1><h1 id="overflow"><a href="#overflow" class="headerlink" title="overflow:"></a>overflow:</h1><ul>
+<li>hidden:超出部分隐藏。</li>
+<li>scroll:滚动条（超出的部分会显示在滚动条之内）</li>
+<li>auto:如果内容超出会显示滚动条，如果没有那么会自动隐藏。</li>
+</ul>
+<h1 id="display-none-隐藏元素"><a href="#display-none-隐藏元素" class="headerlink" title="display:none;   隐藏元素"></a>display:none;   隐藏元素</h1><p>完全隐藏原来的div，不占位置<br>display:none;  隐藏<br>display:block;  显示  </p>
+<h1 id="visibility-隐藏元素"><a href="#visibility-隐藏元素" class="headerlink" title="visibility:      隐藏元素"></a>visibility:      隐藏元素</h1><p>visibility也会隐藏原来的div但是div还是会占据着自己的位置不放，屏幕上显示的是空白。</p>
+<ul>
+<li>visible;默认值。元素是可见的。</li>
+<li>hidden;元素是不可见的。</li>
+<li>collapse;当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 “hidden”。</li>
+<li>inherit;规定应该从父元素继承 visibility 属性的值。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;a href=&quot;#CSS标签的显示和隐藏：&quot; class=&quot;headerlink&quot; title=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;/a&gt;CSS标签的显示和隐藏：&lt;/h1&gt;&lt;h1 id=&quot;overflow&quot;&gt;&lt;a href=&quot;#overf
+    
+    </summary>
+    
+      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>03_CSS浮动float</title>
     <link href="http://yoursite.com/2017/04/07/CSS/03_CSS%E6%B5%AE%E5%8A%A8float/"/>
     <id>http://yoursite.com/2017/04/07/CSS/03_CSS浮动float/</id>
@@ -26,7 +154,29 @@
 <h1 id="浮动-float"><a href="#浮动-float" class="headerlink" title="浮动(float)"></a>浮动(float)</h1><p>浮动的价值：<br>就是让任何盒子可以一行排列</p>
 <h2 id="元素的浮动属性float"><a href="#元素的浮动属性float" class="headerlink" title="元素的浮动属性float"></a>元素的浮动属性float</h2><p>什么是浮动？<br>元素的浮动是指设置了浮动属性的元素会脱离标准文档流的控制，移动到其父元素中指定位置的过程。  </p>
 <p>如何定义浮动？<br>在CSS中，通过float属性来定义浮动，其基本语法格式如下：<br>选择器{float:属性值;}  </p>
-<p>float属性值：<br>|   属性值   |   描述   |<br>| —- | —- |<br>|  left    |   元素向左浮动   |<br>|   right   |   元素向右浮动   |<br>|   none   |   元素不浮动（默认值）   |</p>
+<p>float属性值：</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>left</td>
+<td>元素向左浮动</td>
+</tr>
+<tr>
+<td>right</td>
+<td>元素向右浮动</td>
+</tr>
+<tr>
+<td>none</td>
+<td>元素不浮动（默认值）</td>
+</tr>
+</tbody>
+</table>
 <h2 id="浮动特性"><a href="#浮动特性" class="headerlink" title="浮动特性"></a>浮动特性</h2><ol>
 <li>浮动脱离标准流，不占位置，会影响标准流。浮动只有左右浮动。</li>
 <li>浮动的元素A排列位置，跟上一个元素（块级）有关系。如果上一个元素有浮动，则A元素顶部会和上一个元素的顶部对齐；如果上一个元素是标准流，则A元素的顶部会和上一个元素的底部对齐。</li>
@@ -58,137 +208,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;标准流-normal-flow&quot;&gt;&lt;a href=&quot;#标准流-normal-flow&quot; class=&quot;headerlink&quot; title=&quot;标准流(normal flow)&quot;&gt;&lt;/a&gt;标准流(normal flow)&lt;/h1&gt;&lt;p&gt;html语言当中另外一个相当重要
-    
-    </summary>
-    
-      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="CSS" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>01_CSS的格式与选择器</title>
-    <link href="http://yoursite.com/2017/04/07/CSS/01_CSS%E7%9A%84%E6%A0%BC%E5%BC%8F%E4%B8%8E%E9%80%89%E6%8B%A9%E5%99%A8/"/>
-    <id>http://yoursite.com/2017/04/07/CSS/01_CSS的格式与选择器/</id>
-    <published>2017-04-07T13:46:07.000Z</published>
-    <updated>2017-04-07T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="W3C"><a href="#W3C" class="headerlink" title="W3C"></a>W3C</h1><p>World Wide Web Consortium<br>中文是W3C组织或者万维网联盟<br>就是出网页标准的<br>web标准不止一个,而是一系列标准,由W3C和其他标准化组织制定  </p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>行为层(Behavior)</td>
-<td>javascript</td>
-</tr>
-<tr>
-<td>表现层(Presentation)</td>
-<td>css</td>
-</tr>
-<tr>
-<td>结构层(Structure)</td>
-<td>xhtml</td>
-</tr>
-<tr>
-<td>内容层</td>
-<td>文字</td>
-</tr>
-</tbody>
-</table>
-<h1 id="CSS-Cascading-Style-Sheets"><a href="#CSS-Cascading-Style-Sheets" class="headerlink" title="CSS(Cascading Style Sheets)"></a>CSS(Cascading Style Sheets)</h1><h1 id="CSS样式规则"><a href="#CSS样式规则" class="headerlink" title="CSS样式规则"></a>CSS样式规则</h1><p>选择器{属性:值}</p>
-<p>选择器(Selector)<br>属性(property)<br>值(value)</p>
-<h1 id="CSS和HTML的结合方式-四种结合和方式"><a href="#CSS和HTML的结合方式-四种结合和方式" class="headerlink" title="CSS和HTML的结合方式:(四种结合和方式)"></a>CSS和HTML的结合方式:(四种结合和方式)</h1><ol>
-<li><p>在每个html标签上面都有一个属性 style 把css和html结合在一起</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div style=&quot;background-color:red;color:green;&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用html的一个标签实现<code>&lt;style&gt;</code>标签,写在head里面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">css代码</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>在style标签里面使用语句(在某些浏览器下不起作用)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@import url(css文件的路径);</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>创建一个css文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">    @import url(&quot;aaa.css&quot;);</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
-<ol>
-<li>使用头标签 link ,引入外部css文件(一般使用第四种方式)<br>创建一个css文件，使用下面方式引入<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;aaa.css&quot;/&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><h2 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h2><p>style &gt; id选择器 &gt; class选择器 &gt; 标签选择器<br><code>权重是叠加的</code><br>!important    权重最高的  </p>
-<p>通配选择符:    *{属性:值}    用于定义所有的html元素<br>作用范围很广,但是效率最低,慎用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">*&#123;border:0 none;margin:0;padding:0;&#125; </div><div class="line">//由于各个浏览器存在着,内外边距的,默认值,还不同  </div><div class="line">//所以,需要将所有浏览器的默认内外边距,都从零开始计算  </div><div class="line">//重置所有元素的,外边距和内边距,为零  </div><div class="line">//大型网站一般不这么用,一般都把所有用的标签写上去  </div><div class="line">body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div&#123;</div><div class="line">    border:0 none;</div><div class="line">    margin:0;</div><div class="line">    padding:0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>//css的属性,虽然有继承的特点,但是并不是,所有的属性都有继承<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!--</div><div class="line">h1#content&#123;&#125;	表示针对所有id为content的h1标签</div><div class="line">h1.p1&#123;&#125;		表示针对所有class为p1的h1标签</div><div class="line">很少使用</div><div class="line">--&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="CSS的扩展选择器"><a href="#CSS的扩展选择器" class="headerlink" title="CSS的扩展选择器"></a>CSS的扩展选择器</h2><ol>
-<li>交集选择器</li>
-<li>合选择器</li>
-<li>伪元素选择器<br>CSS里面提供了一些定义好的样式,可以拿过来使用<br>比如<br>超链接<code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code><br>|   超链接的状态     |      |<br>| —- | —- |<br>|   原始状态   |  :link    |<br>|   鼠标放上去的状态   |   :hover   |<br>|   点击   |   :active   |<br>|   点击之后   |   :visited   |  </li>
-</ol>
-<p>输入框<code>&lt;input type=&quot;&quot;&gt;</code><br>:focus    设置对象在成为输入焦点(该对象的onfocus事件发生时的样式    IE6/7不支持)</p>
-<h1 id="块级元素和行内元素"><a href="#块级元素和行内元素" class="headerlink" title="块级元素和行内元素"></a>块级元素和行内元素</h1><h2 id="块级元素："><a href="#块级元素：" class="headerlink" title="块级元素："></a>块级元素：</h2><p>一个div单独占一行。<br>像这一些元素：（默认没有高但是有宽并且宽度默认占一行的元素）叫做块级元素。<br>特点：单独占一行，并且可以设置宽高。<br>常见块状元素为body,div,p,h1~h6,ul,li等</p>
-<h2 id="行内元素："><a href="#行内元素：" class="headerlink" title="行内元素："></a>行内元素：</h2><p>像这一些元素：可以在一行中显示多个标签的元素叫行内元素。<br>特点：一行同显示多个，设置宽高没有效果。  </p>
-<h2 id="行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）"><a href="#行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）" class="headerlink" title="行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）"></a>行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）</h2><p>display:用来设置页面元素的显示方式。</p>
-<ul>
-<li>block:块级元素。</li>
-<li>inline:行内元素。</li>
-<li>inline-block:行内块级元素。</li>
-</ul>
-<h2 id="CSS标签的嵌套关系："><a href="#CSS标签的嵌套关系：" class="headerlink" title="CSS标签的嵌套关系："></a>CSS标签的嵌套关系：</h2><p>行内元素：span,u,b,i,strong<br>块级元素：h1,h2,h3–h6,div,p<br>原则：</p>
-<ol>
-<li>行内元素可以嵌套行内元素，但是不能嵌套块级元素</li>
-<li>块级元素可以嵌套行内元素。</li>
-<li>少数块级元素不可以嵌套其它的块行元素：<br>在p标签中不可以使用div。<br>在h标签中最好不要用div。  </li>
-</ol>
-<h2 id="页面模块的常用css命名"><a href="#页面模块的常用css命名" class="headerlink" title="页面模块的常用css命名"></a>页面模块的常用css命名</h2><p>头:    header<br>内容:    content<br>尾:    footer<br>导航:    nav<br>侧栏:    sidebar<br>栏目:    column<br>页面外围控制整体布局宽度:    wrapper<br>左中右:    left center right<br>登入条:    loginbar<br>标志:    logo<br>热点:    hot<br>新闻:    news<br>下载:    download<br>广告:    banner<br>页面主体:    main<br>子导航:    subnav<br>菜单:    menu<br>子菜单:    submenu<br>版权:    copyright<br>友情链接:    friendlinks</p>
-<p>zoom<br>设置或检索对象的缩放比例<br>normal:默认值.使用对象的实际尺寸<br>number:百分数|无符号浮点实数.浮点实数值为1.0或百分数为100%时相当于此属性的normal  </p>
-<p>zoom:1 解决IE6高度自适应问题  </p>
-<p>cursor:pointer;<br>鼠标移上会变小手  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;W3C&quot;&gt;&lt;a href=&quot;#W3C&quot; class=&quot;headerlink&quot; title=&quot;W3C&quot;&gt;&lt;/a&gt;W3C&lt;/h1&gt;&lt;p&gt;World Wide Web Consortium&lt;br&gt;中文是W3C组织或者万维网联盟&lt;br&gt;就是出网页标准的&lt;br&gt;web标准不
-    
-    </summary>
-    
-      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="CSS" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>05_CSS定位position</title>
-    <link href="http://yoursite.com/2017/04/07/CSS/05_CSS%E5%AE%9A%E4%BD%8Dposition/"/>
-    <id>http://yoursite.com/2017/04/07/CSS/05_CSS定位position/</id>
-    <published>2017-04-07T13:46:07.000Z</published>
-    <updated>2017-04-07T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><p>浮动是没有占据页面的位置的。<br>绝对定位：也不占据页面的位置。  </p>
-<p>即：脱离了文档流  </p>
-<p>可以使用top,bottom,left,right属性进行定位</p>
-<h2 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h2><p>position:relative<br>在页面上会占据位置，<br>相对定位是相对于原来的位置定位的。  </p>
-<p>总结：绝对定位相当于是一种特殊的”浮动”.  </p>
-<h2 id="固定定位"><a href="#固定定位" class="headerlink" title="固定定位"></a>固定定位</h2><p>position:fixed;<br>在页面上不会占据位置。<br>表现：不管页面到了哪里，图片永远都停留在屏幕的同一位置。  </p>
-<h2 id="决定定位"><a href="#决定定位" class="headerlink" title="决定定位"></a>决定定位</h2><p>position:relative;<br>在页面上不会占据位置。<br><strong>如果给一个行内元素设置了position:absolute，那么这上行内元素会自动转成行内块元素。</strong></p>
-<blockquote>
-<p>一般情况下定位的使用：<br>子绝父相：<br>将来在使用定位的时候最好在<br>1）父元素中使用子元素定位，<br>2）并且遵守一个约定：父元素使用相对定位，子元素使用绝对定位。</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;position&quot;&gt;&lt;a href=&quot;#position&quot; class=&quot;headerlink&quot; title=&quot;position&quot;&gt;&lt;/a&gt;position&lt;/h1&gt;&lt;p&gt;浮动是没有占据页面的位置的。&lt;br&gt;绝对定位：也不占据页面的位置。  &lt;/p&gt;
-&lt;p&gt;即：脱
     
     </summary>
     
@@ -276,30 +295,28 @@
   </entry>
   
   <entry>
-    <title>04_CSS的overflow</title>
-    <link href="http://yoursite.com/2017/04/07/CSS/04_CSS%E7%9A%84overflow/"/>
-    <id>http://yoursite.com/2017/04/07/CSS/04_CSS的overflow/</id>
+    <title>05_CSS定位position</title>
+    <link href="http://yoursite.com/2017/04/07/CSS/05_CSS%E5%AE%9A%E4%BD%8Dposition/"/>
+    <id>http://yoursite.com/2017/04/07/CSS/05_CSS定位position/</id>
     <published>2017-04-07T13:46:07.000Z</published>
     <updated>2017-04-07T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="CSS标签的显示和隐藏："><a href="#CSS标签的显示和隐藏：" class="headerlink" title="CSS标签的显示和隐藏："></a>CSS标签的显示和隐藏：</h1><h1 id="overflow"><a href="#overflow" class="headerlink" title="overflow:"></a>overflow:</h1><ul>
-<li>hidden:超出部分隐藏。</li>
-<li>scroll:滚动条（超出的部分会显示在滚动条之内）</li>
-<li>auto:如果内容超出会显示滚动条，如果没有那么会自动隐藏。</li>
-</ul>
-<h1 id="display-none-隐藏元素"><a href="#display-none-隐藏元素" class="headerlink" title="display:none;   隐藏元素"></a>display:none;   隐藏元素</h1><p>完全隐藏原来的div，不占位置<br>display:none;  隐藏<br>display:block;  显示  </p>
-<h1 id="visibility-隐藏元素"><a href="#visibility-隐藏元素" class="headerlink" title="visibility:      隐藏元素"></a>visibility:      隐藏元素</h1><p>visibility也会隐藏原来的div但是div还是会占据着自己的位置不放，屏幕上显示的是空白。</p>
-<ul>
-<li>visible;默认值。元素是可见的。</li>
-<li>hidden;元素是不可见的。</li>
-<li>collapse;当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 “hidden”。</li>
-<li>inherit;规定应该从父元素继承 visibility 属性的值。</li>
-</ul>
+    <content type="html"><![CDATA[<h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><p>浮动是没有占据页面的位置的。<br>绝对定位：也不占据页面的位置。  </p>
+<p>即：脱离了文档流  </p>
+<p>可以使用top,bottom,left,right属性进行定位</p>
+<h2 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h2><p>position:relative<br>在页面上会占据位置，<br>相对定位是相对于原来的位置定位的。  </p>
+<p>总结：绝对定位相当于是一种特殊的”浮动”.  </p>
+<h2 id="固定定位"><a href="#固定定位" class="headerlink" title="固定定位"></a>固定定位</h2><p>position:fixed;<br>在页面上不会占据位置。<br>表现：不管页面到了哪里，图片永远都停留在屏幕的同一位置。  </p>
+<h2 id="决定定位"><a href="#决定定位" class="headerlink" title="决定定位"></a>决定定位</h2><p>position:relative;<br>在页面上不会占据位置。<br><strong>如果给一个行内元素设置了position:absolute，那么这上行内元素会自动转成行内块元素。</strong></p>
+<blockquote>
+<p>一般情况下定位的使用：<br>子绝父相：<br>将来在使用定位的时候最好在<br>1）父元素中使用子元素定位，<br>2）并且遵守一个约定：父元素使用相对定位，子元素使用绝对定位。</p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;a href=&quot;#CSS标签的显示和隐藏：&quot; class=&quot;headerlink&quot; title=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;/a&gt;CSS标签的显示和隐藏：&lt;/h1&gt;&lt;h1 id=&quot;overflow&quot;&gt;&lt;a href=&quot;#overf
+      &lt;h1 id=&quot;position&quot;&gt;&lt;a href=&quot;#position&quot; class=&quot;headerlink&quot; title=&quot;position&quot;&gt;&lt;/a&gt;position&lt;/h1&gt;&lt;p&gt;浮动是没有占据页面的位置的。&lt;br&gt;绝对定位：也不占据页面的位置。  &lt;/p&gt;
+&lt;p&gt;即：脱
     
     </summary>
     
@@ -313,84 +330,90 @@
   </entry>
   
   <entry>
-    <title>02_CSS的盒子模型</title>
-    <link href="http://yoursite.com/2017/04/07/CSS/02_CSS%E7%9A%84%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://yoursite.com/2017/04/07/CSS/02_CSS的盒子模型/</id>
+    <title>01_CSS的格式与选择器</title>
+    <link href="http://yoursite.com/2017/04/07/CSS/01_CSS%E7%9A%84%E6%A0%BC%E5%BC%8F%E4%B8%8E%E9%80%89%E6%8B%A9%E5%99%A8/"/>
+    <id>http://yoursite.com/2017/04/07/CSS/01_CSS的格式与选择器/</id>
     <published>2017-04-07T13:46:07.000Z</published>
     <updated>2017-04-07T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="盒子模型的概念"><a href="#盒子模型的概念" class="headerlink" title="盒子模型的概念"></a>盒子模型的概念</h1><p>所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。<br>每个矩形都由元素的内容、内边距（padding）、边框（border）和外边距（margin）组成。  </p>
-<ul>
-<li><p>网页就是多个盒子嵌套排列的结果。  </p>
+    <content type="html"><![CDATA[<h1 id="W3C"><a href="#W3C" class="headerlink" title="W3C"></a>W3C</h1><p>World Wide Web Consortium<br>中文是W3C组织或者万维网联盟<br>就是出网页标准的<br>web标准不止一个,而是一系列标准,由W3C和其他标准化组织制定  </p>
+<table>
+<thead>
+<tr>
+<th>页面</th>
+<th>语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行为层(Behavior)</td>
+<td>JavaScript</td>
+</tr>
+<tr>
+<td>表现层(Presentation)</td>
+<td>CSS</td>
+</tr>
+<tr>
+<td>结构层(Structure)</td>
+<td>HTML</td>
+</tr>
+<tr>
+<td>内容层</td>
+<td>文字</td>
+</tr>
+</tbody>
+</table>
+<h1 id="CSS-Cascading-Style-Sheets"><a href="#CSS-Cascading-Style-Sheets" class="headerlink" title="CSS(Cascading Style Sheets)"></a>CSS(Cascading Style Sheets)</h1><p>层叠样式表</p>
+<h1 id="CSS样式规则"><a href="#CSS样式规则" class="headerlink" title="CSS样式规则"></a>CSS样式规则</h1><p>选择器{属性:值}</p>
+<p>选择器(Selector)<br>属性(property)<br>值(value)</p>
+<h1 id="CSS和HTML的结合方式-四种结合和方式"><a href="#CSS和HTML的结合方式-四种结合和方式" class="headerlink" title="CSS和HTML的结合方式:(四种结合和方式)"></a>CSS和HTML的结合方式:(四种结合和方式)</h1><ol>
+<li><p>在每个html标签上面都有一个属性 style 把css和html结合在一起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div style=&quot;background-color:red;color:green;&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
 </li>
-<li><p>内边距出现在内容区域的周围，当给元素添加背景色或背景图像时，该元素的背景色或背景图像也将出现在内边距中。</p>
+<li><p>使用html的一个标签实现<code>&lt;style&gt;</code>标签,写在head里面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">css代码</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
 </li>
-<li>外边距是该元素与相邻元素之间的距离。</li>
-<li>如果给元素定义边框属性，边框将出现在内边距和外边距之间。  </li>
-</ul>
-<blockquote>
-<p>注意：虽然盒子模型拥有内边距、边框、外边距、宽和高这些基本属性，但是并不要求每个元素都必须定义这些属性。</p>
-</blockquote>
-<h1 id="外边距"><a href="#外边距" class="headerlink" title="外边距"></a>外边距</h1><p>margin-top:上外边距<br>margin-right:右外边距<br>margin-bottom:下外边距<br>margin-left:上外边距<br>margin:上外边距 [右外边距  下外边距  左外边距]</p>
-<p><strong>对块元素应用宽度属性width，并将左右的外边距都设置为auto，可使块级元素水平居中，实际工作中常用这种方式进行网页布局</strong><br>示例代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.header&#123; width:960px; margin:0 auto;&#125;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意：使用margin定义块元素的垂直外边距时，可能会出现外边距的合并。  </p>
-</blockquote>
-<h2 id="外边距的合并"><a href="#外边距的合并" class="headerlink" title="外边距的合并"></a>外边距的合并</h2><h3 id="相邻块元素垂直外边距的合并"><a href="#相邻块元素垂直外边距的合并" class="headerlink" title="相邻块元素垂直外边距的合并:"></a>相邻块元素垂直外边距的合并:</h3><p><img src="./images/相邻块元素垂直外边距的合并.png" alt="相邻块元素垂直外边距的合并"><br>当上下相邻的两个块元素相遇时，如果上面的元素有下外边距margin-bottom，下面的元素有上外边距margin-top，则他们之间的垂直间距不是margin-bottom与margin-top之和，而是两者中的较大者。这种现象被称为相邻块元素垂直外边距的合并（也称外边距塌陷）。</p>
-<h3 id="嵌套块元素垂直外边距的合并"><a href="#嵌套块元素垂直外边距的合并" class="headerlink" title="嵌套块元素垂直外边距的合并:"></a>嵌套块元素垂直外边距的合并:</h3><p><img src="./images/嵌套块元素垂直外边距的合并.png" alt="嵌套块元素垂直外边距的合并">  </p>
-<ul>
-<li>对于两个嵌套关系的块元素，如果父元素没有上内边距及边框，则父元素的上外边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会发生合并。</li>
-<li>如果希望外边距不合并，可以为父元素定义1像素的上边框或上内边距。这里以定义父元素的上边框为例，在父<div>的CSS样式中增加如下代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-top:1px solid #FCC;/*定义父div的上边框*/</div></pre></td></tr></table></figure>
-</div></li>
-</ul>
-<h1 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h1><h2 id="边框样式（border-style）"><a href="#边框样式（border-style）" class="headerlink" title="边框样式（border-style）"></a>边框样式（border-style）</h2><p>样式：<br>border-top/right/bottom/left-style:;<br>border-style:top right bottom left;  </p>
-<p>边框样式用于定义页面中边框的风格，常用属性值如下：  </p>
-<ul>
-<li>none：没有边框即忽略所有边框的宽度（默认值）</li>
-<li>solid：边框为单实线</li>
-<li>dashed：边框为虚线</li>
-<li>dotted：边框为点线</li>
-<li>double：边框为双实线</li>
-</ul>
-<h2 id="边框宽度（border-width）"><a href="#边框宽度（border-width）" class="headerlink" title="边框宽度（border-width）"></a>边框宽度（border-width）</h2><p>宽度<br>border-top/right/bottom/left-width:;<br>border-width:top right bottom left;  </p>
-<h2 id="边框颜色（border-color）"><a href="#边框颜色（border-color）" class="headerlink" title="边框颜色（border-color）"></a>边框颜色（border-color）</h2><p>颜色<br>border-top/right/bottom/left-color:;<br>border-color:top right bottom left;  </p>
-<blockquote>
-<p>注意：设置边框颜色时同样必须设置边框样式，如果未设置样式或设置为none，则其他的边框属性无效。</p>
-</blockquote>
-<h2 id="综合设置边框-复合属性"><a href="#综合设置边框-复合属性" class="headerlink" title="综合设置边框(复合属性)"></a>综合设置边框(复合属性)</h2><p>border[-top right bottom left]:宽度 样式 颜色;  </p>
-<ul>
-<li>像border、border-top等这样，能够一个属性定义元素的多种样式，在CSS中称之为复合属性。</li>
-<li>常用的复合属性有font、border、margin、padding和background等。</li>
-<li>复合属性可以简化代码，提高页面的运行速度，但是如果只有一项值，最好不要应用复合属性，以免样式不被兼容。</li>
-</ul>
-<h2 id="多学几招"><a href="#多学几招" class="headerlink" title="多学几招"></a>多学几招</h2><ol>
-<li>表单的边框通常改为 0；<br><code>border:0 none;</code></li>
-<li>表格的细线边框<br><code>table { border-collapse:collapse; }</code></li>
-<li>轮廓 （链接有虚线 和  文本框  有 蓝色边框）<br><code>outline-style:none;</code></li>
+<li><p>在style标签里面使用语句(在某些浏览器下不起作用)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@import url(css文件的路径);</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<p>在制作网页的过程中，如果涉及到了页面的宽高的问题，最好用width和height去解决，才用padding,最后才考虑margin.<br>因为margin在布局中会存在兼容性的问题</p>
-<h1 id="内边距属性"><a href="#内边距属性" class="headerlink" title="内边距属性"></a>内边距属性</h1><p>padding-top:上内边距<br>padding-right:右内边距<br>padding-bottom:下内边距<br>padding-left:左内边距<br>padding:上内边距[右内边距 下内边距  左内边距]  </p>
-<p>为了更方便地控制网页中的元素，制作网页时，可使用如下代码清除元素的默认内外边距：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*&#123;</div><div class="line">	padding:0;         /*清除内边距*/</div><div class="line">	margin:0;          /*清除外边距*/</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意：行内元素尽量不要给上下的margin 和padding</p>
-</blockquote>
-<h1 id="盒子的宽与高"><a href="#盒子的宽与高" class="headerlink" title="盒子的宽与高"></a>盒子的宽与高</h1><ul>
-<li>使用宽度属性width和高度属性height可以对盒子的大小进行控制。</li>
-<li>width和height的属性值可以为不同单位的数值或相对于父元素的百分比%，实际工作中最常用的是像素值。</li>
-<li>大多数浏览器，如Firefox、IE6及以上版本都采用了W3C规范，符合CSS规范的盒子模型的总宽度和总高度的计算原则是：<br>盒子的总宽度= width+左右内边距之和+左右边框宽度之和+左右外边距之和<br>盒子的总高度= height+上下内边距之和+上下边框宽度之和+上下外边距之和</li>
-</ul>
-<blockquote>
-<p>注意：</p>
+<p>创建一个css文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">    @import url(&quot;aaa.css&quot;);</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
 <ol>
-<li>宽度属性width和高度属性height仅适用于块级元素，对行内元素无效<code>&lt;img /&gt;标记和&lt;input /&gt;除外</code></li>
-<li>计算盒子模型的总高度时，还应考虑上下两个盒子垂直外边距合并的情况</li>
+<li>使用头标签 link ,引入外部css文件(一般使用第四种方式)<br>创建一个css文件，使用下面方式引入<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;aaa.css&quot;/&gt;</div></pre></td></tr></table></figure>
+</li>
 </ol>
-</blockquote>
+<h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><h2 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h2><p>style &gt; id选择器 &gt; class选择器 &gt; 标签选择器<br><code>权重是叠加的</code><br>!important    权重最高的  </p>
+<p>通配选择符:    *{属性:值}    用于定义所有的html元素<br>作用范围很广,但是效率最低,慎用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">*&#123;border:0 none;margin:0;padding:0;&#125; </div><div class="line">//由于各个浏览器存在着,内外边距的,默认值,还不同  </div><div class="line">//所以,需要将所有浏览器的默认内外边距,都从零开始计算  </div><div class="line">//重置所有元素的,外边距和内边距,为零  </div><div class="line">//大型网站一般不这么用,一般都把所有用的标签写上去  </div><div class="line">body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div&#123;</div><div class="line">    border:0 none;</div><div class="line">    margin:0;</div><div class="line">    padding:0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>//css的属性,虽然有继承的特点,但是并不是,所有的属性都有继承<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!--</div><div class="line">h1#content&#123;&#125;	表示针对所有id为content的h1标签</div><div class="line">h1.p1&#123;&#125;		表示针对所有class为p1的h1标签</div><div class="line">很少使用</div><div class="line">--&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="CSS的扩展选择器"><a href="#CSS的扩展选择器" class="headerlink" title="CSS的扩展选择器"></a>CSS的扩展选择器</h2><ol>
+<li>交集选择器</li>
+<li>合选择器</li>
+<li>伪元素选择器<br>CSS里面提供了一些定义好的样式,可以拿过来使用<br>比如<br>超链接<code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code><br>|   超链接的状态     |      |<br>| —- | —- |<br>|   原始状态   |  :link    |<br>|   鼠标放上去的状态   |   :hover   |<br>|   点击   |   :active   |<br>|   点击之后   |   :visited   |  </li>
+</ol>
+<p>输入框<code>&lt;input type=&quot;&quot;&gt;</code><br>:focus    设置对象在成为输入焦点(该对象的onfocus事件发生时的样式    IE6/7不支持)</p>
+<h1 id="块级元素和行内元素"><a href="#块级元素和行内元素" class="headerlink" title="块级元素和行内元素"></a>块级元素和行内元素</h1><h2 id="块级元素："><a href="#块级元素：" class="headerlink" title="块级元素："></a>块级元素：</h2><p>一个div单独占一行。<br>像这一些元素：（默认没有高但是有宽并且宽度默认占一行的元素）叫做块级元素。<br>特点：单独占一行，并且可以设置宽高。<br>常见块状元素为body,div,p,h1~h6,ul,li等</p>
+<h2 id="行内元素："><a href="#行内元素：" class="headerlink" title="行内元素："></a>行内元素：</h2><p>像这一些元素：可以在一行中显示多个标签的元素叫行内元素。<br>特点：一行同显示多个，设置宽高没有效果。  </p>
+<h2 id="行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）"><a href="#行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）" class="headerlink" title="行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）"></a>行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）</h2><p>display:用来设置页面元素的显示方式。</p>
+<ul>
+<li>block:块级元素。</li>
+<li>inline:行内元素。</li>
+<li>inline-block:行内块级元素。</li>
+</ul>
+<h2 id="CSS标签的嵌套关系："><a href="#CSS标签的嵌套关系：" class="headerlink" title="CSS标签的嵌套关系："></a>CSS标签的嵌套关系：</h2><p>行内元素：span,u,b,i,strong<br>块级元素：h1,h2,h3–h6,div,p<br>原则：</p>
+<ol>
+<li>行内元素可以嵌套行内元素，但是不能嵌套块级元素</li>
+<li>块级元素可以嵌套行内元素。</li>
+<li>少数块级元素不可以嵌套其它的块行元素：<br>在p标签中不可以使用div。<br>在h标签中最好不要用div。  </li>
+</ol>
+<h2 id="页面模块的常用css命名"><a href="#页面模块的常用css命名" class="headerlink" title="页面模块的常用css命名"></a>页面模块的常用css命名</h2><p>头:    header<br>内容:    content<br>尾:    footer<br>导航:    nav<br>侧栏:    sidebar<br>栏目:    column<br>页面外围控制整体布局宽度:    wrapper<br>左中右:    left center right<br>登入条:    loginbar<br>标志:    logo<br>热点:    hot<br>新闻:    news<br>下载:    download<br>广告:    banner<br>页面主体:    main<br>子导航:    subnav<br>菜单:    menu<br>子菜单:    submenu<br>版权:    copyright<br>友情链接:    friendlinks</p>
+<p>zoom<br>设置或检索对象的缩放比例<br>normal:默认值.使用对象的实际尺寸<br>number:百分数|无符号浮点实数.浮点实数值为1.0或百分数为100%时相当于此属性的normal  </p>
+<p>zoom:1 解决IE6高度自适应问题  </p>
+<p>cursor:pointer;<br>鼠标移上会变小手  </p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;盒子模型的概念&quot;&gt;&lt;a href=&quot;#盒子模型的概念&quot; class=&quot;headerlink&quot; title=&quot;盒子模型的概念&quot;&gt;&lt;/a&gt;盒子模型的概念&lt;/h1&gt;&lt;p&gt;所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。&lt;br&gt;每个矩
+      &lt;h1 id=&quot;W3C&quot;&gt;&lt;a href=&quot;#W3C&quot; class=&quot;headerlink&quot; title=&quot;W3C&quot;&gt;&lt;/a&gt;W3C&lt;/h1&gt;&lt;p&gt;World Wide Web Consortium&lt;br&gt;中文是W3C组织或者万维网联盟&lt;br&gt;就是出网页标准的&lt;br&gt;web标准不
     
     </summary>
     
@@ -400,6 +423,214 @@
     
     
       <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>03_Hibernate_一级缓存</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/03_Hibernate_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/03_Hibernate_一级缓存/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate的一级缓存"><a href="#Hibernate的一级缓存" class="headerlink" title="Hibernate的一级缓存."></a>Hibernate的一级缓存.</h1><ol>
+<li>一级缓存，默认是开启的.</li>
+<li>它是跟Session相关(一级缓存是放在Session对象中).</li>
+<li>一级缓存是存放在内存中.<br>因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.  </li>
+</ol>
+<ul>
+<li><p>一级缓存的作用：<br>提高Hibernate的执行效率.  </p>
+</li>
+<li><p>如何提高Hibernate的执行效率:<br>因为它会把查询出来的对象先存放在内存中(一级缓存中).<br>当你调用该对象的set方法时它不会立即发出update语句<br>当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,<br>如果对象的属性值没有发生改变就不会生成update语句.  </p>
+</li>
+</ul>
+<blockquote>
+<p>操作一级缓存的方法：</p>
+</blockquote>
+<ol>
+<li><p>session.contains(持久化对象);<br>判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态</p>
+</li>
+<li><p>void session.clear(): 清空Session中的一级缓存.(所有的持久化状态的对象都没有了).</p>
+</li>
+<li><p>void session.evict(Object object): 从Session一级缓存中删除一个指定的持久化状态的对象.</p>
+</li>
+<li><p>void flush(): 把Session一级缓存中的对象同步到底层的数据库表中.(默认是事务提交时才同步)</p>
+</li>
+<li><p>void session.close(): 先清空Session中的一级缓存，再关闭数据库连接.</p>
+</li>
+<li><p>Session的一级缓存的生命周期：<br>Session session = SessionFactory.openSession(); 一级缓存开始<br>…..<br>session.close();  一级缓存结束</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate的一级缓存&quot;&gt;&lt;a href=&quot;#Hibernate的一级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate的一级缓存.&quot;&gt;&lt;/a&gt;Hibernate的一级缓存.&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;一级缓存，默认是开启的.&lt;/
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>01_Hibernate框架介绍</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/01_Hibernate_%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/01_Hibernate_介绍/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate框架介绍"><a href="#Hibernate框架介绍" class="headerlink" title="Hibernate框架介绍:"></a>Hibernate框架介绍:</h1><p>Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，<br>能够让程序员以面向对象的方式来操作数据库，从而简化持久层的开发.</p>
+<p>直接把一个对象保存到数据库.</p>
+<p>持久层(数据访问层).</p>
+<p><strong>ORM:Object Relation Mapping 对象关系映射.</strong></p>
+<ul>
+<li>Object: 对象指得是面向对象的编程语言.</li>
+<li>Relation: 关系指得是关系型数据库.</li>
+<li>Mapping: 面向对象的编程语言与关系型数据库之间的映射.</li>
+</ul>
+<p><strong>ORM映射思想:</strong></p>
+<table>
+<thead>
+<tr>
+<th>面向对象的编程语言(java)</th>
+<th>关系型数据库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类</td>
+<td>表</td>
+</tr>
+<tr>
+<td>对象</td>
+<td>一行数据</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>列名</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Hibernate框架优缺点"><a href="#Hibernate框架优缺点" class="headerlink" title="Hibernate框架优缺点:"></a>Hibernate框架优缺点:</h2><ul>
+<li><p>优点:简化持化层的开发.<br> 它底层可以跨数据库.  </p>
+</li>
+<li><p>缺点:性能比JDBC差.  </p>
+</li>
+</ul>
+<p><strong>JPA: Java Persistence Api: java持久化api.</strong></p>
+<ul>
+<li>它是sun公司根据ORM思想制订出来的持久层的规范.</li>
+</ul>
+<p><strong>JDBC: Java DataBase Connection java数据库连接的规范.</strong></p>
+<p>ORM –&gt; JPA –&gt; (Hibernate、TopLink、Jdo).</p>
+<p>Hibernate框架下载与安装(了解):</p>
+<blockquote>
+<p>官方网站:<a href="http://www.hibernate.org" target="_blank" rel="external">http://www.hibernate.org</a><br>公司:jboss公司的产品.</p>
+</blockquote>
+<p>解压后文件夹说明:  </p>
+<ul>
+<li><p>documentation:存放了Hibernate所有的文档.<br> devguide : 开发指导<br> javadocs: api文档<br> manual: 开发指南<br> quickstart: 快速入门  </p>
+</li>
+<li><p>lib:存放了所有的jar.<br> required : 必须的<br> jpa : jpa实现jar包.<br> optional:  可选的<br> c3p0: 连接池.<br> ehcache: 缓存.</p>
+</li>
+<li><p>project: 项目的源码、示例、测试</p>
+</li>
+<li>etc : 存放了配置文件的模版.</li>
+</ul>
+<h2 id="Hibernate快速开始"><a href="#Hibernate快速开始" class="headerlink" title="Hibernate快速开始:"></a>Hibernate快速开始:</h2><h3 id="写Hibernate的核心配置文件"><a href="#写Hibernate的核心配置文件" class="headerlink" title="写Hibernate的核心配置文件"></a>写Hibernate的核心配置文件</h3><p>src/hibernate.cfg.xml<br>cfg: configuration  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置数据库方言(告诉Hibernate4底层用得是什么样的数据库) --&gt;</div><div class="line">&lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQL5InnoDBDialect&lt;/property&gt;</div><div class="line">&lt;!-- 配置Hibernate4是否支持自动创建表 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的信息 --&gt;</div><div class="line">&lt;!-- 配置连接数据库驱动类 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的URL --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql://localhost:3306/hibernate4&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的用户名 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的用户名 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.password&quot;&gt;root&lt;/property&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>hibernate-release-4.3.8.Final\project\etc\hibernate.cfg.xml<br>hibernate-release-4.3.8.Final\project\etc\hibernate.properties(参考属性文件)  </p>
+<p>配置(myeclipse提示): hibernate-configuration-3.0.dtd<br>dtd位置:<br>hibernate-release-4.3.8.Final\project\hibernate-core\src\main\resources\org\hibernate\hibernate-configuration-3.0.dtd</p>
+</blockquote>
+<h3 id="写持久化类"><a href="#写持久化类" class="headerlink" title="写持久化类"></a>写持久化类</h3><p>持久化类 = 普通java类(pojo) + xxx.hbm.xml(老的方式)<br>持久化类 = 普通java类(pojo) + jpa注解@Entity<br><br>HBM: hibernate-mapping<br>持久化类必须有一个唯一的属性(唯一标识符): @Id<br>也就是哪个属性生成表中的主键列.<br>Hibernate生成的表必须要有主键列.<br>xxx.hbm.xml:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!-- class:配置类转换成表的相关信息 --&gt;</div><div class="line">&lt;class name=&quot;cn.itcast.hibernate.entity.User&quot; table=&quot;USER_INFO&quot;&gt;</div><div class="line">&lt;!-- id: 主键映射 --&gt;</div><div class="line">&lt;id name=&quot;id&quot; column=&quot;ID&quot;/&gt;</div><div class="line">&lt;!-- 基本的列 --&gt;</div><div class="line">&lt;property name=&quot;name&quot; column=&quot;NAME&quot;/&gt;</div><div class="line">&lt;!-- 基本的列 --&gt;</div><div class="line">&lt;property name=&quot;age&quot; column=&quot;AGE&quot;/&gt;	</div><div class="line">&lt;/class&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="在hibernate-cfg-xml文件中配置持久化类"><a href="#在hibernate-cfg-xml文件中配置持久化类" class="headerlink" title="在hibernate.cfg.xml文件中配置持久化类"></a>在hibernate.cfg.xml文件中配置持久化类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置持久化类 --&gt;</div><div class="line">&lt;mapping class=&quot;cn.itcast.hibernate.entity.User&quot;/&gt;</div></pre></td></tr></table></figure>
+<h3 id="Hibernate编程部分"><a href="#Hibernate编程部分" class="headerlink" title="Hibernate编程部分"></a>Hibernate编程部分</h3><ol>
+<li><p>Configuration: 专门负责加载hibernate.cfg.xml文件，产生SessionFactory.</p>
+</li>
+<li><p>SessionFactory: 会话工厂</p>
+</li>
+<li><p>Session: 会话</p>
+</li>
+<li><p>Transaction: 事务管理</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/** 第一步 : 创建Configuration加载hibernate.cfg.xml */</div><div class="line">Configuration configuration = new Configuration() // 加载hibernate.properties</div><div class="line">.configure(); // 加载hibernate.cfg.xml</div><div class="line">/** 第二步:构建SessionFactory */</div><div class="line">SessionFactory sessionFactory = configuration.buildSessionFactory();</div><div class="line">/** 第三步:打开Session */</div><div class="line">Session session = sessionFactory.openSession();</div><div class="line">/** 第四步:开启事务得到事务对象(事务默认是开启的) */</div><div class="line">Transaction transaction = session.beginTransaction();</div><div class="line">/** 第五步:利用Session完成所有的持久化操作(CRUD) */</div><div class="line">User user = new User();</div><div class="line">user.setId(1);</div><div class="line">user.setAge(19);</div><div class="line">user.setName(&quot;名字&quot;);</div><div class="line">session.save(user);</div><div class="line">/** 第六步:事务提交 */</div><div class="line">transaction.commit();</div><div class="line">/** 第七步:关闭Session与SessionFactory */</div><div class="line">session.close();</div><div class="line">sessionFactory.close();</div></pre></td></tr></table></figure>
+<p>总结:基本运行流程<br>Configuration –&gt; hibernate.cfg.xml文件 –&gt; 创建DataSource.<br>SessionFactory sessionFactory = Configuration.buildSessionFactory();<br>开启事务、利用Session所有的CRUD操作. </p>
+<h1 id="Hibernate-持久化状态："><a href="#Hibernate-持久化状态：" class="headerlink" title="Hibernate_持久化状态："></a>Hibernate_持久化状态：</h1><blockquote>
+<p>持久化类 持久化对象 = new 持久化类();  </p>
+</blockquote>
+<ul>
+<li><p>Transient(瞬态): 从未与Session关联过.  </p>
+</li>
+<li><p>Persistent(持久化状态): 正在被Session管理，也就是这个对象正在Session的一级缓中.<br>一个持久化对象属于持久化状态时，你调用它的setXxx方法，会影响数据库表中的数据.<br>当事务提交时，它会把这个对象同步到底层数据库表中.  </p>
+</li>
+<li><p>Detached(脱管状态、分离状态)： 脱离Session的管理，曾经被Session管理过.</p>
+</li>
+</ul>
+<p>持久化对象的状态转换：<br>User user = new User(); // 瞬态<br>user.setId(1); // 脱管  </p>
+<p>持久化对象的三种状态：</p>
+<ol>
+<li>瞬态：user对象没有主键id值，并且也不在一级缓存中.  </li>
+<li>脱管：user对象有id属性值跟好与数据库中的一行数据的主键id值对应, 并且它也不在一级缓存中.  </li>
+<li>持久化状态：在session的一级缓存中.</li>
+</ol>
+<h1 id="Hibernate框架的核心api"><a href="#Hibernate框架的核心api" class="headerlink" title="Hibernate框架的核心api."></a>Hibernate框架的核心api.</h1><ol>
+<li><p>Configuration : 负责加载全局的配置文件产生SessionFactory.</p>
+</li>
+<li><p>SessionFactory: 它存活的时间很长.随tomcat开启就存在，tomcat关闭它才关闭.</p>
+<ul>
+<li>它是线程安全的.</li>
+<li>它是创建Session的工厂.</li>
+<li>它底层封装了数据源(DataSource).</li>
+<li>它包含了一个二级缓存. (默认是关闭的)  </li>
+</ul>
+</li>
+<li><p>Session: 它是应用程序与数据库表交互的对象.  </p>
+<ul>
+<li>它是单线程对象(它是线程不安全).</li>
+<li>它底层封装了数据库连接.</li>
+<li>它存活比较短(Connection用完就需要关闭). </li>
+<li>它是事务的工厂.</li>
+<li>它包含了一级缓存(内存).(默认是开启的)</li>
+</ul>
+</li>
+<li><p>Transaction: 事务管理对象. connection.setAutoCommit(false);</p>
+<ul>
+<li>transaction.commit(); 事务提交</li>
+<li>transaction.rollback(); 事务回滚</li>
+</ul>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate框架介绍&quot;&gt;&lt;a href=&quot;#Hibernate框架介绍&quot; class=&quot;headerlink&quot; title=&quot;Hibernate框架介绍:&quot;&gt;&lt;/a&gt;Hibernate框架介绍:&lt;/h1&gt;&lt;p&gt;Hibernate是一个开放源代码的对象关系映射
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
     
   </entry>
   
@@ -497,296 +728,6 @@
     
     
       <category term="Mybatis" scheme="http://yoursite.com/tags/Mybatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>02_Hibernate实现简单的CRUD操作</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/02_Hibernate_CRUD/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/02_Hibernate_CRUD/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate实现简单的CRUD操作："><a href="#Hibernate实现简单的CRUD操作：" class="headerlink" title="Hibernate实现简单的CRUD操作："></a>Hibernate实现简单的CRUD操作：</h1><h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h2><ol>
-<li><p>第一种方式(不需要设置id属性值)：<br>Serializable save(User user); // user : 持久化状态<br>– save方法做保存，返回主键id的值   </p>
-</li>
-<li><p>第二种方式(不需要设置id属性值)：<br>void saveOrUpdate(User user): 它集成添加与修改. // user : 持久化状态<br>如果持久化对象的主键属性有值就做修改，(找不到主键值就报错)<br>不给主键属性值就做添加.  </p>
-</li>
-<li><p>第三种方式(不需要设置id属性值)：<br>User user = new User();<br>void session.persist(user); // user : 持久化状态  </p>
-</li>
-<li><p>第四种方式(不需要设置id属性值)：<br>/<em>* merge它集成了添加与修改 </em>/<br>User u = (User)session.merge(user);  //user:不是持久化状态、u:才是持久化状态  </p>
-<ul>
-<li><p>什么时候做添加：<br>第一种情况：user对象没有设置id属性值.<br>第二种情况：设置了user对象的id属性值， 但是数据库表中没有主键列值与它对应.  </p>
-</li>
-<li><p>什么时候做修改：<br>设置了user对象的id属性值，<br>而且数据库表中有主键列值与它对应。  </p>
-</li>
-</ul>
-</li>
-</ol>
-<p>save与persist方法的区别：  </p>
-<ul>
-<li><p>save()有返主键id值、persist()没有返回值  </p>
-</li>
-<li><p>save()跟事务是否开启没有关系(立即生成insert语句向数据库内存插入数据).<br>跟事务是否提交有关系，因为先是存放在数据库的内存中.  </p>
-</li>
-<li><p>persist()跟事务是否开启有关系，<br>没有开启的话,要等到开启事务并且事务提交时才会向数据库发送并插入insert语句.  </p>
-</li>
-</ul>
-<p>save(): hibernate的框架的方法.(差)<br>persist(): jpa规范中的方法.(好)  </p>
-<h2 id="根据主键id做查询："><a href="#根据主键id做查询：" class="headerlink" title="根据主键id做查询："></a>根据主键id做查询：</h2><p>Object get(class, Serializable id):<br>User u = (User)session.get(User.class, 5);  //u: 持久化状态  </p>
-<p>Object load(class, Serializable id):<br>User u = (User)session.load(User.class, 5);  //u: 持久化状态  </p>
-<p>get(): 立即向数据库发送sql语句查询数据.<br>load(): 延迟向数据库发送sql语句查询数据，刚开始返回的是代理对象，当你真正用到这个对象中的属性时才会去查询.  </p>
-<p>注意：当你真正用到这个对象中的属性时，Session不能关闭.<br>因为Session封装了数据库connection.<br>报错:org.hibernate.LazyInitializationException: could not initialize proxy - no Session(Session已关闭)</p>
-<h2 id="修改："><a href="#修改：" class="headerlink" title="修改："></a>修改：</h2><ol>
-<li><p>在持久化状态下：<br>User user = session.get(User.class, 5);  // user: 持久化状态<br>user.setXxx();  </p>
-<blockquote>
-<p>注意：等到事务提交时就会修改该对象(生成update语句).<br>如果这个对象属性值没有发生改变，就不会生成update语句.</p>
-</blockquote>
-</li>
-<li><p>脱管状态下：  </p>
-<ul>
-<li><p>session.update(user);</p>
-<ul>
-<li>user: 是持久化状态  </li>
-<li>它是在事务提交时发出update语句.  </li>
-</ul>
-</li>
-<li><p>session.saveOrUpdate(user);</p>
-<ul>
-<li>user: 是持久化状态  </li>
-<li>它是在事务提交时发出update语句.  </li>
-</ul>
-</li>
-<li><p>User u = (User)session.merge(user);</p>
-<ul>
-<li>user: 不是持久化状态  </li>
-<li>u: 是持久化状态  </li>
-<li>首先要根据主键id先查询.有对象返回就做修改，没有对象返回就做添加.  </li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>sql: update 表名 set 列名 = ? where id = ?  </p>
-</blockquote>
-<h2 id="删除："><a href="#删除：" class="headerlink" title="删除："></a>删除：</h2><ol>
-<li><p>在持久化状态下：<br>User user = Session.get(User.class, 5); // user : 持久化状态<br>session.delete(user); // user: 持久化状态 –&gt; 瞬态  </p>
-</li>
-<li><p>脱管状态下：<br>User user = new User(); // 瞬态<br>user.setId(6); // 脱管<br>session.delete(user); // user:  脱管 –&gt; 瞬态</p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate实现简单的CRUD操作：&quot;&gt;&lt;a href=&quot;#Hibernate实现简单的CRUD操作：&quot; class=&quot;headerlink&quot; title=&quot;Hibernate实现简单的CRUD操作：&quot;&gt;&lt;/a&gt;Hibernate实现简单的CRUD操作：&lt;/
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>05_Hibernate_HQL</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/05_Hibernate_HQL/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/05_Hibernate_HQL/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-HQL"><a href="#Hibernate-HQL" class="headerlink" title="Hibernate_HQL"></a>Hibernate_HQL</h1><p>Hibernate的三套查询: </p>
-<ol>
-<li>HQL查询: Hibernate Query Language (需要写hql语句)</li>
-<li>SQL查询: sql查询 (需要写sql语句).</li>
-<li>Criteria查询：(不需要写任何查询语句) 完全是面向对象</li>
-</ol>
-<p>HQL(Hibernate Query Language)查询：</p>
-<table>
-<thead>
-<tr>
-<th>SQL语句(面向)</th>
-<th>表</th>
-<th>行</th>
-<th>列</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HQL语句(面向)</td>
-<td>类</td>
-<td>对象</td>
-<td>属性</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>sql: select * from stu_info<br>hql: select s from Student as s  </p>
-</li>
-<li><p>from 子句:<br>语法：<br>FROM 持久化类名 [as? 对象名]?</p>
-</li>
-<li><p>select 子句：<br>语法：select s from 持久化类名 as? s</p>
-</li>
-</ul>
-<p>select s from Student as s       –&gt; List<student><br>select s.name from Student as s  –&gt; List<string><br>select s.age from Student as s   –&gt; List<integer><br>select s.name, s.age from Student as s  –&gt; List<object[]><br>select s, s.name, s.age from Student as s –&gt; List<object[]>  </object[]></object[]></integer></string></student></p>
-<ul>
-<li><p>select new 子句：它可以改变List集合中元素存放的是什么.</p>
-<ul>
-<li><p>select new map():  List<map<string, object="">&gt;   –&gt; [{},{}]<br>select new map(name as name, age as age) from Student</map<string,></p>
-</li>
-<li><p>select new list(): List<list<object>&gt;  –&gt; [[],[]]<br>select new list(name, age) from Student</list<object></p>
-</li>
-<li><p>select new 数据传输类: List<user><br>select new cn.xxx.pojo.User(id, name, age) from Student</user></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询:"></a>关联查询:</h2><ul>
-<li><p>隐式关联：查询时不需要显示的写join语句<br>查询时关联的属性是持久化类<br>@OneToOne、@ManyToOne<br><code>select s from Student s where s.teacher.id = ?</code></p>
-</li>
-<li><p>显示关联：查询需要显示的写join语句<br>查询时关联的属性是Set集合<br>@OneToMany、@ManyToMany<br><code>select t from Teacher t inner join t.students as s where s.id = ?</code></p>
-</li>
-</ul>
-<ul>
-<li><p>抓取连接：延迟的属性需要查询.<br>join fetch<br><code>select s from Student s join fetch s.teacher</code><br><code>select t from Teacher t join fetch t.students (不要用).</code></p>
-</li>
-<li><p>order by : 排序 (asc | desc)</p>
-</li>
-<li><p>group by: 分组.<br>select count(s), avg(s.score), s.teacher.name<br>from Student s<br>group by s.teacher.id  </p>
-</li>
-<li><p>having : 分组后过滤.<br>select count(s), avg(s.score), s.teacher.name from Student s<br>group by s.teacher.id having s.teacher.id = ?  </p>
-</li>
-</ul>
-<h2 id="分页查询："><a href="#分页查询：" class="headerlink" title="分页查询："></a>分页查询：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int pageIndex = 2;  </div><div class="line">int pageSize = 2;  </div><div class="line">List&lt;Student&gt; students = session.createQuery(&quot;select s from Student s&quot;)</div><div class="line">                                .setFirstResult((pageIndex - 1) * pageSize) // limit第一个问号</div><div class="line">                                .setMaxResults(pageSize)// limit第二个问号</div><div class="line">                                .list();</div></pre></td></tr></table></figure>
-<h2 id="统计查询："><a href="#统计查询：" class="headerlink" title="统计查询："></a>统计查询：</h2><p>统计函数：count()、sum()、avg()、max()、min()  </p>
-<ul>
-<li><p>where子句(数据过滤，添加查询条件).<br>– Hibernate4的hql语句中的where子句部分跟<br>sql语句中的where子句部分差不多.<br>Hibernate的where子句部分能支持的运算符，表达式、函数特别多，<br>用法与sql语句是一样的.  </p>
-<ol>
-<li><p>=、&lt;、&lt;=、&gt;、&gt;=、!=、and、or、distinct、between … and、like、<br>is null、is not null、is empty、is not empty</p>
-</li>
-<li><p>支持EJB-QL 3.0的函数:<br>trim(), lower(), upper(), length(), abs(), sqrt(), bit_length()<br>length(): 一个汉字是算三个字符,一个数字或字母算一个字符.<br>char_length()长度: 不管汉字还是数字或者是字母都算是一个字符.<br>SQL语句：<br>SELECT LENGTH(‘国’)<br>SELECT CHAR_LENGTH(‘中’)  </p>
-</li>
-</ol>
-</li>
-</ul>
-<h2 id="子查询："><a href="#子查询：" class="headerlink" title="子查询："></a>子查询：</h2><p>子查询语句写在in 与 not in 里面.<br>select s from Student s where s.id in (select t.id from Teacher t)<br>select s from Student s where s.id not in (select t.id from Teacher t)  </p>
-<h2 id="命名查询："><a href="#命名查询：" class="headerlink" title="命名查询："></a>命名查询：</h2><p>–  也就是把项目中比较复杂的hql语句定义<br>在一个独立的配置文件中,为后期hql语句优化做准备.</p>
-<h2 id="HQL查询"><a href="#HQL查询" class="headerlink" title="HQL查询"></a>HQL查询</h2><h3 id="1-第一种方式："><a href="#1-第一种方式：" class="headerlink" title="1. 第一种方式："></a>1. 第一种方式：</h3><p>开发步骤：</p>
-<ul>
-<li><p>定义HQL查询语句. (Query.hbm.xml).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 定义一条查询语句 --&gt;</div><div class="line">&lt;query name=&quot;query_1&quot;&gt;</div><div class="line">    select s from Student s where s.age &gt; ?  HQL语句</div><div class="line">&lt;/query&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>需要在hibernate.cfg.xml文件中进行配置.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;mapping resource=&quot;cn/mortalliao/hibernate/entity/Query.hbm.xml&quot;/&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>调用Session中的getNamedQuery()方法做查询.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/** 命名查询 &lt;query name=&quot;query_1&quot;&gt; */</div><div class="line">List&lt;Student&gt; students = session.getNamedQuery(&quot;query_1&quot;)</div><div class="line">                                .setParameter(0, 20)</div><div class="line">                                .list();</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="2-第二种方式："><a href="#2-第二种方式：" class="headerlink" title="2. 第二种方式："></a>2. 第二种方式：</h3><p>开发步骤：  </p>
-<ul>
-<li><p>在持久化类上添加NamedQuery()这个注解.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@NamedQuery(name=&quot;query_2&quot;, // 名称  </div><div class="line">            query=&quot;select s from Student s where s.age &gt; ?&quot;) // 查询语句</div></pre></td></tr></table></figure>
-</li>
-<li><p>调用Session中的getNamedQuery()方法做查询.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/** 命名查询 @NamedQuery(name=&quot;query_2&quot;) */</div><div class="line">List&lt;Student&gt; students = session.getNamedQuery(&quot;query_2&quot;)</div><div class="line">                                .setParameter(0, 20)</div><div class="line">                                .list();</div><div class="line">for (Student s : students)&#123;</div><div class="line">    System.out.println(s.getName() + &quot;==&quot; + s.getAge());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="SQL查询"><a href="#SQL查询" class="headerlink" title="SQL查询:"></a>SQL查询:</h2><p>查询步骤：</p>
-<ul>
-<li>获取Session.</li>
-<li>写sql语句.</li>
-<li>调用SQLQuery query = session.createSQLQuery(sql);</li>
-<li>如果hql语句中有占位符，需要为占位符设置查询参数<br>query.setParameter(“索引号”, “值”);<br>如果需要分页查询就需要为 limit ?,? 这两个问号赋值<br>第一个问号：query.setFirstResult();<br>第二个问号：query.setMaxResults();  </li>
-<li>获取查询的结果：<br>如果查询得到多个结果，就调用query.list()返回List集合.<br>如果查询得到一个结果，就调用query.uniqueResult().  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">List&lt;Student&gt; students = session.createSQLQuery(sql)</div><div class="line">                                .addEntity(Student.class) // 实体查询</div><div class="line">                                .list();</div><div class="line">String sql = &quot;select * from stu_info&quot;;</div><div class="line">List&lt;Object[]&gt; lists = session.createSQLQuery(sql)</div><div class="line">                              .addScalar(&quot;stu_name&quot;) // 标量查询 (标量查询哪些列)</div><div class="line">                              .addScalar(&quot;stu_age&quot;)</div><div class="line">                              .list();</div><div class="line">String sql = &quot;SELECT s.*,t.* FROM stu_info AS s, tea_info AS t WHERE s.t_id = t.tea_id&quot;;</div><div class="line">List&lt;Object[]&gt; lists = session.createSQLQuery(sql)</div><div class="line">                              .addEntity(&quot;s&quot;, Student.class) // 第一个参数：表的别名</div><div class="line">                              .addEntity(&quot;t&quot;, Teacher.class) // 实体查询</div><div class="line">                              .addJoin(&quot;t&quot;, &quot;s.teacher&quot;) // 关联查询 把t别名的数据关联到学生的teacher属性中.</div><div class="line">                              .addScalar(&quot;s.stu_name&quot;) // 标量查询</div><div class="line">                              .list();</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-HQL&quot;&gt;&lt;a href=&quot;#Hibernate-HQL&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_HQL&quot;&gt;&lt;/a&gt;Hibernate_HQL&lt;/h1&gt;&lt;p&gt;Hibernate的三套查询: &lt;/p&gt;
-&lt;ol&gt;
-
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>03_Hibernate_一级缓存</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/03_Hibernate_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/03_Hibernate_一级缓存/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate的一级缓存"><a href="#Hibernate的一级缓存" class="headerlink" title="Hibernate的一级缓存."></a>Hibernate的一级缓存.</h1><ol>
-<li>一级缓存，默认是开启的.</li>
-<li>它是跟Session相关(一级缓存是放在Session对象中).</li>
-<li>一级缓存是存放在内存中.<br>因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.  </li>
-</ol>
-<ul>
-<li><p>一级缓存的作用：<br>提高Hibernate的执行效率.  </p>
-</li>
-<li><p>如何提高Hibernate的执行效率:<br>因为它会把查询出来的对象先存放在内存中(一级缓存中).<br>当你调用该对象的set方法时它不会立即发出update语句<br>当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,<br>如果对象的属性值没有发生改变就不会生成update语句.  </p>
-</li>
-</ul>
-<blockquote>
-<p>操作一级缓存的方法：</p>
-</blockquote>
-<ol>
-<li><p>session.contains(持久化对象);<br>判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态</p>
-</li>
-<li><p>void session.clear(): 清空Session中的一级缓存.(所有的持久化状态的对象都没有了).</p>
-</li>
-<li><p>void session.evict(Object object): 从Session一级缓存中删除一个指定的持久化状态的对象.</p>
-</li>
-<li><p>void flush(): 把Session一级缓存中的对象同步到底层的数据库表中.(默认是事务提交时才同步)</p>
-</li>
-<li><p>void session.close(): 先清空Session中的一级缓存，再关闭数据库连接.</p>
-</li>
-<li><p>Session的一级缓存的生命周期：<br>Session session = SessionFactory.openSession(); 一级缓存开始<br>…..<br>session.close();  一级缓存结束</p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate的一级缓存&quot;&gt;&lt;a href=&quot;#Hibernate的一级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate的一级缓存.&quot;&gt;&lt;/a&gt;Hibernate的一级缓存.&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;一级缓存，默认是开启的.&lt;/
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
     
   </entry>
   
@@ -949,82 +890,6 @@
   </entry>
   
   <entry>
-    <title>09_Hibernate_Session线程安全问题</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session线程安全/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
-<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>第二步：编程部分</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注意:session不需自己关闭.</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-Session线程安全问题&quot;&gt;&lt;a href=&quot;#Hibernate-Session线程安全问题&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_Session线程安全问题:&quot;&gt;&lt;/a&gt;Hibernate_Sessio
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>08_Hibernate_查询缓存</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/08_Hibernate_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/08_Hibernate_查询缓存/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-查询缓存"><a href="#Hibernate-查询缓存" class="headerlink" title="Hibernate_查询缓存:"></a>Hibernate_查询缓存:</h1><ol>
-<li>默认是关闭的.</li>
-<li>它缓存得是hql语句.(内存中)</li>
-</ol>
-<p>使用查询缓存的步骤:<br>第一步：配置开启查询缓存(hibernate.cfg.xml)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启查询缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_query_cache&quot;&gt;true&lt;/property&gt;</div></pre></td></tr></table></figure></p>
-<p>第二步：查询时需要指定哪些hql语句存入查询缓存中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">session.createQuery(hql)</div><div class="line">       .setCacheable(true) // 存入查询缓存</div><div class="line">       .list(); // 把所有的学生存入一级缓存</div></pre></td></tr></table></figure></p>
-<p>缓存格式：<br>Map<string, list<string="">&gt;<br>key : hql语句<br>value: [“cn.mortalliao.entity.Student#1”, “cn.mortalliao.entity.Student#2”]</string,></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-查询缓存&quot;&gt;&lt;a href=&quot;#Hibernate-查询缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_查询缓存:&quot;&gt;&lt;/a&gt;Hibernate_查询缓存:&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;默认是关闭的.&lt;/li&gt;
-&lt;
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
     <title>07_Hibernate_二级缓存</title>
     <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/07_Hibernate_%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
     <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/07_Hibernate_二级缓存/</id>
@@ -1088,140 +953,298 @@
   </entry>
   
   <entry>
-    <title>01_Hibernate框架介绍</title>
-    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/01_Hibernate_%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/01_Hibernate_介绍/</id>
+    <title>09_Hibernate_Session线程安全问题</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session线程安全/</id>
     <published>2017-04-02T13:46:07.000Z</published>
     <updated>2017-04-02T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Hibernate框架介绍"><a href="#Hibernate框架介绍" class="headerlink" title="Hibernate框架介绍:"></a>Hibernate框架介绍:</h1><p>Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，<br>能够让程序员以面向对象的方式来操作数据库，从而简化持久层的开发.</p>
-<p>直接把一个对象保存到数据库.</p>
-<p>持久层(数据访问层).</p>
-<p><strong>ORM:Object Relation Mapping 对象关系映射.</strong></p>
-<ul>
-<li>Object: 对象指得是面向对象的编程语言.</li>
-<li>Relation: 关系指得是关系型数据库.</li>
-<li>Mapping: 面向对象的编程语言与关系型数据库之间的映射.</li>
+    <content type="html"><![CDATA[<h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
+<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
 </ul>
-<p><strong>ORM映射思想:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>第二步：编程部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:session不需自己关闭.</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate-Session线程安全问题&quot;&gt;&lt;a href=&quot;#Hibernate-Session线程安全问题&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_Session线程安全问题:&quot;&gt;&lt;/a&gt;Hibernate_Sessio
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>05_Hibernate_HQL</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/05_Hibernate_HQL/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/05_Hibernate_HQL/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate-HQL"><a href="#Hibernate-HQL" class="headerlink" title="Hibernate_HQL"></a>Hibernate_HQL</h1><p>Hibernate的三套查询: </p>
+<ol>
+<li>HQL查询: Hibernate Query Language (需要写hql语句)</li>
+<li>SQL查询: sql查询 (需要写sql语句).</li>
+<li>Criteria查询：(不需要写任何查询语句) 完全是面向对象</li>
+</ol>
+<p>HQL(Hibernate Query Language)查询：</p>
 <table>
 <thead>
 <tr>
-<th>面向对象的编程语言(java)</th>
-<th>关系型数据库</th>
+<th>SQL语句(面向)</th>
+<th>表</th>
+<th>行</th>
+<th>列</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>HQL语句(面向)</td>
 <td>类</td>
-<td>表</td>
-</tr>
-<tr>
 <td>对象</td>
-<td>一行数据</td>
-</tr>
-<tr>
 <td>属性</td>
-<td>列名</td>
 </tr>
 </tbody>
 </table>
-<h2 id="Hibernate框架优缺点"><a href="#Hibernate框架优缺点" class="headerlink" title="Hibernate框架优缺点:"></a>Hibernate框架优缺点:</h2><ul>
-<li><p>优点:简化持化层的开发.<br> 它底层可以跨数据库.  </p>
-</li>
-<li><p>缺点:性能比JDBC差.  </p>
-</li>
-</ul>
-<p><strong>JPA: Java Persistence Api: java持久化api.</strong></p>
 <ul>
-<li>它是sun公司根据ORM思想制订出来的持久层的规范.</li>
+<li><p>sql: select * from stu_info<br>hql: select s from Student as s  </p>
+</li>
+<li><p>from 子句:<br>语法：<br>FROM 持久化类名 [as? 对象名]?</p>
+</li>
+<li><p>select 子句：<br>语法：select s from 持久化类名 as? s</p>
+</li>
 </ul>
-<p><strong>JDBC: Java DataBase Connection java数据库连接的规范.</strong></p>
-<p>ORM –&gt; JPA –&gt; (Hibernate、TopLink、Jdo).</p>
-<p>Hibernate框架下载与安装(了解):</p>
-<blockquote>
-<p>官方网站:<a href="http://www.hibernate.org" target="_blank" rel="external">http://www.hibernate.org</a><br>公司:jboss公司的产品.</p>
-</blockquote>
-<p>解压后文件夹说明:  </p>
+<p>select s from Student as s       –&gt; List<student><br>select s.name from Student as s  –&gt; List<string><br>select s.age from Student as s   –&gt; List<integer><br>select s.name, s.age from Student as s  –&gt; List<object[]><br>select s, s.name, s.age from Student as s –&gt; List<object[]>  </object[]></object[]></integer></string></student></p>
 <ul>
-<li><p>documentation:存放了Hibernate所有的文档.<br> devguide : 开发指导<br> javadocs: api文档<br> manual: 开发指南<br> quickstart: 快速入门  </p>
-</li>
-<li><p>lib:存放了所有的jar.<br> required : 必须的<br> jpa : jpa实现jar包.<br> optional:  可选的<br> c3p0: 连接池.<br> ehcache: 缓存.</p>
-</li>
-<li><p>project: 项目的源码、示例、测试</p>
-</li>
-<li>etc : 存放了配置文件的模版.</li>
-</ul>
-<h2 id="Hibernate快速开始"><a href="#Hibernate快速开始" class="headerlink" title="Hibernate快速开始:"></a>Hibernate快速开始:</h2><h3 id="写Hibernate的核心配置文件"><a href="#写Hibernate的核心配置文件" class="headerlink" title="写Hibernate的核心配置文件"></a>写Hibernate的核心配置文件</h3><p>src/hibernate.cfg.xml<br>cfg: configuration  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置数据库方言(告诉Hibernate4底层用得是什么样的数据库) --&gt;</div><div class="line">&lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQL5InnoDBDialect&lt;/property&gt;</div><div class="line">&lt;!-- 配置Hibernate4是否支持自动创建表 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的信息 --&gt;</div><div class="line">&lt;!-- 配置连接数据库驱动类 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的URL --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql://localhost:3306/hibernate4&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的用户名 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;</div><div class="line">&lt;!-- 配置连接数据库的用户名 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.connection.password&quot;&gt;root&lt;/property&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>hibernate-release-4.3.8.Final\project\etc\hibernate.cfg.xml<br>hibernate-release-4.3.8.Final\project\etc\hibernate.properties(参考属性文件)  </p>
-<p>配置(myeclipse提示): hibernate-configuration-3.0.dtd<br>dtd位置:<br>hibernate-release-4.3.8.Final\project\hibernate-core\src\main\resources\org\hibernate\hibernate-configuration-3.0.dtd</p>
-</blockquote>
-<h3 id="写持久化类"><a href="#写持久化类" class="headerlink" title="写持久化类"></a>写持久化类</h3><p>持久化类 = 普通java类(pojo) + xxx.hbm.xml(老的方式)<br>持久化类 = 普通java类(pojo) + jpa注解@Entity<br><br>HBM: hibernate-mapping<br>持久化类必须有一个唯一的属性(唯一标识符): @Id<br>也就是哪个属性生成表中的主键列.<br>Hibernate生成的表必须要有主键列.<br>xxx.hbm.xml:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!-- class:配置类转换成表的相关信息 --&gt;</div><div class="line">&lt;class name=&quot;cn.itcast.hibernate.entity.User&quot; table=&quot;USER_INFO&quot;&gt;</div><div class="line">&lt;!-- id: 主键映射 --&gt;</div><div class="line">&lt;id name=&quot;id&quot; column=&quot;ID&quot;/&gt;</div><div class="line">&lt;!-- 基本的列 --&gt;</div><div class="line">&lt;property name=&quot;name&quot; column=&quot;NAME&quot;/&gt;</div><div class="line">&lt;!-- 基本的列 --&gt;</div><div class="line">&lt;property name=&quot;age&quot; column=&quot;AGE&quot;/&gt;	</div><div class="line">&lt;/class&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="在hibernate-cfg-xml文件中配置持久化类"><a href="#在hibernate-cfg-xml文件中配置持久化类" class="headerlink" title="在hibernate.cfg.xml文件中配置持久化类"></a>在hibernate.cfg.xml文件中配置持久化类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置持久化类 --&gt;</div><div class="line">&lt;mapping class=&quot;cn.itcast.hibernate.entity.User&quot;/&gt;</div></pre></td></tr></table></figure>
-<h3 id="Hibernate编程部分"><a href="#Hibernate编程部分" class="headerlink" title="Hibernate编程部分"></a>Hibernate编程部分</h3><ol>
-<li><p>Configuration: 专门负责加载hibernate.cfg.xml文件，产生SessionFactory.</p>
-</li>
-<li><p>SessionFactory: 会话工厂</p>
-</li>
-<li><p>Session: 会话</p>
-</li>
-<li><p>Transaction: 事务管理</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/** 第一步 : 创建Configuration加载hibernate.cfg.xml */</div><div class="line">Configuration configuration = new Configuration() // 加载hibernate.properties</div><div class="line">.configure(); // 加载hibernate.cfg.xml</div><div class="line">/** 第二步:构建SessionFactory */</div><div class="line">SessionFactory sessionFactory = configuration.buildSessionFactory();</div><div class="line">/** 第三步:打开Session */</div><div class="line">Session session = sessionFactory.openSession();</div><div class="line">/** 第四步:开启事务得到事务对象(事务默认是开启的) */</div><div class="line">Transaction transaction = session.beginTransaction();</div><div class="line">/** 第五步:利用Session完成所有的持久化操作(CRUD) */</div><div class="line">User user = new User();</div><div class="line">user.setId(1);</div><div class="line">user.setAge(19);</div><div class="line">user.setName(&quot;名字&quot;);</div><div class="line">session.save(user);</div><div class="line">/** 第六步:事务提交 */</div><div class="line">transaction.commit();</div><div class="line">/** 第七步:关闭Session与SessionFactory */</div><div class="line">session.close();</div><div class="line">sessionFactory.close();</div></pre></td></tr></table></figure>
-<p>总结:基本运行流程<br>Configuration –&gt; hibernate.cfg.xml文件 –&gt; 创建DataSource.<br>SessionFactory sessionFactory = Configuration.buildSessionFactory();<br>开启事务、利用Session所有的CRUD操作. </p>
-<h1 id="Hibernate-持久化状态："><a href="#Hibernate-持久化状态：" class="headerlink" title="Hibernate_持久化状态："></a>Hibernate_持久化状态：</h1><blockquote>
-<p>持久化类 持久化对象 = new 持久化类();  </p>
-</blockquote>
+<li><p>select new 子句：它可以改变List集合中元素存放的是什么.</p>
 <ul>
-<li><p>Transient(瞬态): 从未与Session关联过.  </p>
+<li><p>select new map():  List<map<string, object="">&gt;   –&gt; [{},{}]<br>select new map(name as name, age as age) from Student</map<string,></p>
 </li>
-<li><p>Persistent(持久化状态): 正在被Session管理，也就是这个对象正在Session的一级缓中.<br>一个持久化对象属于持久化状态时，你调用它的setXxx方法，会影响数据库表中的数据.<br>当事务提交时，它会把这个对象同步到底层数据库表中.  </p>
+<li><p>select new list(): List<list<object>&gt;  –&gt; [[],[]]<br>select new list(name, age) from Student</list<object></p>
 </li>
-<li><p>Detached(脱管状态、分离状态)： 脱离Session的管理，曾经被Session管理过.</p>
+<li><p>select new 数据传输类: List<user><br>select new cn.xxx.pojo.User(id, name, age) from Student</user></p>
 </li>
 </ul>
-<p>持久化对象的状态转换：<br>User user = new User(); // 瞬态<br>user.setId(1); // 脱管  </p>
-<p>持久化对象的三种状态：</p>
+</li>
+</ul>
+<h2 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询:"></a>关联查询:</h2><ul>
+<li><p>隐式关联：查询时不需要显示的写join语句<br>查询时关联的属性是持久化类<br>@OneToOne、@ManyToOne<br><code>select s from Student s where s.teacher.id = ?</code></p>
+</li>
+<li><p>显示关联：查询需要显示的写join语句<br>查询时关联的属性是Set集合<br>@OneToMany、@ManyToMany<br><code>select t from Teacher t inner join t.students as s where s.id = ?</code></p>
+</li>
+</ul>
+<ul>
+<li><p>抓取连接：延迟的属性需要查询.<br>join fetch<br><code>select s from Student s join fetch s.teacher</code><br><code>select t from Teacher t join fetch t.students (不要用).</code></p>
+</li>
+<li><p>order by : 排序 (asc | desc)</p>
+</li>
+<li><p>group by: 分组.<br>select count(s), avg(s.score), s.teacher.name<br>from Student s<br>group by s.teacher.id  </p>
+</li>
+<li><p>having : 分组后过滤.<br>select count(s), avg(s.score), s.teacher.name from Student s<br>group by s.teacher.id having s.teacher.id = ?  </p>
+</li>
+</ul>
+<h2 id="分页查询："><a href="#分页查询：" class="headerlink" title="分页查询："></a>分页查询：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int pageIndex = 2;  </div><div class="line">int pageSize = 2;  </div><div class="line">List&lt;Student&gt; students = session.createQuery(&quot;select s from Student s&quot;)</div><div class="line">                                .setFirstResult((pageIndex - 1) * pageSize) // limit第一个问号</div><div class="line">                                .setMaxResults(pageSize)// limit第二个问号</div><div class="line">                                .list();</div></pre></td></tr></table></figure>
+<h2 id="统计查询："><a href="#统计查询：" class="headerlink" title="统计查询："></a>统计查询：</h2><p>统计函数：count()、sum()、avg()、max()、min()  </p>
+<ul>
+<li><p>where子句(数据过滤，添加查询条件).<br>– Hibernate4的hql语句中的where子句部分跟<br>sql语句中的where子句部分差不多.<br>Hibernate的where子句部分能支持的运算符，表达式、函数特别多，<br>用法与sql语句是一样的.  </p>
 <ol>
-<li>瞬态：user对象没有主键id值，并且也不在一级缓存中.  </li>
-<li>脱管：user对象有id属性值跟好与数据库中的一行数据的主键id值对应, 并且它也不在一级缓存中.  </li>
-<li>持久化状态：在session的一级缓存中.</li>
+<li><p>=、&lt;、&lt;=、&gt;、&gt;=、!=、and、or、distinct、between … and、like、<br>is null、is not null、is empty、is not empty</p>
+</li>
+<li><p>支持EJB-QL 3.0的函数:<br>trim(), lower(), upper(), length(), abs(), sqrt(), bit_length()<br>length(): 一个汉字是算三个字符,一个数字或字母算一个字符.<br>char_length()长度: 不管汉字还是数字或者是字母都算是一个字符.<br>SQL语句：<br>SELECT LENGTH(‘国’)<br>SELECT CHAR_LENGTH(‘中’)  </p>
+</li>
 </ol>
-<h1 id="Hibernate框架的核心api"><a href="#Hibernate框架的核心api" class="headerlink" title="Hibernate框架的核心api."></a>Hibernate框架的核心api.</h1><ol>
-<li><p>Configuration : 负责加载全局的配置文件产生SessionFactory.</p>
 </li>
-<li><p>SessionFactory: 它存活的时间很长.随tomcat开启就存在，tomcat关闭它才关闭.</p>
+</ul>
+<h2 id="子查询："><a href="#子查询：" class="headerlink" title="子查询："></a>子查询：</h2><p>子查询语句写在in 与 not in 里面.<br>select s from Student s where s.id in (select t.id from Teacher t)<br>select s from Student s where s.id not in (select t.id from Teacher t)  </p>
+<h2 id="命名查询："><a href="#命名查询：" class="headerlink" title="命名查询："></a>命名查询：</h2><p>–  也就是把项目中比较复杂的hql语句定义<br>在一个独立的配置文件中,为后期hql语句优化做准备.</p>
+<h2 id="HQL查询"><a href="#HQL查询" class="headerlink" title="HQL查询"></a>HQL查询</h2><h3 id="1-第一种方式："><a href="#1-第一种方式：" class="headerlink" title="1. 第一种方式："></a>1. 第一种方式：</h3><p>开发步骤：</p>
 <ul>
-<li>它是线程安全的.</li>
-<li>它是创建Session的工厂.</li>
-<li>它底层封装了数据源(DataSource).</li>
-<li>它包含了一个二级缓存. (默认是关闭的)  </li>
+<li><p>定义HQL查询语句. (Query.hbm.xml).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 定义一条查询语句 --&gt;</div><div class="line">&lt;query name=&quot;query_1&quot;&gt;</div><div class="line">    select s from Student s where s.age &gt; ?  HQL语句</div><div class="line">&lt;/query&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>需要在hibernate.cfg.xml文件中进行配置.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;mapping resource=&quot;cn/mortalliao/hibernate/entity/Query.hbm.xml&quot;/&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>调用Session中的getNamedQuery()方法做查询.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/** 命名查询 &lt;query name=&quot;query_1&quot;&gt; */</div><div class="line">List&lt;Student&gt; students = session.getNamedQuery(&quot;query_1&quot;)</div><div class="line">                                .setParameter(0, 20)</div><div class="line">                                .list();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-第二种方式："><a href="#2-第二种方式：" class="headerlink" title="2. 第二种方式："></a>2. 第二种方式：</h3><p>开发步骤：  </p>
+<ul>
+<li><p>在持久化类上添加NamedQuery()这个注解.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@NamedQuery(name=&quot;query_2&quot;, // 名称  </div><div class="line">            query=&quot;select s from Student s where s.age &gt; ?&quot;) // 查询语句</div></pre></td></tr></table></figure>
+</li>
+<li><p>调用Session中的getNamedQuery()方法做查询.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/** 命名查询 @NamedQuery(name=&quot;query_2&quot;) */</div><div class="line">List&lt;Student&gt; students = session.getNamedQuery(&quot;query_2&quot;)</div><div class="line">                                .setParameter(0, 20)</div><div class="line">                                .list();</div><div class="line">for (Student s : students)&#123;</div><div class="line">    System.out.println(s.getName() + &quot;==&quot; + s.getAge());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="SQL查询"><a href="#SQL查询" class="headerlink" title="SQL查询:"></a>SQL查询:</h2><p>查询步骤：</p>
+<ul>
+<li>获取Session.</li>
+<li>写sql语句.</li>
+<li>调用SQLQuery query = session.createSQLQuery(sql);</li>
+<li>如果hql语句中有占位符，需要为占位符设置查询参数<br>query.setParameter(“索引号”, “值”);<br>如果需要分页查询就需要为 limit ?,? 这两个问号赋值<br>第一个问号：query.setFirstResult();<br>第二个问号：query.setMaxResults();  </li>
+<li>获取查询的结果：<br>如果查询得到多个结果，就调用query.list()返回List集合.<br>如果查询得到一个结果，就调用query.uniqueResult().  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">List&lt;Student&gt; students = session.createSQLQuery(sql)</div><div class="line">                                .addEntity(Student.class) // 实体查询</div><div class="line">                                .list();</div><div class="line">String sql = &quot;select * from stu_info&quot;;</div><div class="line">List&lt;Object[]&gt; lists = session.createSQLQuery(sql)</div><div class="line">                              .addScalar(&quot;stu_name&quot;) // 标量查询 (标量查询哪些列)</div><div class="line">                              .addScalar(&quot;stu_age&quot;)</div><div class="line">                              .list();</div><div class="line">String sql = &quot;SELECT s.*,t.* FROM stu_info AS s, tea_info AS t WHERE s.t_id = t.tea_id&quot;;</div><div class="line">List&lt;Object[]&gt; lists = session.createSQLQuery(sql)</div><div class="line">                              .addEntity(&quot;s&quot;, Student.class) // 第一个参数：表的别名</div><div class="line">                              .addEntity(&quot;t&quot;, Teacher.class) // 实体查询</div><div class="line">                              .addJoin(&quot;t&quot;, &quot;s.teacher&quot;) // 关联查询 把t别名的数据关联到学生的teacher属性中.</div><div class="line">                              .addScalar(&quot;s.stu_name&quot;) // 标量查询</div><div class="line">                              .list();</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate-HQL&quot;&gt;&lt;a href=&quot;#Hibernate-HQL&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_HQL&quot;&gt;&lt;/a&gt;Hibernate_HQL&lt;/h1&gt;&lt;p&gt;Hibernate的三套查询: &lt;/p&gt;
+&lt;ol&gt;
+
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>08_Hibernate_查询缓存</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/08_Hibernate_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/08_Hibernate_查询缓存/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate-查询缓存"><a href="#Hibernate-查询缓存" class="headerlink" title="Hibernate_查询缓存:"></a>Hibernate_查询缓存:</h1><ol>
+<li>默认是关闭的.</li>
+<li>它缓存得是hql语句.(内存中)</li>
+</ol>
+<p>使用查询缓存的步骤:<br>第一步：配置开启查询缓存(hibernate.cfg.xml)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启查询缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_query_cache&quot;&gt;true&lt;/property&gt;</div></pre></td></tr></table></figure></p>
+<p>第二步：查询时需要指定哪些hql语句存入查询缓存中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">session.createQuery(hql)</div><div class="line">       .setCacheable(true) // 存入查询缓存</div><div class="line">       .list(); // 把所有的学生存入一级缓存</div></pre></td></tr></table></figure></p>
+<p>缓存格式：<br>Map<string, list<string="">&gt;<br>key : hql语句<br>value: [“cn.mortalliao.entity.Student#1”, “cn.mortalliao.entity.Student#2”]</string,></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate-查询缓存&quot;&gt;&lt;a href=&quot;#Hibernate-查询缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_查询缓存:&quot;&gt;&lt;/a&gt;Hibernate_查询缓存:&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;默认是关闭的.&lt;/li&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>02_Hibernate实现简单的CRUD操作</title>
+    <link href="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/02_Hibernate_CRUD/"/>
+    <id>http://yoursite.com/2017/04/02/Java/ORM/Hibernate/02_Hibernate_CRUD/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate实现简单的CRUD操作："><a href="#Hibernate实现简单的CRUD操作：" class="headerlink" title="Hibernate实现简单的CRUD操作："></a>Hibernate实现简单的CRUD操作：</h1><h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h2><ol>
+<li><p>第一种方式(不需要设置id属性值)：<br>Serializable save(User user); // user : 持久化状态<br>– save方法做保存，返回主键id的值   </p>
+</li>
+<li><p>第二种方式(不需要设置id属性值)：<br>void saveOrUpdate(User user): 它集成添加与修改. // user : 持久化状态<br>如果持久化对象的主键属性有值就做修改，(找不到主键值就报错)<br>不给主键属性值就做添加.  </p>
+</li>
+<li><p>第三种方式(不需要设置id属性值)：<br>User user = new User();<br>void session.persist(user); // user : 持久化状态  </p>
+</li>
+<li><p>第四种方式(不需要设置id属性值)：<br>/<em>* merge它集成了添加与修改 </em>/<br>User u = (User)session.merge(user);  //user:不是持久化状态、u:才是持久化状态  </p>
+<ul>
+<li><p>什么时候做添加：<br>第一种情况：user对象没有设置id属性值.<br>第二种情况：设置了user对象的id属性值， 但是数据库表中没有主键列值与它对应.  </p>
+</li>
+<li><p>什么时候做修改：<br>设置了user对象的id属性值，<br>而且数据库表中有主键列值与它对应。  </p>
+</li>
 </ul>
 </li>
-<li><p>Session: 它是应用程序与数据库表交互的对象.  </p>
+</ol>
+<p>save与persist方法的区别：  </p>
 <ul>
-<li>它是单线程对象(它是线程不安全).</li>
-<li>它底层封装了数据库连接.</li>
-<li>它存活比较短(Connection用完就需要关闭). </li>
-<li>它是事务的工厂.</li>
-<li>它包含了一级缓存(内存).(默认是开启的)</li>
+<li><p>save()有返主键id值、persist()没有返回值  </p>
+</li>
+<li><p>save()跟事务是否开启没有关系(立即生成insert语句向数据库内存插入数据).<br>跟事务是否提交有关系，因为先是存放在数据库的内存中.  </p>
+</li>
+<li><p>persist()跟事务是否开启有关系，<br>没有开启的话,要等到开启事务并且事务提交时才会向数据库发送并插入insert语句.  </p>
+</li>
+</ul>
+<p>save(): hibernate的框架的方法.(差)<br>persist(): jpa规范中的方法.(好)  </p>
+<h2 id="根据主键id做查询："><a href="#根据主键id做查询：" class="headerlink" title="根据主键id做查询："></a>根据主键id做查询：</h2><p>Object get(class, Serializable id):<br>User u = (User)session.get(User.class, 5);  //u: 持久化状态  </p>
+<p>Object load(class, Serializable id):<br>User u = (User)session.load(User.class, 5);  //u: 持久化状态  </p>
+<p>get(): 立即向数据库发送sql语句查询数据.<br>load(): 延迟向数据库发送sql语句查询数据，刚开始返回的是代理对象，当你真正用到这个对象中的属性时才会去查询.  </p>
+<p>注意：当你真正用到这个对象中的属性时，Session不能关闭.<br>因为Session封装了数据库connection.<br>报错:org.hibernate.LazyInitializationException: could not initialize proxy - no Session(Session已关闭)</p>
+<h2 id="修改："><a href="#修改：" class="headerlink" title="修改："></a>修改：</h2><ol>
+<li><p>在持久化状态下：<br>User user = session.get(User.class, 5);  // user: 持久化状态<br>user.setXxx();  </p>
+<blockquote>
+<p>注意：等到事务提交时就会修改该对象(生成update语句).<br>如果这个对象属性值没有发生改变，就不会生成update语句.</p>
+</blockquote>
+</li>
+<li><p>脱管状态下：  </p>
+<ul>
+<li><p>session.update(user);</p>
+<ul>
+<li>user: 是持久化状态  </li>
+<li>它是在事务提交时发出update语句.  </li>
 </ul>
 </li>
-<li><p>Transaction: 事务管理对象. connection.setAutoCommit(false);</p>
+<li><p>session.saveOrUpdate(user);</p>
 <ul>
-<li>transaction.commit(); 事务提交</li>
-<li>transaction.rollback(); 事务回滚</li>
+<li>user: 是持久化状态  </li>
+<li>它是在事务提交时发出update语句.  </li>
 </ul>
+</li>
+<li><p>User u = (User)session.merge(user);</p>
+<ul>
+<li>user: 不是持久化状态  </li>
+<li>u: 是持久化状态  </li>
+<li>首先要根据主键id先查询.有对象返回就做修改，没有对象返回就做添加.  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>sql: update 表名 set 列名 = ? where id = ?  </p>
+</blockquote>
+<h2 id="删除："><a href="#删除：" class="headerlink" title="删除："></a>删除：</h2><ol>
+<li><p>在持久化状态下：<br>User user = Session.get(User.class, 5); // user : 持久化状态<br>session.delete(user); // user: 持久化状态 –&gt; 瞬态  </p>
+</li>
+<li><p>脱管状态下：<br>User user = new User(); // 瞬态<br>user.setId(6); // 脱管<br>session.delete(user); // user:  脱管 –&gt; 瞬态</p>
 </li>
 </ol>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Hibernate框架介绍&quot;&gt;&lt;a href=&quot;#Hibernate框架介绍&quot; class=&quot;headerlink&quot; title=&quot;Hibernate框架介绍:&quot;&gt;&lt;/a&gt;Hibernate框架介绍:&lt;/h1&gt;&lt;p&gt;Hibernate是一个开放源代码的对象关系映射
+      &lt;h1 id=&quot;Hibernate实现简单的CRUD操作：&quot;&gt;&lt;a href=&quot;#Hibernate实现简单的CRUD操作：&quot; class=&quot;headerlink&quot; title=&quot;Hibernate实现简单的CRUD操作：&quot;&gt;&lt;/a&gt;Hibernate实现简单的CRUD操作：&lt;/
     
     </summary>
     
