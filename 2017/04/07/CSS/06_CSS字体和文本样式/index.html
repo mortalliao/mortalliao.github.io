@@ -1,0 +1,406 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>06_CSS字体和文本样式 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li></ul></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">16</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="06_CSS字体和文本样式">
+                
+                06_CSS字体和文本样式
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>CSS</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            CSS
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/07</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/07/CSS/06_CSS字体和文本样式/" data-thread-key="/2017/04/07/CSS/06_CSS字体和文本样式/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="06_CSS字体和文本样式"
+              data-leadcloud-url="/2017/04/07/CSS/06_CSS字体和文本样式/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="CSS字体样式属性"><a href="#CSS字体样式属性" class="headerlink" title="CSS字体样式属性"></a>CSS字体样式属性</h1><h2 id="font-size-字号大小"><a href="#font-size-字号大小" class="headerlink" title="font-size:字号大小"></a>font-size:字号大小</h2><p>font-size属性用于设置字号，该属性的值可以使用相对长度单位，也可以使用绝对长度单位。其中，相对长度单位比较常用，推荐使用像素单位px，绝对长度单位使用较少。具体如下：</p>
+<h2 id="font-family-字体"><a href="#font-family-字体" class="headerlink" title="font-family:字体"></a>font-family:字体</h2><p>font-family属性用于设置字体。网页中常用的字体有宋体、微软雅黑、黑体等，例如将网页中所有段落文本的字体设置为微软雅黑，可以使用如下CSS样式代码：<br><code>p{ font-family:&quot;微软雅黑&quot;;}</code><br>可以同时指定多个字体，中间以逗号隔开，表示如果浏览器不支持第一个字体，则会尝试下一个，直到找到合适的字体。<br>使用font-family设置字体时，需要注意以下几点：</p>
+<ul>
+<li>各种字体之间必须使用英文状态下的逗号隔开。  </li>
+<li>中文字体需要加英文状态下的引号，英文字体一般不需要加引号。当需要设置英文字体时，英文字体名必须位于中文字体名之前。  </li>
+<li>如果字体名中包含空格、#、$等符号，则该字体必须加英文状态下的单引号或双引号，例如font-family: “Times New Roman”;。  </li>
+<li>尽量使用系统默认字体，保证在任何用户的浏览器中都能正确显示。      </li>
+<li>在 CSS 中设置字体名称，直接写中文是可以的。但是在文件编码（GB2312、UTF-8 等）不匹配时会产生乱码的错误。</li>
+<li>为此，在 CSS 直接使用 Unicode 编码来写字体名称可以避免这些错误。使用 Unicode 写中文字体名称，浏览器是可以正确的解析的。<br><code>font-family: &quot;\5FAE\8F6F\96C5\9ED1&quot;</code>，表示设置字体为“微软雅黑”。  </li>
+<li>可以通过escape()  来得到</li>
+</ul>
+<h2 id="font-weight-字体粗细"><a href="#font-weight-字体粗细" class="headerlink" title="font-weight:字体粗细"></a>font-weight:字体粗细</h2><p>font-weight属性用于定义字体的粗细，<br>其可用属性值：normal、bold、bolder、lighter、100~900（100的整数倍）。</p>
+<h2 id="font-style-字体风格"><a href="#font-style-字体风格" class="headerlink" title="font-style:字体风格"></a>font-style:字体风格</h2><p>font-style属性用于定义字体风格，如设置斜体、倾斜或正常字体，其可用属性值如下：<br>normal：默认值，浏览器会显示标准的字体样式。<br>italic：浏览器会显示斜体的字体样式。<br>oblique：浏览器会显示倾斜的字体样式。</p>
+<h2 id="font-综合设置字体样式"><a href="#font-综合设置字体样式" class="headerlink" title="font:综合设置字体样式"></a>font:综合设置字体样式</h2><p>font属性用于对字体样式进行综合设置，其基本语法格式如下：<br><code>选择器{font: font-style  font-weight  font-size/line-height  font-family;}</code><br>使用font属性时，必须按上面语法格式中的顺序书写，各个属性以空格隔开。<br>其中不需要设置的属性可以省略（取默认值），但必须保留font-size和font-family属性，否则font属性将不起作用。</p>
+<h1 id="CSS文本外观属性"><a href="#CSS文本外观属性" class="headerlink" title="CSS文本外观属性"></a>CSS文本外观属性</h1><h2 id="color-文本颜色"><a href="#color-文本颜色" class="headerlink" title="color:文本颜色"></a>color:文本颜色</h2><p>color属性用于定义文本的颜色，其取值方式有如下3种：<br>预定义的颜色值，如red，green，blue等。<br>十六进制，如#FF0000，#FF6600，#29D794等。实际工作中，十六进制是最常用的定义颜色的方式。<br>RGB代码，如红色可以表示为rgb(255,0,0)或rgb(100%,0%,0%)。<br>需要注意的是，如果使用RGB代码的百分比颜色值，取值为0时也不能省略百分号，必须写为0%。  </p>
+<h2 id="letter-spacing-字间距"><a href="#letter-spacing-字间距" class="headerlink" title="letter-spacing:字间距"></a>letter-spacing:字间距</h2><p>letter-spacing属性用于定义字间距，所谓字间距就是字符与字符之间的空白。<br>其属性值可为不同单位的数值，允许使用负值，默认为normal。</p>
+<h2 id="word-spacing-单词间距"><a href="#word-spacing-单词间距" class="headerlink" title="word-spacing:单词间距"></a>word-spacing:单词间距</h2><p>word-spacing属性用于定义英文单词之间的间距，对中文字符无效。<br>和letter-spacing一样，其属性值可为不同单位的数值，允许使用负值，默认为normal。<br>word-spacing和letter-spacing均可对英文进行设置。<br>不同的是letter-spacing定义的为字母之间的间距，而word-spacing定义的为英文单词之间的间距。</p>
+<h2 id="line-height-行间距"><a href="#line-height-行间距" class="headerlink" title="line-height:行间距"></a>line-height:行间距</h2><p>line-height属性用于设置行间距，就是行与行之间的距离，即字符的垂直间距，一般称为行高。<br>line-height常用的属性值单位有三种，分别为像素px，相对值em和百分比%，实际工作中使用最多的是像素px。</p>
+<h2 id="text-decoration-文本装饰"><a href="#text-decoration-文本装饰" class="headerlink" title="text-decoration:文本装饰"></a>text-decoration:文本装饰</h2><p>text-decoration属性用于设置文本的下划线，上划线，删除线等装饰效果，其可用属性值如下：</p>
+<ul>
+<li>none：没有装饰（正常文本默认值）。</li>
+<li>underline：下划线。</li>
+<li>overline：上划线。</li>
+<li>line-through：删除线。  </li>
+</ul>
+<p>另外，text-decoration后可以赋多个值，用于给文本添加多种显示效果，<br>例如希望文字同时有下划线和删除线效果，就可以将underline和line-through同时赋给text-decoration。</p>
+<h2 id="text-align-水平对齐方式"><a href="#text-align-水平对齐方式" class="headerlink" title="text-align:水平对齐方式"></a>text-align:水平对齐方式</h2><p>text-align属性用于设置文本内容的水平对齐，相当于html中的align对齐属性。其可用属性值如下：</p>
+<ul>
+<li>left：左对齐（默认值）</li>
+<li>right：右对齐</li>
+<li>center：居中对齐</li>
+</ul>
+<h2 id="text-indent-首行缩进"><a href="#text-indent-首行缩进" class="headerlink" title="text-indent:首行缩进"></a>text-indent:首行缩进</h2><p>text-indent属性用于设置首行文本的缩进，<br>其属性值可为不同单位的数值、em字符宽度的倍数、或相对于浏览器窗口宽度的百分比%，允许使用负值,<br>建议使用em作为设置单位。</p>
+<h2 id="white-space-空白符处理"><a href="#white-space-空白符处理" class="headerlink" title="white-space:空白符处理"></a>white-space:空白符处理</h2><p><strong>使用HTML制作网页时，不论源代码中有多少空格，在浏览器中只会显示一个字符的空白。</strong><br>在CSS中，使用white-space属性可设置空白符的处理方式，其属性值如下：</p>
+<ul>
+<li>normal：常规（默认值），文本中的空格、空行无效，满行（到达区域边界）后自动换行。</li>
+<li>pre：预格式化，按文档的书写格式保留空格、空行原样显示。</li>
+<li>nowrap：空格空行无效，强制文本不能换行，除非遇到换行标记<code>&lt;br /&gt;</code>。<br>内容超出元素的边界也不换行，若超出浏览器页面则会自动增加滚动条。</li>
+</ul>
+<h2 id="word-break-自动换行"><a href="#word-break-自动换行" class="headerlink" title="word-break:自动换行"></a>word-break:自动换行</h2><ul>
+<li>normal     使用浏览器默认的换行规则。</li>
+<li>break-all   允许在单词内换行。</li>
+<li>keep-all    只能在半角空格或连字符处换行。</li>
+</ul>
+<h2 id="word-wrap"><a href="#word-wrap" class="headerlink" title="word-wrap"></a>word-wrap</h2><p>属性允许长单词或 URL 地址换行到下一行normal     </p>
+<ul>
+<li>normal    只在允许的断字点换行（浏览器保持默认处理）。</li>
+<li>break-word    在长单词或 URL 地址内部进行换行。  </li>
+</ul>
+<p>几乎得到了浏览器的支持</p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/前端开发/">前端开发</a>
+                    
+                    <a href="/categories/前端开发/CSS/">CSS</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/CSS/">CSS</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/07/CSS/05_CSS定位position/" class="pre-post fa fa-caret-left">05_CSS定位position</a>
+        
+        
+        <a href="/2017/04/07/CSS/04_CSS的overflow/" class="next-post fa">04_CSS的overflow</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS字体样式属性"><span class="toc-number">1.</span> <span class="toc-text">CSS字体样式属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#font-size-字号大小"><span class="toc-number">1.1.</span> <span class="toc-text">font-size:字号大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#font-family-字体"><span class="toc-number">1.2.</span> <span class="toc-text">font-family:字体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#font-weight-字体粗细"><span class="toc-number">1.3.</span> <span class="toc-text">font-weight:字体粗细</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#font-style-字体风格"><span class="toc-number">1.4.</span> <span class="toc-text">font-style:字体风格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#font-综合设置字体样式"><span class="toc-number">1.5.</span> <span class="toc-text">font:综合设置字体样式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS文本外观属性"><span class="toc-number">2.</span> <span class="toc-text">CSS文本外观属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#color-文本颜色"><span class="toc-number">2.1.</span> <span class="toc-text">color:文本颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#letter-spacing-字间距"><span class="toc-number">2.2.</span> <span class="toc-text">letter-spacing:字间距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#word-spacing-单词间距"><span class="toc-number">2.3.</span> <span class="toc-text">word-spacing:单词间距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height-行间距"><span class="toc-number">2.4.</span> <span class="toc-text">line-height:行间距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-decoration-文本装饰"><span class="toc-number">2.5.</span> <span class="toc-text">text-decoration:文本装饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-align-水平对齐方式"><span class="toc-number">2.6.</span> <span class="toc-text">text-align:水平对齐方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-indent-首行缩进"><span class="toc-number">2.7.</span> <span class="toc-text">text-indent:首行缩进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#white-space-空白符处理"><span class="toc-number">2.8.</span> <span class="toc-text">white-space:空白符处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#word-break-自动换行"><span class="toc-number">2.9.</span> <span class="toc-text">word-break:自动换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#word-wrap"><span class="toc-number">2.10.</span> <span class="toc-text">word-wrap</span></a></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

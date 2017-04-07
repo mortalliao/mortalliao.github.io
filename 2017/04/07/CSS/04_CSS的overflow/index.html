@@ -22,7 +22,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>resume | mortalLiao</title>
+<title>04_CSS的overflow | mortalLiao</title>
 
 <link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
 
@@ -31,7 +31,7 @@
 
     
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/othersPages.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
     <!--script-->
@@ -147,55 +147,137 @@
 
 
         <div id="main">
-    <div id="about">
-        <h2 id="个人信息">个人信息</h2>
-        <ul>
-            <li>廖于坚 / 男 / 1995</li>
-            <li>意向： Java后端开发</li>
-            <li>博客: http://mortalliao.win/</li>
-            <li>Github: https://github.com/mortalliao</li>
-            <li>手机: 18720968986</li>
-            <li>E-mail: <a href="http://mail.163.com/" target="_blank" rel="external">mortalliaoyujian@163.com</a></li>
-            <li>QQ: <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=552170836&amp;site=qq&amp;menu=yes" target="_blank" rel="external">2533011924</a></li>
-        </ul>
-        <h2 id="教育背景">教育背景</h2>
-        <ul>
-            <li>南昌工程学院(2010.9 - 2014.6)
-                <ul>
-                    <li>本科 / 软件工程专业</li>
-                    <!--<li>大学英语四级</li>-->
-                </ul>
-            </li>
-        </ul>
-        <h2 id="项目和作品">项目和作品</h2>
-        <ul>
-            <li><a href="http://m.qlchat.com" target="_blank" rel="external">千聊微信授课平台</a>
-                <ul>
-                    <li>Java工程师</li>
-                    <li><code>JavaScript</code><code>CSS3</code></li>
-                    <!--<li>Hexo主题的制作基本上是考察布局、<code>CSS</code>等基本功底，难点在于整合Hexo提供的辅助函数和变量，通过搜索和<code>console.log()</code>的笨方法，最终理解Hexo的基本运行机制，并用<a href="http://note.geekaholic.cn/2017/02/22/%E5%88%B6%E4%BD%9CHexo%E4%B8%BB%E9%A2%98%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B%EF%BC%881%EF%BC%89/" target="_blank" rel="external">文章</a>记录了下来</li>
-                    <li>对整个开发感到最满意的是根据自己的主题需要改写或编写了<code>helper</code>和<code>generator</code>，并对<code>hexo-generator-search</code>提出了<a href="https://github.com/PaicHyperionDev/hexo-generator-search/pull/17" target="_blank" rel="external">pull requests</a></li>-->
-                </ul>
-            </li>
-        </ul>
-        <h2 id="相关技能">相关技能</h2>
-        <ul>
-            <li>了解及使用
-                <ul>
-                    <li>Web开发： Java</li>
-                    <li>数据库相关： Oracle / MySQL</li>
-                    <li>工具相关： Git</li>
-                </ul></li>
-            <li>掌握
-                <ul>
-                    <li>语言： HTML / CSS / JavaScript</li>
-                    <li>框架和类库： jQuery</li>
-                </ul></li>
-        </ul>
-        <h2 id="致谢">致谢</h2>
-        <p>十分感谢您花时间阅读我的简历，希望能够得到面试的机会。</p>
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="04_CSS的overflow">
+                
+                04_CSS的overflow
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>CSS</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            CSS
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/07</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/07/CSS/04_CSS的overflow/" data-thread-key="/2017/04/07/CSS/04_CSS的overflow/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="04_CSS的overflow"
+              data-leadcloud-url="/2017/04/07/CSS/04_CSS的overflow/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="CSS标签的显示和隐藏："><a href="#CSS标签的显示和隐藏：" class="headerlink" title="CSS标签的显示和隐藏："></a>CSS标签的显示和隐藏：</h1><h1 id="overflow"><a href="#overflow" class="headerlink" title="overflow:"></a>overflow:</h1><ul>
+<li>hidden:超出部分隐藏。</li>
+<li>scroll:滚动条（超出的部分会显示在滚动条之内）</li>
+<li>auto:如果内容超出会显示滚动条，如果没有那么会自动隐藏。</li>
+</ul>
+<h1 id="display-none-隐藏元素"><a href="#display-none-隐藏元素" class="headerlink" title="display:none;   隐藏元素"></a>display:none;   隐藏元素</h1><p>完全隐藏原来的div，不占位置<br>display:none;  隐藏<br>display:block;  显示  </p>
+<h1 id="visibility-隐藏元素"><a href="#visibility-隐藏元素" class="headerlink" title="visibility:      隐藏元素"></a>visibility:      隐藏元素</h1><p>visibility也会隐藏原来的div但是div还是会占据着自己的位置不放，屏幕上显示的是空白。</p>
+<ul>
+<li>visible;默认值。元素是可见的。</li>
+<li>hidden;元素是不可见的。</li>
+<li>collapse;当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 “hidden”。</li>
+<li>inherit;规定应该从父元素继承 visibility 属性的值。</li>
+</ul>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/前端开发/">前端开发</a>
+                    
+                    <a href="/categories/前端开发/CSS/">CSS</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/CSS/">CSS</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/07/CSS/06_CSS字体和文本样式/" class="pre-post fa fa-caret-left">06_CSS字体和文本样式</a>
+        
+        
+        <a href="/2017/04/07/CSS/02_CSS的盒子模型/" class="next-post fa">02_CSS的盒子模型</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
 
     </div>
+    
 </div>
 
 
@@ -232,6 +314,8 @@
     <ul id="tools">
     <li class="totop-btn fa fa-angle-up"></li>
     
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -251,6 +335,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS标签的显示和隐藏："><span class="toc-number">1.</span> <span class="toc-text">CSS标签的显示和隐藏：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#overflow"><span class="toc-number">2.</span> <span class="toc-text">overflow:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#display-none-隐藏元素"><span class="toc-number">3.</span> <span class="toc-text">display:none;   隐藏元素</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#visibility-隐藏元素"><span class="toc-number">4.</span> <span class="toc-text">visibility:      隐藏元素</span></a></li></ol>
 
 
 

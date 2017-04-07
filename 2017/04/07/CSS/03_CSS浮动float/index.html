@@ -22,7 +22,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>09_Hibernate_Session线程安全问题 | mortalLiao</title>
+<title>03_CSS浮动float | mortalLiao</title>
 
 <link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
 
@@ -150,9 +150,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="09_Hibernate_Session线程安全问题">
+            <h1 id="03_CSS浮动float">
                 
-                09_Hibernate_Session线程安全问题
+                03_CSS浮动float
                 
             </h1>
             <div class="article-meta">
@@ -160,7 +160,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>Hibernate</span>
+        <span>CSS</span>
     </span>
     
     
@@ -168,7 +168,7 @@
          <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            Hibernate
+            CSS
             
         </span>
     </span>
@@ -176,20 +176,20 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2017/04/02</span>
+        <span class="date-meta ">2017/04/07</span>
     </span>
     
     <span  class=" fa-wrap">
         <i class="fa fa-comment-o"></i>
-        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session线程安全/" data-thread-key="/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session线程安全/"
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/07/CSS/03_CSS浮动float/" data-thread-key="/2017/04/07/CSS/03_CSS浮动float/"
            data-count-type="comments"></span>
     </span>
     
     
     <span class="fa-wrap">
             <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="09_Hibernate_Session线程安全问题"
-              data-leadcloud-url="/2017/04/02/Java/ORM/Hibernate/09_Hibernate_Session线程安全/"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="hits hits-meta " data-leadcloud-title="03_CSS浮动float"
+              data-leadcloud-url="/2017/04/07/CSS/03_CSS浮动float/"><i class="fa fa-spinner fa-spin"></i></span>
     </span>
     
     
@@ -200,17 +200,37 @@
         </div>
         
         <div id="post-body">
-            <h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
-<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>第二步：编程部分</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注意:session不需自己关闭.</p>
-</blockquote>
+            <h1 id="标准流-normal-flow"><a href="#标准流-normal-flow" class="headerlink" title="标准流(normal flow)"></a>标准流(normal flow)</h1><p>html语言当中另外一个相当重要的概念———-标准流！或者普通流。<br>标准流实际上就是一个网页内标签元素正常排列的顺序的意思；<br>比如块级元素会独占一行，行内元素会按顺序依次前后排列；<br>按照这种大前提的布局排列之下绝对不会出现列外的情况叫做标准流布局；  </p>
+<h1 id="浮动-float"><a href="#浮动-float" class="headerlink" title="浮动(float)"></a>浮动(float)</h1><p>浮动的价值：<br>就是让任何盒子可以一行排列</p>
+<h2 id="元素的浮动属性float"><a href="#元素的浮动属性float" class="headerlink" title="元素的浮动属性float"></a>元素的浮动属性float</h2><p>什么是浮动？<br>元素的浮动是指设置了浮动属性的元素会脱离标准文档流的控制，移动到其父元素中指定位置的过程。  </p>
+<p>如何定义浮动？<br>在CSS中，通过float属性来定义浮动，其基本语法格式如下：<br>选择器{float:属性值;}  </p>
+<p>float属性值：<br>|   属性值   |   描述   |<br>| —- | —- |<br>|  left    |   元素向左浮动   |<br>|   right   |   元素向右浮动   |<br>|   none   |   元素不浮动（默认值）   |</p>
+<h2 id="浮动特性"><a href="#浮动特性" class="headerlink" title="浮动特性"></a>浮动特性</h2><ol>
+<li>浮动脱离标准流，不占位置，会影响标准流。浮动只有左右浮动。</li>
+<li>浮动的元素A排列位置，跟上一个元素（块级）有关系。如果上一个元素有浮动，则A元素顶部会和上一个元素的顶部对齐；如果上一个元素是标准流，则A元素的顶部会和上一个元素的底部对齐。</li>
+<li>一个父盒子里面的子盒子，如果其中一个子级有浮动的，则其他子级都需要浮动。这样才能一行对齐显示。</li>
+<li>浮动根据元素书写的位置来显示相应的浮动。</li>
+<li>元素添加浮动后，元素会具有行内块元素的特性。元素的大小完全取决于定义的大小或者默认的内容多少。</li>
+<li>浮动以后的子元素，不会撑开父容器</li>
+<li>如果行内元素 浮动之后就可以指定宽和高</li>
+</ol>
+<h2 id="清除浮动："><a href="#清除浮动：" class="headerlink" title="清除浮动："></a>清除浮动：</h2><ol>
+<li>clear:left<br>clear:right<br>clear:both</li>
+<li><p>使用overflow:hidden清除浮动<br>父元素(设置了height和没设置height结果可不一样，以后补充)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overflow: hidden;/*清除子元素的浮动*/</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用伪元素来清除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.clearfix:after &#123;</div><div class="line">    content:&quot;&quot;;</div><div class="line">    height: 0;</div><div class="line">    line-height: 0;</div><div class="line">    visibility: hidden;</div><div class="line">    display: block;</div><div class="line">    clear: both;</div><div class="line">&#125;</div><div class="line">.clearfix &#123;</div><div class="line">    zoom: 1;/*兼容ie浏览器*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="版心和布局流程"><a href="#版心和布局流程" class="headerlink" title="版心和布局流程"></a>版心和布局流程</h1><p>为什么要应用布局？<br>阅读报纸时容易发现，虽然报纸中的内容很多，但是经过合理地排版，版面依然清晰、易读。同样，在制作网页时，要想使页面结构清晰、有条理，也需要对网页进行“排版”。  </p>
+<p>版心<br>“版心”是指网页中主体内容所在的区域。一般在浏览器窗口中水平居中显示，常见的宽度值为960px、980px、1000px等。  </p>
+<p>布局流程<br>为了提高网页制作的效率，布局时通常需要遵守一定的布局流程，具体如下：</p>
+<ol>
+<li>确定页面的版心（可视区）。</li>
+<li>分析页面中的行模块，以及每个行模块中的列模块。</li>
+<li>运用盒子模型的原理，通过DIV+CSS布局来控制网页的各个模块。</li>
+</ol>
 
         </div>
         <div id="post-footer">
@@ -224,26 +244,22 @@
                     
                     <a href="/about">mortalLiao</a>
                 </li>
-                <li>发表日期: <span>2017-04-02  09:46:07</span></li>
+                <li>发表日期: <span>2017-04-07  09:46:07</span></li>
                 
-                <li>最后编辑日期: <span>2017-04-02  09:46:07</span></li>
+                <li>最后编辑日期: <span>2017-04-07  09:46:07</span></li>
                 
                 <li class="post-category">
                     文章分类:
                     
-                    <a href="/categories/后端开发/">后端开发</a>
+                    <a href="/categories/前端开发/">前端开发</a>
                     
-                    <a href="/categories/后端开发/Java/">Java</a>
-                    
-                    <a href="/categories/后端开发/Java/ORM/">ORM</a>
-                    
-                    <a href="/categories/后端开发/Java/ORM/Hibernate/">Hibernate</a>
+                    <a href="/categories/前端开发/CSS/">CSS</a>
                     
                 </li>
                 <li class="post-tags">
                     文章标签:
                     
-                    <a href="/tags/Hibernate/">Hibernate</a>
+                    <a href="/tags/CSS/">CSS</a>
                     
                 </li>
                 
@@ -266,10 +282,8 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2017/04/02/Java/ORM/Hibernate/06_Hibernate_批量处理/" class="pre-post fa fa-caret-left">06_Hibernate_批量处理</a>
         
-        
-        <a href="/2017/04/02/Java/ORM/Hibernate/08_Hibernate_查询缓存/" class="next-post fa">08_Hibernate_查询缓存</a>
+        <a href="/2017/04/07/CSS/01_CSS的格式与选择器/" class="next-post fa">01_CSS的格式与选择器</a>
         
     </div>
     
@@ -338,7 +352,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate-Session线程安全问题"><span class="toc-number">1.</span> <span class="toc-text">Hibernate_Session线程安全问题:</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#标准流-normal-flow"><span class="toc-number">1.</span> <span class="toc-text">标准流(normal flow)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浮动-float"><span class="toc-number">2.</span> <span class="toc-text">浮动(float)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#元素的浮动属性float"><span class="toc-number">2.1.</span> <span class="toc-text">元素的浮动属性float</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮动特性"><span class="toc-number">2.2.</span> <span class="toc-text">浮动特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动："><span class="toc-number">2.3.</span> <span class="toc-text">清除浮动：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#版心和布局流程"><span class="toc-number">3.</span> <span class="toc-text">版心和布局流程</span></a></li></ol>
 
 
 

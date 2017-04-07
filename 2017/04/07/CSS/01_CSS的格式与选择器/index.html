@@ -1,0 +1,428 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>01_CSS的格式与选择器 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li></ul></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">16</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="01_CSS的格式与选择器">
+                
+                01_CSS的格式与选择器
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>CSS</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            CSS
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/07</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/07/CSS/01_CSS的格式与选择器/" data-thread-key="/2017/04/07/CSS/01_CSS的格式与选择器/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="01_CSS的格式与选择器"
+              data-leadcloud-url="/2017/04/07/CSS/01_CSS的格式与选择器/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="W3C"><a href="#W3C" class="headerlink" title="W3C"></a>W3C</h1><p>World Wide Web Consortium<br>中文是W3C组织或者万维网联盟<br>就是出网页标准的<br>web标准不止一个,而是一系列标准,由W3C和其他标准化组织制定  </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行为层(Behavior)</td>
+<td>javascript</td>
+</tr>
+<tr>
+<td>表现层(Presentation)</td>
+<td>css</td>
+</tr>
+<tr>
+<td>结构层(Structure)</td>
+<td>xhtml</td>
+</tr>
+<tr>
+<td>内容层</td>
+<td>文字</td>
+</tr>
+</tbody>
+</table>
+<h1 id="CSS-Cascading-Style-Sheets"><a href="#CSS-Cascading-Style-Sheets" class="headerlink" title="CSS(Cascading Style Sheets)"></a>CSS(Cascading Style Sheets)</h1><h1 id="CSS样式规则"><a href="#CSS样式规则" class="headerlink" title="CSS样式规则"></a>CSS样式规则</h1><p>选择器{属性:值}</p>
+<p>选择器(Selector)<br>属性(property)<br>值(value)</p>
+<h1 id="CSS和HTML的结合方式-四种结合和方式"><a href="#CSS和HTML的结合方式-四种结合和方式" class="headerlink" title="CSS和HTML的结合方式:(四种结合和方式)"></a>CSS和HTML的结合方式:(四种结合和方式)</h1><ol>
+<li><p>在每个html标签上面都有一个属性 style 把css和html结合在一起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div style=&quot;background-color:red;color:green;&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用html的一个标签实现<code>&lt;style&gt;</code>标签,写在head里面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">css代码</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在style标签里面使用语句(在某些浏览器下不起作用)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@import url(css文件的路径);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>创建一个css文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">    @import url(&quot;aaa.css&quot;);</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>使用头标签 link ,引入外部css文件(一般使用第四种方式)<br>创建一个css文件，使用下面方式引入<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;aaa.css&quot;/&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><h2 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h2><p>style &gt; id选择器 &gt; class选择器 &gt; 标签选择器<br><code>权重是叠加的</code><br>!important    权重最高的  </p>
+<p>通配选择符:    *{属性:值}    用于定义所有的html元素<br>作用范围很广,但是效率最低,慎用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">*&#123;border:0 none;margin:0;padding:0;&#125; </div><div class="line">//由于各个浏览器存在着,内外边距的,默认值,还不同  </div><div class="line">//所以,需要将所有浏览器的默认内外边距,都从零开始计算  </div><div class="line">//重置所有元素的,外边距和内边距,为零  </div><div class="line">//大型网站一般不这么用,一般都把所有用的标签写上去  </div><div class="line">body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div&#123;</div><div class="line">    border:0 none;</div><div class="line">    margin:0;</div><div class="line">    padding:0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>//css的属性,虽然有继承的特点,但是并不是,所有的属性都有继承<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!--</div><div class="line">h1#content&#123;&#125;	表示针对所有id为content的h1标签</div><div class="line">h1.p1&#123;&#125;		表示针对所有class为p1的h1标签</div><div class="line">很少使用</div><div class="line">--&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="CSS的扩展选择器"><a href="#CSS的扩展选择器" class="headerlink" title="CSS的扩展选择器"></a>CSS的扩展选择器</h2><ol>
+<li>交集选择器</li>
+<li>合选择器</li>
+<li>伪元素选择器<br>CSS里面提供了一些定义好的样式,可以拿过来使用<br>比如<br>超链接<code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code><br>|   超链接的状态     |      |<br>| —- | —- |<br>|   原始状态   |  :link    |<br>|   鼠标放上去的状态   |   :hover   |<br>|   点击   |   :active   |<br>|   点击之后   |   :visited   |  </li>
+</ol>
+<p>输入框<code>&lt;input type=&quot;&quot;&gt;</code><br>:focus    设置对象在成为输入焦点(该对象的onfocus事件发生时的样式    IE6/7不支持)</p>
+<h1 id="块级元素和行内元素"><a href="#块级元素和行内元素" class="headerlink" title="块级元素和行内元素"></a>块级元素和行内元素</h1><h2 id="块级元素："><a href="#块级元素：" class="headerlink" title="块级元素："></a>块级元素：</h2><p>一个div单独占一行。<br>像这一些元素：（默认没有高但是有宽并且宽度默认占一行的元素）叫做块级元素。<br>特点：单独占一行，并且可以设置宽高。<br>常见块状元素为body,div,p,h1~h6,ul,li等</p>
+<h2 id="行内元素："><a href="#行内元素：" class="headerlink" title="行内元素："></a>行内元素：</h2><p>像这一些元素：可以在一行中显示多个标签的元素叫行内元素。<br>特点：一行同显示多个，设置宽高没有效果。  </p>
+<h2 id="行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）"><a href="#行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）" class="headerlink" title="行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）"></a>行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）</h2><p>display:用来设置页面元素的显示方式。</p>
+<ul>
+<li>block:块级元素。</li>
+<li>inline:行内元素。</li>
+<li>inline-block:行内块级元素。</li>
+</ul>
+<h2 id="CSS标签的嵌套关系："><a href="#CSS标签的嵌套关系：" class="headerlink" title="CSS标签的嵌套关系："></a>CSS标签的嵌套关系：</h2><p>行内元素：span,u,b,i,strong<br>块级元素：h1,h2,h3–h6,div,p<br>原则：</p>
+<ol>
+<li>行内元素可以嵌套行内元素，但是不能嵌套块级元素</li>
+<li>块级元素可以嵌套行内元素。</li>
+<li>少数块级元素不可以嵌套其它的块行元素：<br>在p标签中不可以使用div。<br>在h标签中最好不要用div。  </li>
+</ol>
+<h2 id="页面模块的常用css命名"><a href="#页面模块的常用css命名" class="headerlink" title="页面模块的常用css命名"></a>页面模块的常用css命名</h2><p>头:    header<br>内容:    content<br>尾:    footer<br>导航:    nav<br>侧栏:    sidebar<br>栏目:    column<br>页面外围控制整体布局宽度:    wrapper<br>左中右:    left center right<br>登入条:    loginbar<br>标志:    logo<br>热点:    hot<br>新闻:    news<br>下载:    download<br>广告:    banner<br>页面主体:    main<br>子导航:    subnav<br>菜单:    menu<br>子菜单:    submenu<br>版权:    copyright<br>友情链接:    friendlinks</p>
+<p>zoom<br>设置或检索对象的缩放比例<br>normal:默认值.使用对象的实际尺寸<br>number:百分数|无符号浮点实数.浮点实数值为1.0或百分数为100%时相当于此属性的normal  </p>
+<p>zoom:1 解决IE6高度自适应问题  </p>
+<p>cursor:pointer;<br>鼠标移上会变小手  </p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/前端开发/">前端开发</a>
+                    
+                    <a href="/categories/前端开发/CSS/">CSS</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/CSS/">CSS</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/07/CSS/03_CSS浮动float/" class="pre-post fa fa-caret-left">03_CSS浮动float</a>
+        
+        
+        <a href="/2017/04/07/CSS/05_CSS定位position/" class="next-post fa">05_CSS定位position</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#W3C"><span class="toc-number">1.</span> <span class="toc-text">W3C</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS-Cascading-Style-Sheets"><span class="toc-number">2.</span> <span class="toc-text">CSS(Cascading Style Sheets)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS样式规则"><span class="toc-number">3.</span> <span class="toc-text">CSS样式规则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS和HTML的结合方式-四种结合和方式"><span class="toc-number">4.</span> <span class="toc-text">CSS和HTML的结合方式:(四种结合和方式)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#选择器"><span class="toc-number">5.</span> <span class="toc-text">选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#优先级"><span class="toc-number">5.1.</span> <span class="toc-text">优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS的扩展选择器"><span class="toc-number">5.2.</span> <span class="toc-text">CSS的扩展选择器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#块级元素和行内元素"><span class="toc-number">6.</span> <span class="toc-text">块级元素和行内元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素："><span class="toc-number">6.1.</span> <span class="toc-text">块级元素：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行内元素："><span class="toc-number">6.2.</span> <span class="toc-text">行内元素：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）"><span class="toc-number">6.3.</span> <span class="toc-text">行内块级元素：（其实这样的元素是不存在的，但是可以通过后天的努力来改变自己）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS标签的嵌套关系："><span class="toc-number">6.4.</span> <span class="toc-text">CSS标签的嵌套关系：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面模块的常用css命名"><span class="toc-number">6.5.</span> <span class="toc-text">页面模块的常用css命名</span></a></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>
