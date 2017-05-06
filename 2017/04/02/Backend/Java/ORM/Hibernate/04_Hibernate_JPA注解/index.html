@@ -1,0 +1,448 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>04_Hibernate_JPA注解 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="04_Hibernate_JPA注解">
+                
+                04_Hibernate_JPA注解
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/" data-thread-key="/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="04_Hibernate_JPA注解"
+              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="Hibernate-JPA注解"><a href="#Hibernate-JPA注解" class="headerlink" title="Hibernate_JPA注解"></a>Hibernate_JPA注解</h1><p>注解的作用: 将持久化类转换成表的相关信息.<br>(表名、索引、唯一约束、列名的相关信息、关联).</p>
+<h2 id="注解加在持久类上"><a href="#注解加在持久类上" class="headerlink" title="注解加在持久类上:"></a>注解加在持久类上:</h2><ol>
+<li><p>@Entity : 把pojo转化成持久化类.</p>
+</li>
+<li><p>@Table : 把持久化类转化成表的相关表信息.</p>
+<ul>
+<li>name(表名)</li>
+<li>indexes(用于指定表的引索列)</li>
+<li>schema(指定将数据表存入哪个数据库)</li>
+<li>catalog(指定将数据表存入哪个数据库)</li>
+<li>uniqueConstraints(用于指定唯一约束)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@Table(name=&quot;USER_INFO&quot;, // 指定表名</div><div class="line">indexes=&#123;@Index(columnList=&quot;name&quot;, // 指定列名</div><div class="line">                name=&quot;IDX_NAME&quot;) // 指定索引的名称&#125;, // 用于指定表的引索列</div><div class="line">uniqueConstraints=&#123;@UniqueConstraint(columnNames=&#123;&quot;name&quot;,&quot;age&quot;&#125;, // 指定列名</div><div class="line">                name=&quot;UC_NAME_AGE&quot;)// 指定约束名&#125; // 联合唯一约束</div><div class="line">)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="主键映射"><a href="#主键映射" class="headerlink" title="主键映射:"></a>主键映射:</h2><p>主键生成策略:<br>@Id<br>@GeneratedValue(strategy=GenerationType.xxx)</p>
+<ul>
+<li>GenerationType.IDENTITY: 适宜MySQL、SqlServer有自增长列的数据库。</li>
+<li>GenerationType.SEQUENCE：适宜Oracle这种没有自增长有sequence的数据库。</li>
+<li>GenerationType.AUTO：让Hibernate根据数据库方言自动选择主键生成策略。</li>
+<li><p>GenerationType.TABLE: 适宜所有的数据库,因为它会单独生成一张表来维护主键生成。</p>
+<ul>
+<li>单个属性做主键:<br>在单个属性上加: @Id注解.</li>
+<li>多个属性做联合主键:<br>在多个属性上加: @Id注解.<br>需要持久化类实现Serializable接口.</li>
+</ul>
+<blockquote>
+<p>注意：持久化类中属性生成的列名不能为SQL语句中的关键字.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="属性映射-运用"><a href="#属性映射-运用" class="headerlink" title="属性映射(运用):"></a>属性映射(运用):</h2><p>@Column(属性转化成表中的列): </p>
+<ul>
+<li>name(指定列名)</li>
+<li>length(该列支持的长度)</li>
+<li>precision(有效的总位数)</li>
+<li>scale(小数点的位数)</li>
+<li>unique(唯一约束)</li>
+<li>nullable(非空约束)</li>
+<li>insertable(是否允许插入)</li>
+<li>updatable(是否允许修改)</li>
+</ul>
+<p>@Temporal(日期属性):</p>
+<ul>
+<li>TemporalType.DATE //yyyy-MM-dd</li>
+<li>TemporalType.TIME //HH: mm:ss</li>
+<li>TemporalType.TIMESTAMP //yyyy-MM-dd HH: mm:ss</li>
+</ul>
+<p>@Transient(指定不是持久化属性):</p>
+<ul>
+<li>transient：关键字修饰不需要序列化的属性,同时用它也能指定不是持久化的属性。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@Column(name=&quot;U_NAME&quot;,  // 列名</div><div class="line">        length=50,  // 指定列的数据长度</div><div class="line">        unique=true, // 是否为唯一(唯一约束)</div><div class="line">        nullable=false // 是否为空 (非空约束)</div><div class="line">)</div><div class="line">private String name;</div><div class="line">@Column(name=&quot;U_DEPT&quot;, length=20,</div><div class="line">        insertable=false, // 是否允许插入这一列的值(生成insert语句时是否包含这一列) true:允许插入  false: 不允许允许插入</div><div class="line">        updatable=false // 是否允许修改这一列的值(生成update语句时是否包含这一列) true:允许修改  false: 不允许修改</div><div class="line">)</div><div class="line">private String dept;</div><div class="line">@Column(name=&quot;EMP_SALARY&quot;,</div><div class="line">        precision=7, // 有效的总位数(整数部分 + 小数部分)</div><div class="line">        scale=2 // 小数点后面的总位数 99999.99</div><div class="line">)</div><div class="line">private BigDecimal salary;</div><div class="line">@Column(name=&quot;EMP_BIRTHDAY&quot;)</div><div class="line">@Temporal(TemporalType.DATE) // yyyy-MM-dd</div><div class="line">//@Temporal(TemporalType.TIMESTAMP) // yyyy-MM-dd HH:mm:ss</div><div class="line">//@Temporal(TemporalType.TIME) // HH:mm:ss</div><div class="line">private Date birthday;</div><div class="line">@Transient() // 指定不是持久化属性,该属性不会生成表中的列</div><div class="line">private transient String remark;</div></pre></td></tr></table></figure>
+<h2 id="双向关联："><a href="#双向关联：" class="headerlink" title="双向关联："></a>双向关联：</h2><p><strong>有外键的都是从表</strong></p>
+<p><strong>一的一方都不维护关系</strong></p>
+<p>关联关系两边都配置，那就是双向关联.</p>
+<h3 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h3><p>@OneToOne():<br>两边都用关联的持久化类定义属性.<br>两边都用@OneToOne()注解.  </p>
+<p>一边(主表):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/**  学生与老师一对一 */</div><div class="line">@OneToOne(fetch=FetchType.LAZY,  // 延迟加载</div><div class="line">          targetEntity=Teacher.class, // 目标持久化类</div><div class="line">          mappedBy=&quot;student&quot;) // 不维护外键列 (主表)</div><div class="line">private Teacher teacher;</div></pre></td></tr></table></figure></p>
+<p>另一边(从表)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">/** 老师与学生一对一 */</div><div class="line">@OneToOne(fetch=FetchType.LAZY, </div><div class="line">          targetEntity=Student.class)</div><div class="line">/** 生成外键列 */</div><div class="line">@JoinColumn(name=&quot;S_ID&quot;, // 外键列的列名</div><div class="line">            unique=true, // 添加唯一约束</div><div class="line">            referencedColumnName=&quot;STU_ID&quot;) // 从表</div><div class="line">private Student student;</div></pre></td></tr></table></figure></p>
+<h3 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h3><ul>
+<li><p>一的一端(主表)<br>@OneToMany():<br>Teacher类：<!-- 
+--><br> 1. 用Set集合定义关联的属性.<br> 2. 定义后该Set需要程序员自己初始化.<br><code>private Set&lt;Student&gt; students = new HashSet&lt;&gt;();</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/** 老师是一的一端(一个老师对应多个学生) */</div><div class="line">@OneToMany(fetch=FetchType.LAZY, // 指定Set集合中的数据抓取策略 FetchType.LAZY:延迟加载   FetchType.EAGER:立即加载</div><div class="line">            targetEntity=Student.class, // 指定关联的持久化类</div><div class="line">            cascade=CascadeType.REMOVE,  // 级联删除 (级联到关联的持久化类)</div><div class="line">            orphanRemoval=true, // 删除孤儿记录</div><div class="line">            mappedBy=&quot;teacher&quot;) // 代表老师这边不维护关联关系(不维护外键列) 写关联的持久化类中哪个属性引用了它自己</div><div class="line">private Set&lt;Student&gt; students = new HashSet&lt;&gt;();</div></pre></td></tr></table></figure>
+</li>
+<li><p>多的一端(从表)<br>@ManyToOne():<br>Student类：(用关联的持久化类定义属性)<br><code>private Teacher teacher;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/** 学生是多的一端 (多个学生对应一个老师)*/</div><div class="line">@ManyToOne(fetch=FetchType.LAZY,  // 指定teacher属性的抓取策略 FetchType.LAZY:延迟加载 FetchType.EAGER:立即加载</div><div class="line">             targetEntity=Teacher.class)// 指定关联的持久化类</div><div class="line">/** 生成关联的外键列 */</div><div class="line">@JoinColumn(name=&quot;T_ID&quot;, // 外键列的列名</div><div class="line">            referencedColumnName=&quot;TEA_ID&quot;) // 指定引用老师表的主键列</div><div class="line">private Teacher teacher;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h3><p>@ManyToMany():</p>
+<ul>
+<li>生成中间表</li>
+<li>两端都用: @ManyToMany()注解</li>
+<li>两端都用：Set集合定义关联的属性</li>
+</ul>
+<p>老师：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/** 老师是多的一端 */</div><div class="line">@ManyToMany(fetch=FetchType.LAZY, // 指定Set集合中的数据抓取策略 FetchType.LAZY:延迟加载   FetchType.EAGER:立即加载</div><div class="line">            targetEntity=Student.class, // 指定关联的持久化类</div><div class="line">            cascade=CascadeType.REMOVE  // 级联删除 (级联到关联的持久化类)</div><div class="line">) </div><div class="line">/** 生成中间表 */</div><div class="line">// 中间表的一列  @ManyToMany()注解里面没有加mappedBy属性的持久类这边</div><div class="line">@JoinTable(name=&quot;TEA_2_STU&quot;, // 中间表的表名</div><div class="line">           joinColumns=@JoinColumn(name=&quot;T_ID&quot;, referencedColumnName=&quot;TEA_ID&quot;), </div><div class="line">           inverseJoinColumns=@JoinColumn(name=&quot;S_ID&quot;, referencedColumnName=&quot;STU_ID&quot;)) </div><div class="line">private Set&lt;Student&gt; students = new HashSet&lt;&gt;();</div></pre></td></tr></table></figure></p>
+<p>学生：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/** 学生也是多的一端 */</div><div class="line">@ManyToMany(fetch=FetchType.LAZY,  // 延迟加载</div><div class="line">            cascade=CascadeType.REMOVE, // 级联删除(级联到关联的持久化类)</div><div class="line">            targetEntity=Teacher.class, // 关联的持久化类</div><div class="line">            mappedBy=&quot;students&quot;) // 不维护中间表(不操作中间表)</div><div class="line">private Set&lt;Teacher&gt; teachers = new HashSet&lt;&gt;();</div></pre></td></tr></table></figure></p>
+<h2 id="单向关联："><a href="#单向关联：" class="headerlink" title="单向关联："></a>单向关联：</h2><p><strong>关联关系只配置一边，那就是单向关联.</strong></p>
+<ul>
+<li><p>1-1(一对一): 把双向关联1-1的去掉一边的关联. (生成外键列的一边保留).<br>主表的关联属性删除.</p>
+</li>
+<li><p>1-N(一对多):  把双向关联1-N的去掉一边的关联. (生成外键列的一边保留).<br>主表的关联属性删除.</p>
+</li>
+<li><p>N-N(多对多): 把双向关联N-N的去掉一边的关联. (生成中间表的一边保留).  </p>
+</li>
+</ul>
+<blockquote>
+<p>双向关联与单向关联的区别：<br>双向关联两边都可以互相查询.<br>单向关联只能通过一边查询另一边.  </p>
+<p>说明：一般情况，先配置成单向关联.</p>
+</blockquote>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-02  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/后端开发/">后端开发</a>
+                    
+                    <a href="/categories/后端开发/Java/">Java</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/">ORM</a>
+                    
+                    <a href="/categories/后端开发/Java/ORM/Hibernate/">Hibernate</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Hibernate/">Hibernate</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/02/Backend/Java/ORM/Hibernate/05_Hibernate_HQL/" class="pre-post fa fa-caret-left">05_Hibernate_HQL</a>
+        
+        
+        <a href="/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/" class="next-post fa">07_Hibernate_二级缓存</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate-JPA注解"><span class="toc-number">1.</span> <span class="toc-text">Hibernate_JPA注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注解加在持久类上"><span class="toc-number">1.1.</span> <span class="toc-text">注解加在持久类上:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主键映射"><span class="toc-number">1.2.</span> <span class="toc-text">主键映射:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性映射-运用"><span class="toc-number">1.3.</span> <span class="toc-text">属性映射(运用):</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双向关联："><span class="toc-number">1.4.</span> <span class="toc-text">双向关联：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一对一"><span class="toc-number">1.4.1.</span> <span class="toc-text">一对一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一对多"><span class="toc-number">1.4.2.</span> <span class="toc-text">一对多</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多对多"><span class="toc-number">1.4.3.</span> <span class="toc-text">多对多</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单向关联："><span class="toc-number">1.5.</span> <span class="toc-text">单向关联：</span></a></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

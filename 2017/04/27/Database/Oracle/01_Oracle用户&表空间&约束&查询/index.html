@@ -1,0 +1,581 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>01_Oracle用户&amp;表空间&amp;约束&amp;查询 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="01_Oracle用户&amp;表空间&amp;约束&amp;查询">
+                
+                01_Oracle用户&amp;表空间&amp;约束&amp;查询
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Oracle</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Oracle
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/27</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/27/Database/Oracle/01_Oracle用户&amp;表空间&amp;约束&amp;查询/" data-thread-key="/2017/04/27/Database/Oracle/01_Oracle用户&表空间&约束&查询/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="01_Oracle用户&amp;表空间&amp;约束&amp;查询"
+              data-leadcloud-url="/2017/04/27/Database/Oracle/01_Oracle用户&表空间&约束&查询/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="用户与表空间"><a href="#用户与表空间" class="headerlink" title="用户与表空间"></a>用户与表空间</h1><h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><h3 id="登入SQL-Plus"><a href="#登入SQL-Plus" class="headerlink" title="登入SQL Plus"></a>登入SQL Plus</h3><p>系统用户<br>sys 权限大于 system  系统管理员<br>sysman  </p>
+<p>scott默认密码tiger  </p>
+<p>使用系统用户登录<br>[username/password] [@server] [as sysdba|sysoper]  </p>
+<p>system/password @orcl as sysdba<br>orcl就是自己设置的服务名  </p>
+<p>system/password [@server]<br>connect sys/password [@server] as sysdba;  </p>
+<h3 id="查看登录用户"><a href="#查看登录用户" class="headerlink" title="查看登录用户"></a>查看登录用户</h3><p>show user命令<br>show user  </p>
+<p>dba_users数据字典<br>数据字典是数据库提供的表，用于查看数据库的信息。<br>desc dba_users<br>select username from dba_users;  </p>
+<h3 id="启用scott用户"><a href="#启用scott用户" class="headerlink" title="启用scott用户"></a>启用scott用户</h3><p>启用用户的语句<br>alter user username account unlock;<br>锁定用户<br>alter user username account lock;  </p>
+<p>使用scott用户登录SQL Plus<br>connect scott/tiger  </p>
+<h2 id="表空间"><a href="#表空间" class="headerlink" title="表空间"></a>表空间</h2><h3 id="表空间概述"><a href="#表空间概述" class="headerlink" title="表空间概述"></a>表空间概述</h3><ul>
+<li><p>理解表空间<br>数据库与表空间<br>表空间与数据文件  </p>
+</li>
+<li><p>表空间的分类<br>永久表空间<br>临时表空间<br>UNDO表空间  </p>
+</li>
+</ul>
+<h3 id="查看用户的表空间"><a href="#查看用户的表空间" class="headerlink" title="查看用户的表空间"></a>查看用户的表空间</h3><ul>
+<li>dba_tablespaces、user_tablespaces数据字典  </li>
+</ul>
+<p>dba_tablespaces系统管理员级的用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">desc dba_tablespaces</div><div class="line">select tablespace_name from dba_tablespaces;</div><div class="line">TABLESPACE_NAME</div><div class="line">SYSTEM  # 主要是用来存放sys用户的表，视图以及存储过程的数据库对象，也称为系统表空间</div><div class="line">SYSAUX  # EXAMPLE的辅助表空间</div><div class="line">UNDOTBS1  # 用户存储一些撤销信息的，属于UNDO类型的表空间</div><div class="line">TEMP  # 处理表的索引信息的，临时表空间</div><div class="line">USERS  # 永久性表空间，存储用户创建的数据库对象，和SYSTEM类似</div><div class="line">EXAMPLE  # 安装Oracle 11g数据库示例来使用的表空间</div></pre></td></tr></table></figure></p>
+<p>user_tablespaces普通用户登录后查看的用户字典<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">desc user_tablespaces</div><div class="line">select tablespace_name from user_tablespaces;</div><div class="line">TABLESPACE_NAME</div><div class="line">SYSTEM  # 主要是用来存放sys用户的表，视图以及存储过程的数据库对象，也称为系统表空间</div><div class="line">SYSAUX  # EXAMPLE的辅助表空间</div><div class="line">UNDOTBS1  # 用户存储一些撤销信息的，属于UNDO类型的表空间</div><div class="line">TEMP  # 处理表的索引信息的，临时表空间</div><div class="line">USERS  # 永久性表空间，存储用户创建的数据库对象，和SYSTEM类似</div><div class="line">EXAMPLE  # 安装Oracle 11g数据库示例来使用的表空间</div></pre></td></tr></table></figure></p>
+<ul>
+<li>dba_users、user_users数据字典  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">desc dba_users</div><div class="line">select default_tablespace,temporary_tablespace from dba_users where username= &apos;SYSTEM&apos;;</div><div class="line">DEFAULT_TABLESPACE  TEMPORARY_TABLESPACE</div><div class="line">USERS               TEMP</div></pre></td></tr></table></figure>
+<ul>
+<li>设置用户的默认或临时表空间<br>ALTER USER username DEFAULT|TEMPORARY TABLESPACE tablespace_name</li>
+</ul>
+<h3 id="创建，修改，删除表空间"><a href="#创建，修改，删除表空间" class="headerlink" title="创建，修改，删除表空间"></a>创建，修改，删除表空间</h3><ul>
+<li>创建表空间<br>CREATE [TEMPORARY] TABLESPACE tablespace_name TEMPFILE|DATAFILE ‘xx.dbf’ SIZE xx;  </li>
+</ul>
+<p>创建永久表空间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">create tablespace test1_tablespace datafile &apos;test1file.dbf&apos; size 10m;</div><div class="line">desc dba_data_files</div><div class="line">select file_name from dba_data_files where tablespace_name=&apos;TEST1_TABLESPACE&apos;;</div></pre></td></tr></table></figure></p>
+<p>创建临时表空间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">create temporary tablespace temptest1_tablespace tempfile &apos;tempfile1.dbf&apos; size 10m;</div><div class="line">desc dba_temp_files</div><div class="line">select file_name from dba_temp_files where tablespace_name=&apos;TEMPTEST1_TABLESPACE&apos;;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>修改表空间  </p>
+<ul>
+<li><p>修改表空间的状态  </p>
+<ul>
+<li>设置联机或脱机状态<br>  ALTER TABLESPACE tablespace_name ONLINE|OFFLINE;<br>  查看表空间状态<br>  desc dba_tablespaces<br>  select status from dba_tablespaces where tablespace_name=’TEST1_TABLESPACE’;  </li>
+<li>设置只读或可读写状态<br>  ALTER TABLESPACE　tablespace_name READ ONLY|READ WRITE  </li>
+</ul>
+</li>
+<li><p>修改数据文件  </p>
+<ul>
+<li>增加数据文件<br>ALTER TABLESPACE tablespace_name ADD DATAFILE ‘xx.dbf’ SIZE xx;<br>查看数据文件<br>select file_name from dba_data_files where tablespace_name=’TEST1_TABLESPACE’;</li>
+<li>删除数据文件<br>ALTER TABLESPACE tablespace_name DROP DATAFILE ‘filename.dbf’<br>注意：不能删除第一个数据文件(创建表空间时设置的数据文件)  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>删除表空间<br>DROP TABLESPACE tablespace_name [INCLUDING CONTENTS]；<br>INCLUDING CONTENTS 删除表空间同时删除数据文件  </p>
+</li>
+<li><p>查看表空间状态<br>desc dba_tablespaces<br>select status from dba_tablespaces where tablespace_name=’TEST1_TABLESPACE’;<br>默认的联机状态就是读写状态  </p>
+</li>
+</ul>
+<h1 id="表与约束"><a href="#表与约束" class="headerlink" title="表与约束"></a>表与约束</h1><h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><h3 id="认识表"><a href="#认识表" class="headerlink" title="认识表"></a>认识表</h3><ul>
+<li>基本存储单位  </li>
+<li>二维结构</li>
+<li>行和列</li>
+</ul>
+<p>列(域和字段)<br>行(记录)  </p>
+<p>约定：</p>
+<ol>
+<li>每一列数据必须具有相同的数据类型。  </li>
+<li>列名唯一  </li>
+<li>每一行数据的唯一性  </li>
+</ol>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ul>
+<li><p>字符型<br>CHAR(n) MAX:2000<br>NCHAR(n) UNICODE格式存放数据 MAX:1000<br>VARCHAR2(n) MAX:4000<br>NVARCHAR2(n) UNICODE格式 MAX:2000  </p>
+</li>
+<li><p>数值型<br>NUMBER(p,s) p:有效数字 s:小数后的位数,正小数点到最低位，负最高位到小数点<br>NUMBER(5,2) 有效数字5位，保留2位小数，如123.45<br>FLOAT(n) 二进制数字  </p>
+</li>
+<li><p>日期型<br>DATE DATE类型表示范围：公元前4712年1月1日到公元前9999年12月31日<br>TIMESTAMP  </p>
+</li>
+<li><p>其他类型<br>BLOB 二进制数据 MAX:4G<br>CLOB 字符串形式</p>
+</li>
+</ul>
+<h3 id="管理表"><a href="#管理表" class="headerlink" title="管理表"></a>管理表</h3><ul>
+<li>创建表  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name</div><div class="line">(</div><div class="line">    column_name datatype,...</div><div class="line">);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>查看表信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">desc table_name</div></pre></td></tr></table></figure></p>
+<ul>
+<li>修改表  <ul>
+<li>添加字段<br>ALTER TABLE table_name ADD column_name datatype;  </li>
+<li>更改字段数据类型<br>ALTER TABLE table_name MODIFY column_name datatype;  </li>
+<li>删除字段<br>ALTER TABLE table_name DROP COLUMN column_name;  </li>
+<li>修改字段名<br>ALTER TABLE table_name RENAME COLUMN column_name TO new_column_name;  </li>
+<li>修改表名<br>RENAME table_name TO new_table_name;</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>删除表<br>TRUNCATE TABLE table_name;<br>DROP TABLE table_name;</li>
+</ul>
+<ul>
+<li>操作表中的数据  <ul>
+<li>添加数据<br>INSERT INTO table_name<br>(column1,column2,…)<br>VALUES(value1,value2,…);<br>当前时间sysdate<br>即使设置了默认值也必须设值  </li>
+<li>修改数据<br>UPDATE table_name SET column1=value1,… [WHERE conditions];  </li>
+<li>删除数据<br>DELETE FROM table_name [WHERE conditions];  </li>
+</ul>
+</li>
+</ul>
+<p>复制表数据  </p>
+<p>在建表时复制<br>CREATE TABLE table_new AS SELECT column1,…|* FROM table_old  </p>
+<p>在添加时复制<br>INSERT INTO table_new [(column1,…)] SELECT column1,…|* FROM table_old  </p>
+<h1 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h1><h2 id="约束的作用"><a href="#约束的作用" class="headerlink" title="约束的作用"></a>约束的作用</h2><ul>
+<li>定义规则  </li>
+<li>确保完整性  </li>
+</ul>
+<h2 id="非空约束"><a href="#非空约束" class="headerlink" title="非空约束"></a>非空约束</h2><ul>
+<li><p>在创建表时设置非空约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name(  </div><div class="line">    column_name datatype NOT NULL,...</div><div class="line">)</div></pre></td></tr></table></figure>
+</li>
+<li><p>在修改表时添加非空约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE table_name MODIFY column_name datatype NOT NULL;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在修改表时去除非空约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE table_name MODIFY column_name datatype NULL;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h2><p>作用：确保表当中每一行数据的唯一性<br>非空 唯一<br>一张表只能设计一个主键约束<br>主键约束可以由多个字段构成(联合主键或复合主键)  </p>
+<ul>
+<li>在创建表时设置主键约束<br>列级<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name(</div><div class="line">    column_name datatype PRIMARY KEY,...</div><div class="line">);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>表级<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name(</div><div class="line">    column_name datatype ,</div><div class="line">    ...,</div><div class="line">    CONSTRAINT constraint_name PRIMARY KEY(column_name1,...)</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>在修改表时添加主键约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE table_name  S</div><div class="line">ADD CONSTRAINTS constraint_name PRIMARY KEY(column_name1,...);</div></pre></td></tr></table></figure>
+</li>
+<li><p>更改约束的名称  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE table_name  </div><div class="line">RENAME CONSTRAINT old_name TO new_name;</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除主键约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 禁用</div><div class="line">ALTER TABLE table_name  </div><div class="line">DISABLE|ENABLE CONSTRAINT constraint_name;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 删除</div><div class="line">ALTER TABLE table_name  </div><div class="line">DROP CONSTRAINT constraint_name;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 级联删除</div><div class="line">ALTER TABLE table_name  </div><div class="line">DROP PRIMARY KEY[CASCADE];</div></pre></td></tr></table></figure>
+<h2 id="查看约束"><a href="#查看约束" class="headerlink" title="查看约束"></a>查看约束</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">desc user_constraints;</div><div class="line">select constraints_name,constraint_type,status from user_constraints where table_name=&apos;TABLE_NAME&apos;</div></pre></td></tr></table></figure>
+<h2 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h2><ul>
+<li>在创建表时设置外键约束<br>设置外键约束时，主表的字段必须是主键<br>主从表中相应的字段必须是同一数据类型<br>从表中外键字段的值必须来自主表中的相应字段的值，或者为null值<br>table1从表<br>table2主表  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table1 </div><div class="line">(column_name datatype REFERENCES table2(column_name),...)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table1 (</div><div class="line">    column_name datatype ,</div><div class="line">    ...,</div><div class="line">    CONSTRAINT constraint_name FOREIGN KEY(column_name) REFERENCES table2(column_name)[ON DELETE CASCADE]</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li><p>在修改表时添加外键约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE table1</div><div class="line">ADD CONSTRAINT constraint_name FOREIGN KEY(column_name) REFERENCES table2(column_name)[ON DETELE CASCADE]</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除外键约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 禁用</div><div class="line">ALTER TABLE table_name  </div><div class="line">DISABLE|ENABLE CONSTRAINT constraint_name;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 删除</div><div class="line">ALTER TABLE table_name  </div><div class="line">DROP CONSTRAINT constraint_name;</div></pre></td></tr></table></figure>
+<h2 id="唯一约束"><a href="#唯一约束" class="headerlink" title="唯一约束"></a>唯一约束</h2><p>唯一约束和主键约束的区别：<br>主键字段值必须是非空的，唯一约束允许有一个空值<br>主键在每一张表中只能有一个，唯一约束在每张表中可以有多个  </p>
+<ul>
+<li>在创建表时设置唯一约束  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name  </div><div class="line">(column_name datatype UNIQUE,...)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name (</div><div class="line">    column_name datatype UNIQUE,</div><div class="line">    ...,</div><div class="line">    CONSTRAINT constraint_name UNIQUE(column_name)</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li><p>在修改表时添加唯一约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE table_name  </div><div class="line">ADD CONSTRAINT constraint_name UNIQUE(column_name);</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除唯一约束  </p>
+</li>
+<li>删除外键约束  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 禁用</div><div class="line">ALTER TABLE table_name  </div><div class="line">DISABLE|ENABLE CONSTRAINT constraint_name;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 删除</div><div class="line">ALTER TABLE table_name  </div><div class="line">DROP CONSTRAINT constraint_name;</div></pre></td></tr></table></figure>
+<h2 id="检查约束"><a href="#检查约束" class="headerlink" title="检查约束"></a>检查约束</h2><ul>
+<li>在创建表时设置检查约束  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name</div><div class="line">(column_name datatype CHECK(expressions),...)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name (</div><div class="line">    column_name datatype ,</div><div class="line">    ...,</div><div class="line">    CONSTRAIN constraint_name CHECK(expressions)</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li><p>在修改表时添加检查约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE table_name  </div><div class="line">ADD CONSTRAINT constraint_name CHECK(expressions);</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除检查约束  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 禁用</div><div class="line">ALTER TABLE table_name  </div><div class="line">DISABLE|ENABLE CONSTRAINT constraint_name;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 删除</div><div class="line">ALTER TABLE table_name  </div><div class="line">DROP CONSTRAINT constraint_name;</div></pre></td></tr></table></figure>
+<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><h2 id="基本查询语句"><a href="#基本查询语句" class="headerlink" title="基本查询语句"></a>基本查询语句</h2><p>SELECT [DISTINCT] column_name1,…|*<br>FROM table_name<br>[WHERE conditions]  </p>
+<h2 id="在SQL-PLUS中设置格式"><a href="#在SQL-PLUS中设置格式" class="headerlink" title="在SQL PLUS中设置格式"></a>在SQL PLUS中设置格式</h2><ol>
+<li>COLUMN column_name HEADING new_name<br>注意：COLUMN可以简写成COL  </li>
+</ol>
+<p>col username heading 用户名；<br>select * from users;</p>
+<ol>
+<li>COLUMN column_name FORMAT dataformat<br>注意：字符类型只能设置显示的长度<br>数值类型用”9”代表一个数字  </li>
+</ol>
+<p>col username format a10;<br>select * from users; # 800  </p>
+<p>col salary format 9999.9;<br>select * from users; # 800.0  </p>
+<p>col salary format 999.9;<br>select * from users; # 800.0   ######  </p>
+<p>col salary format $9999.9;<br>select * from users; # $800.0</p>
+<ol>
+<li>COLUMN column_name CLEAR  </li>
+</ol>
+<p>col username clear;<br>select * from users;  </p>
+<h2 id="查询表中的所有字段及指定字段"><a href="#查询表中的所有字段及指定字段" class="headerlink" title="查询表中的所有字段及指定字段"></a>查询表中的所有字段及指定字段</h2><ul>
+<li><p>查询所用字段<br>select * from table_name;  </p>
+</li>
+<li><p>查询指定字段<br>select username,salary from users;  </p>
+</li>
+</ul>
+<h2 id="给字段设置别名"><a href="#给字段设置别名" class="headerlink" title="给字段设置别名"></a>给字段设置别名</h2><ul>
+<li>SELECT column_name AS new_name,… FROM table_name<br>注意：AS 可以省略，用空格隔开原来的字段名和新字段名即可  </li>
+</ul>
+<h2 id="运算符和表达式"><a href="#运算符和表达式" class="headerlink" title="运算符和表达式"></a>运算符和表达式</h2><p>表达式 = 操作数 + 运算符<br>Oracle中的操作数可以有变量、常量和字段<br>算术运算符+,-*,/<br>比较运算符&gt;,&gt;=,&lt;,&lt;=,=,&lt;&gt;<br>逻辑运算符and,or,not()  </p>
+<p>逻辑运算符的优先级：按not、and、or的顺序依次递减<br>比较运算符的优先级高于逻辑运算符</p>
+<h2 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h2><ul>
+<li>通配符的使用_,%  </li>
+<li>使用LIKE查询  </li>
+</ul>
+<p>一个_只能代表一个字符<br>%可以代表0到多个任意字符  </p>
+<h2 id="范围查询"><a href="#范围查询" class="headerlink" title="范围查询"></a>范围查询</h2><p>between … and …<br>not between … and …  </p>
+<p>IN()<br>NOT IN()  </p>
+<h2 id="对查询结果排序"><a href="#对查询结果排序" class="headerlink" title="对查询结果排序"></a>对查询结果排序</h2><p>SELECT … FROM … [WHERE …]<br>ORDER BY column1 DESC/ASC,…</p>
+<h2 id="case-when语句的使用"><a href="#case-when语句的使用" class="headerlink" title="case..when语句的使用"></a>case..when语句的使用</h2><p>CASE column_name<br>WHERE value1 THEN result1,…<br>[ELSE result] END  </p>
+<p>select username,case username where ‘aaa’ then ‘计算机部门’<br>when ‘bbb’ then ‘市场部门’ else ‘其他部门’ end as 部门<br>from users;  </p>
+<p>CASE<br>WHERE column_name=value1<br>THEN result1,…[ELSE result] END  </p>
+<p>select username,case when username=’aaa’ then ‘计算机部门’<br>when username=’bbb’ then ‘市场部门’ else ‘其他部门’ end as 部门<br>from users;  </p>
+<h2 id="decode函数的使用"><a href="#decode函数的使用" class="headerlink" title="decode函数的使用"></a>decode函数的使用</h2><p>decode (column_name,value1,result1,…,defaultvalue)  </p>
+<p>select username,decode(username,’aaa’,’计算机部门’,’bbb’,’市场部门’,’其他’) as 部门 from users;  </p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-04-27  12:27:56</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-27  12:27:56</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/数据库/">数据库</a>
+                    
+                    <a href="/categories/数据库/Oracle/">Oracle</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Oracle/">Oracle</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        
+        <a href="/2017/04/07/Frontend/CSS/01_CSS的格式与选择器/" class="next-post fa">01_CSS的格式与选择器</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用户与表空间"><span class="toc-number">1.</span> <span class="toc-text">用户与表空间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户"><span class="toc-number">1.1.</span> <span class="toc-text">用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#登入SQL-Plus"><span class="toc-number">1.1.1.</span> <span class="toc-text">登入SQL Plus</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看登录用户"><span class="toc-number">1.1.2.</span> <span class="toc-text">查看登录用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启用scott用户"><span class="toc-number">1.1.3.</span> <span class="toc-text">启用scott用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表空间"><span class="toc-number">1.2.</span> <span class="toc-text">表空间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表空间概述"><span class="toc-number">1.2.1.</span> <span class="toc-text">表空间概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看用户的表空间"><span class="toc-number">1.2.2.</span> <span class="toc-text">查看用户的表空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建，修改，删除表空间"><span class="toc-number">1.2.3.</span> <span class="toc-text">创建，修改，删除表空间</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表与约束"><span class="toc-number">2.</span> <span class="toc-text">表与约束</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#表"><span class="toc-number">2.1.</span> <span class="toc-text">表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#认识表"><span class="toc-number">2.1.1.</span> <span class="toc-text">认识表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据类型"><span class="toc-number">2.1.2.</span> <span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管理表"><span class="toc-number">2.1.3.</span> <span class="toc-text">管理表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#约束"><span class="toc-number">3.</span> <span class="toc-text">约束</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#约束的作用"><span class="toc-number">3.1.</span> <span class="toc-text">约束的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非空约束"><span class="toc-number">3.2.</span> <span class="toc-text">非空约束</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主键约束"><span class="toc-number">3.3.</span> <span class="toc-text">主键约束</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看约束"><span class="toc-number">3.4.</span> <span class="toc-text">查看约束</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外键约束"><span class="toc-number">3.5.</span> <span class="toc-text">外键约束</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#唯一约束"><span class="toc-number">3.6.</span> <span class="toc-text">唯一约束</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检查约束"><span class="toc-number">3.7.</span> <span class="toc-text">检查约束</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查询"><span class="toc-number">4.</span> <span class="toc-text">查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本查询语句"><span class="toc-number">4.1.</span> <span class="toc-text">基本查询语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在SQL-PLUS中设置格式"><span class="toc-number">4.2.</span> <span class="toc-text">在SQL PLUS中设置格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询表中的所有字段及指定字段"><span class="toc-number">4.3.</span> <span class="toc-text">查询表中的所有字段及指定字段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#给字段设置别名"><span class="toc-number">4.4.</span> <span class="toc-text">给字段设置别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符和表达式"><span class="toc-number">4.5.</span> <span class="toc-text">运算符和表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模糊查询"><span class="toc-number">4.6.</span> <span class="toc-text">模糊查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#范围查询"><span class="toc-number">4.7.</span> <span class="toc-text">范围查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对查询结果排序"><span class="toc-number">4.8.</span> <span class="toc-text">对查询结果排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#case-when语句的使用"><span class="toc-number">4.9.</span> <span class="toc-text">case..when语句的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#decode函数的使用"><span class="toc-number">4.10.</span> <span class="toc-text">decode函数的使用</span></a></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

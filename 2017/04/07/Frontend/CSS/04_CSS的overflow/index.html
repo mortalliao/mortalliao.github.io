@@ -1,0 +1,369 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>04_CSS的overflow | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="04_CSS的overflow">
+                
+                04_CSS的overflow
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>CSS</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            CSS
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/07</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/07/Frontend/CSS/04_CSS的overflow/" data-thread-key="/2017/04/07/Frontend/CSS/04_CSS的overflow/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="04_CSS的overflow"
+              data-leadcloud-url="/2017/04/07/Frontend/CSS/04_CSS的overflow/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="CSS标签的显示和隐藏："><a href="#CSS标签的显示和隐藏：" class="headerlink" title="CSS标签的显示和隐藏："></a>CSS标签的显示和隐藏：</h1><h1 id="overflow"><a href="#overflow" class="headerlink" title="overflow:"></a>overflow:</h1><ul>
+<li>hidden:超出部分隐藏。</li>
+<li>scroll:滚动条（超出的部分会显示在滚动条之内）</li>
+<li>auto:如果内容超出会显示滚动条，如果没有那么会自动隐藏。</li>
+</ul>
+<h1 id="display-none-隐藏元素"><a href="#display-none-隐藏元素" class="headerlink" title="display:none;   隐藏元素"></a>display:none;   隐藏元素</h1><p>完全隐藏原来的div，不占位置<br>display:none;  隐藏<br>display:block;  显示  </p>
+<h1 id="visibility-隐藏元素"><a href="#visibility-隐藏元素" class="headerlink" title="visibility:      隐藏元素"></a>visibility:      隐藏元素</h1><p>visibility也会隐藏原来的div但是div还是会占据着自己的位置不放，屏幕上显示的是空白。</p>
+<ul>
+<li>visible;默认值。元素是可见的。</li>
+<li>hidden;元素是不可见的。</li>
+<li>collapse;当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 “hidden”。</li>
+<li>inherit;规定应该从父元素继承 visibility 属性的值。</li>
+</ul>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/前端开发/">前端开发</a>
+                    
+                    <a href="/categories/前端开发/CSS/">CSS</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/CSS/">CSS</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/07/Frontend/CSS/01_CSS的格式与选择器/" class="pre-post fa fa-caret-left">01_CSS的格式与选择器</a>
+        
+        
+        <a href="/2017/04/07/Frontend/CSS/03_CSS浮动float/" class="next-post fa">03_CSS浮动float</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS标签的显示和隐藏："><span class="toc-number">1.</span> <span class="toc-text">CSS标签的显示和隐藏：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#overflow"><span class="toc-number">2.</span> <span class="toc-text">overflow:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#display-none-隐藏元素"><span class="toc-number">3.</span> <span class="toc-text">display:none;   隐藏元素</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#visibility-隐藏元素"><span class="toc-number">4.</span> <span class="toc-text">visibility:      隐藏元素</span></a></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

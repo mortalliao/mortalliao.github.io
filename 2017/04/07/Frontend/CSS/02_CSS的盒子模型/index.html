@@ -1,0 +1,424 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>02_CSS的盒子模型 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="02_CSS的盒子模型">
+                
+                02_CSS的盒子模型
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>CSS</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            CSS
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/07</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/04/07/Frontend/CSS/02_CSS的盒子模型/" data-thread-key="/2017/04/07/Frontend/CSS/02_CSS的盒子模型/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="02_CSS的盒子模型"
+              data-leadcloud-url="/2017/04/07/Frontend/CSS/02_CSS的盒子模型/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="盒子模型的概念"><a href="#盒子模型的概念" class="headerlink" title="盒子模型的概念"></a>盒子模型的概念</h1><p>所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。<br>每个矩形都由元素的内容、内边距（padding）、边框（border）和外边距（margin）组成。  </p>
+<ul>
+<li><p>网页就是多个盒子嵌套排列的结果。  </p>
+</li>
+<li><p>内边距出现在内容区域的周围，当给元素添加背景色或背景图像时，该元素的背景色或背景图像也将出现在内边距中。</p>
+</li>
+<li>外边距是该元素与相邻元素之间的距离。</li>
+<li>如果给元素定义边框属性，边框将出现在内边距和外边距之间。  </li>
+</ul>
+<blockquote>
+<p>注意：虽然盒子模型拥有内边距、边框、外边距、宽和高这些基本属性，但是并不要求每个元素都必须定义这些属性。</p>
+</blockquote>
+<h1 id="外边距"><a href="#外边距" class="headerlink" title="外边距"></a>外边距</h1><p>margin-top:上外边距<br>margin-right:右外边距<br>margin-bottom:下外边距<br>margin-left:上外边距<br>margin:上外边距 [右外边距  下外边距  左外边距]</p>
+<p><strong>对块元素应用宽度属性width，并将左右的外边距都设置为auto，可使块级元素水平居中，实际工作中常用这种方式进行网页布局</strong><br>示例代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.header&#123; width:960px; margin:0 auto;&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：使用margin定义块元素的垂直外边距时，可能会出现外边距的合并。  </p>
+</blockquote>
+<h2 id="外边距的合并"><a href="#外边距的合并" class="headerlink" title="外边距的合并"></a>外边距的合并</h2><h3 id="相邻块元素垂直外边距的合并"><a href="#相邻块元素垂直外边距的合并" class="headerlink" title="相邻块元素垂直外边距的合并:"></a>相邻块元素垂直外边距的合并:</h3><p><img src="http://oo22worto.bkt.clouddn.com/%E7%9B%B8%E9%82%BB%E5%9D%97%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E5%90%88%E5%B9%B6.png" alt="相邻块元素垂直外边距的合并"><br>当上下相邻的两个块元素相遇时，如果上面的元素有下外边距margin-bottom，下面的元素有上外边距margin-top，则他们之间的垂直间距不是margin-bottom与margin-top之和，而是两者中的较大者。这种现象被称为相邻块元素垂直外边距的合并（也称外边距塌陷）。</p>
+<h3 id="嵌套块元素垂直外边距的合并"><a href="#嵌套块元素垂直外边距的合并" class="headerlink" title="嵌套块元素垂直外边距的合并:"></a>嵌套块元素垂直外边距的合并:</h3><p><img src="http://oo22worto.bkt.clouddn.com/%E5%B5%8C%E5%A5%97%E5%9D%97%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E5%90%88%E5%B9%B6.png" alt="嵌套块元素垂直外边距的合并">  </p>
+<ul>
+<li>对于两个嵌套关系的块元素，如果父元素没有上内边距及边框，则父元素的上外边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会发生合并。</li>
+<li>如果希望外边距不合并，可以为父元素定义1像素的上边框或上内边距。这里以定义父元素的上边框为例，在父<div>的CSS样式中增加如下代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-top:1px solid #FCC;/*定义父div的上边框*/</div></pre></td></tr></table></figure>
+</div></li>
+</ul>
+<h1 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h1><h2 id="边框样式（border-style）"><a href="#边框样式（border-style）" class="headerlink" title="边框样式（border-style）"></a>边框样式（border-style）</h2><p>样式：<br>border-top/right/bottom/left-style:;<br>border-style:top right bottom left;  </p>
+<p>边框样式用于定义页面中边框的风格，常用属性值如下：  </p>
+<ul>
+<li>none：没有边框即忽略所有边框的宽度（默认值）</li>
+<li>solid：边框为单实线</li>
+<li>dashed：边框为虚线</li>
+<li>dotted：边框为点线</li>
+<li>double：边框为双实线</li>
+</ul>
+<h2 id="边框宽度（border-width）"><a href="#边框宽度（border-width）" class="headerlink" title="边框宽度（border-width）"></a>边框宽度（border-width）</h2><p>宽度<br>border-top/right/bottom/left-width:;<br>border-width:top right bottom left;  </p>
+<h2 id="边框颜色（border-color）"><a href="#边框颜色（border-color）" class="headerlink" title="边框颜色（border-color）"></a>边框颜色（border-color）</h2><p>颜色<br>border-top/right/bottom/left-color:;<br>border-color:top right bottom left;  </p>
+<blockquote>
+<p>注意：设置边框颜色时同样必须设置边框样式，如果未设置样式或设置为none，则其他的边框属性无效。</p>
+</blockquote>
+<h2 id="综合设置边框-复合属性"><a href="#综合设置边框-复合属性" class="headerlink" title="综合设置边框(复合属性)"></a>综合设置边框(复合属性)</h2><p>border[-top right bottom left]:宽度 样式 颜色;  </p>
+<ul>
+<li>像border、border-top等这样，能够一个属性定义元素的多种样式，在CSS中称之为复合属性。</li>
+<li>常用的复合属性有font、border、margin、padding和background等。</li>
+<li>复合属性可以简化代码，提高页面的运行速度，但是如果只有一项值，最好不要应用复合属性，以免样式不被兼容。</li>
+</ul>
+<h2 id="圆角"><a href="#圆角" class="headerlink" title="圆角"></a>圆角</h2><p>border-radius<br>border-top-left-radius: //左上角<br>border-top-right-radius: //右上角<br>border-bottom-right-radius: //右下角<br>border-bottom-left-radius: //左下角<br>分别是水平方向和竖直方向半径，第二值省略的情况下，水平方向和竖直方向的半径相等。<br>border-radius 只有在以下版本的浏览器：Firefox4.0+、Safari5.0+、Google Chrome 10.0+、Opera 10.5+、IE9+ 支持 border-radius 标准语法格式，对于老版的浏览器，border-radius 需要根据不同的浏览器内核添加不同的前缀，比说 Mozilla 内核需要加上“-moz”，而 Webkit 内核需要加上“-webkit”等，但是IE和Opera没有私有格式，因此为了最大程度的兼容浏览器，我们需要设置如下：<br>-webkit-border-radius: 10px 20px 30px;<br>-moz-border-radius: 10px 20px 30px;<br>border-radius: 10px 20px 30px;<br><a href="http://blog.csdn.net/liuyan19891230/article/details/50724630" target="_blank" rel="external">CSS3的border-radius属性详解</a></p>
+<h2 id="多学几招"><a href="#多学几招" class="headerlink" title="多学几招"></a>多学几招</h2><ol>
+<li>表单的边框通常改为 0；<br><code>border:0 none;</code></li>
+<li>表格的细线边框<br><code>table { border-collapse:collapse; }</code></li>
+<li>轮廓 （链接有虚线 和  文本框  有 蓝色边框）<br><code>outline-style:none;</code></li>
+</ol>
+<p>在制作网页的过程中，如果涉及到了页面的宽高的问题，最好用width和height去解决，才用padding,最后才考虑margin.<br>因为margin在布局中会存在兼容性的问题</p>
+<h1 id="内边距属性"><a href="#内边距属性" class="headerlink" title="内边距属性"></a>内边距属性</h1><p>padding-top:上内边距<br>padding-right:右内边距<br>padding-bottom:下内边距<br>padding-left:左内边距<br>padding:上内边距[右内边距 下内边距  左内边距]  </p>
+<p>为了更方便地控制网页中的元素，制作网页时，可使用如下代码清除元素的默认内外边距：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*&#123;</div><div class="line">	padding:0;         /*清除内边距*/</div><div class="line">	margin:0;          /*清除外边距*/</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：行内元素尽量不要给上下的margin 和padding</p>
+</blockquote>
+<h1 id="盒子的宽与高"><a href="#盒子的宽与高" class="headerlink" title="盒子的宽与高"></a>盒子的宽与高</h1><ul>
+<li>使用宽度属性width和高度属性height可以对盒子的大小进行控制。</li>
+<li>width和height的属性值可以为不同单位的数值或相对于父元素的百分比%，实际工作中最常用的是像素值。</li>
+<li>大多数浏览器，如Firefox、IE6及以上版本都采用了W3C规范，符合CSS规范的盒子模型的总宽度和总高度的计算原则是：<br>盒子的总宽度= width+左右内边距之和+左右边框宽度之和+左右外边距之和<br>盒子的总高度= height+上下内边距之和+上下边框宽度之和+上下外边距之和</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>宽度属性width和高度属性height仅适用于块级元素，对行内元素无效<code>&lt;img /&gt;标记和&lt;input /&gt;除外</code></li>
+<li>计算盒子模型的总高度时，还应考虑上下两个盒子垂直外边距合并的情况</li>
+</ol>
+</blockquote>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-04-07  09:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/前端开发/">前端开发</a>
+                    
+                    <a href="/categories/前端开发/CSS/">CSS</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/CSS/">CSS</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/04/07/Frontend/CSS/05_CSS定位position/" class="pre-post fa fa-caret-left">05_CSS定位position</a>
+        
+        
+        <a href="/2017/04/07/Frontend/CSS/06_CSS字体和文本样式/" class="next-post fa">06_CSS字体和文本样式</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#盒子模型的概念"><span class="toc-number">1.</span> <span class="toc-text">盒子模型的概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#外边距"><span class="toc-number">2.</span> <span class="toc-text">外边距</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#外边距的合并"><span class="toc-number">2.1.</span> <span class="toc-text">外边距的合并</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相邻块元素垂直外边距的合并"><span class="toc-number">2.1.1.</span> <span class="toc-text">相邻块元素垂直外边距的合并:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#嵌套块元素垂直外边距的合并"><span class="toc-number">2.1.2.</span> <span class="toc-text">嵌套块元素垂直外边距的合并:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#边框"><span class="toc-number">3.</span> <span class="toc-text">边框</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#边框样式（border-style）"><span class="toc-number">3.1.</span> <span class="toc-text">边框样式（border-style）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#边框宽度（border-width）"><span class="toc-number">3.2.</span> <span class="toc-text">边框宽度（border-width）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#边框颜色（border-color）"><span class="toc-number">3.3.</span> <span class="toc-text">边框颜色（border-color）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#综合设置边框-复合属性"><span class="toc-number">3.4.</span> <span class="toc-text">综合设置边框(复合属性)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#圆角"><span class="toc-number">3.5.</span> <span class="toc-text">圆角</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多学几招"><span class="toc-number">3.6.</span> <span class="toc-text">多学几招</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内边距属性"><span class="toc-number">4.</span> <span class="toc-text">内边距属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#盒子的宽与高"><span class="toc-number">5.</span> <span class="toc-text">盒子的宽与高</span></a></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>
