@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>03_logback配置详解filter | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/CSS/" style="font-size: 0.18rem; color: #295e97">CSS</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #477bb1">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="03_logback配置详解filter">
+                
+                03_logback配置详解filter
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>logback</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            logback
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/05/14</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解filter/" data-thread-key="/2017/05/14/Backend/Java/Log/logback配置详解filter/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="03_logback配置详解filter"
+              data-leadcloud-url="/2017/05/14/Backend/Java/Log/logback配置详解filter/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="logback配置详解filter"><a href="#logback配置详解filter" class="headerlink" title="logback配置详解filter"></a>logback配置详解filter</h1><h2 id="lt-filter-gt"><a href="#lt-filter-gt" class="headerlink" title="&lt;filter&gt;"></a><code>&lt;filter&gt;</code></h2><p>过滤器，执行一个过滤器会有返回个枚举值，即DENY，NEUTRAL，ACCEPT其中之一。<br>返回DENY，日志将立即被抛弃不再经过其他过滤器；<br>返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；<br>返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。  </p>
+<p>过滤器被添加到 <code>&lt;appender&gt;</code> 中，为 <code>&lt;appender&gt;</code> 添加一个或多个过滤器后，可以用任意条件对日志进行过滤。<br><code>&lt;Appender&gt;</code> 有多个过滤器时，按照配置顺序执行。  </p>
+<p>下面是几个常用的过滤器：</p>
+<h3 id="LevelFilter-级别过滤器，根据日志级别进行过滤"><a href="#LevelFilter-级别过滤器，根据日志级别进行过滤" class="headerlink" title="LevelFilter 级别过滤器，根据日志级别进行过滤"></a>LevelFilter 级别过滤器，根据日志级别进行过滤</h3><p>如果日志级别等于配置级别，过滤器会根据 onMath 和 onMismatch 接收或拒绝日志。有以下子节点：  </p>
+<p><level>:设置过滤级别  </level></p>
+<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
+<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
+<p>例如：将过滤器的日志级别配置为INFO，所有INFO级别的日志交给appender处理，非INFO级别的日志，被过滤掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;encoder&gt;</div><div class="line">      &lt;pattern&gt;</div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;</div><div class="line">    &lt;/encoder&gt;</div><div class="line">  &lt;/appender&gt;</div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志"><a href="#ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志" class="headerlink" title="ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志"></a>ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志</h3><p>当日志级别等于或高于临界值时，过滤器返回NEUTRAL；<br>当日志级别低于临界值时，日志会被拒绝。  </p>
+<p>例如：过滤掉所有低于INFO级别的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot;   </div><div class="line">    class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;!-- 过滤掉 TRACE 和 DEBUG 级别的日志--&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;   </div><div class="line">    &lt;/filter&gt;   </div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件"><a href="#EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件" class="headerlink" title="EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件"></a>EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件</h3><p>有以下子节点：<br><code>&lt;evaluator&gt;</code><br>鉴别器，常用的鉴别器是JaninoEventEvaluato，也是默认的鉴别器，它以任意的Java布尔值表达式作为求值条件，求值条件在配置文件解释过成功被动态编译，布尔值表达式返回true就表示符合过滤条件。<br>evaluator有个子标签<code>&lt;expression&gt;</code>，用于配置求值条件。  </p>
+<p>求值表达式作用于当前日志，logback向求值表达式暴露日志的各种字段：  </p>
+<table class="bodyTable" border="0" style="padding-left:60px"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Name</th><br><th style="text-align:left; font-weight:bold">Type</th><br><th style="text-align:left; font-weight:bold">Description</th><br></tr><br><tr><br><td style="font-size:1em">event</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggingEvent</code></td><br><td style="font-size:1em">与记录请求相关联的原始记录事件，下面所有变量都来自event，例如，event.getMessage()返回下面&quot;message&quot;相同的字符串</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">message</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志的原始消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello {}&quot;就是原始消息。</td><br></tr><br><tr><br><td style="font-size:1em">formatedMessage</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志被各式话的消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello Aub&quot;就是&#26684;式化后的消息。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">logger</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">logger 名。</td><br></tr><br><tr><br><td style="font-size:1em">loggerContext</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggerContextVO</code></td><br><td style="font-size:1em">日志所属的logger上下文。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">level</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">int</code></td><br><td style="font-size:1em">级别对应的整数&#20540;，所以<span>&nbsp;</span><em style="font-style:italic">level &gt; INFO<span>&nbsp;</span></em>是正确的表达式。</td><br></tr><br><tr><br><td style="font-size:1em">timeStamp</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">long</code></td><br><td style="font-size:1em">创建日志的时间戳。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">marker</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Marker</code></td><br><td style="font-size:1em">与日志请求相关联的Marker对象，注意“Marker”有可能为null，所以你要确保它不能是null。</td><br></tr><br><tr><br><td style="font-size:1em">mdc</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Map</code></td><br><td style="font-size:1em">包含创建日志期间的MDC所有&#20540;得map。访问方法是：<em style="font-style:italic">mdc.get(&quot;myKey&quot;)</em><span>&nbsp;</span>。mdc.get()返回的是Object不是String，要想调用String的方法就要强转，例如，<br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">((String)&nbsp;mdc.get(&quot;k&quot;)).contains(&quot;val&quot;)</code><span>&nbsp;</span>.MDC可能为null，调用时注意。</p><br></td><br></tr><br><tr class="alt"><br><td style="font-size:1em">throwable</td><br><td style="font-size:1em">java.lang.Throwable</td><br><td style="font-size:1em">如果没有异常与日志关联&quot;throwable&quot; 变量为 null. 不幸的是， &quot;throwable&quot; 不能被序列化。在远程系统上永远为null，对于与位置无关的表达式请使用下面的变量<code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">throwableProxy</code></td><br></tr><br><tr><br><td style="font-size:1em">throwableProxy</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">IThrowableProxy</code></td><br><td style="font-size:1em">与日志事件关联的异常代理。如果没有异常与日志事件关联，则变量&quot;throwableProxy&quot; 为 null. 当异常被关联到日志事件时，&quot;throwableProxy&quot; 在远程系统上不会为null</td><br></tr><br></tbody><br></table>
+
+
+<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
+<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
+<p>例如：过滤掉所有日志消息中不包含“billing”字符串的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line"></div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt; &lt;!-- 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator --&gt;</div><div class="line">        &lt;expression&gt;return message.contains(&quot;billing&quot;);&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT &lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line"></div><div class="line">  &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p><code>&lt;matcher&gt;</code><br>匹配器，尽管可以使用String类的matches()方法进行模式匹配，但会导致每次调用过滤器时都会创建一个新的Pattern对象，为了消除这种开销，可以预定义一个或多个matcher对象，定以后就可以在求值表达式中重复引用。<code>&lt;matcher&gt;</code>是<code>&lt;evaluator&gt;</code>的子标签。<br><code>&lt;matcher&gt;</code>中包含两个子标签，<br>一个是<code>&lt;name&gt;</code>，用于定义matcher的名字，求值表达式中使用这个名字来引用matcher；<br>另一个是<code>&lt;regex&gt;</code>，用于配置匹配条件。  </p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;configuration debug=&quot;true&quot;&gt;   </div><div class="line"></div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt;</div><div class="line">        &lt;matcher&gt;</div><div class="line">          &lt;Name&gt;odd&lt;/Name&gt;</div><div class="line">          &lt;!-- filter out odd numbered statements --&gt;</div><div class="line">          &lt;regex&gt;statement [13579]&lt;/regex&gt;</div><div class="line">        &lt;/matcher&gt;</div><div class="line"></div><div class="line">        &lt;expression&gt;odd.matches(formattedMessage)&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line"></div><div class="line">      &lt;OnMismatch&gt;NEUTRAL&lt;/OnMismatch&gt;</div><div class="line">      &lt;OnMatch&gt;DENY&lt;/OnMatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line"></div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">&lt;!-- if debug set to true, context info always print  </div><div class="line"> otherwise the contex info will print when error occour --&gt;  </div><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;stdout&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;    </div><div class="line">     &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;    </div><div class="line">       &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;    </div><div class="line">     &lt;/layout&gt;    </div><div class="line">   &lt;/appender&gt;    </div><div class="line">   </div><div class="line"> &lt;!-- 所有日志文件--&gt;  </div><div class="line"> &lt;appender name=&quot;AllLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/all/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;   </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line">   </div><div class="line"> &lt;appender name=&quot;TaskLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/task/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;appender name=&quot;SendLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/send/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;!-- 为莫个包下的所有类指定Appender 这里也可以指定类名称例如：com.aa.bb.ClassName--&gt;    </div><div class="line"> &lt;logger name=&quot;com.aa.bb&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;TaskLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">   </div><div class="line"> &lt;logger name=&quot;com.aa.cc&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;SendLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">   </div><div class="line"> &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">  &lt;appender-ref ref=&quot;AllLog&quot; /&gt;  </div><div class="line"> &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-05-14  01:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-05-14  01:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/后端开发/">后端开发</a>
+                    
+                    <a href="/categories/后端开发/Java/">Java</a>
+                    
+                    <a href="/categories/后端开发/Java/logback/">logback</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/logback/">logback</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/05/14/Linux/vim/" class="pre-post fa fa-caret-left">01_vim的初级使用</a>
+        
+        
+        <a href="/2017/05/14/Backend/Java/Log/logback配置详解/" class="next-post fa">01_logback配置详解</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#logback配置详解filter"><span class="toc-number">1.</span> <span class="toc-text">logback配置详解filter</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-filter-gt"><span class="toc-number">1.1.</span> <span class="toc-text"><filter></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LevelFilter-级别过滤器，根据日志级别进行过滤"><span class="toc-number">1.1.1.</span> <span class="toc-text">LevelFilter 级别过滤器，根据日志级别进行过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志"><span class="toc-number">1.1.2.</span> <span class="toc-text">ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件"><span class="toc-number">1.1.3.</span> <span class="toc-text">EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件</span></a></li></ol></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

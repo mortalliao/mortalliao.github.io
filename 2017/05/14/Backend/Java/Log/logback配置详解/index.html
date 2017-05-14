@@ -1,0 +1,406 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>01_logback配置详解 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/CSS/" style="font-size: 0.18rem; color: #295e97">CSS</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #477bb1">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="01_logback配置详解">
+                
+                01_logback配置详解
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>logback</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            logback
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/05/14</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解/" data-thread-key="/2017/05/14/Backend/Java/Log/logback配置详解/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="01_logback配置详解"
+              data-leadcloud-url="/2017/05/14/Backend/Java/Log/logback配置详解/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="logback配置详解"><a href="#logback配置详解" class="headerlink" title="logback配置详解"></a>logback配置详解</h1><h2 id="lt-configuration-gt-根节点包含的属性："><a href="#lt-configuration-gt-根节点包含的属性：" class="headerlink" title="&lt;configuration&gt;根节点包含的属性："></a><code>&lt;configuration&gt;</code>根节点包含的属性：</h2><ul>
+<li><p>scan:<br>当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。  </p>
+</li>
+<li><p>scanPeriod:<br>设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。  </p>
+</li>
+<li><p>debug:<br>当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。  </p>
+</li>
+</ul>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="lt-configuration-gt-根节点的子节点："><a href="#lt-configuration-gt-根节点的子节点：" class="headerlink" title="&lt;configuration&gt;根节点的子节点："></a><code>&lt;configuration&gt;</code>根节点的子节点：</h2><p><img src="http://i.imgur.com/xQql2Mj.png" alt="">  </p>
+<h3 id="lt-contextName-gt-设置上下文名称"><a href="#lt-contextName-gt-设置上下文名称" class="headerlink" title="&lt;contextName&gt; 设置上下文名称"></a><code>&lt;contextName&gt;</code> 设置上下文名称</h3><p>每个logger都关联到logger上下文，默认上下文名称为”default”。<br>但可以使用<contextname>设置成其他名字，用于区分不同应用程序的记录。一旦设置，不能修改。  </contextname></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;contextName&gt;myAppName&lt;/contextName&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<h3 id="lt-property-gt-设置变量"><a href="#lt-property-gt-设置变量" class="headerlink" title="&lt;property&gt; 设置变量"></a><code>&lt;property&gt;</code> 设置变量</h3><p>用来定义变量值的标签，<br><code>&lt;property&gt;</code> 有两个属性，name和value；<br>其中name的值是变量的名称，value的值时变量定义的值。<br>通过<code>&lt;property&gt;</code>定义的值会被插入到logger上下文中。定义变量后，可以使${}来使用变量。<br>例如使用<code>&lt;property&gt;</code>定义上下文名称，然后在<code>&lt;contentName&gt;</code>设置logger上下文时使用。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;property name=&quot;APP_Name&quot; value=&quot;myAppName&quot; /&gt;   </div><div class="line">      &lt;contextName&gt;$&#123;APP_Name&#125;&lt;/contextName&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<h3 id="lt-timestamp-gt-获取时间戳字符串"><a href="#lt-timestamp-gt-获取时间戳字符串" class="headerlink" title="&lt;timestamp&gt; 获取时间戳字符串"></a><code>&lt;timestamp&gt;</code> 获取时间戳字符串</h3><p>两个属性：  </p>
+<ul>
+<li>key标识此<code>&lt;timestamp&gt;</code> 的名字；  </li>
+<li>datePattern：设置将当前时间（解析配置文件的时间）转换为字符串的模式，遵循Java.txt.SimpleDateFormat的格式。  </li>
+</ul>
+<p>例如将解析配置文件的时间作为上下文名称：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;timestamp key=&quot;bySecond&quot; datePattern=&quot;yyyyMMdd&apos;T&apos;HHmmss&quot;/&gt;   </div><div class="line">      &lt;contextName&gt;$&#123;bySecond&#125;&lt;/contextName&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="设置loger："><a href="#设置loger：" class="headerlink" title="设置loger："></a>设置loger：</h3><h4 id="lt-loger-gt"><a href="#lt-loger-gt" class="headerlink" title="&lt;loger&gt;"></a><code>&lt;loger&gt;</code></h4><p>用来设置某一个包或者具体的某一个类的日志打印级别、以及指定<code>&lt;appender&gt;</code>。<br><code>&lt;loger&gt;</code>仅有一个name属性，一个可选的level和一个可选的addtivity属性。  </p>
+<ul>
+<li>name:<br>用来指定受此loger约束的某一个包或者具体的某一个类。</li>
+<li>level:<br>用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，还有一个特殊值INHERITED或者同义词NULL，代表强制执行上级的级别。<br>如果未设置此属性，那么当前loger将会继承上级的级别。  </li>
+<li>addtivity:<br>是否向上级loger传递打印信息。默认是true。<br><code>&lt;loger&gt;</code>可以包含零个或多个<code>&lt;appender-ref&gt;</code>元素，标识这个appender将会添加到这个loger。  </li>
+</ul>
+<h3 id="lt-root-gt"><a href="#lt-root-gt" class="headerlink" title="&lt;root&gt;"></a><code>&lt;root&gt;</code></h3><p>也是<code>&lt;loger&gt;</code>元素，但是它是根loger。只有一个level属性，应为已经被命名为”root”.</p>
+<ul>
+<li>level:<br>用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，不能设置为INHERITED或者同义词NULL。<br>默认是DEBUG。<br><root>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger。  </appender-ref></root></li>
+</ul>
+<p>例如：<br>LogbackDemo.java类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">package logback;  </div><div class="line">  </div><div class="line">import org.slf4j.Logger;  </div><div class="line">import org.slf4j.LoggerFactory;  </div><div class="line">  </div><div class="line">public class LogbackDemo &#123;  </div><div class="line">    private static Logger log = LoggerFactory.getLogger(LogbackDemo.class);  </div><div class="line">    public static void main(String[] args) &#123;  </div><div class="line">        log.trace(&quot;======trace&quot;);  </div><div class="line">        log.debug(&quot;======debug&quot;);  </div><div class="line">        log.info(&quot;======info&quot;);  </div><div class="line">        log.warn(&quot;======warn&quot;);  </div><div class="line">        log.error(&quot;======error&quot;);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="logback-xml配置文件"><a href="#logback-xml配置文件" class="headerlink" title="logback.xml配置文件"></a>logback.xml配置文件</h1><h2 id="第1种：只配置root"><a href="#第1种：只配置root" class="headerlink" title="第1种：只配置root"></a>第1种：只配置root</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</div><div class="line">        &lt;!-- encoder 默认配置为PatternLayoutEncoder --&gt;</div><div class="line">        &lt;encoder&gt;</div><div class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;</div><div class="line">        &lt;/encoder&gt;</div><div class="line">    &lt;/appender&gt;</div><div class="line">    &lt;root level=&quot;INFO&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</div><div class="line">    &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<p>其中appender的配置表示打印到控制台；<br><code>&lt;root level=&quot;INFO&quot;&gt;</code>将root的打印级别设置为“INFO”，指定了名字为“STDOUT”的appender。  </p>
+<p>当执行logback.LogbackDemo类的main方法时，root将级别为“INFO”及大于“INFO”的日志信息交给已经配置好的名为“STDOUT”的appender处理，“STDOUT”appender将信息打印到控制台；  </p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">13:30:38.484 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">13:30:38.500 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">13:30:38.500 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
+<h2 id="第2种：带有loger的配置，不指定级别，不指定appender"><a href="#第2种：带有loger的配置，不指定级别，不指定appender" class="headerlink" title="第2种：带有loger的配置，不指定级别，不指定appender"></a>第2种：带有loger的配置，不指定级别，不指定appender</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</div><div class="line">        &lt;!-- encoder 默认配置为PatternLayoutEncoder --&gt;</div><div class="line">        &lt;encoder&gt;</div><div class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;</div><div class="line">        &lt;/encoder&gt;</div><div class="line">    &lt;/appender&gt;</div><div class="line">    &lt;!-- logback为java中的包 --&gt;</div><div class="line">    &lt;logger name=&quot;logback&quot;/&gt;</div><div class="line">    &lt;root level=&quot;DEBUG&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</div><div class="line">    &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<p>其中appender的配置表示打印到控制台；<br><code>&lt;logger name=&quot;logback&quot; /&gt;</code>将控制logback包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级<root>的日志级别“DEBUG”；<br>没有设置addtivity，默认为true，将此loger的打印信息向上级传递；<br>没有设置appender，此loger本身不打印任何信息。<br><code>&lt;root level=&quot;DEBUG&quot;&gt;</code>将root的打印级别设置为“DEBUG”，指定了名字为“STDOUT”的appender。  </root></p>
+<p>当执行logback.LogbackDemo类的main方法时，因为LogbackDemo 在包logback中，所以首先执行<code>&lt;logger name=&quot;logback&quot; /&gt;</code>，将级别为“DEBUG”及大于“DEBUG”的日志信息传递给root，本身并不打印；<br>root接到下级传递的信息，交给已经配置好的名为“STDOUT”的appender处理，“STDOUT”appender将信息打印到控制台；  </p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">13:19:15.406 [main] DEBUG logback.LogbackDemo - ======debug  </div><div class="line">13:19:15.406 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">13:19:15.406 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">13:19:15.406 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
+<h2 id="第3种：带有多个loger的配置，指定级别，指定appender"><a href="#第3种：带有多个loger的配置，指定级别，指定appender" class="headerlink" title="第3种：带有多个loger的配置，指定级别，指定appender"></a>第3种：带有多个loger的配置，指定级别，指定appender</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</div><div class="line">        &lt;!-- encoder 默认配置为PatternLayoutEncoder --&gt;</div><div class="line">        &lt;encoder&gt;</div><div class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;</div><div class="line">        &lt;/encoder&gt;</div><div class="line">    &lt;/appender&gt;</div><div class="line">    &lt;!-- logback为java中的包 --&gt;</div><div class="line">    &lt;logger name=&quot;logback&quot;/&gt;</div><div class="line">    &lt;!--logback.LogbackDemo：类的全路径 --&gt;</div><div class="line">    &lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot;/&gt;</div><div class="line">    &lt;/logger&gt;</div><div class="line">    &lt;root level=&quot;ERROR&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</div><div class="line">    &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<p>其中appender的配置表示打印到控制台；  </p>
+<p><code>&lt;logger name=&quot;logback&quot; /&gt;</code>将控制logback包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级<root>的日志级别“DEBUG”；<br>没有设置addtivity，默认为true，将此loger的打印信息向上级传递；<br>没有设置appender，此loger本身不打印任何信息。  </root></p>
+<p> <code>&lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;</code>控制logback.LogbackDemo类的日志打印，打印级别为“INFO”；<br>additivity属性为false，表示此loger的打印信息不再向上级传递，<br>指定了名字为“STDOUT”的appender。  </p>
+<p><code>&lt;root level=&quot;DEBUG&quot;&gt;</code>将root的打印级别设置为“ERROR”，指定了名字为“STDOUT”的appender。  </p>
+<p>当执行logback.LogbackDemo类的main方法时，先执行<code>&lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;</code>，将级别为“INFO”及大于“INFO”的日志信息交给此loger指定的名为“STDOUT”的appender处理，在控制台中打出日志，不再向次loger的上级 <code>&lt;logger name=&quot;logback&quot;/&gt;</code> 传递打印信息；<br><code>&lt;logger name=&quot;logback&quot;/&gt;</code>未接到任何打印信息，当然也不会给它的上级root传递任何打印信息；  </p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">14:05:35.937 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">14:05:35.937 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">14:05:35.937 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
+<p>如果将<code>&lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;修改为 &lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;true&quot;&gt;</code>那打印结果将是什么呢？<br>没错，日志打印了两次，想必大家都知道原因了，因为打印信息向上级传递，logger本身打印一次，root接到后又打印一次</p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">14:09:01.531 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">14:09:01.531 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">14:09:01.531 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">14:09:01.531 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">14:09:01.531 [main] ERROR logback.LogbackDemo - ======error  </div><div class="line">14:09:01.531 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-05-14  01:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-05-14  01:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/后端开发/">后端开发</a>
+                    
+                    <a href="/categories/后端开发/Java/">Java</a>
+                    
+                    <a href="/categories/后端开发/Java/logback/">logback</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/logback/">logback</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/05/14/Backend/Java/Log/logback配置详解filter/" class="pre-post fa fa-caret-left">03_logback配置详解filter</a>
+        
+        
+        <a href="/2017/04/27/Database/Oracle/01_Oracle用户&表空间&约束&查询/" class="next-post fa">01_Oracle用户&amp;表空间&amp;约束&amp;查询</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#logback配置详解"><span class="toc-number">1.</span> <span class="toc-text">logback配置详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-configuration-gt-根节点包含的属性："><span class="toc-number">1.1.</span> <span class="toc-text"><configuration>根节点包含的属性：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-configuration-gt-根节点的子节点："><span class="toc-number">1.2.</span> <span class="toc-text"><configuration>根节点的子节点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-contextName-gt-设置上下文名称"><span class="toc-number">1.2.1.</span> <span class="toc-text"><contextName> 设置上下文名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-property-gt-设置变量"><span class="toc-number">1.2.2.</span> <span class="toc-text"><property> 设置变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-timestamp-gt-获取时间戳字符串"><span class="toc-number">1.2.3.</span> <span class="toc-text"><timestamp> 获取时间戳字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置loger："><span class="toc-number">1.2.4.</span> <span class="toc-text">设置loger：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lt-loger-gt"><span class="toc-number">1.2.4.1.</span> <span class="toc-text"><loger></span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-root-gt"><span class="toc-number">1.2.5.</span> <span class="toc-text"><root></span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#logback-xml配置文件"><span class="toc-number">2.</span> <span class="toc-text">logback.xml配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第1种：只配置root"><span class="toc-number">2.1.</span> <span class="toc-text">第1种：只配置root</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第2种：带有loger的配置，不指定级别，不指定appender"><span class="toc-number">2.2.</span> <span class="toc-text">第2种：带有loger的配置，不指定级别，不指定appender</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第3种：带有多个loger的配置，指定级别，指定appender"><span class="toc-number">2.3.</span> <span class="toc-text">第3种：带有多个loger的配置，指定级别，指定appender</span></a></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

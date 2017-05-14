@@ -1,0 +1,382 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>01_logback配置详解appender | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/CSS/" style="font-size: 0.18rem; color: #295e97">CSS</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #477bb1">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="01_logback配置详解appender">
+                
+                01_logback配置详解appender
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>logback</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            logback
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/05/14</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解appender/" data-thread-key="/2017/05/14/Backend/Java/Log/logback配置详解appender/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="01_logback配置详解appender"
+              data-leadcloud-url="/2017/05/14/Backend/Java/Log/logback配置详解appender/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="logback配置详解appender"><a href="#logback配置详解appender" class="headerlink" title="logback配置详解appender"></a>logback配置详解appender</h1><p><img src="http://i.imgur.com/QIUk9fj.png" alt="">  </p>
+<p><code>&lt;appender&gt;</code><br><code>&lt;appender&gt;</code>是<code>&lt;configuration&gt;</code>的子节点，是负责写日志的组件。<br><code>&lt;appender&gt;</code>有两个必要属性name和class。name指定appender名称，class指定appender的全限定名。  </p>
+<h2 id="ConsoleAppender"><a href="#ConsoleAppender" class="headerlink" title="ConsoleAppender"></a>ConsoleAppender</h2><p>把日志添加到控制台，有以下子节点：<br><code>&lt;encoder&gt;</code> 对日志进行格式化。（具体参数稍后讲解 ）<br><code>&lt;target&gt;</code> 字符串 System.out 或者 System.err ，默认 System.out ；  </p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;  </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;  </div><div class="line">    &lt;encoder&gt;  </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg %n&lt;/pattern&gt;  </div><div class="line">    &lt;/encoder&gt;  </div><div class="line">  &lt;/appender&gt;  </div><div class="line">  </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;  </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;  </div><div class="line">  &lt;/root&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="FileAppender"><a href="#FileAppender" class="headerlink" title="FileAppender"></a>FileAppender</h2><p>把日志添加到文件，有以下子节点：<br><code>&lt;file&gt;</code> 被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。<br><code>&lt;append&gt;</code> 如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。<br><code>&lt;encoder&gt;</code> 对记录事件进行格式化。<br><code>&lt;prudent&gt;</code> 如果是 true，日志会被安全的写入文件，即使其他的FileAppender也在向此文件做写入操作，效率低，默认是 false。  </p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;  </div><div class="line"></div><div class="line">  &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.FileAppender&quot;&gt;  </div><div class="line">    &lt;file&gt;testFile.log&lt;/file&gt;  </div><div class="line">    &lt;append&gt;true&lt;/append&gt;  </div><div class="line">    &lt;encoder&gt;  </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;  </div><div class="line">    &lt;/encoder&gt;  </div><div class="line">  &lt;/appender&gt;  </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;  </div><div class="line">    &lt;appender-ref ref=&quot;FILE&quot; /&gt;  </div><div class="line">  &lt;/root&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="RollingFileAppender"><a href="#RollingFileAppender" class="headerlink" title="RollingFileAppender"></a>RollingFileAppender</h2><p>滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。有以下子节点：<br><code>&lt;file&gt;</code>：被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。<br><code>&lt;append&gt;</code>：如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。<br><code>&lt;encoder&gt;</code>：对记录事件进行格式化。<br><code>&lt;rollingPolicy&gt;</code>:当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名。<br><code>&lt;triggeringPolicy &gt;</code>: 告知 RollingFileAppender 何时激活滚动。<br><code>&lt;prudent&gt;</code>：当为true时，不支持FixedWindowRollingPolicy。支持TimeBasedRollingPolicy，但是有两个限制，1不支持也不允许文件压缩，2不能设置file属性，必须留空。  </p>
+<h3 id="lt-rollingPolicy-gt-滚动策略"><a href="#lt-rollingPolicy-gt-滚动策略" class="headerlink" title="&lt;rollingPolicy&gt; 滚动策略"></a><code>&lt;rollingPolicy&gt;</code> 滚动策略</h3><ol>
+<li><p>TimeBasedRollingPolicy<br>最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动。有以下子节点：<br><code>&lt;fileNamePattern&gt;</code><br>必要节点，包含文件名及 %d 转换符， “%d”可以包含一个Java.text.SimpleDateFormat指定的时间格式，如：%d{yyyy-MM}。如果直接使用 %d，默认格式是 yyyy-MM-dd。<br>RollingFileAppender 的file子节点可有可无，通过设置file，可以为活动文件和归档文件指定不同位置，当前日志总是记录到file指定的文件（活动文件），活动文件的名字不会改变；如果没设置file，活动文件的名字会根据fileNamePattern 的值，每隔一段时间改变一次。“/”或者“\”会被当做目录分隔符。<br><code>&lt;maxHistory&gt;</code><br>可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。假设设置每个月滚动，且<maxhistory>是6，则只保存最近6个月的文件，删除之前的旧文件。注意，删除旧文件是，那些为了归档而创建的目录也会被删除。</maxhistory></p>
+</li>
+<li><p>FixedWindowRollingPolicy<br>根据固定窗口算法重命名文件的滚动策略。有以下子节点：<br><code>&lt;minIndex&gt;</code> 窗口索引最小值<br><code>&lt;maxIndex&gt;</code> 窗口索引最大值，当用户指定的窗口过大时，会自动将窗口设置为12。<br><code>&lt;fileNamePattern &gt;</code> 必须包含“%i”例如，假设最小值和最大值分别为1和2，命名模式为 mylog%i.log,会产生归档文件mylog1.log和mylog2.log。还可以指定文件压缩选项，例如，mylog%i.log.gz 或者 没有log%i.log.zip  </p>
+</li>
+</ol>
+<h3 id="lt-triggeringPolicy-gt"><a href="#lt-triggeringPolicy-gt" class="headerlink" title="&lt;triggeringPolicy&gt;"></a><code>&lt;triggeringPolicy&gt;</code></h3><p>SizeBasedTriggeringPolicy： 查看当前活动文件的大小，如果超过指定大小会告知RollingFileAppender 触发当前活动文件滚动。只有一个节点:<br><code>&lt;maxFileSize&gt;</code>:这是活动文件的大小，默认值是10MB。</p>
+<p>例如：<br>每天生成一个日志文件，保存30天的日志文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line"></div><div class="line">    &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;   </div><div class="line">      &lt;fileNamePattern&gt;logFile.%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">      &lt;maxHistory&gt;30&lt;/maxHistory&gt;    </div><div class="line">    &lt;/rollingPolicy&gt;   </div><div class="line"></div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;    </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;FILE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p>例如：<br>按照固定窗口模式生成日志文件，当文件大于20MB时，生成新的日志文件。窗口大小是1到3，当保存了3个归档文件后，将覆盖最早的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line">    &lt;file&gt;test.log&lt;/file&gt;   </div><div class="line"></div><div class="line">    &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;&gt;   </div><div class="line">      &lt;fileNamePattern&gt;tests.%i.log.zip&lt;/fileNamePattern&gt;   </div><div class="line">      &lt;minIndex&gt;1&lt;/minIndex&gt;   </div><div class="line">      &lt;maxIndex&gt;3&lt;/maxIndex&gt;   </div><div class="line">    &lt;/rollingPolicy&gt;   </div><div class="line"></div><div class="line">    &lt;triggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;&gt;   </div><div class="line">      &lt;maxFileSize&gt;5MB&lt;/maxFileSize&gt;   </div><div class="line">    &lt;/triggeringPolicy&gt;   </div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;FILE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p>另外还有SocketAppender、SMTPAppender、DBAppender、SyslogAppender、SiftingAppender，并不常用，这些就不在这里讲解了，大家可以参考官方文档。当然大家可以编写自己的Appender。  </p>
+<h2 id="lt-encoder-gt"><a href="#lt-encoder-gt" class="headerlink" title="&lt;encoder&gt;"></a><code>&lt;encoder&gt;</code></h2><p>负责两件事，一是把日志信息转换成字节数组，二是把字节数组写入到输出流。<br>目前PatternLayoutEncoder 是唯一有用的且默认的encoder ，有一个<code>&lt;pattern&gt;</code>节点，用来设置日志的输入格式。使用“%”加“转换符”方式，如果要输出“%”，则必须用“\”对“%”进行转义。  </p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">&lt;/encoder</div></pre></td></tr></table></figure></p>
+<p><code>&lt;pattern&gt;</code>里面的转换符说明：</p>
+<table class="bodyTable properties" border="1" style="border-bottom:rgb(0,0,0) 1px solid; border-left:rgb(0,0,0) 1px solid; padding-left:60px; border-top:rgb(0,0,0) 1px solid; border-right:rgb(0,0,0) 1px solid"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">转换符</th><br><th style="text-align:left; font-weight:bold">作用</th><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">c</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">lo</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">logger</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span></td><br><td style="font-size:1em">输出日志的logger名，可有一个整形参数，功能是缩短logger名，设置为0表示只输入logger最右边点符号之后的字符串。<br><table class="bodyTable dark" border="1" cellpadding="8" style="border-bottom:rgb(0,0,0) 1px solid; border-left:rgb(0,0,0) 1px solid; border-top:rgb(0,0,0) 1px solid; border-right:rgb(0,0,0) 1px solid"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Conversion specifier</th><br><th style="text-align:left; font-weight:bold">Logger name</th><br><th style="text-align:left; font-weight:bold">Result</th><br></tr><br><tr><br><td style="font-size:1em">%logger</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{0}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{5}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.s.s.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{10}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.s.s.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{15}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.s.sample.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{16}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.sub.sample.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{26}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br></tr><br></tbody><br></table><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p><br></td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">C</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">class</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span></td><br><td style="font-size:1em">输出执行记录请求的调用者的全限定名。参数与上面的一样。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">contextName</strong><span>&nbsp;</span><br><br><strong style="font-weight:bold">cn</strong><span>&nbsp;</span></td><br><td style="font-size:1em">输出上下文名称。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">d</strong><span>&nbsp;</span>{<em style="font-style:italic">pattern</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">date</strong><span>&nbsp;</span>{<em style="font-style:italic">pattern</em><span>&nbsp;</span>}<span>&nbsp;</span></td><br><td style="font-size:1em">输出日志的打印日志，模式语法与<code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">java.text.SimpleDateFormat</code><span>&nbsp;</span>兼容。<br><table class="bodyTable dark" border="1" cellpadding="8" style="border-bottom:rgb(0,0,0) 1px solid; border-left:rgb(0,0,0) 1px solid; border-top:rgb(0,0,0) 1px solid; border-right:rgb(0,0,0) 1px solid"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Conversion Pattern</th><br><th style="text-align:left; font-weight:bold">Result</th><br></tr><br><tr><br><td style="font-size:1em">%d</td><br><td style="font-size:1em">2006-10-20 14:06:49,812</td><br></tr><br><tr><br><td style="font-size:1em">%date</td><br><td style="font-size:1em">2006-10-20 14:06:49,812</td><br></tr><br><tr><br><td style="font-size:1em">%date{ISO8601}</td><br><td style="font-size:1em">2006-10-20 14:06:49,812</td><br></tr><br><tr><br><td style="font-size:1em">%date{HH:mm:ss.SSS}</td><br><td style="font-size:1em">14:06:49.812</td><br></tr><br><tr><br><td style="font-size:1em">%date{dd&nbsp;MMM&nbsp;yyyy&nbsp;;HH:mm:ss.SSS}</td><br><td style="font-size:1em">20 oct. 2006;14:06:49.812</td><br></tr><br></tbody><br></table><br></td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">F / file</strong></td><br><td style="font-size:1em">输出执行记录请求的java源文件名。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">caller{depth}caller{depth, evaluator-1, … evaluator-n}</strong></td><br><td style="font-size:1em">输出生成日志的调用者的位置信息，整数选项表示输出信息深度。<br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>例如，<span>&nbsp;</span><strong style="font-weight:bold">%caller{2}</strong><span>&nbsp;</span>&nbsp; 输出为：</p><br><pre class="source white_bg" style="font-family:monospace; font-size:1em">0    [main] DEBUG - logging statement<br>Caller&#43;0   at mainPackage.sub.sample.Bar.sampleMethodName(Bar.java:22)<br>Caller&#43;1   at mainPackage.sub.sample.Bar.createLoggingRequest(Bar.java:17)</pre><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>例如，<span>&nbsp;</span><strong style="font-weight:bold">%caller{3}</strong><span>&nbsp;</span>&nbsp; 输出为：</p><br><pre class="source white_bg" style="font-family:monospace; font-size:1em">16   [main] DEBUG - logging statement<br>Caller&#43;0   at mainPackage.sub.sample.Bar.sampleMethodName(Bar.java:22)<br>Caller&#43;1   at mainPackage.sub.sample.Bar.createLoggingRequest(Bar.java:17)<br>Caller&#43;2   at mainPackage.ConfigTester.main(ConfigTester.java:38)</pre><br></td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">L / line</strong></td><br><td style="font-size:1em">输出执行日志请求的行号。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">m / msg / message</strong></td><br><td style="font-size:1em"><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>输出应用程序提供的信息。</p><br></td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">M / method</strong></td><br><td style="font-size:1em">输出执行日志请求的方法名。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">n</strong></td><br><td style="font-size:1em">输出平台先关的分行符“\n”或者“\r\n”。</td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">p / le / level</strong></td><br><td style="font-size:1em">输出日志级别。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">r / relative</strong></td><br><td style="font-size:1em">输出从程序启动到创建日志记录的时间，单位是毫秒</td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">t / thread</strong></td><br><td style="font-size:1em">输出产生日志的线程名。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><span><strong style="font-weight:bold">replace(<em style="font-style:italic">p</em><span>&nbsp;</span>){r, t}</strong></span></td><br><td style="font-size:1em"><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><strong style="font-weight:bold">p</strong><span>&nbsp;</span>为日志内容，<strong style="font-weight:bold">r</strong><span>&nbsp;</span>是正则表达式，将<strong style="font-weight:bold">p</strong><span>&nbsp;</span>中符合<strong style="font-weight:bold">r</strong><span>&nbsp;</span>的内容替换为<strong style="font-weight:bold">t</strong><span>&nbsp;</span>。</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>例如， &quot;%replace(%msg){‘\s’, ‘’}&quot;</p><br></td><br></tr><br></tbody><br></table>
+
+
+
+<p>格式修饰符，与转换符共同使用：<br>可选的格式修饰符位于“%”和转换符之间。<br>第一个可选修饰符是左对齐 标志，符号是减号“-”；接着是可选的最小宽度 修饰符，用十进制数表示。<br>如果字符小于最小宽度，则左填充或右填充，默认是左填充（即右对齐），填充符为空格。<br>如果字符大于最小宽度，字符永远不会被截断。最大宽度 修饰符，符号是点号”.”后面加十进制数。<br>如果字符大于最大宽度，则从前面截断。点符号“.”后面加减号“-”在加数字，表示从尾部截断。  </p>
+<p>例如：%-4relative 表示，将输出从程序启动到创建日志记录的时间 进行左对齐 且最小宽度为4。</p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-05-14  01:46:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-05-14  01:46:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/后端开发/">后端开发</a>
+                    
+                    <a href="/categories/后端开发/Java/">Java</a>
+                    
+                    <a href="/categories/后端开发/Java/logback/">logback</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/logback/">logback</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        
+        <a href="/2017/05/14/Linux/vim/" class="next-post fa">01_vim的初级使用</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#logback配置详解appender"><span class="toc-number">1.</span> <span class="toc-text">logback配置详解appender</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ConsoleAppender"><span class="toc-number">1.1.</span> <span class="toc-text">ConsoleAppender</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FileAppender"><span class="toc-number">1.2.</span> <span class="toc-text">FileAppender</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RollingFileAppender"><span class="toc-number">1.3.</span> <span class="toc-text">RollingFileAppender</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-rollingPolicy-gt-滚动策略"><span class="toc-number">1.3.1.</span> <span class="toc-text"><rollingPolicy> 滚动策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-triggeringPolicy-gt"><span class="toc-number">1.3.2.</span> <span class="toc-text"><triggeringPolicy></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-encoder-gt"><span class="toc-number">1.4.</span> <span class="toc-text"><encoder></span></a></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>
