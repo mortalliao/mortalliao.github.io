@@ -16,38 +16,43 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>03_logback配置详解filter</title>
-    <link href="http://yoursite.com/2017/05/14/Backend/Java/Log/logback%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3filter/"/>
-    <id>http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解filter/</id>
+    <title>02_logback配置详解appender</title>
+    <link href="http://yoursite.com/2017/05/14/Backend/Java/Log/logback%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3appender/"/>
+    <id>http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解appender/</id>
     <published>2017-05-14T05:46:07.000Z</published>
     <updated>2017-05-14T05:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="logback配置详解filter"><a href="#logback配置详解filter" class="headerlink" title="logback配置详解filter"></a>logback配置详解filter</h1><h2 id="lt-filter-gt"><a href="#lt-filter-gt" class="headerlink" title="&lt;filter&gt;"></a><code>&lt;filter&gt;</code></h2><p>过滤器，执行一个过滤器会有返回个枚举值，即DENY，NEUTRAL，ACCEPT其中之一。<br>返回DENY，日志将立即被抛弃不再经过其他过滤器；<br>返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；<br>返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。  </p>
-<p>过滤器被添加到 <code>&lt;appender&gt;</code> 中，为 <code>&lt;appender&gt;</code> 添加一个或多个过滤器后，可以用任意条件对日志进行过滤。<br><code>&lt;Appender&gt;</code> 有多个过滤器时，按照配置顺序执行。  </p>
-<p>下面是几个常用的过滤器：</p>
-<h3 id="LevelFilter-级别过滤器，根据日志级别进行过滤"><a href="#LevelFilter-级别过滤器，根据日志级别进行过滤" class="headerlink" title="LevelFilter 级别过滤器，根据日志级别进行过滤"></a>LevelFilter 级别过滤器，根据日志级别进行过滤</h3><p>如果日志级别等于配置级别，过滤器会根据 onMath 和 onMismatch 接收或拒绝日志。有以下子节点：  </p>
-<p><level>:设置过滤级别  </level></p>
-<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
-<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
-<p>例如：将过滤器的日志级别配置为INFO，所有INFO级别的日志交给appender处理，非INFO级别的日志，被过滤掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;encoder&gt;</div><div class="line">      &lt;pattern&gt;</div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;</div><div class="line">    &lt;/encoder&gt;</div><div class="line">  &lt;/appender&gt;</div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志"><a href="#ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志" class="headerlink" title="ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志"></a>ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志</h3><p>当日志级别等于或高于临界值时，过滤器返回NEUTRAL；<br>当日志级别低于临界值时，日志会被拒绝。  </p>
-<p>例如：过滤掉所有低于INFO级别的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot;   </div><div class="line">    class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;!-- 过滤掉 TRACE 和 DEBUG 级别的日志--&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;   </div><div class="line">    &lt;/filter&gt;   </div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件"><a href="#EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件" class="headerlink" title="EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件"></a>EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件</h3><p>有以下子节点：<br><code>&lt;evaluator&gt;</code><br>鉴别器，常用的鉴别器是JaninoEventEvaluato，也是默认的鉴别器，它以任意的Java布尔值表达式作为求值条件，求值条件在配置文件解释过成功被动态编译，布尔值表达式返回true就表示符合过滤条件。<br>evaluator有个子标签<code>&lt;expression&gt;</code>，用于配置求值条件。  </p>
-<p>求值表达式作用于当前日志，logback向求值表达式暴露日志的各种字段：  </p>
-<table class="bodyTable" border="0" style="padding-left:60px"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Name</th><br><th style="text-align:left; font-weight:bold">Type</th><br><th style="text-align:left; font-weight:bold">Description</th><br></tr><br><tr><br><td style="font-size:1em">event</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggingEvent</code></td><br><td style="font-size:1em">与记录请求相关联的原始记录事件，下面所有变量都来自event，例如，event.getMessage()返回下面&quot;message&quot;相同的字符串</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">message</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志的原始消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello {}&quot;就是原始消息。</td><br></tr><br><tr><br><td style="font-size:1em">formatedMessage</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志被各式话的消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello Aub&quot;就是&#26684;式化后的消息。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">logger</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">logger 名。</td><br></tr><br><tr><br><td style="font-size:1em">loggerContext</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggerContextVO</code></td><br><td style="font-size:1em">日志所属的logger上下文。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">level</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">int</code></td><br><td style="font-size:1em">级别对应的整数&#20540;，所以<span>&nbsp;</span><em style="font-style:italic">level &gt; INFO<span>&nbsp;</span></em>是正确的表达式。</td><br></tr><br><tr><br><td style="font-size:1em">timeStamp</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">long</code></td><br><td style="font-size:1em">创建日志的时间戳。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">marker</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Marker</code></td><br><td style="font-size:1em">与日志请求相关联的Marker对象，注意“Marker”有可能为null，所以你要确保它不能是null。</td><br></tr><br><tr><br><td style="font-size:1em">mdc</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Map</code></td><br><td style="font-size:1em">包含创建日志期间的MDC所有&#20540;得map。访问方法是：<em style="font-style:italic">mdc.get(&quot;myKey&quot;)</em><span>&nbsp;</span>。mdc.get()返回的是Object不是String，要想调用String的方法就要强转，例如，<br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">((String)&nbsp;mdc.get(&quot;k&quot;)).contains(&quot;val&quot;)</code><span>&nbsp;</span>.MDC可能为null，调用时注意。</p><br></td><br></tr><br><tr class="alt"><br><td style="font-size:1em">throwable</td><br><td style="font-size:1em">java.lang.Throwable</td><br><td style="font-size:1em">如果没有异常与日志关联&quot;throwable&quot; 变量为 null. 不幸的是， &quot;throwable&quot; 不能被序列化。在远程系统上永远为null，对于与位置无关的表达式请使用下面的变量<code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">throwableProxy</code></td><br></tr><br><tr><br><td style="font-size:1em">throwableProxy</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">IThrowableProxy</code></td><br><td style="font-size:1em">与日志事件关联的异常代理。如果没有异常与日志事件关联，则变量&quot;throwableProxy&quot; 为 null. 当异常被关联到日志事件时，&quot;throwableProxy&quot; 在远程系统上不会为null</td><br></tr><br></tbody><br></table>
+    <content type="html"><![CDATA[<h1 id="logback配置详解appender"><a href="#logback配置详解appender" class="headerlink" title="logback配置详解appender"></a>logback配置详解appender</h1><p><img src="http://i.imgur.com/QIUk9fj.png" alt="">  </p>
+<p><code>&lt;appender&gt;</code><br><code>&lt;appender&gt;</code>是<code>&lt;configuration&gt;</code>的子节点，是负责写日志的组件。<br><code>&lt;appender&gt;</code>有两个必要属性name和class。name指定appender名称，class指定appender的全限定名。  </p>
+<h2 id="ConsoleAppender"><a href="#ConsoleAppender" class="headerlink" title="ConsoleAppender"></a>ConsoleAppender</h2><p>把日志添加到控制台，有以下子节点：<br><code>&lt;encoder&gt;</code> 对日志进行格式化。（具体参数稍后讲解 ）<br><code>&lt;target&gt;</code> 字符串 System.out 或者 System.err ，默认 System.out ；  </p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;  </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;  </div><div class="line">    &lt;encoder&gt;  </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg %n&lt;/pattern&gt;  </div><div class="line">    &lt;/encoder&gt;  </div><div class="line">  &lt;/appender&gt;  </div><div class="line">  </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;  </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;  </div><div class="line">  &lt;/root&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="FileAppender"><a href="#FileAppender" class="headerlink" title="FileAppender"></a>FileAppender</h2><p>把日志添加到文件，有以下子节点：<br><code>&lt;file&gt;</code> 被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。<br><code>&lt;append&gt;</code> 如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。<br><code>&lt;encoder&gt;</code> 对记录事件进行格式化。<br><code>&lt;prudent&gt;</code> 如果是 true，日志会被安全的写入文件，即使其他的FileAppender也在向此文件做写入操作，效率低，默认是 false。  </p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;  </div><div class="line"></div><div class="line">  &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.FileAppender&quot;&gt;  </div><div class="line">    &lt;file&gt;testFile.log&lt;/file&gt;  </div><div class="line">    &lt;append&gt;true&lt;/append&gt;  </div><div class="line">    &lt;encoder&gt;  </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;  </div><div class="line">    &lt;/encoder&gt;  </div><div class="line">  &lt;/appender&gt;  </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;  </div><div class="line">    &lt;appender-ref ref=&quot;FILE&quot; /&gt;  </div><div class="line">  &lt;/root&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="RollingFileAppender"><a href="#RollingFileAppender" class="headerlink" title="RollingFileAppender"></a>RollingFileAppender</h2><p>滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。有以下子节点：<br><code>&lt;file&gt;</code>：被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。<br><code>&lt;append&gt;</code>：如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。<br><code>&lt;encoder&gt;</code>：对记录事件进行格式化。<br><code>&lt;rollingPolicy&gt;</code>:当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名。<br><code>&lt;triggeringPolicy &gt;</code>: 告知 RollingFileAppender 何时激活滚动。<br><code>&lt;prudent&gt;</code>：当为true时，不支持FixedWindowRollingPolicy。支持TimeBasedRollingPolicy，但是有两个限制，1不支持也不允许文件压缩，2不能设置file属性，必须留空。  </p>
+<h3 id="lt-rollingPolicy-gt-滚动策略"><a href="#lt-rollingPolicy-gt-滚动策略" class="headerlink" title="&lt;rollingPolicy&gt; 滚动策略"></a><code>&lt;rollingPolicy&gt;</code> 滚动策略</h3><ol>
+<li><p>TimeBasedRollingPolicy<br>最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动。有以下子节点：<br><code>&lt;fileNamePattern&gt;</code><br>必要节点，包含文件名及 %d 转换符， “%d”可以包含一个Java.text.SimpleDateFormat指定的时间格式，如：%d{yyyy-MM}。如果直接使用 %d，默认格式是 yyyy-MM-dd。<br>RollingFileAppender 的file子节点可有可无，通过设置file，可以为活动文件和归档文件指定不同位置，当前日志总是记录到file指定的文件（活动文件），活动文件的名字不会改变；如果没设置file，活动文件的名字会根据fileNamePattern 的值，每隔一段时间改变一次。“/”或者“\”会被当做目录分隔符。<br><code>&lt;maxHistory&gt;</code><br>可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。假设设置每个月滚动，且<maxhistory>是6，则只保存最近6个月的文件，删除之前的旧文件。注意，删除旧文件是，那些为了归档而创建的目录也会被删除。</maxhistory></p>
+</li>
+<li><p>FixedWindowRollingPolicy<br>根据固定窗口算法重命名文件的滚动策略。有以下子节点：<br><code>&lt;minIndex&gt;</code> 窗口索引最小值<br><code>&lt;maxIndex&gt;</code> 窗口索引最大值，当用户指定的窗口过大时，会自动将窗口设置为12。<br><code>&lt;fileNamePattern &gt;</code> 必须包含“%i”例如，假设最小值和最大值分别为1和2，命名模式为 mylog%i.log,会产生归档文件mylog1.log和mylog2.log。还可以指定文件压缩选项，例如，mylog%i.log.gz 或者 没有log%i.log.zip  </p>
+</li>
+</ol>
+<h3 id="lt-triggeringPolicy-gt"><a href="#lt-triggeringPolicy-gt" class="headerlink" title="&lt;triggeringPolicy&gt;"></a><code>&lt;triggeringPolicy&gt;</code></h3><p>SizeBasedTriggeringPolicy： 查看当前活动文件的大小，如果超过指定大小会告知RollingFileAppender 触发当前活动文件滚动。只有一个节点:<br><code>&lt;maxFileSize&gt;</code>:这是活动文件的大小，默认值是10MB。</p>
+<p>例如：<br>每天生成一个日志文件，保存30天的日志文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line"></div><div class="line">    &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;   </div><div class="line">      &lt;fileNamePattern&gt;logFile.%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">      &lt;maxHistory&gt;30&lt;/maxHistory&gt;    </div><div class="line">    &lt;/rollingPolicy&gt;   </div><div class="line"></div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;    </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;FILE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p>例如：<br>按照固定窗口模式生成日志文件，当文件大于20MB时，生成新的日志文件。窗口大小是1到3，当保存了3个归档文件后，将覆盖最早的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line">    &lt;file&gt;test.log&lt;/file&gt;   </div><div class="line"></div><div class="line">    &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;&gt;   </div><div class="line">      &lt;fileNamePattern&gt;tests.%i.log.zip&lt;/fileNamePattern&gt;   </div><div class="line">      &lt;minIndex&gt;1&lt;/minIndex&gt;   </div><div class="line">      &lt;maxIndex&gt;3&lt;/maxIndex&gt;   </div><div class="line">    &lt;/rollingPolicy&gt;   </div><div class="line"></div><div class="line">    &lt;triggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;&gt;   </div><div class="line">      &lt;maxFileSize&gt;5MB&lt;/maxFileSize&gt;   </div><div class="line">    &lt;/triggeringPolicy&gt;   </div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;FILE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p>另外还有SocketAppender、SMTPAppender、DBAppender、SyslogAppender、SiftingAppender，并不常用，这些就不在这里讲解了，大家可以参考官方文档。当然大家可以编写自己的Appender。  </p>
+<h2 id="lt-encoder-gt"><a href="#lt-encoder-gt" class="headerlink" title="&lt;encoder&gt;"></a><code>&lt;encoder&gt;</code></h2><p>负责两件事，一是把日志信息转换成字节数组，二是把字节数组写入到输出流。<br>目前PatternLayoutEncoder 是唯一有用的且默认的encoder ，有一个<code>&lt;pattern&gt;</code>节点，用来设置日志的输入格式。使用“%”加“转换符”方式，如果要输出“%”，则必须用“\”对“%”进行转义。  </p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">&lt;/encoder</div></pre></td></tr></table></figure></p>
+<p><code>&lt;pattern&gt;</code>里面的转换符说明：</p>
+<table class="bodyTable properties" border="1" style="border-bottom:rgb(0,0,0) 1px solid; border-left:rgb(0,0,0) 1px solid; padding-left:60px; border-top:rgb(0,0,0) 1px solid; border-right:rgb(0,0,0) 1px solid"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">转换符</th><br><th style="text-align:left; font-weight:bold">作用</th><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">c</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">lo</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">logger</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span></td><br><td style="font-size:1em">输出日志的logger名，可有一个整形参数，功能是缩短logger名，设置为0表示只输入logger最右边点符号之后的字符串。<br><table class="bodyTable dark" border="1" cellpadding="8" style="border-bottom:rgb(0,0,0) 1px solid; border-left:rgb(0,0,0) 1px solid; border-top:rgb(0,0,0) 1px solid; border-right:rgb(0,0,0) 1px solid"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Conversion specifier</th><br><th style="text-align:left; font-weight:bold">Logger name</th><br><th style="text-align:left; font-weight:bold">Result</th><br></tr><br><tr><br><td style="font-size:1em">%logger</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{0}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{5}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.s.s.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{10}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.s.s.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{15}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.s.sample.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{16}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.sub.sample.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{26}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br></tr><br></tbody><br></table><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p><br></td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">C</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">class</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span></td><br><td style="font-size:1em">输出执行记录请求的调用者的全限定名。参数与上面的一样。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">contextName</strong><span>&nbsp;</span><br><br><strong style="font-weight:bold">cn</strong><span>&nbsp;</span></td><br><td style="font-size:1em">输出上下文名称。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">d</strong><span>&nbsp;</span>{<em style="font-style:italic">pattern</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">date</strong><span>&nbsp;</span>{<em style="font-style:italic">pattern</em><span>&nbsp;</span>}<span>&nbsp;</span></td><br><td style="font-size:1em">输出日志的打印日志，模式语法与<code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">java.text.SimpleDateFormat</code><span>&nbsp;</span>兼容。<br><table class="bodyTable dark" border="1" cellpadding="8" style="border-bottom:rgb(0,0,0) 1px solid; border-left:rgb(0,0,0) 1px solid; border-top:rgb(0,0,0) 1px solid; border-right:rgb(0,0,0) 1px solid"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Conversion Pattern</th><br><th style="text-align:left; font-weight:bold">Result</th><br></tr><br><tr><br><td style="font-size:1em">%d</td><br><td style="font-size:1em">2006-10-20 14:06:49,812</td><br></tr><br><tr><br><td style="font-size:1em">%date</td><br><td style="font-size:1em">2006-10-20 14:06:49,812</td><br></tr><br><tr><br><td style="font-size:1em">%date{ISO8601}</td><br><td style="font-size:1em">2006-10-20 14:06:49,812</td><br></tr><br><tr><br><td style="font-size:1em">%date{HH:mm:ss.SSS}</td><br><td style="font-size:1em">14:06:49.812</td><br></tr><br><tr><br><td style="font-size:1em">%date{dd&nbsp;MMM&nbsp;yyyy&nbsp;;HH:mm:ss.SSS}</td><br><td style="font-size:1em">20 oct. 2006;14:06:49.812</td><br></tr><br></tbody><br></table><br></td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">F / file</strong></td><br><td style="font-size:1em">输出执行记录请求的java源文件名。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">caller{depth}caller{depth, evaluator-1, … evaluator-n}</strong></td><br><td style="font-size:1em">输出生成日志的调用者的位置信息，整数选项表示输出信息深度。<br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>例如，<span>&nbsp;</span><strong style="font-weight:bold">%caller{2}</strong><span>&nbsp;</span>&nbsp; 输出为：</p><br><pre class="source white_bg" style="font-family:monospace; font-size:1em">0    [main] DEBUG - logging statement<br>Caller&#43;0   at mainPackage.sub.sample.Bar.sampleMethodName(Bar.java:22)<br>Caller&#43;1   at mainPackage.sub.sample.Bar.createLoggingRequest(Bar.java:17)</pre><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>例如，<span>&nbsp;</span><strong style="font-weight:bold">%caller{3}</strong><span>&nbsp;</span>&nbsp; 输出为：</p><br><pre class="source white_bg" style="font-family:monospace; font-size:1em">16   [main] DEBUG - logging statement<br>Caller&#43;0   at mainPackage.sub.sample.Bar.sampleMethodName(Bar.java:22)<br>Caller&#43;1   at mainPackage.sub.sample.Bar.createLoggingRequest(Bar.java:17)<br>Caller&#43;2   at mainPackage.ConfigTester.main(ConfigTester.java:38)</pre><br></td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">L / line</strong></td><br><td style="font-size:1em">输出执行日志请求的行号。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">m / msg / message</strong></td><br><td style="font-size:1em"><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>输出应用程序提供的信息。</p><br></td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">M / method</strong></td><br><td style="font-size:1em">输出执行日志请求的方法名。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">n</strong></td><br><td style="font-size:1em">输出平台先关的分行符“\n”或者“\r\n”。</td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">p / le / level</strong></td><br><td style="font-size:1em">输出日志级别。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">r / relative</strong></td><br><td style="font-size:1em">输出从程序启动到创建日志记录的时间，单位是毫秒</td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">t / thread</strong></td><br><td style="font-size:1em">输出产生日志的线程名。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><span><strong style="font-weight:bold">replace(<em style="font-style:italic">p</em><span>&nbsp;</span>){r, t}</strong></span></td><br><td style="font-size:1em"><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><strong style="font-weight:bold">p</strong><span>&nbsp;</span>为日志内容，<strong style="font-weight:bold">r</strong><span>&nbsp;</span>是正则表达式，将<strong style="font-weight:bold">p</strong><span>&nbsp;</span>中符合<strong style="font-weight:bold">r</strong><span>&nbsp;</span>的内容替换为<strong style="font-weight:bold">t</strong><span>&nbsp;</span>。</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>例如， &quot;%replace(%msg){‘\s’, ‘’}&quot;</p><br></td><br></tr><br></tbody><br></table>
 
 
-<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
-<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
-<p>例如：过滤掉所有日志消息中不包含“billing”字符串的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line"></div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt; &lt;!-- 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator --&gt;</div><div class="line">        &lt;expression&gt;return message.contains(&quot;billing&quot;);&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT &lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line"></div><div class="line">  &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<p><code>&lt;matcher&gt;</code><br>匹配器，尽管可以使用String类的matches()方法进行模式匹配，但会导致每次调用过滤器时都会创建一个新的Pattern对象，为了消除这种开销，可以预定义一个或多个matcher对象，定以后就可以在求值表达式中重复引用。<code>&lt;matcher&gt;</code>是<code>&lt;evaluator&gt;</code>的子标签。<br><code>&lt;matcher&gt;</code>中包含两个子标签，<br>一个是<code>&lt;name&gt;</code>，用于定义matcher的名字，求值表达式中使用这个名字来引用matcher；<br>另一个是<code>&lt;regex&gt;</code>，用于配置匹配条件。  </p>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;configuration debug=&quot;true&quot;&gt;   </div><div class="line"></div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt;</div><div class="line">        &lt;matcher&gt;</div><div class="line">          &lt;Name&gt;odd&lt;/Name&gt;</div><div class="line">          &lt;!-- filter out odd numbered statements --&gt;</div><div class="line">          &lt;regex&gt;statement [13579]&lt;/regex&gt;</div><div class="line">        &lt;/matcher&gt;</div><div class="line"></div><div class="line">        &lt;expression&gt;odd.matches(formattedMessage)&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line"></div><div class="line">      &lt;OnMismatch&gt;NEUTRAL&lt;/OnMismatch&gt;</div><div class="line">      &lt;OnMatch&gt;DENY&lt;/OnMatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line"></div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">&lt;!-- if debug set to true, context info always print  </div><div class="line"> otherwise the contex info will print when error occour --&gt;  </div><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;stdout&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;    </div><div class="line">     &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;    </div><div class="line">       &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;    </div><div class="line">     &lt;/layout&gt;    </div><div class="line">   &lt;/appender&gt;    </div><div class="line">   </div><div class="line"> &lt;!-- 所有日志文件--&gt;  </div><div class="line"> &lt;appender name=&quot;AllLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/all/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;   </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line">   </div><div class="line"> &lt;appender name=&quot;TaskLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/task/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;appender name=&quot;SendLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/send/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;!-- 为莫个包下的所有类指定Appender 这里也可以指定类名称例如：com.aa.bb.ClassName--&gt;    </div><div class="line"> &lt;logger name=&quot;com.aa.bb&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;TaskLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">   </div><div class="line"> &lt;logger name=&quot;com.aa.cc&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;SendLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">   </div><div class="line"> &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">  &lt;appender-ref ref=&quot;AllLog&quot; /&gt;  </div><div class="line"> &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+
+<p>格式修饰符，与转换符共同使用：<br>可选的格式修饰符位于“%”和转换符之间。<br>第一个可选修饰符是左对齐 标志，符号是减号“-”；接着是可选的最小宽度 修饰符，用十进制数表示。<br>如果字符小于最小宽度，则左填充或右填充，默认是左填充（即右对齐），填充符为空格。<br>如果字符大于最小宽度，字符永远不会被截断。最大宽度 修饰符，符号是点号”.”后面加十进制数。<br>如果字符大于最大宽度，则从前面截断。点符号“.”后面加减号“-”在加数字，表示从尾部截断。  </p>
+<p>例如：%-4relative 表示，将输出从程序启动到创建日志记录的时间 进行左对齐 且最小宽度为4。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;logback配置详解filter&quot;&gt;&lt;a href=&quot;#logback配置详解filter&quot; class=&quot;headerlink&quot; title=&quot;logback配置详解filter&quot;&gt;&lt;/a&gt;logback配置详解filter&lt;/h1&gt;&lt;h2 id=&quot;lt-fi
+      &lt;h1 id=&quot;logback配置详解appender&quot;&gt;&lt;a href=&quot;#logback配置详解appender&quot; class=&quot;headerlink&quot; title=&quot;logback配置详解appender&quot;&gt;&lt;/a&gt;logback配置详解appender&lt;/h1&gt;&lt;p&gt;&lt;i
     
     </summary>
     
@@ -118,43 +123,38 @@
   </entry>
   
   <entry>
-    <title>02_logback配置详解appender</title>
-    <link href="http://yoursite.com/2017/05/14/Backend/Java/Log/logback%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3appender/"/>
-    <id>http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解appender/</id>
+    <title>03_logback配置详解filter</title>
+    <link href="http://yoursite.com/2017/05/14/Backend/Java/Log/logback%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3filter/"/>
+    <id>http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解filter/</id>
     <published>2017-05-14T05:46:07.000Z</published>
     <updated>2017-05-14T05:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="logback配置详解appender"><a href="#logback配置详解appender" class="headerlink" title="logback配置详解appender"></a>logback配置详解appender</h1><p><img src="http://i.imgur.com/QIUk9fj.png" alt="">  </p>
-<p><code>&lt;appender&gt;</code><br><code>&lt;appender&gt;</code>是<code>&lt;configuration&gt;</code>的子节点，是负责写日志的组件。<br><code>&lt;appender&gt;</code>有两个必要属性name和class。name指定appender名称，class指定appender的全限定名。  </p>
-<h2 id="ConsoleAppender"><a href="#ConsoleAppender" class="headerlink" title="ConsoleAppender"></a>ConsoleAppender</h2><p>把日志添加到控制台，有以下子节点：<br><code>&lt;encoder&gt;</code> 对日志进行格式化。（具体参数稍后讲解 ）<br><code>&lt;target&gt;</code> 字符串 System.out 或者 System.err ，默认 System.out ；  </p>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;  </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;  </div><div class="line">    &lt;encoder&gt;  </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg %n&lt;/pattern&gt;  </div><div class="line">    &lt;/encoder&gt;  </div><div class="line">  &lt;/appender&gt;  </div><div class="line">  </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;  </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;  </div><div class="line">  &lt;/root&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="FileAppender"><a href="#FileAppender" class="headerlink" title="FileAppender"></a>FileAppender</h2><p>把日志添加到文件，有以下子节点：<br><code>&lt;file&gt;</code> 被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。<br><code>&lt;append&gt;</code> 如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。<br><code>&lt;encoder&gt;</code> 对记录事件进行格式化。<br><code>&lt;prudent&gt;</code> 如果是 true，日志会被安全的写入文件，即使其他的FileAppender也在向此文件做写入操作，效率低，默认是 false。  </p>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;  </div><div class="line"></div><div class="line">  &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.FileAppender&quot;&gt;  </div><div class="line">    &lt;file&gt;testFile.log&lt;/file&gt;  </div><div class="line">    &lt;append&gt;true&lt;/append&gt;  </div><div class="line">    &lt;encoder&gt;  </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;  </div><div class="line">    &lt;/encoder&gt;  </div><div class="line">  &lt;/appender&gt;  </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;  </div><div class="line">    &lt;appender-ref ref=&quot;FILE&quot; /&gt;  </div><div class="line">  &lt;/root&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="RollingFileAppender"><a href="#RollingFileAppender" class="headerlink" title="RollingFileAppender"></a>RollingFileAppender</h2><p>滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。有以下子节点：<br><code>&lt;file&gt;</code>：被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。<br><code>&lt;append&gt;</code>：如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。<br><code>&lt;encoder&gt;</code>：对记录事件进行格式化。<br><code>&lt;rollingPolicy&gt;</code>:当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名。<br><code>&lt;triggeringPolicy &gt;</code>: 告知 RollingFileAppender 何时激活滚动。<br><code>&lt;prudent&gt;</code>：当为true时，不支持FixedWindowRollingPolicy。支持TimeBasedRollingPolicy，但是有两个限制，1不支持也不允许文件压缩，2不能设置file属性，必须留空。  </p>
-<h3 id="lt-rollingPolicy-gt-滚动策略"><a href="#lt-rollingPolicy-gt-滚动策略" class="headerlink" title="&lt;rollingPolicy&gt; 滚动策略"></a><code>&lt;rollingPolicy&gt;</code> 滚动策略</h3><ol>
-<li><p>TimeBasedRollingPolicy<br>最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动。有以下子节点：<br><code>&lt;fileNamePattern&gt;</code><br>必要节点，包含文件名及 %d 转换符， “%d”可以包含一个Java.text.SimpleDateFormat指定的时间格式，如：%d{yyyy-MM}。如果直接使用 %d，默认格式是 yyyy-MM-dd。<br>RollingFileAppender 的file子节点可有可无，通过设置file，可以为活动文件和归档文件指定不同位置，当前日志总是记录到file指定的文件（活动文件），活动文件的名字不会改变；如果没设置file，活动文件的名字会根据fileNamePattern 的值，每隔一段时间改变一次。“/”或者“\”会被当做目录分隔符。<br><code>&lt;maxHistory&gt;</code><br>可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。假设设置每个月滚动，且<maxhistory>是6，则只保存最近6个月的文件，删除之前的旧文件。注意，删除旧文件是，那些为了归档而创建的目录也会被删除。</maxhistory></p>
-</li>
-<li><p>FixedWindowRollingPolicy<br>根据固定窗口算法重命名文件的滚动策略。有以下子节点：<br><code>&lt;minIndex&gt;</code> 窗口索引最小值<br><code>&lt;maxIndex&gt;</code> 窗口索引最大值，当用户指定的窗口过大时，会自动将窗口设置为12。<br><code>&lt;fileNamePattern &gt;</code> 必须包含“%i”例如，假设最小值和最大值分别为1和2，命名模式为 mylog%i.log,会产生归档文件mylog1.log和mylog2.log。还可以指定文件压缩选项，例如，mylog%i.log.gz 或者 没有log%i.log.zip  </p>
-</li>
-</ol>
-<h3 id="lt-triggeringPolicy-gt"><a href="#lt-triggeringPolicy-gt" class="headerlink" title="&lt;triggeringPolicy&gt;"></a><code>&lt;triggeringPolicy&gt;</code></h3><p>SizeBasedTriggeringPolicy： 查看当前活动文件的大小，如果超过指定大小会告知RollingFileAppender 触发当前活动文件滚动。只有一个节点:<br><code>&lt;maxFileSize&gt;</code>:这是活动文件的大小，默认值是10MB。</p>
-<p>例如：<br>每天生成一个日志文件，保存30天的日志文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line"></div><div class="line">    &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;   </div><div class="line">      &lt;fileNamePattern&gt;logFile.%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">      &lt;maxHistory&gt;30&lt;/maxHistory&gt;    </div><div class="line">    &lt;/rollingPolicy&gt;   </div><div class="line"></div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;    </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;FILE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<p>例如：<br>按照固定窗口模式生成日志文件，当文件大于20MB时，生成新的日志文件。窗口大小是1到3，当保存了3个归档文件后，将覆盖最早的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line">    &lt;file&gt;test.log&lt;/file&gt;   </div><div class="line"></div><div class="line">    &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;&gt;   </div><div class="line">      &lt;fileNamePattern&gt;tests.%i.log.zip&lt;/fileNamePattern&gt;   </div><div class="line">      &lt;minIndex&gt;1&lt;/minIndex&gt;   </div><div class="line">      &lt;maxIndex&gt;3&lt;/maxIndex&gt;   </div><div class="line">    &lt;/rollingPolicy&gt;   </div><div class="line"></div><div class="line">    &lt;triggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;&gt;   </div><div class="line">      &lt;maxFileSize&gt;5MB&lt;/maxFileSize&gt;   </div><div class="line">    &lt;/triggeringPolicy&gt;   </div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;FILE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<p>另外还有SocketAppender、SMTPAppender、DBAppender、SyslogAppender、SiftingAppender，并不常用，这些就不在这里讲解了，大家可以参考官方文档。当然大家可以编写自己的Appender。  </p>
-<h2 id="lt-encoder-gt"><a href="#lt-encoder-gt" class="headerlink" title="&lt;encoder&gt;"></a><code>&lt;encoder&gt;</code></h2><p>负责两件事，一是把日志信息转换成字节数组，二是把字节数组写入到输出流。<br>目前PatternLayoutEncoder 是唯一有用的且默认的encoder ，有一个<code>&lt;pattern&gt;</code>节点，用来设置日志的输入格式。使用“%”加“转换符”方式，如果要输出“%”，则必须用“\”对“%”进行转义。  </p>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%-4relative [%thread] %-5level %logger&#123;35&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">&lt;/encoder</div></pre></td></tr></table></figure></p>
-<p><code>&lt;pattern&gt;</code>里面的转换符说明：</p>
-<table class="bodyTable properties" border="1" style="border-bottom:rgb(0,0,0) 1px solid; border-left:rgb(0,0,0) 1px solid; padding-left:60px; border-top:rgb(0,0,0) 1px solid; border-right:rgb(0,0,0) 1px solid"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">转换符</th><br><th style="text-align:left; font-weight:bold">作用</th><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">c</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">lo</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">logger</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span></td><br><td style="font-size:1em">输出日志的logger名，可有一个整形参数，功能是缩短logger名，设置为0表示只输入logger最右边点符号之后的字符串。<br><table class="bodyTable dark" border="1" cellpadding="8" style="border-bottom:rgb(0,0,0) 1px solid; border-left:rgb(0,0,0) 1px solid; border-top:rgb(0,0,0) 1px solid; border-right:rgb(0,0,0) 1px solid"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Conversion specifier</th><br><th style="text-align:left; font-weight:bold">Logger name</th><br><th style="text-align:left; font-weight:bold">Result</th><br></tr><br><tr><br><td style="font-size:1em">%logger</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{0}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{5}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.s.s.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{10}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.s.s.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{15}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.s.sample.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{16}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">m.sub.sample.Bar</td><br></tr><br><tr><br><td style="font-size:1em">%logger{26}</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br><td style="font-size:1em">mainPackage.sub.sample.Bar</td><br></tr><br></tbody><br></table><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>&nbsp;</p><br></td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">C</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">class</strong><span>&nbsp;</span>{<em style="font-style:italic">length</em><span>&nbsp;</span>}<span>&nbsp;</span></td><br><td style="font-size:1em">输出执行记录请求的调用者的全限定名。参数与上面的一样。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">contextName</strong><span>&nbsp;</span><br><br><strong style="font-weight:bold">cn</strong><span>&nbsp;</span></td><br><td style="font-size:1em">输出上下文名称。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">d</strong><span>&nbsp;</span>{<em style="font-style:italic">pattern</em><span>&nbsp;</span>}<span>&nbsp;</span><br><br><strong style="font-weight:bold">date</strong><span>&nbsp;</span>{<em style="font-style:italic">pattern</em><span>&nbsp;</span>}<span>&nbsp;</span></td><br><td style="font-size:1em">输出日志的打印日志，模式语法与<code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">java.text.SimpleDateFormat</code><span>&nbsp;</span>兼容。<br><table class="bodyTable dark" border="1" cellpadding="8" style="border-bottom:rgb(0,0,0) 1px solid; border-left:rgb(0,0,0) 1px solid; border-top:rgb(0,0,0) 1px solid; border-right:rgb(0,0,0) 1px solid"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Conversion Pattern</th><br><th style="text-align:left; font-weight:bold">Result</th><br></tr><br><tr><br><td style="font-size:1em">%d</td><br><td style="font-size:1em">2006-10-20 14:06:49,812</td><br></tr><br><tr><br><td style="font-size:1em">%date</td><br><td style="font-size:1em">2006-10-20 14:06:49,812</td><br></tr><br><tr><br><td style="font-size:1em">%date{ISO8601}</td><br><td style="font-size:1em">2006-10-20 14:06:49,812</td><br></tr><br><tr><br><td style="font-size:1em">%date{HH:mm:ss.SSS}</td><br><td style="font-size:1em">14:06:49.812</td><br></tr><br><tr><br><td style="font-size:1em">%date{dd&nbsp;MMM&nbsp;yyyy&nbsp;;HH:mm:ss.SSS}</td><br><td style="font-size:1em">20 oct. 2006;14:06:49.812</td><br></tr><br></tbody><br></table><br></td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">F / file</strong></td><br><td style="font-size:1em">输出执行记录请求的java源文件名。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">caller{depth}caller{depth, evaluator-1, … evaluator-n}</strong></td><br><td style="font-size:1em">输出生成日志的调用者的位置信息，整数选项表示输出信息深度。<br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>例如，<span>&nbsp;</span><strong style="font-weight:bold">%caller{2}</strong><span>&nbsp;</span>&nbsp; 输出为：</p><br><pre class="source white_bg" style="font-family:monospace; font-size:1em">0    [main] DEBUG - logging statement<br>Caller&#43;0   at mainPackage.sub.sample.Bar.sampleMethodName(Bar.java:22)<br>Caller&#43;1   at mainPackage.sub.sample.Bar.createLoggingRequest(Bar.java:17)</pre><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>例如，<span>&nbsp;</span><strong style="font-weight:bold">%caller{3}</strong><span>&nbsp;</span>&nbsp; 输出为：</p><br><pre class="source white_bg" style="font-family:monospace; font-size:1em">16   [main] DEBUG - logging statement<br>Caller&#43;0   at mainPackage.sub.sample.Bar.sampleMethodName(Bar.java:22)<br>Caller&#43;1   at mainPackage.sub.sample.Bar.createLoggingRequest(Bar.java:17)<br>Caller&#43;2   at mainPackage.ConfigTester.main(ConfigTester.java:38)</pre><br></td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">L / line</strong></td><br><td style="font-size:1em">输出执行日志请求的行号。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">m / msg / message</strong></td><br><td style="font-size:1em"><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>输出应用程序提供的信息。</p><br></td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">M / method</strong></td><br><td style="font-size:1em">输出执行日志请求的方法名。尽量避免使用，除非执行速度不造成任何问题。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">n</strong></td><br><td style="font-size:1em">输出平台先关的分行符“\n”或者“\r\n”。</td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">p / le / level</strong></td><br><td style="font-size:1em">输出日志级别。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">r / relative</strong></td><br><td style="font-size:1em">输出从程序启动到创建日志记录的时间，单位是毫秒</td><br></tr><br><tr><br><td align="middle" style="font-size:1em"><strong style="font-weight:bold">t / thread</strong></td><br><td style="font-size:1em">输出产生日志的线程名。</td><br></tr><br><tr class="alt"><br><td align="middle" style="font-size:1em"><span><strong style="font-weight:bold">replace(<em style="font-style:italic">p</em><span>&nbsp;</span>){r, t}</strong></span></td><br><td style="font-size:1em"><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><strong style="font-weight:bold">p</strong><span>&nbsp;</span>为日志内容，<strong style="font-weight:bold">r</strong><span>&nbsp;</span>是正则表达式，将<strong style="font-weight:bold">p</strong><span>&nbsp;</span>中符合<strong style="font-weight:bold">r</strong><span>&nbsp;</span>的内容替换为<strong style="font-weight:bold">t</strong><span>&nbsp;</span>。</p><br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br>例如， &quot;%replace(%msg){‘\s’, ‘’}&quot;</p><br></td><br></tr><br></tbody><br></table>
+    <content type="html"><![CDATA[<h1 id="logback配置详解filter"><a href="#logback配置详解filter" class="headerlink" title="logback配置详解filter"></a>logback配置详解filter</h1><h2 id="lt-filter-gt"><a href="#lt-filter-gt" class="headerlink" title="&lt;filter&gt;"></a><code>&lt;filter&gt;</code></h2><p>过滤器，执行一个过滤器会有返回个枚举值，即DENY，NEUTRAL，ACCEPT其中之一。<br>返回DENY，日志将立即被抛弃不再经过其他过滤器；<br>返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；<br>返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。  </p>
+<p>过滤器被添加到 <code>&lt;appender&gt;</code> 中，为 <code>&lt;appender&gt;</code> 添加一个或多个过滤器后，可以用任意条件对日志进行过滤。<br><code>&lt;Appender&gt;</code> 有多个过滤器时，按照配置顺序执行。  </p>
+<p>下面是几个常用的过滤器：</p>
+<h3 id="LevelFilter-级别过滤器，根据日志级别进行过滤"><a href="#LevelFilter-级别过滤器，根据日志级别进行过滤" class="headerlink" title="LevelFilter 级别过滤器，根据日志级别进行过滤"></a>LevelFilter 级别过滤器，根据日志级别进行过滤</h3><p>如果日志级别等于配置级别，过滤器会根据 onMath 和 onMismatch 接收或拒绝日志。有以下子节点：  </p>
+<p><level>:设置过滤级别  </level></p>
+<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
+<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
+<p>例如：将过滤器的日志级别配置为INFO，所有INFO级别的日志交给appender处理，非INFO级别的日志，被过滤掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;encoder&gt;</div><div class="line">      &lt;pattern&gt;</div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;</div><div class="line">    &lt;/encoder&gt;</div><div class="line">  &lt;/appender&gt;</div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志"><a href="#ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志" class="headerlink" title="ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志"></a>ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志</h3><p>当日志级别等于或高于临界值时，过滤器返回NEUTRAL；<br>当日志级别低于临界值时，日志会被拒绝。  </p>
+<p>例如：过滤掉所有低于INFO级别的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot;   </div><div class="line">    class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;!-- 过滤掉 TRACE 和 DEBUG 级别的日志--&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;   </div><div class="line">    &lt;/filter&gt;   </div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件"><a href="#EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件" class="headerlink" title="EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件"></a>EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件</h3><p>有以下子节点：<br><code>&lt;evaluator&gt;</code><br>鉴别器，常用的鉴别器是JaninoEventEvaluato，也是默认的鉴别器，它以任意的Java布尔值表达式作为求值条件，求值条件在配置文件解释过成功被动态编译，布尔值表达式返回true就表示符合过滤条件。<br>evaluator有个子标签<code>&lt;expression&gt;</code>，用于配置求值条件。  </p>
+<p>求值表达式作用于当前日志，logback向求值表达式暴露日志的各种字段：  </p>
+<table class="bodyTable" border="0" style="padding-left:60px"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Name</th><br><th style="text-align:left; font-weight:bold">Type</th><br><th style="text-align:left; font-weight:bold">Description</th><br></tr><br><tr><br><td style="font-size:1em">event</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggingEvent</code></td><br><td style="font-size:1em">与记录请求相关联的原始记录事件，下面所有变量都来自event，例如，event.getMessage()返回下面&quot;message&quot;相同的字符串</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">message</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志的原始消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello {}&quot;就是原始消息。</td><br></tr><br><tr><br><td style="font-size:1em">formatedMessage</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志被各式话的消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello Aub&quot;就是&#26684;式化后的消息。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">logger</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">logger 名。</td><br></tr><br><tr><br><td style="font-size:1em">loggerContext</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggerContextVO</code></td><br><td style="font-size:1em">日志所属的logger上下文。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">level</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">int</code></td><br><td style="font-size:1em">级别对应的整数&#20540;，所以<span>&nbsp;</span><em style="font-style:italic">level &gt; INFO<span>&nbsp;</span></em>是正确的表达式。</td><br></tr><br><tr><br><td style="font-size:1em">timeStamp</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">long</code></td><br><td style="font-size:1em">创建日志的时间戳。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">marker</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Marker</code></td><br><td style="font-size:1em">与日志请求相关联的Marker对象，注意“Marker”有可能为null，所以你要确保它不能是null。</td><br></tr><br><tr><br><td style="font-size:1em">mdc</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Map</code></td><br><td style="font-size:1em">包含创建日志期间的MDC所有&#20540;得map。访问方法是：<em style="font-style:italic">mdc.get(&quot;myKey&quot;)</em><span>&nbsp;</span>。mdc.get()返回的是Object不是String，要想调用String的方法就要强转，例如，<br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">((String)&nbsp;mdc.get(&quot;k&quot;)).contains(&quot;val&quot;)</code><span>&nbsp;</span>.MDC可能为null，调用时注意。</p><br></td><br></tr><br><tr class="alt"><br><td style="font-size:1em">throwable</td><br><td style="font-size:1em">java.lang.Throwable</td><br><td style="font-size:1em">如果没有异常与日志关联&quot;throwable&quot; 变量为 null. 不幸的是， &quot;throwable&quot; 不能被序列化。在远程系统上永远为null，对于与位置无关的表达式请使用下面的变量<code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">throwableProxy</code></td><br></tr><br><tr><br><td style="font-size:1em">throwableProxy</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">IThrowableProxy</code></td><br><td style="font-size:1em">与日志事件关联的异常代理。如果没有异常与日志事件关联，则变量&quot;throwableProxy&quot; 为 null. 当异常被关联到日志事件时，&quot;throwableProxy&quot; 在远程系统上不会为null</td><br></tr><br></tbody><br></table>
 
 
-
-<p>格式修饰符，与转换符共同使用：<br>可选的格式修饰符位于“%”和转换符之间。<br>第一个可选修饰符是左对齐 标志，符号是减号“-”；接着是可选的最小宽度 修饰符，用十进制数表示。<br>如果字符小于最小宽度，则左填充或右填充，默认是左填充（即右对齐），填充符为空格。<br>如果字符大于最小宽度，字符永远不会被截断。最大宽度 修饰符，符号是点号”.”后面加十进制数。<br>如果字符大于最大宽度，则从前面截断。点符号“.”后面加减号“-”在加数字，表示从尾部截断。  </p>
-<p>例如：%-4relative 表示，将输出从程序启动到创建日志记录的时间 进行左对齐 且最小宽度为4。</p>
+<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
+<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
+<p>例如：过滤掉所有日志消息中不包含“billing”字符串的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line"></div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt; &lt;!-- 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator --&gt;</div><div class="line">        &lt;expression&gt;return message.contains(&quot;billing&quot;);&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT &lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line"></div><div class="line">  &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p><code>&lt;matcher&gt;</code><br>匹配器，尽管可以使用String类的matches()方法进行模式匹配，但会导致每次调用过滤器时都会创建一个新的Pattern对象，为了消除这种开销，可以预定义一个或多个matcher对象，定以后就可以在求值表达式中重复引用。<code>&lt;matcher&gt;</code>是<code>&lt;evaluator&gt;</code>的子标签。<br><code>&lt;matcher&gt;</code>中包含两个子标签，<br>一个是<code>&lt;name&gt;</code>，用于定义matcher的名字，求值表达式中使用这个名字来引用matcher；<br>另一个是<code>&lt;regex&gt;</code>，用于配置匹配条件。  </p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;configuration debug=&quot;true&quot;&gt;   </div><div class="line"></div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt;</div><div class="line">        &lt;matcher&gt;</div><div class="line">          &lt;Name&gt;odd&lt;/Name&gt;</div><div class="line">          &lt;!-- filter out odd numbered statements --&gt;</div><div class="line">          &lt;regex&gt;statement [13579]&lt;/regex&gt;</div><div class="line">        &lt;/matcher&gt;</div><div class="line"></div><div class="line">        &lt;expression&gt;odd.matches(formattedMessage)&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line"></div><div class="line">      &lt;OnMismatch&gt;NEUTRAL&lt;/OnMismatch&gt;</div><div class="line">      &lt;OnMatch&gt;DENY&lt;/OnMatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line"></div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line"></div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">&lt;!-- if debug set to true, context info always print  </div><div class="line"> otherwise the contex info will print when error occour --&gt;  </div><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;stdout&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;    </div><div class="line">     &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;    </div><div class="line">       &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;    </div><div class="line">     &lt;/layout&gt;    </div><div class="line">   &lt;/appender&gt;    </div><div class="line">   </div><div class="line"> &lt;!-- 所有日志文件--&gt;  </div><div class="line"> &lt;appender name=&quot;AllLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/all/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;   </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line">   </div><div class="line"> &lt;appender name=&quot;TaskLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/task/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;appender name=&quot;SendLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/send/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;!-- 为莫个包下的所有类指定Appender 这里也可以指定类名称例如：com.aa.bb.ClassName--&gt;    </div><div class="line"> &lt;logger name=&quot;com.aa.bb&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;TaskLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">   </div><div class="line"> &lt;logger name=&quot;com.aa.cc&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;SendLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">   </div><div class="line"> &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">  &lt;appender-ref ref=&quot;AllLog&quot; /&gt;  </div><div class="line"> &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;logback配置详解appender&quot;&gt;&lt;a href=&quot;#logback配置详解appender&quot; class=&quot;headerlink&quot; title=&quot;logback配置详解appender&quot;&gt;&lt;/a&gt;logback配置详解appender&lt;/h1&gt;&lt;p&gt;&lt;i
+      &lt;h1 id=&quot;logback配置详解filter&quot;&gt;&lt;a href=&quot;#logback配置详解filter&quot; class=&quot;headerlink&quot; title=&quot;logback配置详解filter&quot;&gt;&lt;/a&gt;logback配置详解filter&lt;/h1&gt;&lt;h2 id=&quot;lt-fi
     
     </summary>
     
@@ -240,6 +240,142 @@
     
     
       <category term="logback" scheme="http://yoursite.com/tags/logback/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flex布局</title>
+    <link href="http://yoursite.com/2017/05/14/Frontend/CSS/Flex%E5%B8%83%E5%B1%80/"/>
+    <id>http://yoursite.com/2017/05/14/Frontend/CSS/Flex布局/</id>
+    <published>2017-05-14T05:46:07.000Z</published>
+    <updated>2017-05-14T05:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Flex布局"><a href="#Flex布局" class="headerlink" title="Flex布局"></a>Flex布局</h1><h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><p>Flexbox 布局（也叫Flex布局，弹性盒子布局）目标在于提供一个更有效地布局、对齐方式，<br>并且能够使 父元素 在 子元素的大小未知 或 动态变化 情况下仍然能够 分配好子元素之间的间隙。  </p>
+<p>Flex布局的主要思想是使 父元素 能够调节 子元素的高度、 宽度 和 排布的顺序，<br>从而能够最好地适应可用布局空间（能够适应不同的设备和不同大小的屏幕）。<br>设定为flex布局的元素能够放大子元素使之尽可能填充可用空间，也可以收缩子元素使之不溢出。</p>
+<p>与传统布局中块状元素按照垂直方向摆放，行内元素按照水平方向摆放相比，<br>flex布局是无方向的。<br>传统布局在应对大型复杂的布局时缺乏灵活性，特别是在改变方向、改变大小、伸展、收缩等等方面。</p>
+<blockquote>
+<p>注: Flex 布局比较适合小规模的布局，Gird布局面向更大规模的布局。</p>
+</blockquote>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>Flex布局是一个完整的模块而不是一个单独的属性，它包括了完整的一套属性。<br>其中有的属性是设置在容器（container，也可以叫做父元素，称为flex container）上，有的则是设置在容器的项目上（item，也可以叫做子元素，称为flex items）上。  </p>
+<p><img src="http://i.imgur.com/6peziD0.png" alt=""><br><img src="http://i.imgur.com/DicVmyr.png" alt="">  </p>
+<p>如果我们可以说传统布局是建立在块状元素垂直流和行内元素水平流上的，<br>那么flex布局就是建立在“flex-flow方向”上的，通过下图解释flex布局的主要思想。  </p>
+<p><img src="http://i.imgur.com/ZcshJnZ.png" alt=""></p>
+<p>在flex布局中，子元素要么按照主轴也就是main axis（从main-start到main-end）排布，<br>要么按照交叉轴，也就是cross axis(从cross-start到cross-end)排布。  </p>
+<p>下面介绍几个概念：  </p>
+<ul>
+<li>main axis: Flex 父元素的主轴是指子元素布局的主要方向轴，注意主轴不一定是水平的，它由属性flex-direction来确定主轴是水平还是垂直的（后面会介绍）。</li>
+<li>main-start|main-end: 分别表示主轴的开始和结束，子元素在父元素中会沿着主轴从main-start到main-end排布。</li>
+<li>main size: 单个项目占据主轴的长度大小。</li>
+<li>cross axis: 交叉轴，与主轴垂直。</li>
+<li>cross-start|cross-end: 分别表示交叉轴的开始和结束。子元素在交叉轴的排布从cross-start开始到cross-end。</li>
+<li>cross size: 子元素在交叉轴方向上的大小。</li>
+</ul>
+<h1 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h1><p>属性分作用于父元素的属性和作用于子元素的属性两部分介绍。</p>
+<h2 id="父元素属性"><a href="#父元素属性" class="headerlink" title="父元素属性"></a>父元素属性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>用来定义父元素是一个 flex布局容器。<br>如果设置为flex则父元素为块状元素，设置为inline-flex父元素呈现为行内元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.container &#123;</div><div class="line">  display: flex; /* or inline-flex */</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p><img src="http://i.imgur.com/y6XsaVw.png" alt=""></p>
+<p>flex-direction定义flex布局的主轴方向。<br>flex布局是单方向布局，子元素主要沿着水平行或者垂直列布局。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.container &#123;</div><div class="line">  flex-direction: row | row-reverse | column | column-reverse;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>row: 行方向，flex-direction的默认值，在ltr(left to right， 从左到右)排版方式下从左到右排列，在rtl(right to left， 从右到左)排版方式下从右到左排列。</li>
+<li>row-reverse: 行反方向，在ltr中从右向左，在rtl中从左到右。</li>
+<li>column: 列方向，与row相似，只是从上到下。</li>
+<li>column-reverse: 列反方向，与row-reverse相似，只是从下到上。</li>
+</ul>
+<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p><img src="http://i.imgur.com/FZygWZ7.png" alt="">  </p>
+<p>默认情况下，flex布局中父元素会把子元素尽可能地排在同一行，通过设置flex-wrap来决定是否允许子元素这行排列。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.container&#123;</div><div class="line">  flex-wrap: nowrap | wrap | wrap-reverse;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>nowrap: 不折行，默认值，所有的子元素会排在一行。</li>
+<li>wrap: 折行，子元素会从上到下根据需求折成多行。</li>
+<li>wrap-reverse: 从下向上折行，子元素会从下到上根据需求折成多行。</li>
+</ul>
+<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>flex-flow是flex-direction和flex-wrap属性的缩写形式。默认值是row,nowrap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flex-flow: &lt;‘flex-direction’&gt; || &lt;‘flex-wrap’&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p><img src="http://i.imgur.com/iUBgaIu.png" alt="">  </p>
+<p>justify-content属性定义了子元素沿主轴方向的对齐方式，<br>用来当子元素大小最大的时候，分配主轴上的剩余空间。也可以当子元素超出主轴的时候用来控制子元素的对齐方式。  </p>
+<ul>
+<li>flex-start: 默认值，朝主轴开始的方向对齐。</li>
+<li>flex-end: 朝主轴结束的方向对齐。</li>
+<li>center: 沿主轴方向居中。</li>
+<li>space-between: 沿主轴两端对齐，第一个子元素在主轴起点，最后一个子元素在主轴终点。</li>
+<li>space-around: 沿主轴子元素之间均匀分布。要注意的是子元素看起来间隙是不均匀的，第一个子元素和最后一个子元素离父元素的边缘有一个单位的间隙，但两个子元素之间有两个单位的间隙，因为每个子元素的两侧都有一个单位的间隙。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.container &#123;</div><div class="line">  justify-content: flex-start | flex-end | center | space-between | space-around;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><img src="http://i.imgur.com/Uy6h4oa.png" alt="">  </p>
+<p>align-items定义了子元素在交叉轴方向的对齐方向，这是在每个子元素仍然在其原来所在行的基础上所说的。可以看作是交叉轴上的justify-content属性;  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.container &#123;</div><div class="line">  align-items: flex-start | flex-end | center | baseline | stretch;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>flex-start: 按照交叉轴的起点对齐。</li>
+<li>flex-end: 按照交叉轴的终点对齐。</li>
+<li>center: 沿交叉轴方向居中。</li>
+<li>baseline: 按照项目的第一行文字的基线对齐。</li>
+<li>stretch: 默认值，在满足子项目所设置的min-height、max-height、height的情况下拉伸子元素使之填充整个父元素。</li>
+</ul>
+<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p><img src="http://i.imgur.com/1ph6EH2.png" alt="">  </p>
+<p>align-content是当父元素所包含的行在交叉轴方向有空余部分时如何分配空间。与justify-content在主轴上如何对单个子元素对齐很相似。  </p>
+<blockquote>
+<p>注意：当只有一行的时候，该属性并不起作用。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.container &#123;</div><div class="line">  align-content: flex-start | flex-end | center | space-between | space-around | stretch;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：该属性中的六个属性值与justify-content中的六个属性意思相似，不同之处在于justify-content沿主轴方向的作用于单个子元素，而align-content沿交叉轴方向作用于行。遂不再赘述各属性值含义。</p>
+<p>注：注意align-items和align-content的区别，前者是指在单行内的子元素对齐方式，后者是指多行之间的对齐方式。</p>
+</blockquote>
+<h3 id="父元素属性总结"><a href="#父元素属性总结" class="headerlink" title="父元素属性总结"></a>父元素属性总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">display: flex|inline-flex;</div><div class="line">flex-direction: row | row-reverse | column | column-reverse;</div><div class="line">flex-wrap: nowrap | wrap | wrap-reverse;</div><div class="line">flex-flow: &lt;‘flex-direction’&gt; || &lt;‘flex-wrap’&gt;;</div><div class="line">justify-content: flex-start | flex-end | center | space-between | space-around;</div><div class="line">align-items: flex-start | flex-end | center | baseline | stretch;</div><div class="line">align-content: flex-start | flex-end | center | space-between | space-around | stretch;</div></pre></td></tr></table></figure>
+<h2 id="子元素属性"><a href="#子元素属性" class="headerlink" title="子元素属性"></a>子元素属性</h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p><img src="http://i.imgur.com/zXXrdvK.png" alt="">  </p>
+<p>默认情况下，子元素按照代码书写的先后顺序布局，但order属性可以更改子元素出现的顺序。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item &#123;</div><div class="line">  order: &lt;integer&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：order的默认值为0;子元素的order值越小，布局越排在前面，参考例图理解。  </p>
+</blockquote>
+<h3 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h3><p><img src="http://i.imgur.com/6G3S8IL.png" alt="">  </p>
+<p>flex-grow规定在空间允许的情况下，子元素如何按照比例分配可用剩余空间。如果所有的子元素的属性都设定为1，则父元素中的剩余空间会等分给所有子元素。如果其中某个子元素的flex-grow设定为2，则在分配剩余空间时该子元素将获得其他元素二倍的空间（至少会尽力获得）。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item &#123;</div><div class="line">  flex-grow: &lt;number&gt;; /* default 0 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：flex-grow不接受负值。默认值为0，意味着即使有剩余空间，各子元素也不会放大。</p>
+</blockquote>
+<h3 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h3><p>与flex-grow属性类似，flex-shrink定义了空间不足时项目的缩小比例。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item &#123;</div><div class="line">  flex-shrink: &lt;number&gt;; /* default 1 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注： flex-shrink不接受负值。<br>flex-shrink默认值为1， 当所有子元素都为默认值时，则空间不足时子元素会同比例缩小。如果其中某个子元素的flex-shrink值为0，则空间不足时该子元素并不会缩小。如果其中某个子元素的flex-shrink值为2时，则空间不足时该子元素会以二倍速度缩小。  </p>
+</blockquote>
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>flex-basis定义了在计算剩余空间之前子元素默认的大小。<br>可以设置为某个长度（e.g. 20%, 5rem, etc.）或者关键字。关键字auto意味着子元素会按照其本来的大小显示。<br>关键字content意味着根据内容来确定大小——这个关键字到目前没有被很好地支持，所以测试起来比较困难，与content的类似的关键字还有max-content, min-content, fit-content。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item &#123;</div><div class="line">  flex-basis: &lt;length&gt; | auto; /* default auto */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果设置为0, 则子元素内容周围的空隙不会根据flex-grow按比例分配，<br>如果设置为auto，则子元素周围额外的空隙会根据flex-grow按照比例分配，如下图：  </p>
+<p><img src="http://i.imgur.com/P89IAI6.png" alt="">  </p>
+<h3 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h3><p>flex是flex-grow、flex-shrink、flex-basis三个属性的缩写。<br>其中第二个和第三个参数(flex-grow,flex-basis)是可选的。默认值为0 1 auto。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item &#123;</div><div class="line">  flex: none | [ &lt;&apos;flex-grow&apos;&gt; &lt;&apos;flex-shrink&apos;&gt;? || &lt;&apos;flex-basis&apos;&gt; ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>推荐使用缩写形式而不是单独地设置每一个属性，缩写形式中会智能地计算出相关值。  </p>
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p><img src="http://i.imgur.com/noM8Qs8.png" alt=""></p>
+<p>通过设置某个子元素的align-self属性，可以覆盖align-items所设置的对齐方式。属性值与align-items中的意义相同。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item &#123;</div><div class="line">  align-self: auto | flex-start | flex-end | center | baseline | stretch;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：float,clear和vertical-align对flex子元素没有任何影响。  </p>
+</blockquote>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><h2 id="示例一：水平垂直居中"><a href="#示例一：水平垂直居中" class="headerlink" title="示例一：水平垂直居中"></a>示例一：水平垂直居中</h2><p>我们从一个非常非常简单的例子开始，解决一个我们经常会遇到的问题：水平垂直居中。如果使用flex布局会非常简单。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.parent &#123;</div><div class="line">  display: flex;</div><div class="line">  height: 300px; /* 随意设定大小 */</div><div class="line">&#125;</div><div class="line"></div><div class="line">.child &#123;</div><div class="line">  width: 100px;  /* 随意设定大小，比父元素要小 */</div><div class="line">  height: 100px; /* 同上 */</div><div class="line">  margin: auto;  /* 见证奇迹的时刻 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个主要原因是，在flex布局的父元素中设置margin为auto会自动吸收额外的空间，所以设置水平垂直的margin都为auto会使子元素在水平垂直方向上都完美居中。  </p>
+<h2 id="示例二：响应式初体验"><a href="#示例二：响应式初体验" class="headerlink" title="示例二：响应式初体验"></a>示例二：响应式初体验</h2><p>现在我们考虑用更多的属性。考虑有6个子元素，有固定的大小，但是我们希望他们能够在改变浏览器宽度的时候仍然可以在水平轴上完美地显示（注意在不使用媒体查询的前提下）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.flex-container &#123;</div><div class="line">  /* 首先我们先创建一个flex布局上下文 */</div><div class="line">  display: flex;</div><div class="line"></div><div class="line">  /* 然后我们定义flex方向和是否允许子元素换行</div><div class="line">   * 注意这与以下代码等价：</div><div class="line">   * flex-direction: row;</div><div class="line">   * flex-wrap: wrap;</div><div class="line">   */</div><div class="line">  flex-flow: row wrap;</div><div class="line"></div><div class="line">  /* 然后我们定义在剩余空间上子元素如何排布 */</div><div class="line">  justify-content: space-around;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="http://adad" target="_blank" rel="external">示例代码</a></p>
+<h2 id="示例三：响应式导航栏"><a href="#示例三：响应式导航栏" class="headerlink" title="示例三：响应式导航栏"></a>示例三：响应式导航栏</h2><p>我们通过灵活使用flex布局尝试一些更好玩的布局。来做一个移动优先的3列布局并带有全屏宽的header和footer。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">  display: flex;</div><div class="line">  flex-flow: row wrap;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* 我们要告诉所有的子元素宽度 100% */</div><div class="line">.header, .main, .nav, .aside, .footer &#123;</div><div class="line">  flex: 1 100%;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* 移动优先依赖于源代码默认的渲染顺序</div><div class="line"> * in this case:</div><div class="line"> * 1. header</div><div class="line"> * 2. nav</div><div class="line"> * 3. main</div><div class="line"> * 4. aside</div><div class="line"> * 5. footer</div><div class="line"> */</div><div class="line"></div><div class="line">/* 中屏 */</div><div class="line">@media all and (min-width: 600px) &#123;</div><div class="line">  /* 我们要告诉两边的sidebar共享一个行 */</div><div class="line">  .aside &#123; flex: 1 auto; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* 大屏幕 */</div><div class="line">@media all and (min-width: 800px) &#123;</div><div class="line">  /* 通过order设定各个面板的渲染顺序</div><div class="line">   * 告诉主要面板元素占用侧栏两倍的空间</div><div class="line">   */</div><div class="line">  .main &#123; flex: 2 0px; &#125;</div><div class="line"></div><div class="line">  .aside-1 &#123; order: 1; &#125;</div><div class="line">  .main    &#123; order: 2; &#125;</div><div class="line">  .aside-2 &#123; order: 3; &#125;</div><div class="line">  .footer  &#123; order: 4; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="浏览器前缀"><a href="#浏览器前缀" class="headerlink" title="浏览器前缀"></a>浏览器前缀</h2><p>Flex布局需要一些浏览器前缀来最大力度地兼容大多数的浏览器。Flex布局的前缀不只是在属性前面添加浏览器前缀，不同浏览器下的属性名和属性值都不同，这是因为Flexbox布局的标准一直在变，一共有old, tweener, new 三个版本。  </p>
+<p>可能处理前缀的最好方法是使用新的语法书写CSS并通过Autoprefixer运行CSS，能够很好地处理这个问题。  </p>
+<p>另外，这里有一个Sass中 @mixin 来处理一些前缀，也可以给你一些处理前缀的启发：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">@mixin flexbox() &#123;</div><div class="line">  display: -webkit-box;</div><div class="line">  display: -moz-box;</div><div class="line">  display: -ms-flexbox;</div><div class="line">  display: -webkit-flex;</div><div class="line">  display: flex;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@mixin flex($values) &#123;</div><div class="line">  -webkit-box-flex: $values;</div><div class="line">  -moz-box-flex:  $values;</div><div class="line">  -webkit-flex:  $values;</div><div class="line">  -ms-flex:  $values;</div><div class="line">  flex:  $values;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@mixin order($val) &#123;</div><div class="line">  -webkit-box-ordinal-group: $val;  </div><div class="line">  -moz-box-ordinal-group: $val;     </div><div class="line">  -ms-flex-order: $val;     </div><div class="line">  -webkit-order: $val;  </div><div class="line">  order: $val;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.wrapper &#123;</div><div class="line">  @include flexbox();</div><div class="line">&#125;</div><div class="line"></div><div class="line">.item &#123;</div><div class="line">  @include flex(1 200px);</div><div class="line">  @include order(2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><p>首先看一下Flex布局的三个版本  </p>
+<p>(new)是指标准中最近的语法(e.g. display:flex;)。<br>(tweener)是指2011年以后非官方的临时版本(e.g. display:flexbox;)。<br>(old)是指2009年以后的旧语法(e.g. display:box;)  </p>
+<p><img src="http://i.imgur.com/EQXoxWi.png" alt="">  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Flex布局&quot;&gt;&lt;a href=&quot;#Flex布局&quot; class=&quot;headerlink&quot; title=&quot;Flex布局&quot;&gt;&lt;/a&gt;Flex布局&lt;/h1&gt;&lt;h1 id=&quot;背景介绍&quot;&gt;&lt;a href=&quot;#背景介绍&quot; class=&quot;headerlink&quot; title=&quot;背
+    
+    </summary>
+    
+      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
+    
+    
+      <category term="Flex布局" scheme="http://yoursite.com/tags/Flex%E5%B8%83%E5%B1%80/"/>
     
   </entry>
   
@@ -495,162 +631,30 @@
   </entry>
   
   <entry>
-    <title>02_CSS的盒子模型</title>
-    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/02_CSS%E7%9A%84%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://yoursite.com/2017/04/07/Frontend/CSS/02_CSS的盒子模型/</id>
+    <title>04_CSS的overflow</title>
+    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/04_CSS%E7%9A%84overflow/"/>
+    <id>http://yoursite.com/2017/04/07/Frontend/CSS/04_CSS的overflow/</id>
     <published>2017-04-07T13:46:07.000Z</published>
     <updated>2017-04-07T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="盒子模型的概念"><a href="#盒子模型的概念" class="headerlink" title="盒子模型的概念"></a>盒子模型的概念</h1><p>所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。<br>每个矩形都由元素的内容、内边距（padding）、边框（border）和外边距（margin）组成。  </p>
+    <content type="html"><![CDATA[<h1 id="CSS标签的显示和隐藏："><a href="#CSS标签的显示和隐藏：" class="headerlink" title="CSS标签的显示和隐藏："></a>CSS标签的显示和隐藏：</h1><h1 id="overflow"><a href="#overflow" class="headerlink" title="overflow:"></a>overflow:</h1><ul>
+<li>hidden:超出部分隐藏。</li>
+<li>scroll:滚动条（超出的部分会显示在滚动条之内）</li>
+<li>auto:如果内容超出会显示滚动条，如果没有那么会自动隐藏。</li>
+</ul>
+<h1 id="display-none-隐藏元素"><a href="#display-none-隐藏元素" class="headerlink" title="display:none;   隐藏元素"></a>display:none;   隐藏元素</h1><p>完全隐藏原来的div，不占位置<br>display:none;  隐藏<br>display:block;  显示  </p>
+<h1 id="visibility-隐藏元素"><a href="#visibility-隐藏元素" class="headerlink" title="visibility:      隐藏元素"></a>visibility:      隐藏元素</h1><p>visibility也会隐藏原来的div但是div还是会占据着自己的位置不放，屏幕上显示的是空白。</p>
 <ul>
-<li><p>网页就是多个盒子嵌套排列的结果。  </p>
-</li>
-<li><p>内边距出现在内容区域的周围，当给元素添加背景色或背景图像时，该元素的背景色或背景图像也将出现在内边距中。</p>
-</li>
-<li>外边距是该元素与相邻元素之间的距离。</li>
-<li>如果给元素定义边框属性，边框将出现在内边距和外边距之间。  </li>
+<li>visible;默认值。元素是可见的。</li>
+<li>hidden;元素是不可见的。</li>
+<li>collapse;当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 “hidden”。</li>
+<li>inherit;规定应该从父元素继承 visibility 属性的值。</li>
 </ul>
-<blockquote>
-<p>注意：虽然盒子模型拥有内边距、边框、外边距、宽和高这些基本属性，但是并不要求每个元素都必须定义这些属性。</p>
-</blockquote>
-<h1 id="外边距"><a href="#外边距" class="headerlink" title="外边距"></a>外边距</h1><p>margin-top:上外边距<br>margin-right:右外边距<br>margin-bottom:下外边距<br>margin-left:上外边距<br>margin:上外边距 [右外边距  下外边距  左外边距]</p>
-<p><strong>对块元素应用宽度属性width，并将左右的外边距都设置为auto，可使块级元素水平居中，实际工作中常用这种方式进行网页布局</strong><br>示例代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.header&#123; width:960px; margin:0 auto;&#125;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意：使用margin定义块元素的垂直外边距时，可能会出现外边距的合并。  </p>
-</blockquote>
-<h2 id="外边距的合并"><a href="#外边距的合并" class="headerlink" title="外边距的合并"></a>外边距的合并</h2><h3 id="相邻块元素垂直外边距的合并"><a href="#相邻块元素垂直外边距的合并" class="headerlink" title="相邻块元素垂直外边距的合并:"></a>相邻块元素垂直外边距的合并:</h3><p><img src="http://oo22worto.bkt.clouddn.com/%E7%9B%B8%E9%82%BB%E5%9D%97%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E5%90%88%E5%B9%B6.png" alt="相邻块元素垂直外边距的合并"><br>当上下相邻的两个块元素相遇时，如果上面的元素有下外边距margin-bottom，下面的元素有上外边距margin-top，则他们之间的垂直间距不是margin-bottom与margin-top之和，而是两者中的较大者。这种现象被称为相邻块元素垂直外边距的合并（也称外边距塌陷）。</p>
-<h3 id="嵌套块元素垂直外边距的合并"><a href="#嵌套块元素垂直外边距的合并" class="headerlink" title="嵌套块元素垂直外边距的合并:"></a>嵌套块元素垂直外边距的合并:</h3><p><img src="http://oo22worto.bkt.clouddn.com/%E5%B5%8C%E5%A5%97%E5%9D%97%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E5%90%88%E5%B9%B6.png" alt="嵌套块元素垂直外边距的合并">  </p>
-<ul>
-<li>对于两个嵌套关系的块元素，如果父元素没有上内边距及边框，则父元素的上外边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会发生合并。</li>
-<li>如果希望外边距不合并，可以为父元素定义1像素的上边框或上内边距。这里以定义父元素的上边框为例，在父<div>的CSS样式中增加如下代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-top:1px solid #FCC;/*定义父div的上边框*/</div></pre></td></tr></table></figure>
-</div></li>
-</ul>
-<h1 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h1><h2 id="边框样式（border-style）"><a href="#边框样式（border-style）" class="headerlink" title="边框样式（border-style）"></a>边框样式（border-style）</h2><p>样式：<br>border-top/right/bottom/left-style:;<br>border-style:top right bottom left;  </p>
-<p>边框样式用于定义页面中边框的风格，常用属性值如下：  </p>
-<ul>
-<li>none：没有边框即忽略所有边框的宽度（默认值）</li>
-<li>solid：边框为单实线</li>
-<li>dashed：边框为虚线</li>
-<li>dotted：边框为点线</li>
-<li>double：边框为双实线</li>
-</ul>
-<h2 id="边框宽度（border-width）"><a href="#边框宽度（border-width）" class="headerlink" title="边框宽度（border-width）"></a>边框宽度（border-width）</h2><p>宽度<br>border-top/right/bottom/left-width:;<br>border-width:top right bottom left;  </p>
-<h2 id="边框颜色（border-color）"><a href="#边框颜色（border-color）" class="headerlink" title="边框颜色（border-color）"></a>边框颜色（border-color）</h2><p>颜色<br>border-top/right/bottom/left-color:;<br>border-color:top right bottom left;  </p>
-<blockquote>
-<p>注意：设置边框颜色时同样必须设置边框样式，如果未设置样式或设置为none，则其他的边框属性无效。</p>
-</blockquote>
-<h2 id="综合设置边框-复合属性"><a href="#综合设置边框-复合属性" class="headerlink" title="综合设置边框(复合属性)"></a>综合设置边框(复合属性)</h2><p>border[-top right bottom left]:宽度 样式 颜色;  </p>
-<ul>
-<li>像border、border-top等这样，能够一个属性定义元素的多种样式，在CSS中称之为复合属性。</li>
-<li>常用的复合属性有font、border、margin、padding和background等。</li>
-<li>复合属性可以简化代码，提高页面的运行速度，但是如果只有一项值，最好不要应用复合属性，以免样式不被兼容。</li>
-</ul>
-<h2 id="圆角"><a href="#圆角" class="headerlink" title="圆角"></a>圆角</h2><p>border-radius<br>border-top-left-radius: //左上角<br>border-top-right-radius: //右上角<br>border-bottom-right-radius: //右下角<br>border-bottom-left-radius: //左下角<br>分别是水平方向和竖直方向半径，第二值省略的情况下，水平方向和竖直方向的半径相等。<br>border-radius 只有在以下版本的浏览器：Firefox4.0+、Safari5.0+、Google Chrome 10.0+、Opera 10.5+、IE9+ 支持 border-radius 标准语法格式，对于老版的浏览器，border-radius 需要根据不同的浏览器内核添加不同的前缀，比说 Mozilla 内核需要加上“-moz”，而 Webkit 内核需要加上“-webkit”等，但是IE和Opera没有私有格式，因此为了最大程度的兼容浏览器，我们需要设置如下：<br>-webkit-border-radius: 10px 20px 30px;<br>-moz-border-radius: 10px 20px 30px;<br>border-radius: 10px 20px 30px;<br><a href="http://blog.csdn.net/liuyan19891230/article/details/50724630" target="_blank" rel="external">CSS3的border-radius属性详解</a></p>
-<h2 id="多学几招"><a href="#多学几招" class="headerlink" title="多学几招"></a>多学几招</h2><ol>
-<li>表单的边框通常改为 0；<br><code>border:0 none;</code></li>
-<li>表格的细线边框<br><code>table { border-collapse:collapse; }</code></li>
-<li>轮廓 （链接有虚线 和  文本框  有 蓝色边框）<br><code>outline-style:none;</code></li>
-</ol>
-<p>在制作网页的过程中，如果涉及到了页面的宽高的问题，最好用width和height去解决，才用padding,最后才考虑margin.<br>因为margin在布局中会存在兼容性的问题</p>
-<h1 id="内边距属性"><a href="#内边距属性" class="headerlink" title="内边距属性"></a>内边距属性</h1><p>padding-top:上内边距<br>padding-right:右内边距<br>padding-bottom:下内边距<br>padding-left:左内边距<br>padding:上内边距[右内边距 下内边距  左内边距]  </p>
-<p>为了更方便地控制网页中的元素，制作网页时，可使用如下代码清除元素的默认内外边距：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*&#123;</div><div class="line">	padding:0;         /*清除内边距*/</div><div class="line">	margin:0;          /*清除外边距*/</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意：行内元素尽量不要给上下的margin 和padding</p>
-</blockquote>
-<h1 id="盒子的宽与高"><a href="#盒子的宽与高" class="headerlink" title="盒子的宽与高"></a>盒子的宽与高</h1><ul>
-<li>使用宽度属性width和高度属性height可以对盒子的大小进行控制。</li>
-<li>width和height的属性值可以为不同单位的数值或相对于父元素的百分比%，实际工作中最常用的是像素值。</li>
-<li>大多数浏览器，如Firefox、IE6及以上版本都采用了W3C规范，符合CSS规范的盒子模型的总宽度和总高度的计算原则是：<br>盒子的总宽度= width+左右内边距之和+左右边框宽度之和+左右外边距之和<br>盒子的总高度= height+上下内边距之和+上下边框宽度之和+上下外边距之和</li>
-</ul>
-<blockquote>
-<p>注意：</p>
-<ol>
-<li>宽度属性width和高度属性height仅适用于块级元素，对行内元素无效<code>&lt;img /&gt;标记和&lt;input /&gt;除外</code></li>
-<li>计算盒子模型的总高度时，还应考虑上下两个盒子垂直外边距合并的情况</li>
-</ol>
-</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;盒子模型的概念&quot;&gt;&lt;a href=&quot;#盒子模型的概念&quot; class=&quot;headerlink&quot; title=&quot;盒子模型的概念&quot;&gt;&lt;/a&gt;盒子模型的概念&lt;/h1&gt;&lt;p&gt;所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。&lt;br&gt;每个矩
-    
-    </summary>
-    
-      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="CSS" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>03_CSS浮动float</title>
-    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/03_CSS%E6%B5%AE%E5%8A%A8float/"/>
-    <id>http://yoursite.com/2017/04/07/Frontend/CSS/03_CSS浮动float/</id>
-    <published>2017-04-07T13:46:07.000Z</published>
-    <updated>2017-04-07T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="标准流-normal-flow"><a href="#标准流-normal-flow" class="headerlink" title="标准流(normal flow)"></a>标准流(normal flow)</h1><p>html语言当中另外一个相当重要的概念———-标准流！或者普通流。<br>标准流实际上就是一个网页内标签元素正常排列的顺序的意思；<br>比如块级元素会独占一行，行内元素会按顺序依次前后排列；<br>按照这种大前提的布局排列之下绝对不会出现列外的情况叫做标准流布局；  </p>
-<h1 id="浮动-float"><a href="#浮动-float" class="headerlink" title="浮动(float)"></a>浮动(float)</h1><p>浮动的价值：<br>就是让任何盒子可以一行排列</p>
-<h2 id="元素的浮动属性float"><a href="#元素的浮动属性float" class="headerlink" title="元素的浮动属性float"></a>元素的浮动属性float</h2><p>什么是浮动？<br>元素的浮动是指设置了浮动属性的元素会脱离标准文档流的控制，移动到其父元素中指定位置的过程。  </p>
-<p>如何定义浮动？<br>在CSS中，通过float属性来定义浮动，其基本语法格式如下：<br>选择器{float:属性值;}  </p>
-<p>float属性值：  </p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>left</td>
-<td>元素向左浮动</td>
-</tr>
-<tr>
-<td>right</td>
-<td>元素向右浮动</td>
-</tr>
-<tr>
-<td>none</td>
-<td>元素不浮动（默认值）</td>
-</tr>
-</tbody>
-</table>
-<h2 id="浮动特性"><a href="#浮动特性" class="headerlink" title="浮动特性"></a>浮动特性</h2><ol>
-<li>浮动脱离标准流，不占位置，会影响标准流。浮动只有左右浮动。</li>
-<li>浮动的元素A排列位置，跟上一个元素（块级）有关系。如果上一个元素有浮动，则A元素顶部会和上一个元素的顶部对齐；如果上一个元素是标准流，则A元素的顶部会和上一个元素的底部对齐。</li>
-<li>一个父盒子里面的子盒子，如果其中一个子级有浮动的，则其他子级都需要浮动。这样才能一行对齐显示。</li>
-<li>浮动根据元素书写的位置来显示相应的浮动。</li>
-<li>元素添加浮动后，元素会具有行内块元素的特性。元素的大小完全取决于定义的大小或者默认的内容多少。</li>
-<li>浮动以后的子元素，不会撑开父容器</li>
-<li>如果行内元素 浮动之后就可以指定宽和高</li>
-</ol>
-<h2 id="清除浮动："><a href="#清除浮动：" class="headerlink" title="清除浮动："></a>清除浮动：</h2><ol>
-<li>clear:left<br>clear:right<br>clear:both</li>
-<li><p>使用overflow:hidden清除浮动<br>父元素(设置了height和没设置height结果可不一样，以后补充)：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overflow: hidden;/*清除子元素的浮动*/</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用伪元素来清除</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.clearfix:after &#123;</div><div class="line">    content:&quot;&quot;;</div><div class="line">    height: 0;</div><div class="line">    line-height: 0;</div><div class="line">    visibility: hidden;</div><div class="line">    display: block;</div><div class="line">    clear: both;</div><div class="line">&#125;</div><div class="line">.clearfix &#123;</div><div class="line">    zoom: 1;/*兼容ie浏览器*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="版心和布局流程"><a href="#版心和布局流程" class="headerlink" title="版心和布局流程"></a>版心和布局流程</h1><p>为什么要应用布局？<br>阅读报纸时容易发现，虽然报纸中的内容很多，但是经过合理地排版，版面依然清晰、易读。同样，在制作网页时，要想使页面结构清晰、有条理，也需要对网页进行“排版”。  </p>
-<p>版心<br>“版心”是指网页中主体内容所在的区域。一般在浏览器窗口中水平居中显示，常见的宽度值为960px、980px、1000px等。  </p>
-<p>布局流程<br>为了提高网页制作的效率，布局时通常需要遵守一定的布局流程，具体如下：</p>
-<ol>
-<li>确定页面的版心（可视区）。</li>
-<li>分析页面中的行模块，以及每个行模块中的列模块。</li>
-<li>运用盒子模型的原理，通过DIV+CSS布局来控制网页的各个模块。</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;标准流-normal-flow&quot;&gt;&lt;a href=&quot;#标准流-normal-flow&quot; class=&quot;headerlink&quot; title=&quot;标准流(normal flow)&quot;&gt;&lt;/a&gt;标准流(normal flow)&lt;/h1&gt;&lt;p&gt;html语言当中另外一个相当重要
+      &lt;h1 id=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;a href=&quot;#CSS标签的显示和隐藏：&quot; class=&quot;headerlink&quot; title=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;/a&gt;CSS标签的显示和隐藏：&lt;/h1&gt;&lt;h1 id=&quot;overflow&quot;&gt;&lt;a href=&quot;#overf
     
     </summary>
     
@@ -738,30 +742,28 @@
   </entry>
   
   <entry>
-    <title>04_CSS的overflow</title>
-    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/04_CSS%E7%9A%84overflow/"/>
-    <id>http://yoursite.com/2017/04/07/Frontend/CSS/04_CSS的overflow/</id>
+    <title>05_CSS定位position</title>
+    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/05_CSS%E5%AE%9A%E4%BD%8Dposition/"/>
+    <id>http://yoursite.com/2017/04/07/Frontend/CSS/05_CSS定位position/</id>
     <published>2017-04-07T13:46:07.000Z</published>
     <updated>2017-04-07T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="CSS标签的显示和隐藏："><a href="#CSS标签的显示和隐藏：" class="headerlink" title="CSS标签的显示和隐藏："></a>CSS标签的显示和隐藏：</h1><h1 id="overflow"><a href="#overflow" class="headerlink" title="overflow:"></a>overflow:</h1><ul>
-<li>hidden:超出部分隐藏。</li>
-<li>scroll:滚动条（超出的部分会显示在滚动条之内）</li>
-<li>auto:如果内容超出会显示滚动条，如果没有那么会自动隐藏。</li>
-</ul>
-<h1 id="display-none-隐藏元素"><a href="#display-none-隐藏元素" class="headerlink" title="display:none;   隐藏元素"></a>display:none;   隐藏元素</h1><p>完全隐藏原来的div，不占位置<br>display:none;  隐藏<br>display:block;  显示  </p>
-<h1 id="visibility-隐藏元素"><a href="#visibility-隐藏元素" class="headerlink" title="visibility:      隐藏元素"></a>visibility:      隐藏元素</h1><p>visibility也会隐藏原来的div但是div还是会占据着自己的位置不放，屏幕上显示的是空白。</p>
-<ul>
-<li>visible;默认值。元素是可见的。</li>
-<li>hidden;元素是不可见的。</li>
-<li>collapse;当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 “hidden”。</li>
-<li>inherit;规定应该从父元素继承 visibility 属性的值。</li>
-</ul>
+    <content type="html"><![CDATA[<h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><p>浮动是没有占据页面的位置的。<br>绝对定位：也不占据页面的位置。  </p>
+<p>即：脱离了文档流  </p>
+<p>可以使用top,bottom,left,right属性进行定位</p>
+<h2 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h2><p>position:relative<br>在页面上会占据位置，<br>相对定位是相对于原来的位置定位的。  </p>
+<p>总结：绝对定位相当于是一种特殊的”浮动”.  </p>
+<h2 id="固定定位"><a href="#固定定位" class="headerlink" title="固定定位"></a>固定定位</h2><p>position:fixed;<br>在页面上不会占据位置。<br>表现：不管页面到了哪里，图片永远都停留在屏幕的同一位置。  </p>
+<h2 id="决定定位"><a href="#决定定位" class="headerlink" title="决定定位"></a>决定定位</h2><p>position:relative;<br>在页面上不会占据位置。<br><strong>如果给一个行内元素设置了position:absolute，那么这上行内元素会自动转成行内块元素。</strong></p>
+<blockquote>
+<p>一般情况下定位的使用：<br>子绝父相：<br>将来在使用定位的时候最好在<br>1）父元素中使用子元素定位，<br>2）并且遵守一个约定：父元素使用相对定位，子元素使用绝对定位。</p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;a href=&quot;#CSS标签的显示和隐藏：&quot; class=&quot;headerlink&quot; title=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;/a&gt;CSS标签的显示和隐藏：&lt;/h1&gt;&lt;h1 id=&quot;overflow&quot;&gt;&lt;a href=&quot;#overf
+      &lt;h1 id=&quot;position&quot;&gt;&lt;a href=&quot;#position&quot; class=&quot;headerlink&quot; title=&quot;position&quot;&gt;&lt;/a&gt;position&lt;/h1&gt;&lt;p&gt;浮动是没有占据页面的位置的。&lt;br&gt;绝对定位：也不占据页面的位置。  &lt;/p&gt;
+&lt;p&gt;即：脱
     
     </summary>
     
@@ -872,28 +874,162 @@
   </entry>
   
   <entry>
-    <title>05_CSS定位position</title>
-    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/05_CSS%E5%AE%9A%E4%BD%8Dposition/"/>
-    <id>http://yoursite.com/2017/04/07/Frontend/CSS/05_CSS定位position/</id>
+    <title>03_CSS浮动float</title>
+    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/03_CSS%E6%B5%AE%E5%8A%A8float/"/>
+    <id>http://yoursite.com/2017/04/07/Frontend/CSS/03_CSS浮动float/</id>
     <published>2017-04-07T13:46:07.000Z</published>
     <updated>2017-04-07T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><p>浮动是没有占据页面的位置的。<br>绝对定位：也不占据页面的位置。  </p>
-<p>即：脱离了文档流  </p>
-<p>可以使用top,bottom,left,right属性进行定位</p>
-<h2 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h2><p>position:relative<br>在页面上会占据位置，<br>相对定位是相对于原来的位置定位的。  </p>
-<p>总结：绝对定位相当于是一种特殊的”浮动”.  </p>
-<h2 id="固定定位"><a href="#固定定位" class="headerlink" title="固定定位"></a>固定定位</h2><p>position:fixed;<br>在页面上不会占据位置。<br>表现：不管页面到了哪里，图片永远都停留在屏幕的同一位置。  </p>
-<h2 id="决定定位"><a href="#决定定位" class="headerlink" title="决定定位"></a>决定定位</h2><p>position:relative;<br>在页面上不会占据位置。<br><strong>如果给一个行内元素设置了position:absolute，那么这上行内元素会自动转成行内块元素。</strong></p>
+    <content type="html"><![CDATA[<h1 id="标准流-normal-flow"><a href="#标准流-normal-flow" class="headerlink" title="标准流(normal flow)"></a>标准流(normal flow)</h1><p>html语言当中另外一个相当重要的概念———-标准流！或者普通流。<br>标准流实际上就是一个网页内标签元素正常排列的顺序的意思；<br>比如块级元素会独占一行，行内元素会按顺序依次前后排列；<br>按照这种大前提的布局排列之下绝对不会出现列外的情况叫做标准流布局；  </p>
+<h1 id="浮动-float"><a href="#浮动-float" class="headerlink" title="浮动(float)"></a>浮动(float)</h1><p>浮动的价值：<br>就是让任何盒子可以一行排列</p>
+<h2 id="元素的浮动属性float"><a href="#元素的浮动属性float" class="headerlink" title="元素的浮动属性float"></a>元素的浮动属性float</h2><p>什么是浮动？<br>元素的浮动是指设置了浮动属性的元素会脱离标准文档流的控制，移动到其父元素中指定位置的过程。  </p>
+<p>如何定义浮动？<br>在CSS中，通过float属性来定义浮动，其基本语法格式如下：<br>选择器{float:属性值;}  </p>
+<p>float属性值：  </p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>left</td>
+<td>元素向左浮动</td>
+</tr>
+<tr>
+<td>right</td>
+<td>元素向右浮动</td>
+</tr>
+<tr>
+<td>none</td>
+<td>元素不浮动（默认值）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="浮动特性"><a href="#浮动特性" class="headerlink" title="浮动特性"></a>浮动特性</h2><ol>
+<li>浮动脱离标准流，不占位置，会影响标准流。浮动只有左右浮动。</li>
+<li>浮动的元素A排列位置，跟上一个元素（块级）有关系。如果上一个元素有浮动，则A元素顶部会和上一个元素的顶部对齐；如果上一个元素是标准流，则A元素的顶部会和上一个元素的底部对齐。</li>
+<li>一个父盒子里面的子盒子，如果其中一个子级有浮动的，则其他子级都需要浮动。这样才能一行对齐显示。</li>
+<li>浮动根据元素书写的位置来显示相应的浮动。</li>
+<li>元素添加浮动后，元素会具有行内块元素的特性。元素的大小完全取决于定义的大小或者默认的内容多少。</li>
+<li>浮动以后的子元素，不会撑开父容器</li>
+<li>如果行内元素 浮动之后就可以指定宽和高</li>
+</ol>
+<h2 id="清除浮动："><a href="#清除浮动：" class="headerlink" title="清除浮动："></a>清除浮动：</h2><ol>
+<li>clear:left<br>clear:right<br>clear:both</li>
+<li><p>使用overflow:hidden清除浮动<br>父元素(设置了height和没设置height结果可不一样，以后补充)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overflow: hidden;/*清除子元素的浮动*/</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用伪元素来清除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.clearfix:after &#123;</div><div class="line">    content:&quot;&quot;;</div><div class="line">    height: 0;</div><div class="line">    line-height: 0;</div><div class="line">    visibility: hidden;</div><div class="line">    display: block;</div><div class="line">    clear: both;</div><div class="line">&#125;</div><div class="line">.clearfix &#123;</div><div class="line">    zoom: 1;/*兼容ie浏览器*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="版心和布局流程"><a href="#版心和布局流程" class="headerlink" title="版心和布局流程"></a>版心和布局流程</h1><p>为什么要应用布局？<br>阅读报纸时容易发现，虽然报纸中的内容很多，但是经过合理地排版，版面依然清晰、易读。同样，在制作网页时，要想使页面结构清晰、有条理，也需要对网页进行“排版”。  </p>
+<p>版心<br>“版心”是指网页中主体内容所在的区域。一般在浏览器窗口中水平居中显示，常见的宽度值为960px、980px、1000px等。  </p>
+<p>布局流程<br>为了提高网页制作的效率，布局时通常需要遵守一定的布局流程，具体如下：</p>
+<ol>
+<li>确定页面的版心（可视区）。</li>
+<li>分析页面中的行模块，以及每个行模块中的列模块。</li>
+<li>运用盒子模型的原理，通过DIV+CSS布局来控制网页的各个模块。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;标准流-normal-flow&quot;&gt;&lt;a href=&quot;#标准流-normal-flow&quot; class=&quot;headerlink&quot; title=&quot;标准流(normal flow)&quot;&gt;&lt;/a&gt;标准流(normal flow)&lt;/h1&gt;&lt;p&gt;html语言当中另外一个相当重要
+    
+    </summary>
+    
+      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>02_CSS的盒子模型</title>
+    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/02_CSS%E7%9A%84%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://yoursite.com/2017/04/07/Frontend/CSS/02_CSS的盒子模型/</id>
+    <published>2017-04-07T13:46:07.000Z</published>
+    <updated>2017-04-07T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="盒子模型的概念"><a href="#盒子模型的概念" class="headerlink" title="盒子模型的概念"></a>盒子模型的概念</h1><p>所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。<br>每个矩形都由元素的内容、内边距（padding）、边框（border）和外边距（margin）组成。  </p>
+<ul>
+<li><p>网页就是多个盒子嵌套排列的结果。  </p>
+</li>
+<li><p>内边距出现在内容区域的周围，当给元素添加背景色或背景图像时，该元素的背景色或背景图像也将出现在内边距中。</p>
+</li>
+<li>外边距是该元素与相邻元素之间的距离。</li>
+<li>如果给元素定义边框属性，边框将出现在内边距和外边距之间。  </li>
+</ul>
 <blockquote>
-<p>一般情况下定位的使用：<br>子绝父相：<br>将来在使用定位的时候最好在<br>1）父元素中使用子元素定位，<br>2）并且遵守一个约定：父元素使用相对定位，子元素使用绝对定位。</p>
+<p>注意：虽然盒子模型拥有内边距、边框、外边距、宽和高这些基本属性，但是并不要求每个元素都必须定义这些属性。</p>
+</blockquote>
+<h1 id="外边距"><a href="#外边距" class="headerlink" title="外边距"></a>外边距</h1><p>margin-top:上外边距<br>margin-right:右外边距<br>margin-bottom:下外边距<br>margin-left:上外边距<br>margin:上外边距 [右外边距  下外边距  左外边距]</p>
+<p><strong>对块元素应用宽度属性width，并将左右的外边距都设置为auto，可使块级元素水平居中，实际工作中常用这种方式进行网页布局</strong><br>示例代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.header&#123; width:960px; margin:0 auto;&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：使用margin定义块元素的垂直外边距时，可能会出现外边距的合并。  </p>
+</blockquote>
+<h2 id="外边距的合并"><a href="#外边距的合并" class="headerlink" title="外边距的合并"></a>外边距的合并</h2><h3 id="相邻块元素垂直外边距的合并"><a href="#相邻块元素垂直外边距的合并" class="headerlink" title="相邻块元素垂直外边距的合并:"></a>相邻块元素垂直外边距的合并:</h3><p><img src="http://oo22worto.bkt.clouddn.com/%E7%9B%B8%E9%82%BB%E5%9D%97%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E5%90%88%E5%B9%B6.png" alt="相邻块元素垂直外边距的合并"><br>当上下相邻的两个块元素相遇时，如果上面的元素有下外边距margin-bottom，下面的元素有上外边距margin-top，则他们之间的垂直间距不是margin-bottom与margin-top之和，而是两者中的较大者。这种现象被称为相邻块元素垂直外边距的合并（也称外边距塌陷）。</p>
+<h3 id="嵌套块元素垂直外边距的合并"><a href="#嵌套块元素垂直外边距的合并" class="headerlink" title="嵌套块元素垂直外边距的合并:"></a>嵌套块元素垂直外边距的合并:</h3><p><img src="http://oo22worto.bkt.clouddn.com/%E5%B5%8C%E5%A5%97%E5%9D%97%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E5%90%88%E5%B9%B6.png" alt="嵌套块元素垂直外边距的合并">  </p>
+<ul>
+<li>对于两个嵌套关系的块元素，如果父元素没有上内边距及边框，则父元素的上外边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会发生合并。</li>
+<li>如果希望外边距不合并，可以为父元素定义1像素的上边框或上内边距。这里以定义父元素的上边框为例，在父<div>的CSS样式中增加如下代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-top:1px solid #FCC;/*定义父div的上边框*/</div></pre></td></tr></table></figure>
+</div></li>
+</ul>
+<h1 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h1><h2 id="边框样式（border-style）"><a href="#边框样式（border-style）" class="headerlink" title="边框样式（border-style）"></a>边框样式（border-style）</h2><p>样式：<br>border-top/right/bottom/left-style:;<br>border-style:top right bottom left;  </p>
+<p>边框样式用于定义页面中边框的风格，常用属性值如下：  </p>
+<ul>
+<li>none：没有边框即忽略所有边框的宽度（默认值）</li>
+<li>solid：边框为单实线</li>
+<li>dashed：边框为虚线</li>
+<li>dotted：边框为点线</li>
+<li>double：边框为双实线</li>
+</ul>
+<h2 id="边框宽度（border-width）"><a href="#边框宽度（border-width）" class="headerlink" title="边框宽度（border-width）"></a>边框宽度（border-width）</h2><p>宽度<br>border-top/right/bottom/left-width:;<br>border-width:top right bottom left;  </p>
+<h2 id="边框颜色（border-color）"><a href="#边框颜色（border-color）" class="headerlink" title="边框颜色（border-color）"></a>边框颜色（border-color）</h2><p>颜色<br>border-top/right/bottom/left-color:;<br>border-color:top right bottom left;  </p>
+<blockquote>
+<p>注意：设置边框颜色时同样必须设置边框样式，如果未设置样式或设置为none，则其他的边框属性无效。</p>
+</blockquote>
+<h2 id="综合设置边框-复合属性"><a href="#综合设置边框-复合属性" class="headerlink" title="综合设置边框(复合属性)"></a>综合设置边框(复合属性)</h2><p>border[-top right bottom left]:宽度 样式 颜色;  </p>
+<ul>
+<li>像border、border-top等这样，能够一个属性定义元素的多种样式，在CSS中称之为复合属性。</li>
+<li>常用的复合属性有font、border、margin、padding和background等。</li>
+<li>复合属性可以简化代码，提高页面的运行速度，但是如果只有一项值，最好不要应用复合属性，以免样式不被兼容。</li>
+</ul>
+<h2 id="圆角"><a href="#圆角" class="headerlink" title="圆角"></a>圆角</h2><p>border-radius<br>border-top-left-radius: //左上角<br>border-top-right-radius: //右上角<br>border-bottom-right-radius: //右下角<br>border-bottom-left-radius: //左下角<br>分别是水平方向和竖直方向半径，第二值省略的情况下，水平方向和竖直方向的半径相等。<br>border-radius 只有在以下版本的浏览器：Firefox4.0+、Safari5.0+、Google Chrome 10.0+、Opera 10.5+、IE9+ 支持 border-radius 标准语法格式，对于老版的浏览器，border-radius 需要根据不同的浏览器内核添加不同的前缀，比说 Mozilla 内核需要加上“-moz”，而 Webkit 内核需要加上“-webkit”等，但是IE和Opera没有私有格式，因此为了最大程度的兼容浏览器，我们需要设置如下：<br>-webkit-border-radius: 10px 20px 30px;<br>-moz-border-radius: 10px 20px 30px;<br>border-radius: 10px 20px 30px;<br><a href="http://blog.csdn.net/liuyan19891230/article/details/50724630" target="_blank" rel="external">CSS3的border-radius属性详解</a></p>
+<h2 id="多学几招"><a href="#多学几招" class="headerlink" title="多学几招"></a>多学几招</h2><ol>
+<li>表单的边框通常改为 0；<br><code>border:0 none;</code></li>
+<li>表格的细线边框<br><code>table { border-collapse:collapse; }</code></li>
+<li>轮廓 （链接有虚线 和  文本框  有 蓝色边框）<br><code>outline-style:none;</code></li>
+</ol>
+<p>在制作网页的过程中，如果涉及到了页面的宽高的问题，最好用width和height去解决，才用padding,最后才考虑margin.<br>因为margin在布局中会存在兼容性的问题</p>
+<h1 id="内边距属性"><a href="#内边距属性" class="headerlink" title="内边距属性"></a>内边距属性</h1><p>padding-top:上内边距<br>padding-right:右内边距<br>padding-bottom:下内边距<br>padding-left:左内边距<br>padding:上内边距[右内边距 下内边距  左内边距]  </p>
+<p>为了更方便地控制网页中的元素，制作网页时，可使用如下代码清除元素的默认内外边距：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*&#123;</div><div class="line">	padding:0;         /*清除内边距*/</div><div class="line">	margin:0;          /*清除外边距*/</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：行内元素尽量不要给上下的margin 和padding</p>
+</blockquote>
+<h1 id="盒子的宽与高"><a href="#盒子的宽与高" class="headerlink" title="盒子的宽与高"></a>盒子的宽与高</h1><ul>
+<li>使用宽度属性width和高度属性height可以对盒子的大小进行控制。</li>
+<li>width和height的属性值可以为不同单位的数值或相对于父元素的百分比%，实际工作中最常用的是像素值。</li>
+<li>大多数浏览器，如Firefox、IE6及以上版本都采用了W3C规范，符合CSS规范的盒子模型的总宽度和总高度的计算原则是：<br>盒子的总宽度= width+左右内边距之和+左右边框宽度之和+左右外边距之和<br>盒子的总高度= height+上下内边距之和+上下边框宽度之和+上下外边距之和</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>宽度属性width和高度属性height仅适用于块级元素，对行内元素无效<code>&lt;img /&gt;标记和&lt;input /&gt;除外</code></li>
+<li>计算盒子模型的总高度时，还应考虑上下两个盒子垂直外边距合并的情况</li>
+</ol>
 </blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;position&quot;&gt;&lt;a href=&quot;#position&quot; class=&quot;headerlink&quot; title=&quot;position&quot;&gt;&lt;/a&gt;position&lt;/h1&gt;&lt;p&gt;浮动是没有占据页面的位置的。&lt;br&gt;绝对定位：也不占据页面的位置。  &lt;/p&gt;
-&lt;p&gt;即：脱
+      &lt;h1 id=&quot;盒子模型的概念&quot;&gt;&lt;a href=&quot;#盒子模型的概念&quot; class=&quot;headerlink&quot; title=&quot;盒子模型的概念&quot;&gt;&lt;/a&gt;盒子模型的概念&lt;/h1&gt;&lt;p&gt;所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。&lt;br&gt;每个矩
     
     </summary>
     
@@ -1004,28 +1140,109 @@
   </entry>
   
   <entry>
-    <title>09_Hibernate_Session线程安全问题</title>
-    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
-    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/</id>
+    <title>07_Hibernate_二级缓存</title>
+    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/</id>
     <published>2017-04-02T13:46:07.000Z</published>
     <updated>2017-04-02T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
-<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
+    <content type="html"><![CDATA[<h1 id="Hibernate-二级缓存"><a href="#Hibernate-二级缓存" class="headerlink" title="Hibernate_二级缓存:"></a>Hibernate_二级缓存:</h1><ol>
+<li>缓存的是对象.</li>
+<li>作用：提高Hibernate4的查询性能.</li>
+<li>二级缓存默认是关闭的.<br>(因为它是与SessionFactory与关),<br>SessionFactory存活的时间很长.</li>
+</ol>
+<h2 id="使用二级缓存的步骤"><a href="#使用二级缓存的步骤" class="headerlink" title="使用二级缓存的步骤:"></a>使用二级缓存的步骤:</h2><ul>
+<li>第一步：拷贝jar (4个jar包)<br>lib\optional\ehcache\ehcache-core-2.4.3.jar<br>lib\optional\ehcache\hibernate-ehcache-4.3.8.Final.jar<br>slf4j-api-1.7.2.jar<br>slf4j-jdk14-1.7.2.jar<br><strong>slf4j: Simple Logging Fade for Java : 简单的java日志门面.</strong></li>
+<li>第二步：在hibernate.cfg.xml文件配置开启二级缓存.</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启二级缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_second_level_cache&quot;&gt;true&lt;/property&gt;</div><div class="line">&lt;!-- 配置二级缓存的实现商 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.region.factory_class&quot;&gt;org.hibernate.cache.ehcache.EhCacheRegionFactory&lt;/property&gt;</div></pre></td></tr></table></figure>
 <ul>
-<li>第二步：编程部分</li>
+<li><p>第三步：在src/ehcache.xml是Ehcache框架默认需要加载的配置文件.<br>主要在ehcache.xml文件中配置二级缓存中的<br>对象在内存中存放的最大数据<br>超出了内存中最大数据就写入磁盘.<br>hibernate-release-4.3.8.Final\project\etc\ehcache.xml</p>
+</li>
+<li><p>第四步：配置哪些持久化类产生的对象存入二级缓存</p>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注意:session不需自己关闭.</p>
-</blockquote>
+<p>hibernate.cfg.xml:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!--  </div><div class="line">配置哪些持久化类产生的对象存入二级缓存</div><div class="line">    usage: 使用缓存的策略 read-only: 查询 | read-write: CRUD</div><div class="line">    class: 指定持久化类</div><div class="line">--&gt;</div><div class="line">&lt;class-cache usage=&quot;read-write&quot; class=&quot;cn.moartalliao.hibernate.entity.Student&quot;/&gt;</div><div class="line">在持久化类上加注解：</div><div class="line">@Cache(usage=CacheConcurrencyStrategy.READ_WRITE) // 使用二级缓存(默认的缓存区)</div><div class="line">@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region=&quot;itCache&quot;) // 使用二级缓存</div></pre></td></tr></table></figure></p>
+<h2 id="操作二级缓存："><a href="#操作二级缓存：" class="headerlink" title="操作二级缓存："></a>操作二级缓存：</h2><ul>
+<li><p>获取二级缓存的操作对象.<br>Cache cache = SessionFactory.getCache();</p>
+</li>
+<li><p>清空二级缓存：<br>cache.evictAllRegions();</p>
+</li>
+<li><p>从二级缓存中逐出单个对象.<br>cache.evictEntity(Class entityClass, Serializable identifier);</p>
+</li>
+<li><p>从二级缓存中逐出指定类型的所有对象.<br>cache.evictEntityRegion(Class entityClass);</p>
+</li>
+<li><p>判断二级缓存中是否包含一个指定的对象.<br>cache.containsEntity(Class entityClass, Serializable identifier)</p>
+</li>
+</ul>
+<p>Map<string, object=""> : map集合<br>key : 包名.类名#主键id属性值<br>value : 对象的值  </string,></p>
+<p>Map<string, object=""> maps = new HashMap&lt;&gt;();<br>maps.put(“cn.moartalliao.entity.Student#1”, “”);<br>maps.put(“cn.moartalliao.entity.Student#2”, “”);<br>maps.put(“cn.moartalliao.entity.Student#3”, “”);  </string,></p>
+<p>Hibernate找查询对象的步骤：<br>Session的一级缓存中找  –&gt; 二级缓存中找  –&gt; 数据库中查找.</p>
+<p>一级缓存中的对象会影响数据库表(setXxx)<br>二级缓存中的对象不会影响数据库表.</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Hibernate-Session线程安全问题&quot;&gt;&lt;a href=&quot;#Hibernate-Session线程安全问题&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_Session线程安全问题:&quot;&gt;&lt;/a&gt;Hibernate_Sessio
+      &lt;h1 id=&quot;Hibernate-二级缓存&quot;&gt;&lt;a href=&quot;#Hibernate-二级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_二级缓存:&quot;&gt;&lt;/a&gt;Hibernate_二级缓存:&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;缓存的是对象.&lt;/li&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>03_Hibernate_一级缓存</title>
+    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate的一级缓存"><a href="#Hibernate的一级缓存" class="headerlink" title="Hibernate的一级缓存."></a>Hibernate的一级缓存.</h1><ol>
+<li>一级缓存，默认是开启的.</li>
+<li>它是跟Session相关(一级缓存是放在Session对象中).</li>
+<li>一级缓存是存放在内存中.<br>因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.  </li>
+</ol>
+<ul>
+<li><p>一级缓存的作用：<br>提高Hibernate的执行效率.  </p>
+</li>
+<li><p>如何提高Hibernate的执行效率:<br>因为它会把查询出来的对象先存放在内存中(一级缓存中).<br>当你调用该对象的set方法时它不会立即发出update语句<br>当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,<br>如果对象的属性值没有发生改变就不会生成update语句.  </p>
+</li>
+</ul>
+<blockquote>
+<p>操作一级缓存的方法：</p>
+</blockquote>
+<ol>
+<li><p>session.contains(持久化对象);<br>判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态</p>
+</li>
+<li><p>void session.clear(): 清空Session中的一级缓存.(所有的持久化状态的对象都没有了).</p>
+</li>
+<li><p>void session.evict(Object object): 从Session一级缓存中删除一个指定的持久化状态的对象.</p>
+</li>
+<li><p>void flush(): 把Session一级缓存中的对象同步到底层的数据库表中.(默认是事务提交时才同步)</p>
+</li>
+<li><p>void session.close(): 先清空Session中的一级缓存，再关闭数据库连接.</p>
+</li>
+<li><p>Session的一级缓存的生命周期：<br>Session session = SessionFactory.openSession(); 一级缓存开始<br>…..<br>session.close();  一级缓存结束</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate的一级缓存&quot;&gt;&lt;a href=&quot;#Hibernate的一级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate的一级缓存.&quot;&gt;&lt;/a&gt;Hibernate的一级缓存.&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;一级缓存，默认是开启的.&lt;/
     
     </summary>
     
@@ -1159,105 +1376,6 @@
   </entry>
   
   <entry>
-    <title>06_Hibernate_批量处理</title>
-    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86/"/>
-    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-批量处理-Hibernate的性能调优"><a href="#Hibernate-批量处理-Hibernate的性能调优" class="headerlink" title="Hibernate_批量处理(Hibernate的性能调优):"></a>Hibernate_批量处理(Hibernate的性能调优):</h1><h2 id="批量添加："><a href="#批量添加：" class="headerlink" title="批量添加："></a>批量添加：</h2><p>假如有10w条数据需要用Hibernate这个框架实现批量添加的话，有可能会出现内存溢出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/** </div><div class="line"> * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line"> * 这样内存中就要存放10w个对象 </div><div class="line"> */</div><div class="line">session.save(t); // t --&gt; 持久化状态</div><div class="line">/**</div><div class="line"> * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line"> * 再调用clear()清空一级缓存，就释放内存 </div><div class="line"> */</div><div class="line">if (i % 20 == 0)&#123;</div><div class="line">    // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">    session.flush();</div><div class="line">    // 清空一级缓存，就释放内存</div><div class="line">    session.clear();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="批量修改："><a href="#批量修改：" class="headerlink" title="批量修改："></a>批量修改：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line">     * 这样内存中就要存放10w个对象 </div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    t.setAge(90);</div><div class="line">    /**</div><div class="line">     * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line">     * 再调用clear()清空一级缓存，就释放内存 </div><div class="line">     */</div><div class="line">    if (i % 20 == 0)&#123;</div><div class="line">        // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">        session.flush(); // 就会有update语句</div><div class="line">        // 清空一级缓存，就释放内存</div><div class="line">        session.clear();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="批量删除："><a href="#批量删除：" class="headerlink" title="批量删除："></a>批量删除：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/** 利用Session完成所有的持久化操作 */</div><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中)</div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    // 调用了delete方法 t是瞬态</div><div class="line">    session.delete(t);</div><div class="line">    System.out.println(session.contains(t)); </div><div class="line">    // 调用flush方法所数据同步到数据库的内存中 (产生delete语句)</div><div class="line">    session.flush();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="DML批量处理："><a href="#DML批量处理：" class="headerlink" title="DML批量处理："></a>DML批量处理：</h2><p>Data Manipulation Language (DML) : insert、select、update、delete</p>
-<p>DDL: drop 、create</p>
-<p>DML语法格式：<br>( UPDATE | DELETE ) FROM? EntityName (WHERE where_conditions)?. </p>
-<p>操作步骤：</p>
-<ul>
-<li>获取Session</li>
-<li>定义DML风格的hql语句.</li>
-<li>调用Query query = session.createQuery(hql);<br>如果hql语句中有占位符?，调用query.setPrameter()设置参数值.</li>
-</ul>
-<p><code>int res = query.exeuteUpdate(); // 受影响的记录条数</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">修改(DML)：</div><div class="line">/** DML风格的update语句 */</div><div class="line">String hql = &quot;update Teacher set age = ?&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">                 .setParameter(0, 50)</div><div class="line">                 .executeUpdate();</div><div class="line">删除(DML)：</div><div class="line">/** DML风格的delete语句 */</div><div class="line">//String hql = &quot;delete Teacher&quot;;</div><div class="line">//String hql = &quot;delete from Teacher where id &lt; ?&quot;;</div><div class="line">String hql = &quot;delete from Teacher where id in(?,?,?)&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">                 .setParameter(0, 10000)</div><div class="line">                 .setParameter(1, 10001)</div><div class="line">                 .setParameter(2, 10002)</div><div class="line">                 .executeUpdate();</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-批量处理-Hibernate的性能调优&quot;&gt;&lt;a href=&quot;#Hibernate-批量处理-Hibernate的性能调优&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_批量处理(Hibernate的性能调优):&quot;&gt;&lt;
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>03_Hibernate_一级缓存</title>
-    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
-    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate的一级缓存"><a href="#Hibernate的一级缓存" class="headerlink" title="Hibernate的一级缓存."></a>Hibernate的一级缓存.</h1><ol>
-<li>一级缓存，默认是开启的.</li>
-<li>它是跟Session相关(一级缓存是放在Session对象中).</li>
-<li>一级缓存是存放在内存中.<br>因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.  </li>
-</ol>
-<ul>
-<li><p>一级缓存的作用：<br>提高Hibernate的执行效率.  </p>
-</li>
-<li><p>如何提高Hibernate的执行效率:<br>因为它会把查询出来的对象先存放在内存中(一级缓存中).<br>当你调用该对象的set方法时它不会立即发出update语句<br>当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,<br>如果对象的属性值没有发生改变就不会生成update语句.  </p>
-</li>
-</ul>
-<blockquote>
-<p>操作一级缓存的方法：</p>
-</blockquote>
-<ol>
-<li><p>session.contains(持久化对象);<br>判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态</p>
-</li>
-<li><p>void session.clear(): 清空Session中的一级缓存.(所有的持久化状态的对象都没有了).</p>
-</li>
-<li><p>void session.evict(Object object): 从Session一级缓存中删除一个指定的持久化状态的对象.</p>
-</li>
-<li><p>void flush(): 把Session一级缓存中的对象同步到底层的数据库表中.(默认是事务提交时才同步)</p>
-</li>
-<li><p>void session.close(): 先清空Session中的一级缓存，再关闭数据库连接.</p>
-</li>
-<li><p>Session的一级缓存的生命周期：<br>Session session = SessionFactory.openSession(); 一级缓存开始<br>…..<br>session.close();  一级缓存结束</p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate的一级缓存&quot;&gt;&lt;a href=&quot;#Hibernate的一级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate的一级缓存.&quot;&gt;&lt;/a&gt;Hibernate的一级缓存.&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;一级缓存，默认是开启的.&lt;/
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
     <title>02_Hibernate实现简单的CRUD操作</title>
     <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/02_Hibernate_CRUD/"/>
     <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/02_Hibernate_CRUD/</id>
@@ -1338,6 +1456,45 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Hibernate实现简单的CRUD操作：&quot;&gt;&lt;a href=&quot;#Hibernate实现简单的CRUD操作：&quot; class=&quot;headerlink&quot; title=&quot;Hibernate实现简单的CRUD操作：&quot;&gt;&lt;/a&gt;Hibernate实现简单的CRUD操作：&lt;/
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>09_Hibernate_Session线程安全问题</title>
+    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
+    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
+<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>第二步：编程部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:session不需自己关闭.</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate-Session线程安全问题&quot;&gt;&lt;a href=&quot;#Hibernate-Session线程安全问题&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_Session线程安全问题:&quot;&gt;&lt;/a&gt;Hibernate_Sessio
     
     </summary>
     
@@ -1474,69 +1631,6 @@
       &lt;h1 id=&quot;Hibernate-HQL&quot;&gt;&lt;a href=&quot;#Hibernate-HQL&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_HQL&quot;&gt;&lt;/a&gt;Hibernate_HQL&lt;/h1&gt;&lt;p&gt;Hibernate的三套查询: &lt;/p&gt;
 &lt;ol&gt;
 
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>07_Hibernate_二级缓存</title>
-    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
-    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-二级缓存"><a href="#Hibernate-二级缓存" class="headerlink" title="Hibernate_二级缓存:"></a>Hibernate_二级缓存:</h1><ol>
-<li>缓存的是对象.</li>
-<li>作用：提高Hibernate4的查询性能.</li>
-<li>二级缓存默认是关闭的.<br>(因为它是与SessionFactory与关),<br>SessionFactory存活的时间很长.</li>
-</ol>
-<h2 id="使用二级缓存的步骤"><a href="#使用二级缓存的步骤" class="headerlink" title="使用二级缓存的步骤:"></a>使用二级缓存的步骤:</h2><ul>
-<li>第一步：拷贝jar (4个jar包)<br>lib\optional\ehcache\ehcache-core-2.4.3.jar<br>lib\optional\ehcache\hibernate-ehcache-4.3.8.Final.jar<br>slf4j-api-1.7.2.jar<br>slf4j-jdk14-1.7.2.jar<br><strong>slf4j: Simple Logging Fade for Java : 简单的java日志门面.</strong></li>
-<li>第二步：在hibernate.cfg.xml文件配置开启二级缓存.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启二级缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_second_level_cache&quot;&gt;true&lt;/property&gt;</div><div class="line">&lt;!-- 配置二级缓存的实现商 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.region.factory_class&quot;&gt;org.hibernate.cache.ehcache.EhCacheRegionFactory&lt;/property&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>第三步：在src/ehcache.xml是Ehcache框架默认需要加载的配置文件.<br>主要在ehcache.xml文件中配置二级缓存中的<br>对象在内存中存放的最大数据<br>超出了内存中最大数据就写入磁盘.<br>hibernate-release-4.3.8.Final\project\etc\ehcache.xml</p>
-</li>
-<li><p>第四步：配置哪些持久化类产生的对象存入二级缓存</p>
-</li>
-</ul>
-<p>hibernate.cfg.xml:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!--  </div><div class="line">配置哪些持久化类产生的对象存入二级缓存</div><div class="line">    usage: 使用缓存的策略 read-only: 查询 | read-write: CRUD</div><div class="line">    class: 指定持久化类</div><div class="line">--&gt;</div><div class="line">&lt;class-cache usage=&quot;read-write&quot; class=&quot;cn.moartalliao.hibernate.entity.Student&quot;/&gt;</div><div class="line">在持久化类上加注解：</div><div class="line">@Cache(usage=CacheConcurrencyStrategy.READ_WRITE) // 使用二级缓存(默认的缓存区)</div><div class="line">@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region=&quot;itCache&quot;) // 使用二级缓存</div></pre></td></tr></table></figure></p>
-<h2 id="操作二级缓存："><a href="#操作二级缓存：" class="headerlink" title="操作二级缓存："></a>操作二级缓存：</h2><ul>
-<li><p>获取二级缓存的操作对象.<br>Cache cache = SessionFactory.getCache();</p>
-</li>
-<li><p>清空二级缓存：<br>cache.evictAllRegions();</p>
-</li>
-<li><p>从二级缓存中逐出单个对象.<br>cache.evictEntity(Class entityClass, Serializable identifier);</p>
-</li>
-<li><p>从二级缓存中逐出指定类型的所有对象.<br>cache.evictEntityRegion(Class entityClass);</p>
-</li>
-<li><p>判断二级缓存中是否包含一个指定的对象.<br>cache.containsEntity(Class entityClass, Serializable identifier)</p>
-</li>
-</ul>
-<p>Map<string, object=""> : map集合<br>key : 包名.类名#主键id属性值<br>value : 对象的值  </string,></p>
-<p>Map<string, object=""> maps = new HashMap&lt;&gt;();<br>maps.put(“cn.moartalliao.entity.Student#1”, “”);<br>maps.put(“cn.moartalliao.entity.Student#2”, “”);<br>maps.put(“cn.moartalliao.entity.Student#3”, “”);  </string,></p>
-<p>Hibernate找查询对象的步骤：<br>Session的一级缓存中找  –&gt; 二级缓存中找  –&gt; 数据库中查找.</p>
-<p>一级缓存中的对象会影响数据库表(setXxx)<br>二级缓存中的对象不会影响数据库表.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-二级缓存&quot;&gt;&lt;a href=&quot;#Hibernate-二级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_二级缓存:&quot;&gt;&lt;/a&gt;Hibernate_二级缓存:&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;缓存的是对象.&lt;/li&gt;
-&lt;
     
     </summary>
     
