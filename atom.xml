@@ -16,38 +16,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>03_logback配置详解filter</title>
-    <link href="http://yoursite.com/2017/05/14/Backend/Java/Log/logback%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3filter/"/>
-    <id>http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解filter/</id>
+    <title>01_logback配置详解</title>
+    <link href="http://yoursite.com/2017/05/14/Backend/Java/Log/logback%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解/</id>
     <published>2017-05-14T05:46:07.000Z</published>
     <updated>2017-05-14T05:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="logback配置详解filter"><a href="#logback配置详解filter" class="headerlink" title="logback配置详解filter"></a>logback配置详解filter</h1><h2 id="lt-filter-gt"><a href="#lt-filter-gt" class="headerlink" title="&lt;filter&gt;"></a><code>&lt;filter&gt;</code></h2><p>过滤器，执行一个过滤器会有返回个枚举值，即DENY，NEUTRAL，ACCEPT其中之一。<br>返回DENY，日志将立即被抛弃不再经过其他过滤器；<br>返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；<br>返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。  </p>
-<p>过滤器被添加到 <code>&lt;appender&gt;</code> 中，为 <code>&lt;appender&gt;</code> 添加一个或多个过滤器后，可以用任意条件对日志进行过滤。<br><code>&lt;Appender&gt;</code> 有多个过滤器时，按照配置顺序执行。  </p>
-<p>下面是几个常用的过滤器：</p>
-<h3 id="LevelFilter-级别过滤器，根据日志级别进行过滤"><a href="#LevelFilter-级别过滤器，根据日志级别进行过滤" class="headerlink" title="LevelFilter 级别过滤器，根据日志级别进行过滤"></a>LevelFilter 级别过滤器，根据日志级别进行过滤</h3><p>如果日志级别等于配置级别，过滤器会根据 onMath 和 onMismatch 接收或拒绝日志。有以下子节点：  </p>
-<p><level>:设置过滤级别  </level></p>
-<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
-<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
-<p>例如：将过滤器的日志级别配置为INFO，所有INFO级别的日志交给appender处理，非INFO级别的日志，被过滤掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">  </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">  </div><div class="line">    &lt;encoder&gt;</div><div class="line">      &lt;pattern&gt;</div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;</div><div class="line">    &lt;/encoder&gt;</div><div class="line">  &lt;/appender&gt;</div><div class="line">  </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志"><a href="#ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志" class="headerlink" title="ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志"></a>ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志</h3><p>当日志级别等于或高于临界值时，过滤器返回NEUTRAL；<br>当日志级别低于临界值时，日志会被拒绝。  </p>
-<p>例如：过滤掉所有低于INFO级别的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot;   </div><div class="line">    class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;!-- 过滤掉 TRACE 和 DEBUG 级别的日志--&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;   </div><div class="line">    &lt;/filter&gt;   </div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line">  </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件"><a href="#EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件" class="headerlink" title="EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件"></a>EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件</h3><p>有以下子节点：<br><code>&lt;evaluator&gt;</code><br>鉴别器，常用的鉴别器是JaninoEventEvaluato，也是默认的鉴别器，它以任意的Java布尔值表达式作为求值条件，求值条件在配置文件解释过成功被动态编译，布尔值表达式返回true就表示符合过滤条件。<br>evaluator有个子标签<code>&lt;expression&gt;</code>，用于配置求值条件。  </p>
-<p>求值表达式作用于当前日志，logback向求值表达式暴露日志的各种字段：  </p>
-<table class="bodyTable" border="0" style="padding-left:60px"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Name</th><br><th style="text-align:left; font-weight:bold">Type</th><br><th style="text-align:left; font-weight:bold">Description</th><br></tr><br><tr><br><td style="font-size:1em">event</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggingEvent</code></td><br><td style="font-size:1em">与记录请求相关联的原始记录事件，下面所有变量都来自event，例如，event.getMessage()返回下面&quot;message&quot;相同的字符串</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">message</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志的原始消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello {}&quot;就是原始消息。</td><br></tr><br><tr><br><td style="font-size:1em">formatedMessage</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志被各式话的消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello Aub&quot;就是&#26684;式化后的消息。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">logger</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">logger 名。</td><br></tr><br><tr><br><td style="font-size:1em">loggerContext</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggerContextVO</code></td><br><td style="font-size:1em">日志所属的logger上下文。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">level</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">int</code></td><br><td style="font-size:1em">级别对应的整数&#20540;，所以<span>&nbsp;</span><em style="font-style:italic">level &gt; INFO<span>&nbsp;</span></em>是正确的表达式。</td><br></tr><br><tr><br><td style="font-size:1em">timeStamp</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">long</code></td><br><td style="font-size:1em">创建日志的时间戳。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">marker</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Marker</code></td><br><td style="font-size:1em">与日志请求相关联的Marker对象，注意“Marker”有可能为null，所以你要确保它不能是null。</td><br></tr><br><tr><br><td style="font-size:1em">mdc</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Map</code></td><br><td style="font-size:1em">包含创建日志期间的MDC所有&#20540;得map。访问方法是：<em style="font-style:italic">mdc.get(&quot;myKey&quot;)</em><span>&nbsp;</span>。mdc.get()返回的是Object不是String，要想调用String的方法就要强转，例如，<br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">((String)&nbsp;mdc.get(&quot;k&quot;)).contains(&quot;val&quot;)</code><span>&nbsp;</span>.MDC可能为null，调用时注意。</p><br></td><br></tr><br><tr class="alt"><br><td style="font-size:1em">throwable</td><br><td style="font-size:1em">java.lang.Throwable</td><br><td style="font-size:1em">如果没有异常与日志关联&quot;throwable&quot; 变量为 null. 不幸的是， &quot;throwable&quot; 不能被序列化。在远程系统上永远为null，对于与位置无关的表达式请使用下面的变量<code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">throwableProxy</code></td><br></tr><br><tr><br><td style="font-size:1em">throwableProxy</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">IThrowableProxy</code></td><br><td style="font-size:1em">与日志事件关联的异常代理。如果没有异常与日志事件关联，则变量&quot;throwableProxy&quot; 为 null. 当异常被关联到日志事件时，&quot;throwableProxy&quot; 在远程系统上不会为null</td><br></tr><br></tbody><br></table>
-
-
-<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
-<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
-<p>例如：过滤掉所有日志消息中不包含“billing”字符串的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt; &lt;!-- 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator --&gt;</div><div class="line">        &lt;expression&gt;return message.contains(&quot;billing&quot;);&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT &lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line">  </div><div class="line">  &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<p><code>&lt;matcher&gt;</code><br>匹配器，尽管可以使用String类的matches()方法进行模式匹配，但会导致每次调用过滤器时都会创建一个新的Pattern对象，为了消除这种开销，可以预定义一个或多个matcher对象，定以后就可以在求值表达式中重复引用。<code>&lt;matcher&gt;</code>是<code>&lt;evaluator&gt;</code>的子标签。<br><code>&lt;matcher&gt;</code>中包含两个子标签，<br>一个是<code>&lt;name&gt;</code>，用于定义matcher的名字，求值表达式中使用这个名字来引用matcher；<br>另一个是<code>&lt;regex&gt;</code>，用于配置匹配条件。  </p>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;configuration debug=&quot;true&quot;&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt;</div><div class="line">        &lt;matcher&gt;</div><div class="line">          &lt;Name&gt;odd&lt;/Name&gt;</div><div class="line">          &lt;!-- filter out odd numbered statements --&gt;</div><div class="line">          &lt;regex&gt;statement [13579]&lt;/regex&gt;</div><div class="line">        &lt;/matcher&gt;</div><div class="line">  </div><div class="line">        &lt;expression&gt;odd.matches(formattedMessage)&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line"></div><div class="line">      &lt;OnMismatch&gt;NEUTRAL&lt;/OnMismatch&gt;</div><div class="line">      &lt;OnMatch&gt;DENY&lt;/OnMatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line"></div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line">  </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">&lt;!-- if debug set to true, context info always print  </div><div class="line"> otherwise the contex info will print when error occour --&gt;  </div><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;stdout&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;    </div><div class="line">     &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;    </div><div class="line">       &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;    </div><div class="line">     &lt;/layout&gt;    </div><div class="line">   &lt;/appender&gt;    </div><div class="line">  </div><div class="line"> &lt;!-- 所有日志文件--&gt;  </div><div class="line"> &lt;appender name=&quot;AllLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/all/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;   </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line">  </div><div class="line"> &lt;appender name=&quot;TaskLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/task/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;appender name=&quot;SendLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/send/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;!-- 为莫个包下的所有类指定Appender 这里也可以指定类名称例如：com.aa.bb.ClassName--&gt;    </div><div class="line"> &lt;logger name=&quot;com.aa.bb&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;TaskLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">   </div><div class="line"> &lt;logger name=&quot;com.aa.cc&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;SendLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">  </div><div class="line"> &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">  &lt;appender-ref ref=&quot;AllLog&quot; /&gt;  </div><div class="line"> &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h1 id="logback配置详解"><a href="#logback配置详解" class="headerlink" title="logback配置详解"></a>logback配置详解</h1><h2 id="lt-configuration-gt-根节点包含的属性："><a href="#lt-configuration-gt-根节点包含的属性：" class="headerlink" title="&lt;configuration&gt;根节点包含的属性："></a><code>&lt;configuration&gt;</code>根节点包含的属性：</h2><ul>
+<li><p>scan:<br>当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。  </p>
+</li>
+<li><p>scanPeriod:<br>设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。  </p>
+</li>
+<li><p>debug:<br>当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。  </p>
+</li>
+</ul>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="lt-configuration-gt-根节点的子节点："><a href="#lt-configuration-gt-根节点的子节点：" class="headerlink" title="&lt;configuration&gt;根节点的子节点："></a><code>&lt;configuration&gt;</code>根节点的子节点：</h2><p><img src="http://i.imgur.com/xQql2Mj.png" alt="">  </p>
+<h3 id="lt-contextName-gt-设置上下文名称"><a href="#lt-contextName-gt-设置上下文名称" class="headerlink" title="&lt;contextName&gt; 设置上下文名称"></a><code>&lt;contextName&gt;</code> 设置上下文名称</h3><p>每个logger都关联到logger上下文，默认上下文名称为”default”。<br>但可以使用<contextname>设置成其他名字，用于区分不同应用程序的记录。一旦设置，不能修改。  </contextname></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;contextName&gt;myAppName&lt;/contextName&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<h3 id="lt-property-gt-设置变量"><a href="#lt-property-gt-设置变量" class="headerlink" title="&lt;property&gt; 设置变量"></a><code>&lt;property&gt;</code> 设置变量</h3><p>用来定义变量值的标签，<br><code>&lt;property&gt;</code> 有两个属性，name和value；<br>其中name的值是变量的名称，value的值时变量定义的值。<br>通过<code>&lt;property&gt;</code>定义的值会被插入到logger上下文中。定义变量后，可以使${}来使用变量。<br>例如使用<code>&lt;property&gt;</code>定义上下文名称，然后在<code>&lt;contentName&gt;</code>设置logger上下文时使用。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;property name=&quot;APP_Name&quot; value=&quot;myAppName&quot; /&gt;   </div><div class="line">      &lt;contextName&gt;$&#123;APP_Name&#125;&lt;/contextName&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<h3 id="lt-timestamp-gt-获取时间戳字符串"><a href="#lt-timestamp-gt-获取时间戳字符串" class="headerlink" title="&lt;timestamp&gt; 获取时间戳字符串"></a><code>&lt;timestamp&gt;</code> 获取时间戳字符串</h3><p>两个属性：  </p>
+<ul>
+<li>key标识此<code>&lt;timestamp&gt;</code> 的名字；  </li>
+<li>datePattern：设置将当前时间（解析配置文件的时间）转换为字符串的模式，遵循Java.txt.SimpleDateFormat的格式。  </li>
+</ul>
+<p>例如将解析配置文件的时间作为上下文名称：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;timestamp key=&quot;bySecond&quot; datePattern=&quot;yyyyMMdd&apos;T&apos;HHmmss&quot;/&gt;   </div><div class="line">      &lt;contextName&gt;$&#123;bySecond&#125;&lt;/contextName&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="设置loger："><a href="#设置loger：" class="headerlink" title="设置loger："></a>设置loger：</h3><h4 id="lt-loger-gt"><a href="#lt-loger-gt" class="headerlink" title="&lt;loger&gt;"></a><code>&lt;loger&gt;</code></h4><p>用来设置某一个包或者具体的某一个类的日志打印级别、以及指定<code>&lt;appender&gt;</code>。<br><code>&lt;loger&gt;</code>仅有一个name属性，一个可选的level和一个可选的addtivity属性。  </p>
+<ul>
+<li>name:<br>用来指定受此loger约束的某一个包或者具体的某一个类。</li>
+<li>level:<br>用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，还有一个特殊值INHERITED或者同义词NULL，代表强制执行上级的级别。<br>如果未设置此属性，那么当前loger将会继承上级的级别。  </li>
+<li>addtivity:<br>是否向上级loger传递打印信息。默认是true。<br><code>&lt;loger&gt;</code>可以包含零个或多个<code>&lt;appender-ref&gt;</code>元素，标识这个appender将会添加到这个loger。  </li>
+</ul>
+<h3 id="lt-root-gt"><a href="#lt-root-gt" class="headerlink" title="&lt;root&gt;"></a><code>&lt;root&gt;</code></h3><p>也是<code>&lt;loger&gt;</code>元素，但是它是根loger。只有一个level属性，应为已经被命名为”root”.</p>
+<ul>
+<li>level:<br>用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，不能设置为INHERITED或者同义词NULL。<br>默认是DEBUG。<br><root>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger。  </appender-ref></root></li>
+</ul>
+<p>例如：<br>LogbackDemo.java类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">package logback;  </div><div class="line">  </div><div class="line">import org.slf4j.Logger;  </div><div class="line">import org.slf4j.LoggerFactory;  </div><div class="line">  </div><div class="line">public class LogbackDemo &#123;</div><div class="line">  </div><div class="line">    private static Logger log = LoggerFactory.getLogger(LogbackDemo.class);  </div><div class="line">  </div><div class="line">    public static void main(String[] args) &#123;  </div><div class="line">        log.trace(&quot;======trace&quot;);  </div><div class="line">        log.debug(&quot;======debug&quot;);  </div><div class="line">        log.info(&quot;======info&quot;);  </div><div class="line">        log.warn(&quot;======warn&quot;);  </div><div class="line">        log.error(&quot;======error&quot;);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="logback-xml配置文件"><a href="#logback-xml配置文件" class="headerlink" title="logback.xml配置文件"></a>logback.xml配置文件</h1><h2 id="第1种：只配置root"><a href="#第1种：只配置root" class="headerlink" title="第1种：只配置root"></a>第1种：只配置root</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</div><div class="line">        &lt;!-- encoder 默认配置为PatternLayoutEncoder --&gt;</div><div class="line">        &lt;encoder&gt;</div><div class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;</div><div class="line">        &lt;/encoder&gt;</div><div class="line">    &lt;/appender&gt;</div><div class="line">  </div><div class="line">    &lt;root level=&quot;INFO&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</div><div class="line">    &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<p>其中appender的配置表示打印到控制台；<br><code>&lt;root level=&quot;INFO&quot;&gt;</code>将root的打印级别设置为“INFO”，指定了名字为“STDOUT”的appender。  </p>
+<p>当执行logback.LogbackDemo类的main方法时，root将级别为“INFO”及大于“INFO”的日志信息交给已经配置好的名为“STDOUT”的appender处理，“STDOUT”appender将信息打印到控制台；  </p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">13:30:38.484 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">13:30:38.500 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">13:30:38.500 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
+<h2 id="第2种：带有loger的配置，不指定级别，不指定appender"><a href="#第2种：带有loger的配置，不指定级别，不指定appender" class="headerlink" title="第2种：带有loger的配置，不指定级别，不指定appender"></a>第2种：带有loger的配置，不指定级别，不指定appender</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</div><div class="line">        &lt;!-- encoder 默认配置为PatternLayoutEncoder --&gt;</div><div class="line">        &lt;encoder&gt;</div><div class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;</div><div class="line">        &lt;/encoder&gt;</div><div class="line">    &lt;/appender&gt;</div><div class="line">  </div><div class="line">    &lt;!-- logback为java中的包 --&gt;</div><div class="line">    &lt;logger name=&quot;logback&quot;/&gt;</div><div class="line">    &lt;root level=&quot;DEBUG&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</div><div class="line">    &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<p>其中appender的配置表示打印到控制台；<br><code>&lt;logger name=&quot;logback&quot; /&gt;</code>将控制logback包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级<root>的日志级别“DEBUG”；<br>没有设置addtivity，默认为true，将此loger的打印信息向上级传递；<br>没有设置appender，此loger本身不打印任何信息。<br><code>&lt;root level=&quot;DEBUG&quot;&gt;</code>将root的打印级别设置为“DEBUG”，指定了名字为“STDOUT”的appender。  </root></p>
+<p>当执行logback.LogbackDemo类的main方法时，因为LogbackDemo 在包logback中，所以首先执行<code>&lt;logger name=&quot;logback&quot; /&gt;</code>，将级别为“DEBUG”及大于“DEBUG”的日志信息传递给root，本身并不打印；<br>root接到下级传递的信息，交给已经配置好的名为“STDOUT”的appender处理，“STDOUT”appender将信息打印到控制台；  </p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">13:19:15.406 [main] DEBUG logback.LogbackDemo - ======debug  </div><div class="line">13:19:15.406 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">13:19:15.406 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">13:19:15.406 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
+<h2 id="第3种：带有多个loger的配置，指定级别，指定appender"><a href="#第3种：带有多个loger的配置，指定级别，指定appender" class="headerlink" title="第3种：带有多个loger的配置，指定级别，指定appender"></a>第3种：带有多个loger的配置，指定级别，指定appender</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</div><div class="line">        &lt;!-- encoder 默认配置为PatternLayoutEncoder --&gt;</div><div class="line">        &lt;encoder&gt;</div><div class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;</div><div class="line">        &lt;/encoder&gt;</div><div class="line">    &lt;/appender&gt;</div><div class="line">  </div><div class="line">    &lt;!-- logback为java中的包 --&gt;</div><div class="line">    &lt;logger name=&quot;logback&quot;/&gt;</div><div class="line">    &lt;!--logback.LogbackDemo：类的全路径 --&gt;</div><div class="line">    &lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot;/&gt;</div><div class="line">    &lt;/logger&gt;</div><div class="line">  </div><div class="line">    &lt;root level=&quot;ERROR&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</div><div class="line">    &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<p>其中appender的配置表示打印到控制台；  </p>
+<p><code>&lt;logger name=&quot;logback&quot; /&gt;</code>将控制logback包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级<root>的日志级别“DEBUG”；<br>没有设置addtivity，默认为true，将此loger的打印信息向上级传递；<br>没有设置appender，此loger本身不打印任何信息。  </root></p>
+<p> <code>&lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;</code>控制logback.LogbackDemo类的日志打印，打印级别为“INFO”；<br>additivity属性为false，表示此loger的打印信息不再向上级传递，<br>指定了名字为“STDOUT”的appender。  </p>
+<p><code>&lt;root level=&quot;DEBUG&quot;&gt;</code>将root的打印级别设置为“ERROR”，指定了名字为“STDOUT”的appender。  </p>
+<p>当执行logback.LogbackDemo类的main方法时，先执行<code>&lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;</code>，将级别为“INFO”及大于“INFO”的日志信息交给此loger指定的名为“STDOUT”的appender处理，在控制台中打出日志，不再向次loger的上级 <code>&lt;logger name=&quot;logback&quot;/&gt;</code> 传递打印信息；<br><code>&lt;logger name=&quot;logback&quot;/&gt;</code>未接到任何打印信息，当然也不会给它的上级root传递任何打印信息；  </p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">14:05:35.937 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">14:05:35.937 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">14:05:35.937 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
+<p>如果将<code>&lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;修改为 &lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;true&quot;&gt;</code>那打印结果将是什么呢？<br>没错，日志打印了两次，想必大家都知道原因了，因为打印信息向上级传递，logger本身打印一次，root接到后又打印一次</p>
+<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">14:09:01.531 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">14:09:01.531 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">14:09:01.531 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">14:09:01.531 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">14:09:01.531 [main] ERROR logback.LogbackDemo - ======error  </div><div class="line">14:09:01.531 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;logback配置详解filter&quot;&gt;&lt;a href=&quot;#logback配置详解filter&quot; class=&quot;headerlink&quot; title=&quot;logback配置详解filter&quot;&gt;&lt;/a&gt;logback配置详解filter&lt;/h1&gt;&lt;h2 id=&quot;lt-fi
+      &lt;h1 id=&quot;logback配置详解&quot;&gt;&lt;a href=&quot;#logback配置详解&quot; class=&quot;headerlink&quot; title=&quot;logback配置详解&quot;&gt;&lt;/a&gt;logback配置详解&lt;/h1&gt;&lt;h2 id=&quot;lt-configuration-gt-根节点包含的属性：
     
     </summary>
     
@@ -118,59 +145,38 @@
   </entry>
   
   <entry>
-    <title>01_logback配置详解</title>
-    <link href="http://yoursite.com/2017/05/14/Backend/Java/Log/logback%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解/</id>
+    <title>03_logback配置详解filter</title>
+    <link href="http://yoursite.com/2017/05/14/Backend/Java/Log/logback%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3filter/"/>
+    <id>http://yoursite.com/2017/05/14/Backend/Java/Log/logback配置详解filter/</id>
     <published>2017-05-14T05:46:07.000Z</published>
     <updated>2017-05-14T05:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="logback配置详解"><a href="#logback配置详解" class="headerlink" title="logback配置详解"></a>logback配置详解</h1><h2 id="lt-configuration-gt-根节点包含的属性："><a href="#lt-configuration-gt-根节点包含的属性：" class="headerlink" title="&lt;configuration&gt;根节点包含的属性："></a><code>&lt;configuration&gt;</code>根节点包含的属性：</h2><ul>
-<li><p>scan:<br>当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。  </p>
-</li>
-<li><p>scanPeriod:<br>设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。  </p>
-</li>
-<li><p>debug:<br>当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。  </p>
-</li>
-</ul>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="lt-configuration-gt-根节点的子节点："><a href="#lt-configuration-gt-根节点的子节点：" class="headerlink" title="&lt;configuration&gt;根节点的子节点："></a><code>&lt;configuration&gt;</code>根节点的子节点：</h2><p><img src="http://i.imgur.com/xQql2Mj.png" alt="">  </p>
-<h3 id="lt-contextName-gt-设置上下文名称"><a href="#lt-contextName-gt-设置上下文名称" class="headerlink" title="&lt;contextName&gt; 设置上下文名称"></a><code>&lt;contextName&gt;</code> 设置上下文名称</h3><p>每个logger都关联到logger上下文，默认上下文名称为”default”。<br>但可以使用<contextname>设置成其他名字，用于区分不同应用程序的记录。一旦设置，不能修改。  </contextname></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;contextName&gt;myAppName&lt;/contextName&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
-<h3 id="lt-property-gt-设置变量"><a href="#lt-property-gt-设置变量" class="headerlink" title="&lt;property&gt; 设置变量"></a><code>&lt;property&gt;</code> 设置变量</h3><p>用来定义变量值的标签，<br><code>&lt;property&gt;</code> 有两个属性，name和value；<br>其中name的值是变量的名称，value的值时变量定义的值。<br>通过<code>&lt;property&gt;</code>定义的值会被插入到logger上下文中。定义变量后，可以使${}来使用变量。<br>例如使用<code>&lt;property&gt;</code>定义上下文名称，然后在<code>&lt;contentName&gt;</code>设置logger上下文时使用。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;property name=&quot;APP_Name&quot; value=&quot;myAppName&quot; /&gt;   </div><div class="line">      &lt;contextName&gt;$&#123;APP_Name&#125;&lt;/contextName&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
-<h3 id="lt-timestamp-gt-获取时间戳字符串"><a href="#lt-timestamp-gt-获取时间戳字符串" class="headerlink" title="&lt;timestamp&gt; 获取时间戳字符串"></a><code>&lt;timestamp&gt;</code> 获取时间戳字符串</h3><p>两个属性：  </p>
-<ul>
-<li>key标识此<code>&lt;timestamp&gt;</code> 的名字；  </li>
-<li>datePattern：设置将当前时间（解析配置文件的时间）转换为字符串的模式，遵循Java.txt.SimpleDateFormat的格式。  </li>
-</ul>
-<p>例如将解析配置文件的时间作为上下文名称：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;  </div><div class="line">      &lt;timestamp key=&quot;bySecond&quot; datePattern=&quot;yyyyMMdd&apos;T&apos;HHmmss&quot;/&gt;   </div><div class="line">      &lt;contextName&gt;$&#123;bySecond&#125;&lt;/contextName&gt;  </div><div class="line">      &lt;!-- 其他配置省略--&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="设置loger："><a href="#设置loger：" class="headerlink" title="设置loger："></a>设置loger：</h3><h4 id=""><a href="#" class="headerlink" title=""></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">用来设置某一个包或者具体的某一个类的日志打印级别、以及指定`&lt;appender&gt;`。  </div><div class="line">`&lt;loger&gt;`仅有一个name属性，一个可选的level和一个可选的addtivity属性。  </div><div class="line">- name:  </div><div class="line">用来指定受此loger约束的某一个包或者具体的某一个类。</div><div class="line">- level:  </div><div class="line">用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，还有一个特殊值INHERITED或者同义词NULL，代表强制执行上级的级别。  </div><div class="line">如果未设置此属性，那么当前loger将会继承上级的级别。  </div><div class="line">- addtivity:  </div><div class="line">是否向上级loger传递打印信息。默认是true。</div><div class="line">`&lt;loger&gt;`可以包含零个或多个`&lt;appender-ref&gt;`元素，标识这个appender将会添加到这个loger。  </div><div class="line"> </div><div class="line">### ```&lt;root&gt;</div></pre></td></tr></table></figure></h4><p>也是<code>&lt;loger&gt;</code>元素，但是它是根loger。只有一个level属性，应为已经被命名为”root”.</p>
-<ul>
-<li>level:<br>用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，不能设置为INHERITED或者同义词NULL。<br>默认是DEBUG。<br><root>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger。  </appender-ref></root></li>
-</ul>
-<p>例如：<br>LogbackDemo.java类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">package logback;  </div><div class="line">  </div><div class="line">import org.slf4j.Logger;  </div><div class="line">import org.slf4j.LoggerFactory;  </div><div class="line">  </div><div class="line">public class LogbackDemo &#123;</div><div class="line">  </div><div class="line">    private static Logger log = LoggerFactory.getLogger(LogbackDemo.class);  </div><div class="line">  </div><div class="line">    public static void main(String[] args) &#123;  </div><div class="line">        log.trace(&quot;======trace&quot;);  </div><div class="line">        log.debug(&quot;======debug&quot;);  </div><div class="line">        log.info(&quot;======info&quot;);  </div><div class="line">        log.warn(&quot;======warn&quot;);  </div><div class="line">        log.error(&quot;======error&quot;);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="logback-xml配置文件"><a href="#logback-xml配置文件" class="headerlink" title="logback.xml配置文件"></a>logback.xml配置文件</h1><h2 id="第1种：只配置root"><a href="#第1种：只配置root" class="headerlink" title="第1种：只配置root"></a>第1种：只配置root</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</div><div class="line">        &lt;!-- encoder 默认配置为PatternLayoutEncoder --&gt;</div><div class="line">        &lt;encoder&gt;</div><div class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;</div><div class="line">        &lt;/encoder&gt;</div><div class="line">    &lt;/appender&gt;</div><div class="line">  </div><div class="line">    &lt;root level=&quot;INFO&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</div><div class="line">    &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
-<p>其中appender的配置表示打印到控制台；<br><code>&lt;root level=&quot;INFO&quot;&gt;</code>将root的打印级别设置为“INFO”，指定了名字为“STDOUT”的appender。  </p>
-<p>当执行logback.LogbackDemo类的main方法时，root将级别为“INFO”及大于“INFO”的日志信息交给已经配置好的名为“STDOUT”的appender处理，“STDOUT”appender将信息打印到控制台；  </p>
-<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">13:30:38.484 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">13:30:38.500 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">13:30:38.500 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
-<h2 id="第2种：带有loger的配置，不指定级别，不指定appender"><a href="#第2种：带有loger的配置，不指定级别，不指定appender" class="headerlink" title="第2种：带有loger的配置，不指定级别，不指定appender"></a>第2种：带有loger的配置，不指定级别，不指定appender</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</div><div class="line">        &lt;!-- encoder 默认配置为PatternLayoutEncoder --&gt;</div><div class="line">        &lt;encoder&gt;</div><div class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;</div><div class="line">        &lt;/encoder&gt;</div><div class="line">    &lt;/appender&gt;</div><div class="line">  </div><div class="line">    &lt;!-- logback为java中的包 --&gt;</div><div class="line">    &lt;logger name=&quot;logback&quot;/&gt;</div><div class="line">    &lt;root level=&quot;DEBUG&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</div><div class="line">    &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
-<p>其中appender的配置表示打印到控制台；<br><code>&lt;logger name=&quot;logback&quot; /&gt;</code>将控制logback包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级<root>的日志级别“DEBUG”；<br>没有设置addtivity，默认为true，将此loger的打印信息向上级传递；<br>没有设置appender，此loger本身不打印任何信息。<br><code>&lt;root level=&quot;DEBUG&quot;&gt;</code>将root的打印级别设置为“DEBUG”，指定了名字为“STDOUT”的appender。  </root></p>
-<p>当执行logback.LogbackDemo类的main方法时，因为LogbackDemo 在包logback中，所以首先执行<code>&lt;logger name=&quot;logback&quot; /&gt;</code>，将级别为“DEBUG”及大于“DEBUG”的日志信息传递给root，本身并不打印；<br>root接到下级传递的信息，交给已经配置好的名为“STDOUT”的appender处理，“STDOUT”appender将信息打印到控制台；  </p>
-<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">13:19:15.406 [main] DEBUG logback.LogbackDemo - ======debug  </div><div class="line">13:19:15.406 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">13:19:15.406 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">13:19:15.406 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
-<h2 id="第3种：带有多个loger的配置，指定级别，指定appender"><a href="#第3种：带有多个loger的配置，指定级别，指定appender" class="headerlink" title="第3种：带有多个loger的配置，指定级别，指定appender"></a>第3种：带有多个loger的配置，指定级别，指定appender</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</div><div class="line">        &lt;!-- encoder 默认配置为PatternLayoutEncoder --&gt;</div><div class="line">        &lt;encoder&gt;</div><div class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;</div><div class="line">        &lt;/encoder&gt;</div><div class="line">    &lt;/appender&gt;</div><div class="line">  </div><div class="line">    &lt;!-- logback为java中的包 --&gt;</div><div class="line">    &lt;logger name=&quot;logback&quot;/&gt;</div><div class="line">    &lt;!--logback.LogbackDemo：类的全路径 --&gt;</div><div class="line">    &lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot;/&gt;</div><div class="line">    &lt;/logger&gt;</div><div class="line">  </div><div class="line">    &lt;root level=&quot;ERROR&quot;&gt;</div><div class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</div><div class="line">    &lt;/root&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
-<p>其中appender的配置表示打印到控制台；  </p>
-<p><code>&lt;logger name=&quot;logback&quot; /&gt;</code>将控制logback包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级<root>的日志级别“DEBUG”；<br>没有设置addtivity，默认为true，将此loger的打印信息向上级传递；<br>没有设置appender，此loger本身不打印任何信息。  </root></p>
-<p> <code>&lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;</code>控制logback.LogbackDemo类的日志打印，打印级别为“INFO”；<br>additivity属性为false，表示此loger的打印信息不再向上级传递，<br>指定了名字为“STDOUT”的appender。  </p>
-<p><code>&lt;root level=&quot;DEBUG&quot;&gt;</code>将root的打印级别设置为“ERROR”，指定了名字为“STDOUT”的appender。  </p>
-<p>当执行logback.LogbackDemo类的main方法时，先执行<code>&lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;</code>，将级别为“INFO”及大于“INFO”的日志信息交给此loger指定的名为“STDOUT”的appender处理，在控制台中打出日志，不再向次loger的上级 <code>&lt;logger name=&quot;logback&quot;/&gt;</code> 传递打印信息；<br><code>&lt;logger name=&quot;logback&quot;/&gt;</code>未接到任何打印信息，当然也不会给它的上级root传递任何打印信息；  </p>
-<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">14:05:35.937 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">14:05:35.937 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">14:05:35.937 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
-<p>如果将<code>&lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;修改为 &lt;logger name=&quot;logback.LogbackDemo&quot; level=&quot;INFO&quot; additivity=&quot;true&quot;&gt;</code>那打印结果将是什么呢？<br>没错，日志打印了两次，想必大家都知道原因了，因为打印信息向上级传递，logger本身打印一次，root接到后又打印一次</p>
-<p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">14:09:01.531 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">14:09:01.531 [main] INFO  logback.LogbackDemo - ======info  </div><div class="line">14:09:01.531 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">14:09:01.531 [main] WARN  logback.LogbackDemo - ======warn  </div><div class="line">14:09:01.531 [main] ERROR logback.LogbackDemo - ======error  </div><div class="line">14:09:01.531 [main] ERROR logback.LogbackDemo - ======error</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h1 id="logback配置详解filter"><a href="#logback配置详解filter" class="headerlink" title="logback配置详解filter"></a>logback配置详解filter</h1><h2 id="lt-filter-gt"><a href="#lt-filter-gt" class="headerlink" title="&lt;filter&gt;"></a><code>&lt;filter&gt;</code></h2><p>过滤器，执行一个过滤器会有返回个枚举值，即DENY，NEUTRAL，ACCEPT其中之一。<br>返回DENY，日志将立即被抛弃不再经过其他过滤器；<br>返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；<br>返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。  </p>
+<p>过滤器被添加到 <code>&lt;appender&gt;</code> 中，为 <code>&lt;appender&gt;</code> 添加一个或多个过滤器后，可以用任意条件对日志进行过滤。<br><code>&lt;Appender&gt;</code> 有多个过滤器时，按照配置顺序执行。  </p>
+<p>下面是几个常用的过滤器：</p>
+<h3 id="LevelFilter-级别过滤器，根据日志级别进行过滤"><a href="#LevelFilter-级别过滤器，根据日志级别进行过滤" class="headerlink" title="LevelFilter 级别过滤器，根据日志级别进行过滤"></a>LevelFilter 级别过滤器，根据日志级别进行过滤</h3><p>如果日志级别等于配置级别，过滤器会根据 onMath 和 onMismatch 接收或拒绝日志。有以下子节点：  </p>
+<p><level>:设置过滤级别  </level></p>
+<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
+<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
+<p>例如：将过滤器的日志级别配置为INFO，所有INFO级别的日志交给appender处理，非INFO级别的日志，被过滤掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">  </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">  </div><div class="line">    &lt;encoder&gt;</div><div class="line">      &lt;pattern&gt;</div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;</div><div class="line">    &lt;/encoder&gt;</div><div class="line">  &lt;/appender&gt;</div><div class="line">  </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志"><a href="#ThresholdFilter-临界值过滤器，过滤掉低于指定临界值的日志" class="headerlink" title="ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志"></a>ThresholdFilter 临界值过滤器，过滤掉低于指定临界值的日志</h3><p>当日志级别等于或高于临界值时，过滤器返回NEUTRAL；<br>当日志级别低于临界值时，日志会被拒绝。  </p>
+<p>例如：过滤掉所有低于INFO级别的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;CONSOLE&quot;   </div><div class="line">    class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;!-- 过滤掉 TRACE 和 DEBUG 级别的日志--&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;&gt;   </div><div class="line">      &lt;level&gt;INFO&lt;/level&gt;   </div><div class="line">    &lt;/filter&gt;   </div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger&#123;30&#125; - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line">  </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件"><a href="#EvaluatorFilter-求值过滤器，评估、鉴别日志是否符合指定条件" class="headerlink" title="EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件"></a>EvaluatorFilter 求值过滤器，评估、鉴别日志是否符合指定条件</h3><p>有以下子节点：<br><code>&lt;evaluator&gt;</code><br>鉴别器，常用的鉴别器是JaninoEventEvaluato，也是默认的鉴别器，它以任意的Java布尔值表达式作为求值条件，求值条件在配置文件解释过成功被动态编译，布尔值表达式返回true就表示符合过滤条件。<br>evaluator有个子标签<code>&lt;expression&gt;</code>，用于配置求值条件。  </p>
+<p>求值表达式作用于当前日志，logback向求值表达式暴露日志的各种字段：  </p>
+<table class="bodyTable" border="0" style="padding-left:60px"><br><tbody><br><tr><br><th style="text-align:left; font-weight:bold">Name</th><br><th style="text-align:left; font-weight:bold">Type</th><br><th style="text-align:left; font-weight:bold">Description</th><br></tr><br><tr><br><td style="font-size:1em">event</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggingEvent</code></td><br><td style="font-size:1em">与记录请求相关联的原始记录事件，下面所有变量都来自event，例如，event.getMessage()返回下面&quot;message&quot;相同的字符串</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">message</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志的原始消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello {}&quot;就是原始消息。</td><br></tr><br><tr><br><td style="font-size:1em">formatedMessage</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">日志被各式话的消息，例如，设有logger mylogger，&quot;name&quot;的&#20540;是&quot;AUB&quot;，对于 mylogger.info(&quot;Hello {}&quot;,name); &quot;Hello Aub&quot;就是&#26684;式化后的消息。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">logger</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">String</code></td><br><td style="font-size:1em">logger 名。</td><br></tr><br><tr><br><td style="font-size:1em">loggerContext</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">LoggerContextVO</code></td><br><td style="font-size:1em">日志所属的logger上下文。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">level</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">int</code></td><br><td style="font-size:1em">级别对应的整数&#20540;，所以<span>&nbsp;</span><em style="font-style:italic">level &gt; INFO<span>&nbsp;</span></em>是正确的表达式。</td><br></tr><br><tr><br><td style="font-size:1em">timeStamp</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">long</code></td><br><td style="font-size:1em">创建日志的时间戳。</td><br></tr><br><tr class="alt"><br><td style="font-size:1em">marker</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Marker</code></td><br><td style="font-size:1em">与日志请求相关联的Marker对象，注意“Marker”有可能为null，所以你要确保它不能是null。</td><br></tr><br><tr><br><td style="font-size:1em">mdc</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">Map</code></td><br><td style="font-size:1em">包含创建日志期间的MDC所有&#20540;得map。访问方法是：<em style="font-style:italic">mdc.get(&quot;myKey&quot;)</em><span>&nbsp;</span>。mdc.get()返回的是Object不是String，要想调用String的方法就要强转，例如，<br><p style="padding-bottom:0px; margin:0px; padding-left:0px; padding-right:0px; padding-top:0px"><br><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">((String)&nbsp;mdc.get(&quot;k&quot;)).contains(&quot;val&quot;)</code><span>&nbsp;</span>.MDC可能为null，调用时注意。</p><br></td><br></tr><br><tr class="alt"><br><td style="font-size:1em">throwable</td><br><td style="font-size:1em">java.lang.Throwable</td><br><td style="font-size:1em">如果没有异常与日志关联&quot;throwable&quot; 变量为 null. 不幸的是， &quot;throwable&quot; 不能被序列化。在远程系统上永远为null，对于与位置无关的表达式请使用下面的变量<code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">throwableProxy</code></td><br></tr><br><tr><br><td style="font-size:1em">throwableProxy</td><br><td style="font-size:1em"><code style="font-family:'Courier New',Courier,monospace; white-space:pre; font-size:1em">IThrowableProxy</code></td><br><td style="font-size:1em">与日志事件关联的异常代理。如果没有异常与日志事件关联，则变量&quot;throwableProxy&quot; 为 null. 当异常被关联到日志事件时，&quot;throwableProxy&quot; 在远程系统上不会为null</td><br></tr><br></tbody><br></table>
+
+
+<p><onmatch>:用于配置符合过滤条件的操作  </onmatch></p>
+<p><onmismatch>:用于配置不符合过滤条件的操作  </onmismatch></p>
+<p>例如：过滤掉所有日志消息中不包含“billing”字符串的日志。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt; &lt;!-- 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator --&gt;</div><div class="line">        &lt;expression&gt;return message.contains(&quot;billing&quot;);&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line">      &lt;onMatch&gt;ACCEPT &lt;/onMatch&gt;</div><div class="line">      &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;   </div><div class="line">        %-4relative [%thread] %-5level %logger - %msg%n   </div><div class="line">      &lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line">  </div><div class="line">  &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p><code>&lt;matcher&gt;</code><br>匹配器，尽管可以使用String类的matches()方法进行模式匹配，但会导致每次调用过滤器时都会创建一个新的Pattern对象，为了消除这种开销，可以预定义一个或多个matcher对象，定以后就可以在求值表达式中重复引用。<code>&lt;matcher&gt;</code>是<code>&lt;evaluator&gt;</code>的子标签。<br><code>&lt;matcher&gt;</code>中包含两个子标签，<br>一个是<code>&lt;name&gt;</code>，用于定义matcher的名字，求值表达式中使用这个名字来引用matcher；<br>另一个是<code>&lt;regex&gt;</code>，用于配置匹配条件。  </p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;configuration debug=&quot;true&quot;&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;   </div><div class="line">    &lt;filter class=&quot;ch.qos.logback.core.filter.EvaluatorFilter&quot;&gt;</div><div class="line">      &lt;evaluator&gt;</div><div class="line">        &lt;matcher&gt;</div><div class="line">          &lt;Name&gt;odd&lt;/Name&gt;</div><div class="line">          &lt;!-- filter out odd numbered statements --&gt;</div><div class="line">          &lt;regex&gt;statement [13579]&lt;/regex&gt;</div><div class="line">        &lt;/matcher&gt;</div><div class="line">  </div><div class="line">        &lt;expression&gt;odd.matches(formattedMessage)&lt;/expression&gt;</div><div class="line">      &lt;/evaluator&gt;</div><div class="line"></div><div class="line">      &lt;OnMismatch&gt;NEUTRAL&lt;/OnMismatch&gt;</div><div class="line">      &lt;OnMatch&gt;DENY&lt;/OnMatch&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line"></div><div class="line">    &lt;encoder&gt;   </div><div class="line">      &lt;pattern&gt;%-4relative [%thread] %-5level %logger - %msg%n&lt;/pattern&gt;   </div><div class="line">    &lt;/encoder&gt;   </div><div class="line">  &lt;/appender&gt;   </div><div class="line">  </div><div class="line">  &lt;root level=&quot;DEBUG&quot;&gt;   </div><div class="line">    &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;   </div><div class="line">  &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">&lt;!-- if debug set to true, context info always print  </div><div class="line"> otherwise the contex info will print when error occour --&gt;  </div><div class="line">&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;   </div><div class="line">  </div><div class="line">  &lt;appender name=&quot;stdout&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;    </div><div class="line">     &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;    </div><div class="line">       &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;    </div><div class="line">     &lt;/layout&gt;    </div><div class="line">   &lt;/appender&gt;    </div><div class="line">  </div><div class="line"> &lt;!-- 所有日志文件--&gt;  </div><div class="line"> &lt;appender name=&quot;AllLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;   </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/all/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;   </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line">  </div><div class="line"> &lt;appender name=&quot;TaskLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/task/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;appender name=&quot;SendLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;  </div><div class="line">  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;  </div><div class="line">   &lt;fileNamePattern&gt;log/abcchina/send/%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;   </div><div class="line">   &lt;maxHistory&gt;30&lt;/maxHistory&gt;  </div><div class="line">  &lt;/rollingPolicy&gt;   </div><div class="line">  &lt;encoder&gt;   </div><div class="line">   &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;40&#125; - %msg%n&lt;/pattern&gt;   </div><div class="line">  &lt;/encoder&gt;   </div><div class="line"> &lt;/appender&gt;  </div><div class="line"> &lt;!-- 为莫个包下的所有类指定Appender 这里也可以指定类名称例如：com.aa.bb.ClassName--&gt;    </div><div class="line"> &lt;logger name=&quot;com.aa.bb&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;TaskLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">   </div><div class="line"> &lt;logger name=&quot;com.aa.cc&quot; &gt;  </div><div class="line">  &lt;appender-ref ref=&quot;SendLog&quot; /&gt;  </div><div class="line"> &lt;/logger&gt;  </div><div class="line">  </div><div class="line"> &lt;root level=&quot;INFO&quot;&gt;   </div><div class="line">  &lt;appender-ref ref=&quot;AllLog&quot; /&gt;  </div><div class="line"> &lt;/root&gt;   </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;logback配置详解&quot;&gt;&lt;a href=&quot;#logback配置详解&quot; class=&quot;headerlink&quot; title=&quot;logback配置详解&quot;&gt;&lt;/a&gt;logback配置详解&lt;/h1&gt;&lt;h2 id=&quot;lt-configuration-gt-根节点包含的属性：
+      &lt;h1 id=&quot;logback配置详解filter&quot;&gt;&lt;a href=&quot;#logback配置详解filter&quot; class=&quot;headerlink&quot; title=&quot;logback配置详解filter&quot;&gt;&lt;/a&gt;logback配置详解filter&lt;/h1&gt;&lt;h2 id=&quot;lt-fi
     
     </summary>
     
@@ -625,30 +631,28 @@
   </entry>
   
   <entry>
-    <title>04_CSS的overflow</title>
-    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/04_CSS%E7%9A%84overflow/"/>
-    <id>http://yoursite.com/2017/04/07/Frontend/CSS/04_CSS的overflow/</id>
+    <title>05_CSS定位position</title>
+    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/05_CSS%E5%AE%9A%E4%BD%8Dposition/"/>
+    <id>http://yoursite.com/2017/04/07/Frontend/CSS/05_CSS定位position/</id>
     <published>2017-04-07T13:46:07.000Z</published>
     <updated>2017-04-07T13:46:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="CSS标签的显示和隐藏："><a href="#CSS标签的显示和隐藏：" class="headerlink" title="CSS标签的显示和隐藏："></a>CSS标签的显示和隐藏：</h1><h1 id="overflow"><a href="#overflow" class="headerlink" title="overflow:"></a>overflow:</h1><ul>
-<li>hidden:超出部分隐藏。</li>
-<li>scroll:滚动条（超出的部分会显示在滚动条之内）</li>
-<li>auto:如果内容超出会显示滚动条，如果没有那么会自动隐藏。</li>
-</ul>
-<h1 id="display-none-隐藏元素"><a href="#display-none-隐藏元素" class="headerlink" title="display:none;   隐藏元素"></a>display:none;   隐藏元素</h1><p>完全隐藏原来的div，不占位置<br>display:none;  隐藏<br>display:block;  显示  </p>
-<h1 id="visibility-隐藏元素"><a href="#visibility-隐藏元素" class="headerlink" title="visibility:      隐藏元素"></a>visibility:      隐藏元素</h1><p>visibility也会隐藏原来的div但是div还是会占据着自己的位置不放，屏幕上显示的是空白。</p>
-<ul>
-<li>visible;默认值。元素是可见的。</li>
-<li>hidden;元素是不可见的。</li>
-<li>collapse;当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 “hidden”。</li>
-<li>inherit;规定应该从父元素继承 visibility 属性的值。</li>
-</ul>
+    <content type="html"><![CDATA[<h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><p>浮动是没有占据页面的位置的。<br>绝对定位：也不占据页面的位置。  </p>
+<p>即：脱离了文档流  </p>
+<p>可以使用top,bottom,left,right属性进行定位</p>
+<h2 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h2><p>position:relative<br>在页面上会占据位置，<br>相对定位是相对于原来的位置定位的。  </p>
+<p>总结：绝对定位相当于是一种特殊的”浮动”.  </p>
+<h2 id="固定定位"><a href="#固定定位" class="headerlink" title="固定定位"></a>固定定位</h2><p>position:fixed;<br>在页面上不会占据位置。<br>表现：不管页面到了哪里，图片永远都停留在屏幕的同一位置。  </p>
+<h2 id="决定定位"><a href="#决定定位" class="headerlink" title="决定定位"></a>决定定位</h2><p>position:relative;<br>在页面上不会占据位置。<br><strong>如果给一个行内元素设置了position:absolute，那么这上行内元素会自动转成行内块元素。</strong></p>
+<blockquote>
+<p>一般情况下定位的使用：<br>子绝父相：<br>将来在使用定位的时候最好在<br>1）父元素中使用子元素定位，<br>2）并且遵守一个约定：父元素使用相对定位，子元素使用绝对定位。</p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;a href=&quot;#CSS标签的显示和隐藏：&quot; class=&quot;headerlink&quot; title=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;/a&gt;CSS标签的显示和隐藏：&lt;/h1&gt;&lt;h1 id=&quot;overflow&quot;&gt;&lt;a href=&quot;#overf
+      &lt;h1 id=&quot;position&quot;&gt;&lt;a href=&quot;#position&quot; class=&quot;headerlink&quot; title=&quot;position&quot;&gt;&lt;/a&gt;position&lt;/h1&gt;&lt;p&gt;浮动是没有占据页面的位置的。&lt;br&gt;绝对定位：也不占据页面的位置。  &lt;/p&gt;
+&lt;p&gt;即：脱
     
     </summary>
     
@@ -815,6 +819,43 @@
     <summary type="html">
     
       &lt;h1 id=&quot;盒子模型的概念&quot;&gt;&lt;a href=&quot;#盒子模型的概念&quot; class=&quot;headerlink&quot; title=&quot;盒子模型的概念&quot;&gt;&lt;/a&gt;盒子模型的概念&lt;/h1&gt;&lt;p&gt;所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。&lt;br&gt;每个矩
+    
+    </summary>
+    
+      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>04_CSS的overflow</title>
+    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/04_CSS%E7%9A%84overflow/"/>
+    <id>http://yoursite.com/2017/04/07/Frontend/CSS/04_CSS的overflow/</id>
+    <published>2017-04-07T13:46:07.000Z</published>
+    <updated>2017-04-07T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="CSS标签的显示和隐藏："><a href="#CSS标签的显示和隐藏：" class="headerlink" title="CSS标签的显示和隐藏："></a>CSS标签的显示和隐藏：</h1><h1 id="overflow"><a href="#overflow" class="headerlink" title="overflow:"></a>overflow:</h1><ul>
+<li>hidden:超出部分隐藏。</li>
+<li>scroll:滚动条（超出的部分会显示在滚动条之内）</li>
+<li>auto:如果内容超出会显示滚动条，如果没有那么会自动隐藏。</li>
+</ul>
+<h1 id="display-none-隐藏元素"><a href="#display-none-隐藏元素" class="headerlink" title="display:none;   隐藏元素"></a>display:none;   隐藏元素</h1><p>完全隐藏原来的div，不占位置<br>display:none;  隐藏<br>display:block;  显示  </p>
+<h1 id="visibility-隐藏元素"><a href="#visibility-隐藏元素" class="headerlink" title="visibility:      隐藏元素"></a>visibility:      隐藏元素</h1><p>visibility也会隐藏原来的div但是div还是会占据着自己的位置不放，屏幕上显示的是空白。</p>
+<ul>
+<li>visible;默认值。元素是可见的。</li>
+<li>hidden;元素是不可见的。</li>
+<li>collapse;当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 “hidden”。</li>
+<li>inherit;规定应该从父元素继承 visibility 属性的值。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;a href=&quot;#CSS标签的显示和隐藏：&quot; class=&quot;headerlink&quot; title=&quot;CSS标签的显示和隐藏：&quot;&gt;&lt;/a&gt;CSS标签的显示和隐藏：&lt;/h1&gt;&lt;h1 id=&quot;overflow&quot;&gt;&lt;a href=&quot;#overf
     
     </summary>
     
@@ -1002,194 +1043,6 @@
   </entry>
   
   <entry>
-    <title>05_CSS定位position</title>
-    <link href="http://yoursite.com/2017/04/07/Frontend/CSS/05_CSS%E5%AE%9A%E4%BD%8Dposition/"/>
-    <id>http://yoursite.com/2017/04/07/Frontend/CSS/05_CSS定位position/</id>
-    <published>2017-04-07T13:46:07.000Z</published>
-    <updated>2017-04-07T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><p>浮动是没有占据页面的位置的。<br>绝对定位：也不占据页面的位置。  </p>
-<p>即：脱离了文档流  </p>
-<p>可以使用top,bottom,left,right属性进行定位</p>
-<h2 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h2><p>position:relative<br>在页面上会占据位置，<br>相对定位是相对于原来的位置定位的。  </p>
-<p>总结：绝对定位相当于是一种特殊的”浮动”.  </p>
-<h2 id="固定定位"><a href="#固定定位" class="headerlink" title="固定定位"></a>固定定位</h2><p>position:fixed;<br>在页面上不会占据位置。<br>表现：不管页面到了哪里，图片永远都停留在屏幕的同一位置。  </p>
-<h2 id="决定定位"><a href="#决定定位" class="headerlink" title="决定定位"></a>决定定位</h2><p>position:relative;<br>在页面上不会占据位置。<br><strong>如果给一个行内元素设置了position:absolute，那么这上行内元素会自动转成行内块元素。</strong></p>
-<blockquote>
-<p>一般情况下定位的使用：<br>子绝父相：<br>将来在使用定位的时候最好在<br>1）父元素中使用子元素定位，<br>2）并且遵守一个约定：父元素使用相对定位，子元素使用绝对定位。</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;position&quot;&gt;&lt;a href=&quot;#position&quot; class=&quot;headerlink&quot; title=&quot;position&quot;&gt;&lt;/a&gt;position&lt;/h1&gt;&lt;p&gt;浮动是没有占据页面的位置的。&lt;br&gt;绝对定位：也不占据页面的位置。  &lt;/p&gt;
-&lt;p&gt;即：脱
-    
-    </summary>
-    
-      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="CSS" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>04_Hibernate_JPA注解</title>
-    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA%E6%B3%A8%E8%A7%A3/"/>
-    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-JPA注解"><a href="#Hibernate-JPA注解" class="headerlink" title="Hibernate_JPA注解"></a>Hibernate_JPA注解</h1><p>注解的作用: 将持久化类转换成表的相关信息.<br>(表名、索引、唯一约束、列名的相关信息、关联).</p>
-<h2 id="注解加在持久类上"><a href="#注解加在持久类上" class="headerlink" title="注解加在持久类上:"></a>注解加在持久类上:</h2><ol>
-<li><p>@Entity : 把pojo转化成持久化类.</p>
-</li>
-<li><p>@Table : 把持久化类转化成表的相关表信息.</p>
-<ul>
-<li>name(表名)</li>
-<li>indexes(用于指定表的引索列)</li>
-<li>schema(指定将数据表存入哪个数据库)</li>
-<li>catalog(指定将数据表存入哪个数据库)</li>
-<li>uniqueConstraints(用于指定唯一约束)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@Table(name=&quot;USER_INFO&quot;, // 指定表名</div><div class="line">indexes=&#123;@Index(columnList=&quot;name&quot;, // 指定列名</div><div class="line">                name=&quot;IDX_NAME&quot;) // 指定索引的名称&#125;, // 用于指定表的引索列</div><div class="line">uniqueConstraints=&#123;@UniqueConstraint(columnNames=&#123;&quot;name&quot;,&quot;age&quot;&#125;, // 指定列名</div><div class="line">                name=&quot;UC_NAME_AGE&quot;)// 指定约束名&#125; // 联合唯一约束</div><div class="line">)</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="主键映射"><a href="#主键映射" class="headerlink" title="主键映射:"></a>主键映射:</h2><p>主键生成策略:<br>@Id<br>@GeneratedValue(strategy=GenerationType.xxx)</p>
-<ul>
-<li>GenerationType.IDENTITY: 适宜MySQL、SqlServer有自增长列的数据库。</li>
-<li>GenerationType.SEQUENCE：适宜Oracle这种没有自增长有sequence的数据库。</li>
-<li>GenerationType.AUTO：让Hibernate根据数据库方言自动选择主键生成策略。</li>
-<li><p>GenerationType.TABLE: 适宜所有的数据库,因为它会单独生成一张表来维护主键生成。</p>
-<ul>
-<li>单个属性做主键:<br>在单个属性上加: @Id注解.</li>
-<li>多个属性做联合主键:<br>在多个属性上加: @Id注解.<br>需要持久化类实现Serializable接口.</li>
-</ul>
-<blockquote>
-<p>注意：持久化类中属性生成的列名不能为SQL语句中的关键字.</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="属性映射-运用"><a href="#属性映射-运用" class="headerlink" title="属性映射(运用):"></a>属性映射(运用):</h2><p>@Column(属性转化成表中的列): </p>
-<ul>
-<li>name(指定列名)</li>
-<li>length(该列支持的长度)</li>
-<li>precision(有效的总位数)</li>
-<li>scale(小数点的位数)</li>
-<li>unique(唯一约束)</li>
-<li>nullable(非空约束)</li>
-<li>insertable(是否允许插入)</li>
-<li>updatable(是否允许修改)</li>
-</ul>
-<p>@Temporal(日期属性):</p>
-<ul>
-<li>TemporalType.DATE //yyyy-MM-dd</li>
-<li>TemporalType.TIME //HH: mm:ss</li>
-<li>TemporalType.TIMESTAMP //yyyy-MM-dd HH: mm:ss</li>
-</ul>
-<p>@Transient(指定不是持久化属性):</p>
-<ul>
-<li>transient：关键字修饰不需要序列化的属性,同时用它也能指定不是持久化的属性。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@Column(name=&quot;U_NAME&quot;,  // 列名</div><div class="line">        length=50,  // 指定列的数据长度</div><div class="line">        unique=true, // 是否为唯一(唯一约束)</div><div class="line">        nullable=false // 是否为空 (非空约束)</div><div class="line">)</div><div class="line">private String name;</div><div class="line">@Column(name=&quot;U_DEPT&quot;, length=20,</div><div class="line">        insertable=false, // 是否允许插入这一列的值(生成insert语句时是否包含这一列) true:允许插入  false: 不允许允许插入</div><div class="line">        updatable=false // 是否允许修改这一列的值(生成update语句时是否包含这一列) true:允许修改  false: 不允许修改</div><div class="line">)</div><div class="line">private String dept;</div><div class="line">@Column(name=&quot;EMP_SALARY&quot;,</div><div class="line">        precision=7, // 有效的总位数(整数部分 + 小数部分)</div><div class="line">        scale=2 // 小数点后面的总位数 99999.99</div><div class="line">)</div><div class="line">private BigDecimal salary;</div><div class="line">@Column(name=&quot;EMP_BIRTHDAY&quot;)</div><div class="line">@Temporal(TemporalType.DATE) // yyyy-MM-dd</div><div class="line">//@Temporal(TemporalType.TIMESTAMP) // yyyy-MM-dd HH:mm:ss</div><div class="line">//@Temporal(TemporalType.TIME) // HH:mm:ss</div><div class="line">private Date birthday;</div><div class="line">@Transient() // 指定不是持久化属性,该属性不会生成表中的列</div><div class="line">private transient String remark;</div></pre></td></tr></table></figure>
-<h2 id="双向关联："><a href="#双向关联：" class="headerlink" title="双向关联："></a>双向关联：</h2><p><strong>有外键的都是从表</strong></p>
-<p><strong>一的一方都不维护关系</strong></p>
-<p>关联关系两边都配置，那就是双向关联.</p>
-<h3 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h3><p>@OneToOne():<br>两边都用关联的持久化类定义属性.<br>两边都用@OneToOne()注解.  </p>
-<p>一边(主表):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/**  学生与老师一对一 */</div><div class="line">@OneToOne(fetch=FetchType.LAZY,  // 延迟加载</div><div class="line">          targetEntity=Teacher.class, // 目标持久化类</div><div class="line">          mappedBy=&quot;student&quot;) // 不维护外键列 (主表)</div><div class="line">private Teacher teacher;</div></pre></td></tr></table></figure></p>
-<p>另一边(从表)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">/** 老师与学生一对一 */</div><div class="line">@OneToOne(fetch=FetchType.LAZY, </div><div class="line">          targetEntity=Student.class)</div><div class="line">/** 生成外键列 */</div><div class="line">@JoinColumn(name=&quot;S_ID&quot;, // 外键列的列名</div><div class="line">            unique=true, // 添加唯一约束</div><div class="line">            referencedColumnName=&quot;STU_ID&quot;) // 从表</div><div class="line">private Student student;</div></pre></td></tr></table></figure></p>
-<h3 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h3><ul>
-<li><p>一的一端(主表)<br>@OneToMany():<br>Teacher类：<!-- 
---><br> 1. 用Set集合定义关联的属性.<br> 2. 定义后该Set需要程序员自己初始化.<br><code>private Set&lt;Student&gt; students = new HashSet&lt;&gt;();</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/** 老师是一的一端(一个老师对应多个学生) */</div><div class="line">@OneToMany(fetch=FetchType.LAZY, // 指定Set集合中的数据抓取策略 FetchType.LAZY:延迟加载   FetchType.EAGER:立即加载</div><div class="line">            targetEntity=Student.class, // 指定关联的持久化类</div><div class="line">            cascade=CascadeType.REMOVE,  // 级联删除 (级联到关联的持久化类)</div><div class="line">            orphanRemoval=true, // 删除孤儿记录</div><div class="line">            mappedBy=&quot;teacher&quot;) // 代表老师这边不维护关联关系(不维护外键列) 写关联的持久化类中哪个属性引用了它自己</div><div class="line">private Set&lt;Student&gt; students = new HashSet&lt;&gt;();</div></pre></td></tr></table></figure>
-</li>
-<li><p>多的一端(从表)<br>@ManyToOne():<br>Student类：(用关联的持久化类定义属性)<br><code>private Teacher teacher;</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/** 学生是多的一端 (多个学生对应一个老师)*/</div><div class="line">@ManyToOne(fetch=FetchType.LAZY,  // 指定teacher属性的抓取策略 FetchType.LAZY:延迟加载 FetchType.EAGER:立即加载</div><div class="line">             targetEntity=Teacher.class)// 指定关联的持久化类</div><div class="line">/** 生成关联的外键列 */</div><div class="line">@JoinColumn(name=&quot;T_ID&quot;, // 外键列的列名</div><div class="line">            referencedColumnName=&quot;TEA_ID&quot;) // 指定引用老师表的主键列</div><div class="line">private Teacher teacher;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h3><p>@ManyToMany():</p>
-<ul>
-<li>生成中间表</li>
-<li>两端都用: @ManyToMany()注解</li>
-<li>两端都用：Set集合定义关联的属性</li>
-</ul>
-<p>老师：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/** 老师是多的一端 */</div><div class="line">@ManyToMany(fetch=FetchType.LAZY, // 指定Set集合中的数据抓取策略 FetchType.LAZY:延迟加载   FetchType.EAGER:立即加载</div><div class="line">            targetEntity=Student.class, // 指定关联的持久化类</div><div class="line">            cascade=CascadeType.REMOVE  // 级联删除 (级联到关联的持久化类)</div><div class="line">) </div><div class="line">/** 生成中间表 */</div><div class="line">// 中间表的一列  @ManyToMany()注解里面没有加mappedBy属性的持久类这边</div><div class="line">@JoinTable(name=&quot;TEA_2_STU&quot;, // 中间表的表名</div><div class="line">           joinColumns=@JoinColumn(name=&quot;T_ID&quot;, referencedColumnName=&quot;TEA_ID&quot;), </div><div class="line">           inverseJoinColumns=@JoinColumn(name=&quot;S_ID&quot;, referencedColumnName=&quot;STU_ID&quot;)) </div><div class="line">private Set&lt;Student&gt; students = new HashSet&lt;&gt;();</div></pre></td></tr></table></figure></p>
-<p>学生：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/** 学生也是多的一端 */</div><div class="line">@ManyToMany(fetch=FetchType.LAZY,  // 延迟加载</div><div class="line">            cascade=CascadeType.REMOVE, // 级联删除(级联到关联的持久化类)</div><div class="line">            targetEntity=Teacher.class, // 关联的持久化类</div><div class="line">            mappedBy=&quot;students&quot;) // 不维护中间表(不操作中间表)</div><div class="line">private Set&lt;Teacher&gt; teachers = new HashSet&lt;&gt;();</div></pre></td></tr></table></figure></p>
-<h2 id="单向关联："><a href="#单向关联：" class="headerlink" title="单向关联："></a>单向关联：</h2><p><strong>关联关系只配置一边，那就是单向关联.</strong></p>
-<ul>
-<li><p>1-1(一对一): 把双向关联1-1的去掉一边的关联. (生成外键列的一边保留).<br>主表的关联属性删除.</p>
-</li>
-<li><p>1-N(一对多):  把双向关联1-N的去掉一边的关联. (生成外键列的一边保留).<br>主表的关联属性删除.</p>
-</li>
-<li><p>N-N(多对多): 把双向关联N-N的去掉一边的关联. (生成中间表的一边保留).  </p>
-</li>
-</ul>
-<blockquote>
-<p>双向关联与单向关联的区别：<br>双向关联两边都可以互相查询.<br>单向关联只能通过一边查询另一边.  </p>
-<p>说明：一般情况，先配置成单向关联.</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-JPA注解&quot;&gt;&lt;a href=&quot;#Hibernate-JPA注解&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_JPA注解&quot;&gt;&lt;/a&gt;Hibernate_JPA注解&lt;/h1&gt;&lt;p&gt;注解的作用: 将持久化类转换成表的相
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>08_Hibernate_查询缓存</title>
-    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98/"/>
-    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_查询缓存/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-查询缓存"><a href="#Hibernate-查询缓存" class="headerlink" title="Hibernate_查询缓存:"></a>Hibernate_查询缓存:</h1><ol>
-<li>默认是关闭的.</li>
-<li>它缓存得是hql语句.(内存中)</li>
-</ol>
-<p>使用查询缓存的步骤:<br>第一步：配置开启查询缓存(hibernate.cfg.xml)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置开启查询缓存 --&gt;</div><div class="line">&lt;property name=&quot;hibernate.cache.use_query_cache&quot;&gt;true&lt;/property&gt;</div></pre></td></tr></table></figure></p>
-<p>第二步：查询时需要指定哪些hql语句存入查询缓存中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">session.createQuery(hql)</div><div class="line">       .setCacheable(true) // 存入查询缓存</div><div class="line">       .list(); // 把所有的学生存入一级缓存</div></pre></td></tr></table></figure></p>
-<p>缓存格式：<br>Map<string, list<string="">&gt;<br>key : hql语句<br>value: [“cn.mortalliao.entity.Student#1”, “cn.mortalliao.entity.Student#2”]</string,></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-查询缓存&quot;&gt;&lt;a href=&quot;#Hibernate-查询缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_查询缓存:&quot;&gt;&lt;/a&gt;Hibernate_查询缓存:&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;默认是关闭的.&lt;/li&gt;
-&lt;
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
     <title>01_Hibernate框架介绍</title>
     <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/01_Hibernate_%E4%BB%8B%E7%BB%8D/"/>
     <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/01_Hibernate_介绍/</id>
@@ -1341,6 +1194,103 @@
   </entry>
   
   <entry>
+    <title>Mybatis</title>
+    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Mybatis/Mybatis/"/>
+    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Mybatis/Mybatis/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-01-24T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-MyBatis概述"><a href="#1-MyBatis概述" class="headerlink" title="1.    MyBatis概述"></a>1.    MyBatis概述</h1><h2 id="1-1-MyBatis简介"><a href="#1-1-MyBatis简介" class="headerlink" title="1.1.    MyBatis简介"></a>1.1.    MyBatis简介</h2><p>MyBatis 世界上流行最广泛的SQL 映射框架，由Clinton Begin 在2002 年创建，其后，捐献给了Apache基金会，成立了iBatis 项目。2010年这个项目从Apache迁移到Google Code改名为Mybatis 之后将版本升级到3.X，其曾经官网：<a href="http://blog.mybatis.org/，从3.2版本之后迁移到github(https://github.com/mybatis/mybatis-3)。" target="_blank" rel="external">http://blog.mybatis.org/，从3.2版本之后迁移到github(https://github.com/mybatis/mybatis-3)。</a><br>Mybatis是一个类似于Hibernate的ORM持久化框架，支持普通SQL查询，存储过程以及高级映射。Mybatis通过使用简单的XM<br>L或注解用于配置和原始映射，将接口和POJO(Plain Old Java Objects,普通的 Java对象)对象映射成数据库中的记录。<br>由于Mybatis是直接基于JDBC做了简单的映射包装，所有从性能角度来看：<br>JDBC &gt; Mybatis &gt; Hibernate</p>
+<p>下载地址（3.2.8）：<br><a href="https://github.com/mybatis/mybatis-3/releases" target="_blank" rel="external">https://github.com/mybatis/mybatis-3/releases</a><br>官方文档：<br><a href="http://mybatis.github.io/mybatis-3/" target="_blank" rel="external">http://mybatis.github.io/mybatis-3/</a><br>官方文档（中文版）：<br><a href="http://mybatis.github.io/mybatis-3/zh/index.html" target="_blank" rel="external">http://mybatis.github.io/mybatis-3/zh/index.html</a></p>
+<h2 id="1-2-MyBatis架构"><a href="#1-2-MyBatis架构" class="headerlink" title="1.2.    MyBatis架构"></a>1.2.    MyBatis架构</h2><p>接口层：提供给外部使用的接口API，开发人员通过这些本地API来操纵数据库。接口层一接收到调用请求就会调用数据处理层来完成具体的数据处理。</p>
+<p>数据处理层：负责具体的SQL查找、SQL解析、SQL执行和执行结果映射处理等。主要目的是根据调用的请求完成一次数据库操作。</p>
+<p>支撑层：负责最基础的功能支撑，包括连接管理、事务管理、配置加载和缓存处理，这些都是共用的东西。为上层的数据处理层提供最基础的支撑。</p>
+<h2 id="1-3-MyBatis执行流程"><a href="#1-3-MyBatis执行流程" class="headerlink" title="1.3.    MyBatis执行流程"></a>1.3.    MyBatis执行流程</h2><p>执行过程：<br>1、mybatis配置<br>mybatis-config.xml，名称可变，此文件作为mybatis的全局配置文件，配置了mybatis的运行环境等信息。mapper.xml文件即sql映射文件，文件中配置了操作数据库的sql语句。此文件需要在mybatis-config.xml中加载；<br>2、通过mybatis环境等配置信息构造SqlSessionFactory即会话工厂；<br>3、由会话工厂创建sqlSession即会话，操作数据库需要通过sqlSession进行；<br>4、mybatis底层自定义了Executor执行器接口操作数据库，Executor接口有两个实现，一个是基本执行器、一个是缓存执行器；<br>5、Mapped Statement也是mybatis一个底层封装对象，它包装了mybatis配置信息及sql映射信息等。mapper.xml文件中一个sql对应一个Mapped Statement对象，sql的id即是Mapped statement的id；<br>6、Mapped Statement对sql执行输入参数进行定义，包括HashMap、基本类型、pojo，Executor通过 Mapped Statement在执行sql前将输入的java对象映射至sql中，输入参数映射就是jdbc编程中对preparedStatement设置参数；<br>7、Mapped Statement对sql执行输出结果进行定义，包括HashMap、基本类型、pojo，Executor通过 Mapped Statement在执行sql后将输出结果映射至java对象中，输出结果映射过程相当于jdbc编程中对结果的解析处理过程。</p>
+<h2 id="1-4-与Hibernate的比较"><a href="#1-4-与Hibernate的比较" class="headerlink" title="1.4.    与Hibernate的比较"></a>1.4.    与Hibernate的比较</h2><p>MyBatis与Hibernate都是流行的持久层开发框架；两者之间各有优缺点，具体的比较详见《MyBatis与Hibernate的区别.doc》</p>
+<h1 id="2-MyBatis初体验"><a href="#2-MyBatis初体验" class="headerlink" title="2.    MyBatis初体验"></a>2.    MyBatis初体验</h1><h2 id="2-1-创建并配置项目"><a href="#2-1-创建并配置项目" class="headerlink" title="2.1.    创建并配置项目"></a>2.1.    创建并配置项目</h2><p>1．创建Maven Project</p>
+<h2 id="2．配置项目；打开pom-xml文件，添加编译、mysql的依赖坐标。"><a href="#2．配置项目；打开pom-xml文件，添加编译、mysql的依赖坐标。" class="headerlink" title="2．配置项目；打开pom.xml文件，添加编译、mysql的依赖坐标。"></a>2．配置项目；打开pom.xml文件，添加编译、mysql的依赖坐标。</h2><pre><code>&lt;dependencies&gt;
+
+    &lt;!-- 单元测试 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.10&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- MySql --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;5.1.32&lt;/version&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;
+
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;!-- java编译插件 --&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.2&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;source&gt;1.7&lt;/source&gt;
+                &lt;target&gt;1.7&lt;/target&gt;
+                &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre><h2 id="2-2-创建数据库表"><a href="#2-2-创建数据库表" class="headerlink" title="2.2.    创建数据库表"></a>2.2.    创建数据库表</h2><p>–创建数据库<br>CREATE DATABASE mybatis DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</p>
+<p>–创建用户表并插入数据<br>drop table if exists t_user;</p>
+<p>/<em>==============================================================</em>/<br>/<em> Table: t_user                                                </em>/<br>/<em>==============================================================</em>/<br>create table t_user<br>(<br>   id                   bigint not null auto_increment,<br>   account              varchar(20),<br>   password             varchar(20),<br>   user_name            varchar(20),<br>   gender               int,<br>   age                  int,<br>   birthday             datetime,<br>   create_time          datetime,<br>   primary key (id)<br>);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘lilei’, ‘123456’, ‘李雷’, 1, 15, ‘2001-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘hanmeimei’, ‘123456’, ‘韩梅梅’, 0, 14, ‘2002-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘lucy’, ‘123456’, ‘露西’, 0, 13, ‘2003-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘lily’, ‘123456’, ‘莉莉’, 0, 13, ‘2003-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘jim’, ‘123456’, ‘Jim Green’, 1, 14, ‘2002-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<p>INSERT INTO t_user (account, password, user_name, gender, age, birthday, create_time)<br>VALUES (‘unclewang’, ‘123456’, ‘王大叔’, 1, 43, ‘1973-01-01 01:01:38’, ‘2016-03-01 19:09:55’);</p>
+<h2 id="2-3-引入MyBatis及其配置"><a href="#2-3-引入MyBatis及其配置" class="headerlink" title="2.3.    引入MyBatis及其配置"></a>2.3.    引入MyBatis及其配置</h2><p>2.3.1.    MyBatis引入及配置<br>1．配置mybatis依赖包的坐标信息到pom.xml文件中；<br>        <dependency><br>            <groupid>org.mybatis</groupid><br>            <artifactid>mybatis</artifactid><br>            <version>3.2.8</version><br>        </dependency></p>
+<p>2．在MyBatis的说明文档中找到它的总配置文件的相关内容，创建对应的配置文件。创建src/main/resources/mybatis-config.xml文件，文件中的内容可如下：</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE configuration<br>  PUBLIC “-//mybatis.org//DTD Config 3.0//EN”<br>  “<a href="http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;" target="_blank" rel="external">http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</a></p>
+<p><configuration><br>    <!-- 引入外部配置文件 --><br>    <properties resource="jdbc.properties"></properties></configuration></p>
+<pre><code>&lt;environments default=&quot;development&quot;&gt;
+    &lt;!-- 开发环境 --&gt;
+    &lt;environment id=&quot;development&quot;&gt;
+        &lt;transactionManager type=&quot;JDBC&quot; /&gt;
+        &lt;dataSource type=&quot;POOLED&quot;&gt;
+            &lt;property name=&quot;driver&quot; value=&quot;${jdbc.driver}&quot; /&gt;
+            &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot; /&gt;
+            &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot; /&gt;
+            &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot; /&gt;
+        &lt;/dataSource&gt;
+    &lt;/environment&gt;
+&lt;/environments&gt;
+&lt;mappers&gt;
+&lt;/mappers&gt;
+</code></pre><p><br>【注意】如果在编辑配置文件或者mapper文件时没有提示，可以在mybatis的源代码包中搜索到两个对应的dtd文件，然后加入开发工具中即可。</p>
+<p>3．在配置文件中对应的jdbc.properties的文件内容可如下：<br>jdbc.driver=com.mysql.jdbc.Driver<br>jdbc.url=jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true&amp;characterEncoding=utf8<br>jdbc.username=root<br>jdbc.password=root<br>)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-MyBatis概述&quot;&gt;&lt;a href=&quot;#1-MyBatis概述&quot; class=&quot;headerlink&quot; title=&quot;1.    MyBatis概述&quot;&gt;&lt;/a&gt;1.    MyBatis概述&lt;/h1&gt;&lt;h2 id=&quot;1-1-MyBatis简介&quot;&gt;&lt;a hre
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+    
+      <category term="Mybatis" scheme="http://yoursite.com/tags/Mybatis/"/>
+    
+  </entry>
+  
+  <entry>
     <title>02_Hibernate实现简单的CRUD操作</title>
     <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/02_Hibernate_CRUD/"/>
     <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/02_Hibernate_CRUD/</id>
@@ -1421,6 +1371,105 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Hibernate实现简单的CRUD操作：&quot;&gt;&lt;a href=&quot;#Hibernate实现简单的CRUD操作：&quot; class=&quot;headerlink&quot; title=&quot;Hibernate实现简单的CRUD操作：&quot;&gt;&lt;/a&gt;Hibernate实现简单的CRUD操作：&lt;/
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>03_Hibernate_一级缓存</title>
+    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate的一级缓存"><a href="#Hibernate的一级缓存" class="headerlink" title="Hibernate的一级缓存."></a>Hibernate的一级缓存.</h1><ol>
+<li>一级缓存，默认是开启的.</li>
+<li>它是跟Session相关(一级缓存是放在Session对象中).</li>
+<li>一级缓存是存放在内存中.<br>因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.  </li>
+</ol>
+<ul>
+<li><p>一级缓存的作用：<br>提高Hibernate的执行效率.  </p>
+</li>
+<li><p>如何提高Hibernate的执行效率:<br>因为它会把查询出来的对象先存放在内存中(一级缓存中).<br>当你调用该对象的set方法时它不会立即发出update语句<br>当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,<br>如果对象的属性值没有发生改变就不会生成update语句.  </p>
+</li>
+</ul>
+<blockquote>
+<p>操作一级缓存的方法：</p>
+</blockquote>
+<ol>
+<li><p>session.contains(持久化对象);<br>判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态</p>
+</li>
+<li><p>void session.clear(): 清空Session中的一级缓存.(所有的持久化状态的对象都没有了).</p>
+</li>
+<li><p>void session.evict(Object object): 从Session一级缓存中删除一个指定的持久化状态的对象.</p>
+</li>
+<li><p>void flush(): 把Session一级缓存中的对象同步到底层的数据库表中.(默认是事务提交时才同步)</p>
+</li>
+<li><p>void session.close(): 先清空Session中的一级缓存，再关闭数据库连接.</p>
+</li>
+<li><p>Session的一级缓存的生命周期：<br>Session session = SessionFactory.openSession(); 一级缓存开始<br>…..<br>session.close();  一级缓存结束</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate的一级缓存&quot;&gt;&lt;a href=&quot;#Hibernate的一级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate的一级缓存.&quot;&gt;&lt;/a&gt;Hibernate的一级缓存.&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;一级缓存，默认是开启的.&lt;/
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>06_Hibernate_批量处理</title>
+    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate-批量处理-Hibernate的性能调优"><a href="#Hibernate-批量处理-Hibernate的性能调优" class="headerlink" title="Hibernate_批量处理(Hibernate的性能调优):"></a>Hibernate_批量处理(Hibernate的性能调优):</h1><h2 id="批量添加："><a href="#批量添加：" class="headerlink" title="批量添加："></a>批量添加：</h2><p>假如有10w条数据需要用Hibernate这个框架实现批量添加的话，有可能会出现内存溢出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/** </div><div class="line"> * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line"> * 这样内存中就要存放10w个对象 </div><div class="line"> */</div><div class="line">session.save(t); // t --&gt; 持久化状态</div><div class="line">/**</div><div class="line"> * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line"> * 再调用clear()清空一级缓存，就释放内存 </div><div class="line"> */</div><div class="line">if (i % 20 == 0)&#123;</div><div class="line">    // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">    session.flush();</div><div class="line">    // 清空一级缓存，就释放内存</div><div class="line">    session.clear();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="批量修改："><a href="#批量修改：" class="headerlink" title="批量修改："></a>批量修改：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line">     * 这样内存中就要存放10w个对象 </div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    t.setAge(90);</div><div class="line">    /**</div><div class="line">     * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line">     * 再调用clear()清空一级缓存，就释放内存 </div><div class="line">     */</div><div class="line">    if (i % 20 == 0)&#123;</div><div class="line">        // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">        session.flush(); // 就会有update语句</div><div class="line">        // 清空一级缓存，就释放内存</div><div class="line">        session.clear();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="批量删除："><a href="#批量删除：" class="headerlink" title="批量删除："></a>批量删除：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/** 利用Session完成所有的持久化操作 */</div><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中)</div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    // 调用了delete方法 t是瞬态</div><div class="line">    session.delete(t);</div><div class="line">    System.out.println(session.contains(t)); </div><div class="line">    // 调用flush方法所数据同步到数据库的内存中 (产生delete语句)</div><div class="line">    session.flush();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="DML批量处理："><a href="#DML批量处理：" class="headerlink" title="DML批量处理："></a>DML批量处理：</h2><p>Data Manipulation Language (DML) : insert、select、update、delete</p>
+<p>DDL: drop 、create</p>
+<p>DML语法格式：<br>( UPDATE | DELETE ) FROM? EntityName (WHERE where_conditions)?. </p>
+<p>操作步骤：</p>
+<ul>
+<li>获取Session</li>
+<li>定义DML风格的hql语句.</li>
+<li>调用Query query = session.createQuery(hql);<br>如果hql语句中有占位符?，调用query.setPrameter()设置参数值.</li>
+</ul>
+<p><code>int res = query.exeuteUpdate(); // 受影响的记录条数</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">修改(DML)：</div><div class="line">/** DML风格的update语句 */</div><div class="line">String hql = &quot;update Teacher set age = ?&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">                 .setParameter(0, 50)</div><div class="line">                 .executeUpdate();</div><div class="line">删除(DML)：</div><div class="line">/** DML风格的delete语句 */</div><div class="line">//String hql = &quot;delete Teacher&quot;;</div><div class="line">//String hql = &quot;delete from Teacher where id &lt; ?&quot;;</div><div class="line">String hql = &quot;delete from Teacher where id in(?,?,?)&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">                 .setParameter(0, 10000)</div><div class="line">                 .setParameter(1, 10001)</div><div class="line">                 .setParameter(2, 10002)</div><div class="line">                 .executeUpdate();</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate-批量处理-Hibernate的性能调优&quot;&gt;&lt;a href=&quot;#Hibernate-批量处理-Hibernate的性能调优&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_批量处理(Hibernate的性能调优):&quot;&gt;&lt;
     
     </summary>
     
@@ -1574,6 +1623,45 @@
   </entry>
   
   <entry>
+    <title>09_Hibernate_Session线程安全问题</title>
+    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
+    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/</id>
+    <published>2017-04-02T13:46:07.000Z</published>
+    <updated>2017-04-02T13:46:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
+<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>第二步：编程部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:session不需自己关闭.</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Hibernate-Session线程安全问题&quot;&gt;&lt;a href=&quot;#Hibernate-Session线程安全问题&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_Session线程安全问题:&quot;&gt;&lt;/a&gt;Hibernate_Sessio
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
+    
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
     <title>07_Hibernate_二级缓存</title>
     <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
     <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/</id>
@@ -1620,87 +1708,6 @@
       &lt;h1 id=&quot;Hibernate-二级缓存&quot;&gt;&lt;a href=&quot;#Hibernate-二级缓存&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_二级缓存:&quot;&gt;&lt;/a&gt;Hibernate_二级缓存:&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;缓存的是对象.&lt;/li&gt;
 &lt;
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>06_Hibernate_批量处理</title>
-    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86/"/>
-    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-批量处理-Hibernate的性能调优"><a href="#Hibernate-批量处理-Hibernate的性能调优" class="headerlink" title="Hibernate_批量处理(Hibernate的性能调优):"></a>Hibernate_批量处理(Hibernate的性能调优):</h1><h2 id="批量添加："><a href="#批量添加：" class="headerlink" title="批量添加："></a>批量添加：</h2><p>假如有10w条数据需要用Hibernate这个框架实现批量添加的话，有可能会出现内存溢出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/** </div><div class="line"> * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line"> * 这样内存中就要存放10w个对象 </div><div class="line"> */</div><div class="line">session.save(t); // t --&gt; 持久化状态</div><div class="line">/**</div><div class="line"> * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line"> * 再调用clear()清空一级缓存，就释放内存 </div><div class="line"> */</div><div class="line">if (i % 20 == 0)&#123;</div><div class="line">    // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">    session.flush();</div><div class="line">    // 清空一级缓存，就释放内存</div><div class="line">    session.clear();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="批量修改："><a href="#批量修改：" class="headerlink" title="批量修改："></a>批量修改：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中),</div><div class="line">     * 这样内存中就要存放10w个对象 </div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    t.setAge(90);</div><div class="line">    /**</div><div class="line">     * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中, </div><div class="line">     * 再调用clear()清空一级缓存，就释放内存 </div><div class="line">     */</div><div class="line">    if (i % 20 == 0)&#123;</div><div class="line">        // 把一级缓存中的对象同步到底层数据库表中</div><div class="line">        session.flush(); // 就会有update语句</div><div class="line">        // 清空一级缓存，就释放内存</div><div class="line">        session.clear();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="批量删除："><a href="#批量删除：" class="headerlink" title="批量删除："></a>批量删除：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/** 利用Session完成所有的持久化操作 */</div><div class="line">for (int i = 1; i &lt;= 100000; i++)&#123;</div><div class="line">    /**</div><div class="line">     * 调用了get方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中)</div><div class="line">     */</div><div class="line">    Teacher t = (Teacher)session.get(Teacher.class, i);</div><div class="line">    // 调用了delete方法 t是瞬态</div><div class="line">    session.delete(t);</div><div class="line">    System.out.println(session.contains(t)); </div><div class="line">    // 调用flush方法所数据同步到数据库的内存中 (产生delete语句)</div><div class="line">    session.flush();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="DML批量处理："><a href="#DML批量处理：" class="headerlink" title="DML批量处理："></a>DML批量处理：</h2><p>Data Manipulation Language (DML) : insert、select、update、delete</p>
-<p>DDL: drop 、create</p>
-<p>DML语法格式：<br>( UPDATE | DELETE ) FROM? EntityName (WHERE where_conditions)?. </p>
-<p>操作步骤：</p>
-<ul>
-<li>获取Session</li>
-<li>定义DML风格的hql语句.</li>
-<li>调用Query query = session.createQuery(hql);<br>如果hql语句中有占位符?，调用query.setPrameter()设置参数值.</li>
-</ul>
-<p><code>int res = query.exeuteUpdate(); // 受影响的记录条数</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">修改(DML)：</div><div class="line">/** DML风格的update语句 */</div><div class="line">String hql = &quot;update Teacher set age = ?&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">                 .setParameter(0, 50)</div><div class="line">                 .executeUpdate();</div><div class="line">删除(DML)：</div><div class="line">/** DML风格的delete语句 */</div><div class="line">//String hql = &quot;delete Teacher&quot;;</div><div class="line">//String hql = &quot;delete from Teacher where id &lt; ?&quot;;</div><div class="line">String hql = &quot;delete from Teacher where id in(?,?,?)&quot;;</div><div class="line">int res = session.createQuery(hql)</div><div class="line">                 .setParameter(0, 10000)</div><div class="line">                 .setParameter(1, 10001)</div><div class="line">                 .setParameter(2, 10002)</div><div class="line">                 .executeUpdate();</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-批量处理-Hibernate的性能调优&quot;&gt;&lt;a href=&quot;#Hibernate-批量处理-Hibernate的性能调优&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_批量处理(Hibernate的性能调优):&quot;&gt;&lt;
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="ORM" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/"/>
-    
-      <category term="Hibernate" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/ORM/Hibernate/"/>
-    
-    
-      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>09_Hibernate_Session线程安全问题</title>
-    <link href="http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
-    <id>http://yoursite.com/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/</id>
-    <published>2017-04-02T13:46:07.000Z</published>
-    <updated>2017-04-02T13:46:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hibernate-Session线程安全问题"><a href="#Hibernate-Session线程安全问题" class="headerlink" title="Hibernate_Session线程安全问题:"></a>Hibernate_Session线程安全问题:</h1><ul>
-<li>第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.<br>org.hibernate.context.internal.JTASessionContext:<br>JTA: Java Transaction Api java事务api. (全局事务)<br><code>跨数据库(EJB容器) WebLogic(IBM)</code><br>org.hibernate.context.internal.ThreadLocalSessionContext:<br>JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置线程安全的Session </div><div class="line">thread: org.hibernate.context.internal.ThreadLocalSessionContext</div><div class="line">jpa:  org.hibernate.context.internal.JTASessionContext --&gt;</div><div class="line">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>第二步：编程部分</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/** 从当前线程中获取Session */</div><div class="line">Session session = sessionFactory.getCurrentSession();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注意:session不需自己关闭.</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hibernate-Session线程安全问题&quot;&gt;&lt;a href=&quot;#Hibernate-Session线程安全问题&quot; class=&quot;headerlink&quot; title=&quot;Hibernate_Session线程安全问题:&quot;&gt;&lt;/a&gt;Hibernate_Sessio
     
     </summary>
     
