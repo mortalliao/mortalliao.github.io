@@ -1,0 +1,465 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>01_JS类型 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/JavaScript/"><i class="fa" aria-hidden="true">JavaScript</i></a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #215690">JavaScript</a> <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #4f83b8">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="01_JS类型">
+                
+                01_JS类型
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>JavaScript</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            JavaScript
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/05/21</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/05/21/Frontend/JavaScript/01_JS类型/" data-thread-key="/2017/05/21/Frontend/JavaScript/01_JS类型/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="01_JS类型"
+              data-leadcloud-url="/2017/05/21/Frontend/JavaScript/01_JS类型/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="JavaScript的组成"><a href="#JavaScript的组成" class="headerlink" title="JavaScript的组成"></a>JavaScript的组成</h1><ul>
+<li>ECMAScript<br>JavaScript的语法规范  </li>
+<li>DOM<br>JavaScript操作网页上元素的API  </li>
+<li>BOM<br>JavaScript操作浏览器部分功能的API  </li>
+</ul>
+<p>关键字：<br>break case catch continue debugger default delete do else finally for function if in instanceof new return switch this throw try typeof var void while with  </p>
+<p>保留字：<br>abstract boolean byte char class const debugger double enum export extends final float goto implements import int interface long native package private protected public short static super synchronized throws transient volatile</p>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>var 变量名 = 值;</p>
+<ol>
+<li>变量的声明用var</li>
+<li>变量的命名：英文，数字，_，$，数字不能在名称开头。</li>
+<li>变量的名称不能是关键字。</li>
+</ol>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>简单类型：</p>
+<ul>
+<li>数值类型(number)</li>
+<li>布尔类型(boolean)</li>
+<li>字符串类型(string)</li>
+<li>未定义类型(undefined)</li>
+<li>null类型(本质上是一个特殊的object)</li>
+</ul>
+<p>复杂类型：</p>
+<ul>
+<li>object类型(引用类型)</li>
+<li>function类型(函数类型)</li>
+</ul>
+<h2 id="number："><a href="#number：" class="headerlink" title="number："></a>number：</h2><p>在number的世界中数字分为两一种  </p>
+<ol>
+<li>number </li>
+<li>NaN(表示的数字的一种不正常的状态：在计算过程出现错误)</li>
+</ol>
+<blockquote>
+<p>正数，负数，小数，0<br>注意：js中对数值没有明确的细分，所有的数值都叫nubmer</p>
+</blockquote>
+<p><strong>NaN: Not a Number(非数字)</strong><br>当我们在进行运算的时候，出现错误，NaN就是用来表示这个错误。本质上是一个数字。<br>如何判断数据是否是NaN:<br><code>IsNaN();</code><br>用于判断当前变量是否是一个非数字，如果是一个非数字，那么为true,如果是一个数字，那么为false.  </p>
+<blockquote>
+<p>注意：NaN是一种很特殊的状态，特殊到它自己都不等于自己。</p>
+</blockquote>
+<p>浮点数<br>var n = 5e-324;<br>浮点数值的最高精度是 17 位小数，但在进行算术计算时其精确度远远不如整数<br> var result = 0.1 + 0.2; // 结果不是 0.3，而是：0.30000000000000004<br> console.log(0.07 <em> 100);<br><em>*永远不要测试某个特定的浮点数值(不要判断两个浮点数是否相等)</em></em>  </p>
+<p>由于内存的限制，ECMAScript 并不能保存世界上所有的数值<br>最小值：Number.MIN_VALUE，这个值为： 5e-324<br>最大值：Number.MAX_VALUE，这个值为： 1.7976931348623157e+308<br>无穷大：Infinity<br>无穷小：-Infinity  </p>
+<h2 id="boolean"><a href="#boolean" class="headerlink" title="boolean:"></a>boolean:</h2><p>Boolean类型有两个字面量：true和false，并且区分大小写！<br>虽然Boolean 类型的字面值只有两个，但 ECMAScript 中所有类型的值都有与这两个 Boolean 值等价的值  </p>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><ol>
+<li>string可以用双引号引起来，也可以用单引号，但单引号和双引号要成对出现</li>
+<li>如果要在字符串中输出引号，可以使用转译符“\”;</li>
+<li>字符串是由一个一个字符组成的，获取一个字符串中字符的个数可以使用length</li>
+</ol>
+<h2 id="undefined-未定义："><a href="#undefined-未定义：" class="headerlink" title="undefined:未定义："></a>undefined:未定义：</h2><p>Undefined这是一种比较特殊的类型，表示变量未赋值，这种类型只有一种值就是undefined<br>undefined是Undefined类型的字面量<br>一般出现在声明了一个变量，但是没有赋值。</p>
+<h2 id="null-Null类型"><a href="#null-Null类型" class="headerlink" title="null(Null类型)"></a>null(Null类型)</h2><p>alert(typeof null);//输出的是object 。null被认为是对象的占位符，但仍然算做原始数据类型  </p>
+<blockquote>
+<p>注释：您也许会问，为什么 typeof 运算符对于 null 值会返回 “Object”。这实际上是 JavaScript 最初实现中的一个错误，然后被 ECMAScript 沿用了。现在，null 被认为是对象的占位符，从而解释了这一矛盾，但从技术上来说，它仍然是原始值。<br>这里需要注意的是：</p>
+</blockquote>
+<p>另一种只有一个值的类型是 Null，它只有一个专用值 null，即它的字面量。值 undefined 实际上是从值 null 派生来的，因此 ECMAScript 把它们定义为相等的。<br>alert(null == undefined);  //输出 “true”<br>尽管这两个值相等，但它们的含义不同。undefined 是声明了变量但未对其初始化时赋予该变量的值，null 则用于表示尚未存在的对象（在讨论 typeof 运算符时，简单地介绍过这一点）。如果函数或方法要返回的是对象，那么找不到该对象时，返回的通常是 null。  </p>
+<p>Null类型（空型）只有一个值就是：null。  </p>
+<p>undefined实际上是从值null派生来的，所以显示true  </p>
+<p>undefined是声明了变量但是未赋值，null是找不到对象。  </p>
+<h2 id="得到数据的类型"><a href="#得到数据的类型" class="headerlink" title="得到数据的类型"></a>得到数据的类型</h2><p>typeof(变量); //得到数据的类型<br>typeof 变量; //在js的代码系统已经使用了这个字符串</p>
+<h1 id="数据类型的转换"><a href="#数据类型的转换" class="headerlink" title="数据类型的转换"></a>数据类型的转换</h1><h2 id="强制转换："><a href="#强制转换：" class="headerlink" title="强制转换："></a>强制转换：</h2><h3 id="转换成数值类型"><a href="#转换成数值类型" class="headerlink" title="转换成数值类型"></a>转换成数值类型</h3><p>三个把值转换成数值类型的函数：Number()、 parseInt()、 parseFloat()  </p>
+<ol>
+<li><p>Number()可以把任意值转换成数值，如果要转换的字符串中有一个不是数值的字符，返回NaN</p>
+</li>
+<li><p>parseInt()把字符串转换成整数<br>parseInt()可以传递两个参数，第一个参数是要转换的字符串，第二个参数是要转换的进制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var num1 = parseInt(&quot;12.3abc&quot;);  //返回12，如果第一个字符是数字会解析知道遇到非数字结束</div><div class="line">var num2 = parseInt(&quot;abc123&quot;);  //返回NaN，如果第一个字符不是数字或者符号就返回NaN</div><div class="line">var num3 = parseInt(&quot;&quot;);        //空字符串返回NaN，Number(&quot;&quot;)返回0</div><div class="line">var num5 = parseInt(&quot;10&quot;);      //返回10</div><div class="line">var num4 = parseInt(&quot;0xA&quot;);     //返回10</div><div class="line">var num1 = parseInt(&quot;A&quot;,16);   //A按16进制解析是10</div><div class="line">var num2 = parseInt(&quot;10&quot;,10);  //10按10进制解析10</div><div class="line">var num3 = parseInt(&quot;10&quot;,16);  //10按16进制解析16</div><div class="line">var num4 = parseInt(&quot;10&quot;,8);   //10按8进制解析是8</div><div class="line">var num5 = parseInt(&quot;10&quot;,2);   //10按2进制解析是2</div><div class="line">var num6 = parseInt(&quot;10&quot;,3);   //10按3进制解析是3</div></pre></td></tr></table></figure>
+</li>
+<li><p>parseFloat()把字符串转换成浮点数<br>parseFloat()和parseInt非常相似，不同之处在与<br>parseFloat会解析第一个. 遇到第二个.或者非数字结束<br>parseFloat不支持第二个参数，只能解析10进制数<br>如果解析的内容里只有整数，解析成整数  </p>
+</li>
+</ol>
+<blockquote>
+<p>注意：parseInt在转换字符串的时候：</p>
+<ol>
+<li>如果使用Number转换非数字类型的字符串，那么转换失败，但是用parseInt转换就不会，如果数据中既有数字又有字母，那么parseInt会将数字转成Number,后面的字母（就算字母后面有数字也会）直接去掉。</li>
+<li>如果在转换的字符串前面有空格，空格会自动去掉。</li>
+<li>如果字符串开头不是数字，那么这个转换结果还是会报错。  </li>
+</ol>
+</blockquote>
+<h3 id="转成字符串："><a href="#转成字符串：" class="headerlink" title="转成字符串："></a>转成字符串：</h3><ol>
+<li><p>几乎每一个值都有toString()方法<br>数值类型的toString()，可以携带一个参数，输出对应进制的值  </p>
+</li>
+<li><p>String()函数<br>String()函数存在的意义：有些值没有toString()，这个时候可以使用String()。比如：undefined和null<br>var a = 123;<br>var b = String(a);<br>console.log(typeof(b));  </p>
+</li>
+</ol>
+<h3 id="将其它类型转成布尔类型"><a href="#将其它类型转成布尔类型" class="headerlink" title="将其它类型转成布尔类型:"></a>将其它类型转成布尔类型:</h3><ol>
+<li>Boolean()函数<br>var a = 123;<br>var b = Boolean(a);<br>console.log(typeof(b));  </li>
+<li>流程控制语句会把后面的值隐式转换成布尔类型</li>
+</ol>
+<p>boolean可以将任意的内容转成boolean类型<br>转换为false的值：false、””、0和NaN、null、undefined  </p>
+<h2 id="隐式转换（自动转换）"><a href="#隐式转换（自动转换）" class="headerlink" title="隐式转换（自动转换）"></a>隐式转换（自动转换）</h2><ol>
+<li><p>将字符串转成number<br>var a = “123”;<br>var b = +a;<br>console.log(b); //123<br>console.log(typeof(b)); //number  </p>
+</li>
+<li><p>将数字转成字符串<br>var a = 123;<br>var b = a + “”;<br>console.log(b);<br>console.log(typeof(b));  </p>
+</li>
+<li><p>将其他类型转成boolean类型：<br>var a = “abc”;<br>var b = !a;<br>console.log(b);<br>console.log(typeof(b));  </p>
+</li>
+</ol>
+<h1 id="比较运算符："><a href="#比较运算符：" class="headerlink" title="比较运算符："></a>比较运算符：</h1><p><code>&gt; &lt; &gt;= &lt;= !=</code><br>var a =  1 &gt; 3;  </p>
+<blockquote>
+<p>注意：比较运算符的优先级要高于赋值运算符的优先级。</p>
+</blockquote>
+<h1 id="数值运算符（算数运算符）："><a href="#数值运算符（算数运算符）：" class="headerlink" title="数值运算符（算数运算符）："></a>数值运算符（算数运算符）：</h1><p><code>+</code>  </p>
+<ol>
+<li>如果有字符串是相连</li>
+<li>如果都是number是相加  </li>
+</ol>
+<p><code>-</code><br>减法不会用在字符串之间，只会用在数值之间<br>如果字符串可以转换为数值，则也是数值相减<br>作用只是一个数据减去另一个数。  </p>
+<p><code>*</code><br>作用于两个数据之间：一个数乘以另一个数  </p>
+<p><code>/</code><br> 作用于两个数据之间：一个数除以另一个数  </p>
+<p><code>%</code>:<br>计算出两个数据相除以后余数：<br>得到一个数余以另一个数的余数  </p>
+<p><code>()</code><br>将括号内的内容当作一个整体在编程没有中括号，也没有大括号。</p>
+<h1 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h1><p>或<code>||</code><br>与<code>&amp;&amp;</code><br>非<code>!</code></p>
+<h1 id="等号运算符"><a href="#等号运算符" class="headerlink" title="等号运算符"></a>等号运算符</h1><p>== 等于     比较的是内容，并不关心数据类型<br>=== 全等   比较的是内容以及数据类型。<br>!= 不等于  比较的是内容，并不关心数据类型<br>!== 不全等于 比较的是内容和数据类型, 其中之一不一样就为true  </p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-05-21  12:18:56</span></li>
+                
+                <li>最后编辑日期: <span>2017-05-21  12:18:56</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/前端开发/">前端开发</a>
+                    
+                    <a href="/categories/前端开发/JavaScript/">JavaScript</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/JavaScript/">JavaScript</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/05/21/Frontend/JavaScript/06_JS-DOM/" class="pre-post fa fa-caret-left">06_JS-DOM</a>
+        
+        
+        <a href="/2017/05/21/Frontend/JavaScript/08_JS_offset/" class="next-post fa">08_JS_offset</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript的组成"><span class="toc-number">1.</span> <span class="toc-text">JavaScript的组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变量"><span class="toc-number">2.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据类型"><span class="toc-number">3.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#number："><span class="toc-number">3.1.</span> <span class="toc-text">number：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#boolean"><span class="toc-number">3.2.</span> <span class="toc-text">boolean:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#string"><span class="toc-number">3.3.</span> <span class="toc-text">string</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined-未定义："><span class="toc-number">3.4.</span> <span class="toc-text">undefined:未定义：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null-Null类型"><span class="toc-number">3.5.</span> <span class="toc-text">null(Null类型)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#得到数据的类型"><span class="toc-number">3.6.</span> <span class="toc-text">得到数据的类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据类型的转换"><span class="toc-number">4.</span> <span class="toc-text">数据类型的转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#强制转换："><span class="toc-number">4.1.</span> <span class="toc-text">强制转换：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#转换成数值类型"><span class="toc-number">4.1.1.</span> <span class="toc-text">转换成数值类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转成字符串："><span class="toc-number">4.1.2.</span> <span class="toc-text">转成字符串：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将其它类型转成布尔类型"><span class="toc-number">4.1.3.</span> <span class="toc-text">将其它类型转成布尔类型:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式转换（自动转换）"><span class="toc-number">4.2.</span> <span class="toc-text">隐式转换（自动转换）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#比较运算符："><span class="toc-number">5.</span> <span class="toc-text">比较运算符：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数值运算符（算数运算符）："><span class="toc-number">6.</span> <span class="toc-text">数值运算符（算数运算符）：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#逻辑运算符"><span class="toc-number">7.</span> <span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#等号运算符"><span class="toc-number">8.</span> <span class="toc-text">等号运算符</span></a></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>02_JS内置对象 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/JavaScript/"><i class="fa" aria-hidden="true">JavaScript</i></a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #215690">JavaScript</a> <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #4f83b8">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="02_JS内置对象">
+                
+                02_JS内置对象
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>JavaScript</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            JavaScript
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/05/21</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/05/21/Frontend/JavaScript/02_JS内置对象/" data-thread-key="/2017/05/21/Frontend/JavaScript/02_JS内置对象/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="02_JS内置对象"
+              data-leadcloud-url="/2017/05/21/Frontend/JavaScript/02_JS内置对象/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>声明：  </p>
+<ol>
+<li>var shuzu = new Array();<br>var array = new Array(5);  </li>
+<li>var array = [];<br>var array = [1,2];  </li>
+</ol>
+<p>赋值：<br>通过数组名称加上中括号，在中括号中加上数据的下标（位置的标号）得到这个数据，给它赋值。<br>Shuzu[0] = 1 ;//[0] 选择器  </p>
+<p>数组对象的属性：<br>length 数组的长度  </p>
+<h2 id="检测数组"><a href="#检测数组" class="headerlink" title="检测数组"></a>检测数组</h2><p>instanceof<br>Array.isArray(); //HTML5中新增</p>
+<h2 id="如何判断数组中是否存在指定的值"><a href="#如何判断数组中是否存在指定的值" class="headerlink" title="如何判断数组中是否存在指定的值"></a>如何判断数组中是否存在指定的值</h2><ol>
+<li>for循环 如果找到了就输出</li>
+<li>indexOf  返回值为指定的数对应的索引，如果没有找到 返回-1</li>
+</ol>
+<h2 id="数组中常用-的方法："><a href="#数组中常用-的方法：" class="headerlink" title="数组中常用 的方法："></a>数组中常用 的方法：</h2><p>slice(0, 3); // 用来从数组中得到对应两个下标的内容，单独作为一个数组保存，注意不包括最后那个<br>splice(2,1,”abc”);<br>// 用来向指定的位置插入元素<br>// 第一个参数是：从哪个下标开始  第二个参数是要替换几个索引长度，最后是插入什么内容。<br>// 如果第二个参数是一：说明要替换一个<br>// splice(0,ary.length);// 清空数组<br>toSource(); // 返回该对象的源代码<br>toString(); // 把数组转换为字符串，并返回结果<br>toLocalString(); // 向数组的开头添加一个或者更多元素，并返回新的长度。<br>valueOf(); // 返回数组对象的原始值</p>
+<p>push(); // 向数组的末尾添加一个或更多元素，并返回新的长度<br>pop(); // 删除并返回数组的最后一个元素  </p>
+<p>shift(); // 删除并返回数组的第一个元素<br>unshift(); // 向数组的顶端添加一个或更多元素，并返回新的长度  </p>
+<p>map(function(val,index,arr){}) // 迭代数组<br>map 方法会迭代数组中的每一个元素，并根据回调函数来处理每一个元素，最后返回一个新数组。注意，这个方法不会改变原始数组。<br>在我们的例子中，回调函数只有一个参数，即数组中元素的值 (val 参数) ，但其实，你的回调函数也可以支持多个参数，譬如：元素的索引index、原始数组arr。  </p>
+<p>reduce(function(previousVal, currentVal){}, 0) // 用来迭代一个数组，并且把它累积到一个值中<br>使用 reduce 方法时，你要传入一个回调函数，这个回调函数的参数是一个 累加器 （比如例子中的 previousVal) 和当前值 (currentVal）。<br>reduce 方法有一个可选的第二参数，它可以被用来设置累加器的初始值。如果没有在这定义初始值，那么初始值将变成数组中的第一项，而 currentVal 将从数组的第二项开始。  </p>
+<p>filter(function(val){}) // 用来迭代一个数组，并且按给出的条件过滤出符合的元素<br>filter 方法传入一个回调函数，这个回调函数会携带一个参数，参数为当前迭代的项（我们叫它 val ）。<br>回调函数返回 true 的项会保留在数组中，返回 false 的项会被过滤出数组。  </p>
+<p>sort(); // 很容易的按字母顺序或数字顺序对数组中的元素进行排序<br>与我们之前用的数组方法仅仅返回一个新数组不同， sort 方法将改变原数组，返回被排序后的数组。<br>sort 可以把比较函数作为参数传入。比较函数有返回值，当 a 小于 b，返回一个负数；当 a 大于 b ，返回一个正数；相等时返回0。<br>如果没有传入比较函数，它将把值全部转成字符串，并按照字母顺序进行排序。  </p>
+<p>reverse(); // 翻转数组  </p>
+<p>concat(); // 用来把两个数组的内容合并到一个数组中<br>concat 方法的参数应该是一个数组。参数中的数组会拼接在原数组的后面，并作为一个新数组返回。  </p>
+<p>join(); // 把数组转换成字符串，里面的每一个元素可以用你指定的连接符来连接起来，这个连接符就是你要传入的参数  </p>
+<h2 id="清空数组"><a href="#清空数组" class="headerlink" title="清空数组"></a>清空数组</h2><p>var arr = [1, 2, 3];<br>arr = [];//方法一<br>arr.length = 0;//方法二<br>arr = null;//方法三<br>delete arr;//方法四<br>splice(0,ary.length);// 方法五  </p>
+<h2 id="删除数组几种方法"><a href="#删除数组几种方法" class="headerlink" title="删除数组几种方法"></a>删除数组几种方法</h2><ol>
+<li>delete方法:delete arr[1];<br>这种方式数组长度不变,此时arr[1]变为undefined了,但是也有好处原来数组的索引也保持不变,此时要遍历数组元素可以才用<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for(index in arr)&#123;</div><div class="line">    document.write(&apos;arr[&apos;+index+&apos;]=&apos;+arr[index]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种遍历方式跳过其中undefined的元素  </p>
+<ol>
+<li>数组对象splice方法:array.splice(1,1);<br>这种方式数组长度相应改变,但是原来的数组索引也相应改变  </li>
+</ol>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>在js中数组一旦定义好了，那么它就是一个无穷大的容器。</li>
+<li>数组是从0开始存储的</li>
+<li>数组定义好了以后的长度是0;</li>
+</ol>
+</blockquote>
+<h2 id="迭代方法-不会修改原数组"><a href="#迭代方法-不会修改原数组" class="headerlink" title="迭代方法 不会修改原数组"></a>迭代方法 不会修改原数组</h2><p>every()、filter()、forEach()、map()、some()</p>
+<h1 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h1><p>Math.pow(2,20); //得到2的20次方的值<br>Math.round(0.5); //1 四舍五入<br>Math.ceil(1.01); //2 向上取值<br>Math.floor(1.9); //1 向下取值<br>Math.abs(-5); //5 求绝对值<br>Math.max(a,b,c…); // 从这组数中取出最大的值（最少为两个数）<br>Math.min(x,y,z); // 返回最小值<br>Math.random(); // 随机生成一个0到1的随机数<br>Math.PI; // 圆周率<br>Math.E; // e: 自然对数的底数<br>Math.sqrt(3); // 3的平方根<br>Math.pow(3, 1/3); // 3的立方根<br>Math.sin(0); // 三角函数： 还有Math.cos(); Math:atan等<br>Math.log(10); // 10的自然对数<br>Math.lot(100)/Math.LN10 // 以10为底100的对数<br>Math.log(512)/Math.LN2 // 以2为底512的对数<br>Math.exp(3); // e的三次幂</p>
+<h1 id="Date对象"><a href="#Date对象" class="headerlink" title="Date对象"></a>Date对象</h1><p>Date-引用类型，JavaScript中的内置对象<br>获取当前时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var date = new Date();   //UTC的时间</div><div class="line">//返回数字，时间的毫秒形式</div><div class="line">var date = Date.now();   //HTML5，IE9+</div><div class="line">var date = +new Date();  //不支持now方法的时候</div></pre></td></tr></table></figure></p>
+<p>Date(); // 返回当日的日期和时间<br>getDate(); // 从Date对象返回一个月中的某一天(1~31)<br>getDay(); // 从Date对象返回一周中的某一天(0~6)<br>getMonth(); // 从Date对象返回月份(0~11)<br>getFullYear(); // 从Date对象以四位数字返回年份<br>getYear(); // 请使用getFullYear();方法代替<br>getHours(); // 返回Date对象的小时(0~23)<br>getMinutes(); // 返回Date对象的分钟(0~59)<br>getSeconds(); // 返回Date对象的秒数(0~59)<br>getMilliseconds(); // 返回Date对象的毫秒(0~999)<br>getTime(); // 返回1970年1月1日至今的毫秒数<br>getTimezoneOffset(); // 返回本地时间与格林威治标准时间(GMT)的分钟差<br>parse(); // 返回1970年1月1日午夜到指定日期(字符串)的毫秒数<br>setDate(); // 设置Date对象中月的某一天(1~31)<br>setMonth(); // 设置Date对象中月份(0~11)<br>setFullYear(); // 设置Date对象中额年份(四位数)<br>setHours(); // 设置Date对象中的小时(0~23)<br>setMinutes(); // 设置Date对象中的分钟(0~59)<br>setSeconds(); // 设置Date对象中的秒钟(0~59)<br>setMilliseconds(); // 设置Date对象中的毫秒(0~999)<br>setTime(); // 以毫秒设置Date对象<br>toString(); // 把Date对象转换为字符串<br>toTimeString(); // 把Date对象的时间部分转换为字符串<br>toDateString(); // 把Date对象的日期部分转换为字符串<br>toLocalString(); // 根据本地时间格式，把Date对象转换为字符串  </p>
+<h2 id="日期转换"><a href="#日期转换" class="headerlink" title="日期转换"></a>日期转换</h2><ul>
+<li>var date = new Date(2005,10,1);<br>可以接受三种参数<ul>
+<li>2005，10，1日期的每一部分  </li>
+<li>“2005-10-1”  字符串的日期格式  </li>
+<li>表示日期的毫秒形式1128096000000  </li>
+</ul>
+</li>
+<li>var date = Date.parse(“2005-10-1”);<br>把字符串或2005，10，1日期的每一部分转换成日期的毫秒形式，如果字符串的格式不是时间的正确格式返回NaN</li>
+</ul>
+<h2 id="基本包装类型"><a href="#基本包装类型" class="headerlink" title="基本包装类型"></a>基本包装类型</h2><p>为了方便操作基本数据类型，JavaScript还提供了三个特殊的引用类型：String/Number/Boolean</p>
+<ul>
+<li>例如：<br>var s1 = “zhangsan”;<br>var s2 = s1.substring(5);  </li>
+<li>s1是基本类型，基本类型是没有方法的</li>
+<li>当调用s1.substring(5)的时候，先把s1包装成String类型的临时对象，再调用substring方法，最后销毁临时对象<br>相当于：<br>var s1 = new String(“zhangsan”);<br>var s2 = s1.substring(5);<br>s1 = null;  </li>
+<li>创建基本包装类型的对象<br>var num = 18;  //数值，基本类型<br>var num = Number(“18”); //类型转换<br>var num = new Number(18); //基本包装类型，对象  </li>
+<li>Number和Boolean基本包装类型基本不用，使用的话可能会引起歧义<br>例如：<br>var b1 = new Boolean(false);<br>var b2 = b1 &amp;&amp; true;  </li>
+</ul>
+<h1 id="String对象"><a href="#String对象" class="headerlink" title="String对象"></a>String对象</h1><p>big(); // 用大号字体显示字符串<br>blink(); // 显示闪动字符串<br>bold(); // 使用粗体显示字符串<br>fontcolor(); // 使用指定的颜色来显示字符串<br>fontsize(); // 使用指定的尺寸来显示字符串<br>fixed(); // 以打字机文本显示字符串<br>italics(); // 使用斜体显示字符串<br>small(); // 使用小字号来显示字符串<br>sub(); // 把字符串显示为下标<br>sup(); // 把字符串显示为上标<br>strike(); // 使用删除线来显示字符串  </p>
+<p>charAt(); // 返回在指定位置的字符<br>charCodeAt(); // 返回在指定的位置的字符的Unicode编码<br>concat(); // 连接字符串<br>fromCharCode(); // 从字符编码创建一个字符串<br>indexOf(); // 检索字符串<br>lastIndexOf(); // 从后向前搜索字符串<br>link(); // 将字符串显示为链接<br>localeCompare(); // 用本地特定的顺序来比较两个字符串<br>match(); // 找到一个或多个正则表达式的匹配<br>replace(); // 替换与正则表达式匹配的子串<br>search(); // 检索与正则表达式相匹配的值<br>slice(start [,end]); // 提去字符串的片段，并在新的字符串中返回被提取的部分  </p>
+<p>split(“s”) // 按指定分隔符将字符串分割为数组  </p>
+<p>substr(start [,number]); // 从起始索引号提取字符串中指定数目的字符<br>substring(start [,end]); // 提取字符串中两个指定的索引号之间的字符<br>toLowerCase(); // 把字符串转换为小写<br>toUpperCase(); // 把字符串转换为大写<br>trim()  //只能去除字符串前后的空白  </p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-05-21  12:18:56</span></li>
+                
+                <li>最后编辑日期: <span>2017-05-21  12:18:56</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/前端开发/">前端开发</a>
+                    
+                    <a href="/categories/前端开发/JavaScript/">JavaScript</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/JavaScript/">JavaScript</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/05/21/Frontend/JavaScript/07_JavaScript事件/" class="pre-post fa fa-caret-left">07_JavaScript事件</a>
+        
+        
+        <a href="/2017/05/21/Frontend/JavaScript/03_JS正则表达式/" class="next-post fa">03_JS正则表达式</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数组"><span class="toc-number">1.</span> <span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#检测数组"><span class="toc-number">1.1.</span> <span class="toc-text">检测数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何判断数组中是否存在指定的值"><span class="toc-number">1.2.</span> <span class="toc-text">如何判断数组中是否存在指定的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组中常用-的方法："><span class="toc-number">1.3.</span> <span class="toc-text">数组中常用 的方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清空数组"><span class="toc-number">1.4.</span> <span class="toc-text">清空数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除数组几种方法"><span class="toc-number">1.5.</span> <span class="toc-text">删除数组几种方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代方法-不会修改原数组"><span class="toc-number">1.6.</span> <span class="toc-text">迭代方法 不会修改原数组</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Math对象"><span class="toc-number">2.</span> <span class="toc-text">Math对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Date对象"><span class="toc-number">3.</span> <span class="toc-text">Date对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#日期转换"><span class="toc-number">3.1.</span> <span class="toc-text">日期转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本包装类型"><span class="toc-number">3.2.</span> <span class="toc-text">基本包装类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#String对象"><span class="toc-number">4.</span> <span class="toc-text">String对象</span></a></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

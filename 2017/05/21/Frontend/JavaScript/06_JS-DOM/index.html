@@ -1,0 +1,531 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>06_JS-DOM | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/JavaScript/"><i class="fa" aria-hidden="true">JavaScript</i></a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #215690">JavaScript</a> <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #4f83b8">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.2rem; color: #0a407c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="06_JS-DOM">
+                
+                06_JS-DOM
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>JavaScript</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            JavaScript
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/05/21</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/05/21/Frontend/JavaScript/06_JS-DOM/" data-thread-key="/2017/05/21/Frontend/JavaScript/06_JS-DOM/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="06_JS-DOM"
+              data-leadcloud-url="/2017/05/21/Frontend/JavaScript/06_JS-DOM/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="DOM（文档对象模型）"><a href="#DOM（文档对象模型）" class="headerlink" title="DOM（文档对象模型）"></a>DOM（文档对象模型）</h1><ul>
+<li>文档：标记型文档</li>
+<li>对象：封装了属性和行为的实例，可以直接被调用。</li>
+<li>模型：所有的标记型文档都具有一些共性特征的一个体现。</li>
+<li>用来将标记型文档封装成对象，并将标记型文档中的所有内容（标签、文本、属性）都封装成对象。</li>
+<li>封装成对象的目的是为了更方便的操作这些文档及其文档中的所有内容。因为对象包含属性和行为。</li>
+<li>标记型文档包含标签、属性、标签中封装的数据。只要是标记型文档，DOM这种技术都可以对其进行操作。</li>
+<li>常见的标记型文档包括：HTML   XML。</li>
+<li>DOM要操作标记型文档必须先进行解析。</li>
+</ul>
+<h1 id="DOM三个级别和DHTML介绍"><a href="#DOM三个级别和DHTML介绍" class="headerlink" title="DOM三个级别和DHTML介绍"></a>DOM三个级别和DHTML介绍</h1><h2 id="DOM模型有三种："><a href="#DOM模型有三种：" class="headerlink" title="DOM模型有三种："></a>DOM模型有三种：</h2><p>DOM level 1：将html文档封装成对象。<br>DOM level 2：在level 1的基础上添加新的功能，例如：对于事件和css样式的支持。<br>DOM level 3：支持xml1.0的一些新特性。  </p>
+<h2 id="DHTML"><a href="#DHTML" class="headerlink" title="DHTML"></a>DHTML</h2><p>动态的HTML，它不是一门语言，是多项技术综合体的简称。<br>包括html，css，dom，javascript。<br>这四种语言的职责：<br>HTML：负责提供标签，封装数据，这样便于操作数据。<br>CSS：负责提供样式，对标签中的数据进行样式定义。<br>DOM：负责将标签及其内容解析，封装成对象，对象中具有属性和行为。<br>JavaScript：负责提供程序设计语言，对页面中的对象进行逻辑操作。  </p>
+<h1 id="node接口的特性和方法"><a href="#node接口的特性和方法" class="headerlink" title="node接口的特性和方法"></a>node接口的特性和方法</h1><table>
+<thead>
+<tr>
+<th>特性/方法</th>
+<th>类型/返回类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nodeName</td>
+<td>String</td>
+<td>节点的名字；根据节点的类型而定义</td>
+</tr>
+<tr>
+<td>nodeValue</td>
+<td>String</td>
+<td>节点的值；根据节点的类型而定义</td>
+</tr>
+<tr>
+<td>nodeType</td>
+<td>Number</td>
+<td>节点的类型常量值之一</td>
+</tr>
+<tr>
+<td>nodeType</td>
+<td>Number</td>
+<td>节点的类型常量值之一</td>
+</tr>
+<tr>
+<td>ownerDocument</td>
+<td>Document</td>
+<td>指向这个节点所属的文档</td>
+</tr>
+<tr>
+<td>firstChild</td>
+<td>Node</td>
+<td>指向在childNodes列表中的第一个节点</td>
+</tr>
+<tr>
+<td>lastChild</td>
+<td>Node</td>
+<td>指向在childNodes列表中的最后一个节点</td>
+</tr>
+<tr>
+<td>childNodes</td>
+<td>NodeList</td>
+<td>所有子节点的列表</td>
+</tr>
+<tr>
+<td>parentNode</td>
+<td>Node</td>
+<td>返回一个给定节点的父节点</td>
+</tr>
+<tr>
+<td>previousSibling</td>
+<td>Node</td>
+<td>指向前一个兄弟节点；如果这个节点就是第一个兄弟节点，那么该值为null</td>
+</tr>
+<tr>
+<td>nextSibling</td>
+<td>Node</td>
+<td>指向后一个兄弟节点；如果这个节点就是最后一个兄弟节点，那么该值为null</td>
+</tr>
+<tr>
+<td>hasChildNodes()</td>
+<td>Boolean</td>
+<td>当childNodes包含一个或多个节点时，返回真</td>
+</tr>
+<tr>
+<td>attributes</td>
+<td>NamedNodeMap</td>
+<td>包含了代表一个元素的特性的Attr对象；仅用于Element节点</td>
+</tr>
+<tr>
+<td>appendChild(node)</td>
+<td>Node</td>
+<td>将node添加到childNodes的末尾</td>
+</tr>
+<tr>
+<td>removeChild(node)</td>
+<td>Node</td>
+<td>从childNodes中删除node</td>
+</tr>
+<tr>
+<td>replaceChild(newnode, oldnode)</td>
+<td>Node</td>
+<td>将childNodes中的oldnode替换成newnode</td>
+</tr>
+<tr>
+<td>insertBefore(newnode, refnode)</td>
+<td>Node</td>
+<td>在childNodes中的refnode之前插入newnode</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Document对象"><a href="#Document对象" class="headerlink" title="Document对象"></a>Document对象</h1><p>每个载入浏览器的 HTML 文档都会成为 Document 对象  </p>
+<ul>
+<li>常用属性<br>all[] 提供对文档中所有 HTML 元素的访问  FF不支持<br>forms[]返回对文档中所有 Form 对象引用<br>body  提供对 <body> 元素的直接访问  </body></li>
+<li>常用方法<br>getElementById()返回对拥有指定 id 的第一个对象的引用<br>getElementsByName()返回带有指定名称的对象集合<br>getElementsByTagName()返回带有指定标签名的对象集合<br>write()向文档写 HTML 表达式 或 JavaScript 代码  </li>
+</ul>
+<h1 id="Element-对象"><a href="#Element-对象" class="headerlink" title="Element 对象"></a>Element 对象</h1><ul>
+<li>操纵 Element 对象的属性(首先要获取到element)  <ul>
+<li>获取属性：getAttribute(name)方法。</li>
+<li>设置属性：setAttribute(name,value)方法。</li>
+<li>删除属性：removeAttribute(name)方法。</li>
+</ul>
+</li>
+<li>在 Element 对象中查找 Element 对象<br>在Element对象的范围内，可以用来查找其他节点的唯一有效方法就是getElementsByTagName()方法。而该方法返回的是一个集合</li>
+</ul>
+<h1 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h1><ul>
+<li>nodeName<br>如果节点是元素节点，nodeName返回这个元素的名称(标签名)<br>如果是属性节点，nodeName返回这个属性的名称(属性名)<br>getAttributeNode<br>如果是文本节点，nodeName返回一个内容为#text 的字符串  </li>
+<li>nodeType<br>Node.ELEMENT_NODE    —1    – 元素节点<br>Node.ATTRIBUTE_NODE  —2    – 属性节点<br>Node.TEXT_NODE       —3    – 文本节点  </li>
+<li>nodeValue<br>如果给定节点是一个属性节点，返回值是这个属性的值<br>如果给定节点是一个文本节点，返回值是这个文本节点内容<br>如果给定节点是一个元素节点，返回值是 null  </li>
+</ul>
+<h1 id="父节点、子节点和同辈节点"><a href="#父节点、子节点和同辈节点" class="headerlink" title="父节点、子节点和同辈节点"></a>父节点、子节点和同辈节点</h1><ul>
+<li>父节点： parentNode<br>parentNode 属性返回的节点永远是一个元素节点，因为只有元素节点才有可能包含子节点。<br>document 节点的没有父节点。  </li>
+<li>子节点<br>children[index]:获取子节点<br>children：获取指定节点的所有子节点集合。<br>firstChild：获取指定节点的第一个子节点。<br>lastChild：获取指定节点的最后一个子节点。  </li>
+<li>同辈节点<br>nextSibling: 返回一个给定节点的下一个兄弟节点。<br>previousSibling：返回一个给定节点的上一个兄弟节点。  </li>
+</ul>
+<p>节点属性(了解)<br>节点属性attributes是Node接口定义的属性。<br>节点属性attributes就是节点（特别是元素节点）的属性。<br>事实上，attributes中包含的是一个节点的所有属性的集合。<br>attributes.getNameItem()和Element对象的getAttribute()方法类似。  </p>
+<h1 id="检测子节点和属性"><a href="#检测子节点和属性" class="headerlink" title="检测子节点和属性"></a>检测子节点和属性</h1><p>查看是否存在子节点： hasChildNodes()<br>查看是否存在属性：hasAttributes()<br>即使节点中没有定义属性，其attributes属性仍然有效的，而且长度值为0。同样节点中的childNodes属性也是如此。<br>当你想知道某个节点是否包含子节点和属性时，可以使用hasChildNodes()和hasAttributes()方法。但是，如果还想知道该节点中包含多少子节点和属性的话，仍要使用attributes和childNodes属性。<br>在IE浏览器中，不存在hasAttributes()方法！  </p>
+<h1 id="操作-DOM-节点树"><a href="#操作-DOM-节点树" class="headerlink" title="操作 DOM 节点树"></a>操作 DOM 节点树</h1><ul>
+<li>插入节点<br>appendChild()方法<br>insertBefore(newNode,oldNode)方法<br>没有insertAfter()方法  </li>
+<li>删除节点：removeChild()方法</li>
+<li>替换节点：replaceChild(newNode,oldNode)方法</li>
+<li>复制节点：cloneNode(boolean)方法，其中，参数boolean是判断是否复制子节点。</li>
+<li>移动节点：由以下三种方法组合完成<ul>
+<li>查找节点：<br>getElementById()：通过节点的id属性，查找对应节点。<br>getElementsByName()：通过节点的name属性，查找对应节点。<br>getElementsByTagName()：通过节点名称，查找对应节点。  </li>
+<li>插入节点：<br>appendChild()方法<br>insertBefore()方法  </li>
+<li>替换节点：replaceChild()方法</li>
+</ul>
+</li>
+</ul>
+<h1 id="innerHTML属性"><a href="#innerHTML属性" class="headerlink" title="innerHTML属性"></a>innerHTML属性</h1><p>浏览器几乎都支持该属性，但不是 DOM 标准的组成部分。<br>innerHTML 属性可以用来读，写某给定元素里的 HTML 内容。<br>innerHTML 属性多与div或span标签配合使用。  </p>
+<h1 id="HTML转移符"><a href="#HTML转移符" class="headerlink" title="HTML转移符"></a>HTML转移符</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&quot;        &amp;quot;  </div><div class="line">&apos;        &amp;apos;  </div><div class="line">&amp;        &amp;amp;  </div><div class="line">&lt;        &amp;lt;  </div><div class="line">&gt;        &amp;gt;  </div><div class="line">空格     &amp;nbsp;</div><div class="line">©        &amp;copy;</div></pre></td></tr></table></figure>
+<h1 id="设置样式的两种方式"><a href="#设置样式的两种方式" class="headerlink" title="设置样式的两种方式"></a>设置样式的两种方式</h1><ul>
+<li>className</li>
+<li>style<ul>
+<li>获取样式  <pre><code>DOM的style属性只能获取标签中使用style设置的样式，无法获取嵌入或外部样式  
+style.cssText 获取style里面的字符串  
+</code></pre></li>
+<li>设置样式<pre><code>无论设置还是获取只能操作行内式。  
+</code></pre></li>
+</ul>
+<ol>
+<li>样式少的时候使用</li>
+<li>style是对象（其他大部分是字符串）</li>
+<li>值是字符串，没有设置值是“”；</li>
+<li>命名规则，驼峰命名。和css不一样</li>
+<li>设置了类样式不能获取。（只和行内式交互，和内嵌和外链无关）</li>
+<li>box.style.cssText = “字符串形式的样式”；<br>backgroundColor<br>backgroundImage<br>color<br>width<br>height<br>border<br>opacity (IE8以前filter: alpha(opacity=xx))<br>注意DOM对象style的属性和标签中style内的值不一样，因为在JS中-不能作为标识符<br>backgroundColor       DOM中<br>background-color    CSS中  </li>
+</ol>
+</li>
+</ul>
+<h1 id="动态创建表格"><a href="#动态创建表格" class="headerlink" title="动态创建表格"></a>动态创建表格</h1><ul>
+<li>方式1<br>createElement()</li>
+<li>方式2<br>rows                          (只读，table和textarea能用)<br>insertRow()              (只有table能调用)<br>deleteRow()              (只有table能调用)<br>cells                  (只读，table和textarea能用)<br>insertCell()               (只有tr能调用)<br>deleteCell()              (只有tr能调用)  </li>
+</ul>
+<h1 id="增-删-改-查"><a href="#增-删-改-查" class="headerlink" title="增 删 改 查"></a>增 删 改 查</h1><h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><p>document.createElement<br>appendChild  </p>
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><p>removeChild  </p>
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><p>style<br>id<br>className<br>innerHTML<br>innerText  </p>
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><p>getElementById<br>getElementsByTagName<br>getELementsByClassName  </p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-05-21  12:18:56</span></li>
+                
+                <li>最后编辑日期: <span>2017-05-21  12:18:56</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/前端开发/">前端开发</a>
+                    
+                    <a href="/categories/前端开发/JavaScript/">JavaScript</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/JavaScript/">JavaScript</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/05/21/Frontend/JavaScript/05_JS-BOM/" class="pre-post fa fa-caret-left">05_JS-BOM</a>
+        
+        
+        <a href="/2017/05/21/Frontend/JavaScript/01_JS类型/" class="next-post fa">01_JS类型</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DOM（文档对象模型）"><span class="toc-number">1.</span> <span class="toc-text">DOM（文档对象模型）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DOM三个级别和DHTML介绍"><span class="toc-number">2.</span> <span class="toc-text">DOM三个级别和DHTML介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM模型有三种："><span class="toc-number">2.1.</span> <span class="toc-text">DOM模型有三种：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DHTML"><span class="toc-number">2.2.</span> <span class="toc-text">DHTML</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#node接口的特性和方法"><span class="toc-number">3.</span> <span class="toc-text">node接口的特性和方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Document对象"><span class="toc-number">4.</span> <span class="toc-text">Document对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Element-对象"><span class="toc-number">5.</span> <span class="toc-text">Element 对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Node"><span class="toc-number">6.</span> <span class="toc-text">Node</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#父节点、子节点和同辈节点"><span class="toc-number">7.</span> <span class="toc-text">父节点、子节点和同辈节点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检测子节点和属性"><span class="toc-number">8.</span> <span class="toc-text">检测子节点和属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#操作-DOM-节点树"><span class="toc-number">9.</span> <span class="toc-text">操作 DOM 节点树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#innerHTML属性"><span class="toc-number">10.</span> <span class="toc-text">innerHTML属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTML转移符"><span class="toc-number">11.</span> <span class="toc-text">HTML转移符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设置样式的两种方式"><span class="toc-number">12.</span> <span class="toc-text">设置样式的两种方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#动态创建表格"><span class="toc-number">13.</span> <span class="toc-text">动态创建表格</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增-删-改-查"><span class="toc-number">14.</span> <span class="toc-text">增 删 改 查</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#增"><span class="toc-number">14.1.</span> <span class="toc-text">增</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删"><span class="toc-number">14.2.</span> <span class="toc-text">删</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改"><span class="toc-number">14.3.</span> <span class="toc-text">改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查"><span class="toc-number">14.4.</span> <span class="toc-text">查</span></a></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>
