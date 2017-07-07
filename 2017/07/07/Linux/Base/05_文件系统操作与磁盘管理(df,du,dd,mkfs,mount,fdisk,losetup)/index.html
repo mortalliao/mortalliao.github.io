@@ -1,0 +1,401 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>05_Linux 文件系统操作与磁盘管理 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/基础/"><i class="fa" aria-hidden="true">基础</i></a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/JavaScript/"><i class="fa" aria-hidden="true">JavaScript</i></a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #2f649c">JavaScript</a> <a href="/tags/CSS/" style="font-size: 0.16rem; color: #4175ac">CSS</a> <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/logback/" style="font-size: 0.15rem; color: #5487bc">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #1c528c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="05_Linux 文件系统操作与磁盘管理">
+                
+                05_Linux 文件系统操作与磁盘管理
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>基础</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Linux基础
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/07/07</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/07/07/Linux/Base/05_文件系统操作与磁盘管理(df,du,dd,mkfs,mount,fdisk,losetup)/" data-thread-key="/2017/07/07/Linux/Base/05_文件系统操作与磁盘管理(df,du,dd,mkfs,mount,fdisk,losetup)/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="05_Linux 文件系统操作与磁盘管理"
+              data-leadcloud-url="/2017/07/07/Linux/Base/05_文件系统操作与磁盘管理(df,du,dd,mkfs,mount,fdisk,losetup)/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="文件系统操作与磁盘管理"><a href="#文件系统操作与磁盘管理" class="headerlink" title="文件系统操作与磁盘管理"></a>文件系统操作与磁盘管理</h1><p>使用 df 命令查看磁盘的容量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ df</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/X0x1TgN.png" alt="">  </p>
+<p>一般使用情况下，更多只是关心第一行的内容也就是环境中的rootfs或者物理主机上的/dev/sda2  </p>
+<blockquote>
+<p>“rootfs” : （Root File System）它是 Ramfs（Ramfs 是一个非常简单的 Linux 文件系统用于实现磁盘缓存机制作为动态可调整大小的基于 ram 的文件系统）或者 tmpfs 的一个特殊实例，它作为系统启动时内核载入内存之后，在挂载真正的磁盘之前的一个临时文件系统。通常的主机会在系统启动后用磁盘上的文件系统替换，只是在一些嵌入式系统中会只存在一个 rootfs ，或者像我们目前遇到的情况运行在虚拟环境中共享主机资源的系统也可能会采用这种方式。</p>
+</blockquote>
+<p>物理主机上的 /dev/sda2 是对应着主机硬盘的分区，后面的数字表示分区号，数字前面的字母 a 表示第几块硬盘（也可能是可移动磁盘），如果主机上有多块硬盘则可能还会出现 /dev/sdb，/dev/sdc 这些磁盘设备都会在 /dev 目录下以文件的存在形式。  </p>
+<p>接着你还会看到”1k-blocks”这个陌生的东西，它表示以磁盘块大小的方式显示容量，后面为相应的以块大小表示的已用和可用容量，在你了解 Linux 的文件系统之前这个就先不管吧，我们以一种你应该看得懂的方式展示：  </p>
+<p><img src="http://i.imgur.com/5AppTUt.png" alt="">  </p>
+<p><strong>使用 du 命令查看目录的容量</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 默认同样以 blocks 的大小展示</div><div class="line">$ du </div><div class="line"># 加上`-h`参数，以更易读的方式展示</div><div class="line">$ du -h</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/GF4b7xu.png" alt="">  </p>
+<p>-d参数指定查看目录的深度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 只查看1级目录的信息</div><div class="line">$ du -h -d 0 ~</div><div class="line"># 查看2级</div><div class="line">$ du -h -d 1 ~</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/fcrXD2q.png" alt="">  </p>
+<p>常用参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">du -h #同--human-readable 以K，M，G为单位，提高信息的可读性。</div><div class="line">du -a #同--all 显示目录中所有文件的大小。</div><div class="line">du -s #同--summarize 仅显示总计，只列出最后加总的值。</div></pre></td></tr></table></figure></p>
+<p>du（estimate file space usage）命令与df（report file system disk space usage）只用一字只差，首先就希望注意不要弄混淆了,以可以像我这样从man手册中获取命令的完整描述，记全称就不会搞混了。</p>
+<h1 id="简单的磁盘管理"><a href="#简单的磁盘管理" class="headerlink" title="简单的磁盘管理"></a>简单的磁盘管理</h1><h2 id="创建虚拟磁盘"><a href="#创建虚拟磁盘" class="headerlink" title="创建虚拟磁盘"></a>创建虚拟磁盘</h2><p>dd 命令简介  </p>
+<p>dd命令用于转换和复制文件，不过它的复制不同于cp。之前提到过关于 Linux 的很重要的一点，一切即文件，在 Linux 上，硬件的设备驱动（如硬盘）和特殊设备文件（如/dev/zero和/dev/random）都像普通文件一样，只要在各自的驱动程序中实现了对应的功能，dd 也可以读取自和/或写入到这些文件。这样，dd也可以用在备份硬件的引导扇区、获取一定数量的随机数据或者空数据等任务中。dd程序也可以在复制时处理数据，例如转换字节序、或在 ASCII 与 EBCDIC 编码间互换。  </p>
+<p>dd的命令行语句与其他的 Linux 程序不同，因为它的命令行选项格式为选项=值，而不是更标准的–选项 值或-选项=值。dd默认从标准输入中读取，并写入到标准输出中，但可以用选项if（input file，输入文件）和of（output file，输出文件）改变。  </p>
+<p>我们先来试试用dd命令从标准输入读入用户输入到标准输出或者一个文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 输出到文件</div><div class="line">$ dd of=test bs=10 count=1 # 或者 dd if=/dev/stdin of=test bs=10 count=1</div><div class="line"># 输出到标准输出</div><div class="line">$ dd if=/dev/stdin of=/dev/stdout bs=10 count=1</div><div class="line"># 注</div><div class="line">在打完了这个命令后，继续在终端打字，作为你的输入</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/i6QnyRg.png" alt="">  </p>
+<p>上述命令从标准输入设备读入用户输入（缺省值，所以可省略）然后输出到 test 文件，bs（block size）用于指定块大小（缺省单位为 Byte，也可为其指定如’K’，’M’，’G’等单位），count用于指定块数量。如上图所示，我指定只读取总共 10 个字节的数据，当我输入了“hello shiyanlou”之后加上空格回车总共 16 个字节（一个英文字符占一个字节）内容，显然超过了设定大小。使用和du和cat命令看到的写入完成文件实际内容确实只有 10 个字节（那个黑底百分号表示这里没有换行符）,而其他的多余输入将被截取并保留在标准输入。  </p>
+<p>前面说到dd在拷贝的同时还可以实现数据转换，那下面就举一个简单的例子：将输出的英文字符转换为大写再写入文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ dd if=/dev/stdin of=test bs=10 count=1 conv=ucase</div></pre></td></tr></table></figure></p>
+<h2 id="使用-dd-命令创建虚拟镜像文件"><a href="#使用-dd-命令创建虚拟镜像文件" class="headerlink" title="使用 dd 命令创建虚拟镜像文件"></a>使用 dd 命令创建虚拟镜像文件</h2><p>从/dev/zero设备创建一个容量为 256M 的空文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ dd if=/dev/zero of=virtual.img bs=1M count=256</div><div class="line">$ du -h virtual.img</div></pre></td></tr></table></figure></p>
+<p>然后要将这个文件格式化（写入文件系统）</p>
+<h2 id="使用-mkfs-命令格式化磁盘（我们这里是自己创建的虚拟磁盘镜像）"><a href="#使用-mkfs-命令格式化磁盘（我们这里是自己创建的虚拟磁盘镜像）" class="headerlink" title="使用 mkfs 命令格式化磁盘（我们这里是自己创建的虚拟磁盘镜像）"></a>使用 mkfs 命令格式化磁盘（我们这里是自己创建的虚拟磁盘镜像）</h2><p>你可以在命令行输入 sudo mkfs 然后按下Tab键，你可以看到很多个以 mkfs 为前缀的命令，这些不同的后缀其实就是表示着不同的文件系统，可以用 mkfs 格式化成的文件系统。  </p>
+<p>我们可以简单的使用下面的命令来将我们的虚拟磁盘镜像格式化为ext4文件系统：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo mkfs.ext4 virtual.img</div></pre></td></tr></table></figure></p>
+<h2 id="使用-mount-命令挂载磁盘到目录树"><a href="#使用-mount-命令挂载磁盘到目录树" class="headerlink" title="使用 mount 命令挂载磁盘到目录树"></a>使用 mount 命令挂载磁盘到目录树</h2><p>用户在 Linux/UNIX 的机器上打开一个文件以前，包含该文件的文件系统必须先进行挂载的动作，此时用户要对该文件系统执行 mount 的指令以进行挂载。通常是使用在 USB 或其他可移除存储设备上，而根目录则需要始终保持挂载的状态。又因为 Linux/UNIX 文件系统可以对应一个文件而不一定要是硬件设备，所以可以挂载一个包含文件系统的文件到目录树。  </p>
+<p>Linux/UNIX 命令行的 mount 指令是告诉操作系统，对应的文件系统已经准备好，可以使用了，而该文件系统会对应到一个特定的点（称为挂载点）。挂载好的文件、目录、设备以及特殊文件即可提供用户使用。  </p>
+<p>我们先来使用mount来查看下主机已经挂载的文件系统：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mount</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/rWkGbGM.png" alt="">  </p>
+<p>输出的结果中每一行表示一个设备或虚拟设备,每一行最前面是设备名，然后是 on 后面是挂载点，type 后面表示文件系统类型，再后面是挂载选项（比如可以在挂载时设定以只读方式挂载等等）。  </p>
+<p>那么如何挂载真正的磁盘到目录树呢，mount命令的一般格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount [options] [source] [directory]</div></pre></td></tr></table></figure></p>
+<p>一些常用操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount [-o [操作选项]] [-t 文件系统类型] [-w|--rw|--ro] [文件系统源] [挂载点]</div></pre></td></tr></table></figure></p>
+<p>现在直接来挂载我们创建的虚拟磁盘镜像到/mnt目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ mount -o loop -t ext4 virtual.img /mnt </div><div class="line"># 也可以省略挂载类型，很多时候 mount 会自动识别</div><div class="line">  </div><div class="line"># 以只读方式挂载</div><div class="line">$ mount -o loop --ro virtual.img /mnt</div><div class="line"># 或者mount -o loop,ro virtual.img /mnt</div></pre></td></tr></table></figure></p>
+<p>使用 umount 命令卸载已挂载磁盘<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 命令格式 sudo umount 已挂载设备名或者挂载点，如：</div><div class="line">$ sudo umount /mnt</div></pre></td></tr></table></figure></p>
+<p>不过遗憾的是，由于我们环境的问题（环境中使用的 Linux 内核在编译时没有添加对 Loop device的支持），所以你将无法挂载成功：</p>
+<h2 id="使用-fdisk-为磁盘分区"><a href="#使用-fdisk-为磁盘分区" class="headerlink" title="使用 fdisk 为磁盘分区"></a>使用 fdisk 为磁盘分区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 查看硬盘分区表信息</div><div class="line">$ sudo fdisk -l</div></pre></td></tr></table></figure>
+<p><img src="http://i.imgur.com/c5XPoFW.png" alt="">  </p>
+<p>输出结果中开头显示了主机上的磁盘的一些信息，包括容量扇区数，扇区大小，I/O 大小等信息。  </p>
+<p>重点看一下中间的分区信息，/dev/sda1，/dev/sda2 为主分区分别安装了 Windows 和 Linux 操作系统，/dev/sda3 为交换分区（可以理解为虚拟内存），/dev/sda4 为扩展分区其中包含 /dev/sda5，/dev/sda6，/dev/sda7，/dev/sda8 四个逻辑分区，因为主机上有几个分区之间有空隙，没有对齐边界扇区,所以分区之间的不是完全连续的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 进入磁盘分区模式</div><div class="line">$ sudo fdisk virtual.img</div></pre></td></tr></table></figure></p>
+<h2 id="使用-losetup-命令建立镜像与回环设备的关联"><a href="#使用-losetup-命令建立镜像与回环设备的关联" class="headerlink" title="使用 losetup 命令建立镜像与回环设备的关联"></a>使用 losetup 命令建立镜像与回环设备的关联</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo losetup /dev/loop0 virtual.img</div><div class="line"># 如果提示设备忙你也可以使用其它的回环设备，&quot;ls /dev/loop*&quot;参看所有回环设备</div><div class="line">  </div><div class="line"># 解除设备关联</div><div class="line">$ sudo losetup -d /dev/loop0</div></pre></td></tr></table></figure>
+<p>然后再使用mkfs格式化各分区（前面我们是格式化整个虚拟磁盘镜像文件或磁盘），不过格式化之前，我们还要为各分区建立虚拟设备的映射，用到kpartx工具，需要先安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install kpartx</div><div class="line">$ sudo kpartx -av /dev/loop0</div><div class="line">  </div><div class="line"># 取消映射</div><div class="line">$ sudo kpartx -dv /dev/loop0</div></pre></td></tr></table></figure></p>
+<p>接着再是格式化，我们将其全部格式化为 ext4：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo mkfs.ext4 -q /dev/mapper/loop0p1</div><div class="line">$ sudo mkfs.ext4 -q /dev/mapper/loop0p5</div><div class="line">$ sudo mkfs.ext4 -q /dev/mapper/loop0p6</div></pre></td></tr></table></figure></p>
+<p>格式化完成后在/media目录下新建四个空目录用于挂载虚拟磁盘：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p /media/virtualdisk_&#123;1..3&#125;</div><div class="line"># 挂载磁盘分区</div><div class="line">$ sudo mount /dev/mapper/loop0p1 /media/virtualdisk_1</div><div class="line">$ sudo mount /dev/mapper/loop0p5 /media/virtualdisk_2</div><div class="line">$ sudo mount /dev/mapper/loop0p6 /media/virtualdisk_3</div><div class="line">  </div><div class="line"># 卸载磁盘分区</div><div class="line">$ sudo umount /dev/mapper/loop0p1</div><div class="line">$ sudo umount /dev/mapper/loop0p5</div><div class="line">$ sudo umount /dev/mapper/loop0p6</div></pre></td></tr></table></figure></p>
+<p>然后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ df -h</div></pre></td></tr></table></figure></p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-07-07  08:59:47</span></li>
+                
+                <li>最后编辑日期: <span>2017-07-07  08:59:47</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/Linux/">Linux</a>
+                    
+                    <a href="/categories/Linux/基础/">基础</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Linux基础/">Linux基础</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/07/07/Linux/Base/10_数据流重定向/" class="pre-post fa fa-caret-left">10_Linux 数据流重定向</a>
+        
+        
+        <a href="/2017/07/07/Linux/Base/14_Linux 进程管理(top,ps,pstree)/" class="next-post fa">14_Linux 进程的查看</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#文件系统操作与磁盘管理"><span class="toc-number">1.</span> <span class="toc-text">文件系统操作与磁盘管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简单的磁盘管理"><span class="toc-number">2.</span> <span class="toc-text">简单的磁盘管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建虚拟磁盘"><span class="toc-number">2.1.</span> <span class="toc-text">创建虚拟磁盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-dd-命令创建虚拟镜像文件"><span class="toc-number">2.2.</span> <span class="toc-text">使用 dd 命令创建虚拟镜像文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-mkfs-命令格式化磁盘（我们这里是自己创建的虚拟磁盘镜像）"><span class="toc-number">2.3.</span> <span class="toc-text">使用 mkfs 命令格式化磁盘（我们这里是自己创建的虚拟磁盘镜像）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-mount-命令挂载磁盘到目录树"><span class="toc-number">2.4.</span> <span class="toc-text">使用 mount 命令挂载磁盘到目录树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-fdisk-为磁盘分区"><span class="toc-number">2.5.</span> <span class="toc-text">使用 fdisk 为磁盘分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-losetup-命令建立镜像与回环设备的关联"><span class="toc-number">2.6.</span> <span class="toc-text">使用 losetup 命令建立镜像与回环设备的关联</span></a></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

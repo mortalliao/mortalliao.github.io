@@ -1,0 +1,517 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>04_Linux 文件打包与压缩 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/基础/"><i class="fa" aria-hidden="true">基础</i></a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/JavaScript/"><i class="fa" aria-hidden="true">JavaScript</i></a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #2f649c">JavaScript</a> <a href="/tags/CSS/" style="font-size: 0.16rem; color: #4175ac">CSS</a> <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/logback/" style="font-size: 0.15rem; color: #5487bc">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #1c528c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="04_Linux 文件打包与压缩">
+                
+                04_Linux 文件打包与压缩
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>基础</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Linux基础
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/07/07</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/07/07/Linux/Base/04_文件打包与压缩(zip,rar,tar)/" data-thread-key="/2017/07/07/Linux/Base/04_文件打包与压缩(zip,rar,tar)/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="04_Linux 文件打包与压缩"
+              data-leadcloud-url="/2017/07/07/Linux/Base/04_文件打包与压缩(zip,rar,tar)/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="文件打包与压缩"><a href="#文件打包与压缩" class="headerlink" title="文件打包与压缩"></a>文件打包与压缩</h1><p>在 Windows 上最常见的不外乎这三种<code>*.zip，*.rar，*.7z</code>后缀的压缩文件，<br>而在 Linux 上面常见常用的除了以上三种外，还有<code>*.gz，*.xz，*.bz2，*.tar，*.tar.gz，*.tar.xz，*.tar.bz2</code>，简单介绍如下：</p>
+<table>
+<thead>
+<tr>
+<th>文件后缀名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*.zip</td>
+<td>zip 程序打包压缩的文件</td>
+</tr>
+<tr>
+<td>*.rar</td>
+<td>rar 程序压缩的文件</td>
+</tr>
+<tr>
+<td>*.7z</td>
+<td>7zip 程序压缩的文件</td>
+</tr>
+<tr>
+<td>*.tar</td>
+<td>tar 程序打包，未压缩的文件</td>
+</tr>
+<tr>
+<td>*.gz</td>
+<td>gzip 程序（GNU zip）压缩的文件</td>
+</tr>
+<tr>
+<td>*.xz</td>
+<td>xz程序压缩的文件</td>
+</tr>
+<tr>
+<td>*.bz2</td>
+<td>bzip2 程序压缩的文件</td>
+</tr>
+<tr>
+<td>*.tar.gz</td>
+<td>tar 打包，gzip 程序压缩的文件</td>
+</tr>
+<tr>
+<td>*.tar.xz</td>
+<td>tar 打包，xz 程序压缩的文件</td>
+</tr>
+<tr>
+<td>*tar.bz2</td>
+<td>tar 打包，bzip2 程序压缩的文件</td>
+</tr>
+<tr>
+<td>*.tar.7z</td>
+<td>tar 打包，7z 程序压缩的文件</td>
+</tr>
+</tbody>
+</table>
+<h1 id="zip-压缩打包程序"><a href="#zip-压缩打包程序" class="headerlink" title="zip 压缩打包程序"></a>zip 压缩打包程序</h1><ul>
+<li>使用 zip 打包文件夹：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ zip -r -q -o shiyanlou.zip /home/shiyanlou</div><div class="line">$ du -h shiyanlou.zip</div><div class="line">$ file shiyanlou.zip</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>第一行命令中，-r 参数表示递归打包包含子目录的全部内容，-q 参数表示为安静模式，即不向屏幕输出信息，-o，表示输出文件，需在其后紧跟打包输出文件名<br>后面使用 du 命令查看打包后文件的大小  </p>
+<ul>
+<li>设置压缩级别为 9 和 1（9 最大，1 最小），重新打包<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ zip -r -9 -q -o shiyanlou_9.zip /home/shiyanlou -x ~/*.zip</div><div class="line">$ zip -r -1 -q -o shiyanlou_1.zip /home/shiyanlou -x ~/*.zip</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里添加了一个参数用于设置压缩级别 -[1-9]，1 表示最快压缩但体积大，9 表示体积最小但耗时最久。最后那个 -x 是为了排除我们上一次创建的 zip 文件，否则又会被打包进这一次的压缩文件中  </p>
+<blockquote>
+<p>注意：这里只能使用绝对路径，否则不起作用。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">du -h -d 0 *.zip ~ | sort</div></pre></td></tr></table></figure>
+<p>通过 man 手册可知：  </p>
+<ul>
+<li>h， –human-readable  </li>
+<li>d， –max-depth（所查看文件的深度）  </li>
+</ul>
+<ul>
+<li>创建加密 zip 包<br>使用 -e 参数可以创建加密压缩包：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zip -r -e -o shiyanlou_encryption.zip /home/shiyanlou</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>注意： 关于 zip 命令，因为 Windows 系统与 Linux/Unix 在文本文件格式上的一些兼容问题，比如换行符（为不可见字符），在 Windows 为 CR+LF（Carriage-Return+Line-Feed：回车加换行），而在 Linux/Unix 上为 LF（换行），所以如果在不加处理的情况下，<strong>在 Linux 上编辑的文本，在 Windows 系统上打开可能看起来是没有换行的</strong>。如果你想让你在 Linux 创建的 zip 压缩文件在 Windows 上解压后没有任何问题，那么你还需要对命令做一些修改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zip -r -l -o shiyanlou.zip /home/shiyanlou</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>需要加上 -l 参数将 LF 转换为 CR+LF 来达到以上目的。  </p>
+<h1 id="使用-unzip-命令解压缩-zip-文件"><a href="#使用-unzip-命令解压缩-zip-文件" class="headerlink" title="使用 unzip 命令解压缩 zip 文件"></a>使用 unzip 命令解压缩 zip 文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip shiyanlou.zip</div></pre></td></tr></table></figure>
+<p>使用安静模式，将文件解压到指定目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip -q shiyanlou.zip -d ziptest</div></pre></td></tr></table></figure></p>
+<p>上述指定目录不存在，将会自动创建。如果你不想解压只想查看压缩包的内容你可以使用 -l 参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip -l shiyanlou.zip</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意： 使用 unzip 解压文件时我们同样应该注意兼容问题，不过这里我们关心的不再是上面的问题，而是中文编码的问题，通常 Windows 系统上面创建的压缩文件，如果有有包含中文的文档或以中文作为文件名的文件时默认会采用 GBK 或其它编码，而 Linux 上面默认使用的是 UTF-8 编码，如果不加任何处理，直接解压的话可能会出现中文乱码的问题（有时候它会自动帮你处理），为了解决这个问题，我们可以在解压时指定编码类型。</p>
+</blockquote>
+<p>使用 -O（英文字母，大写 o）参数指定编码类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip -O GBK 中文压缩文件.zip</div></pre></td></tr></table></figure></p>
+<h1 id="rar-打包压缩命令"><a href="#rar-打包压缩命令" class="headerlink" title="rar 打包压缩命令"></a>rar 打包压缩命令</h1><p>rar 也是 Windows 上常用的一种压缩文件格式，在 Linux 上可以使用 rar 和 unrar 工具分别创建和解压 rar 压缩包  </p>
+<ul>
+<li><p>安装 rar 和 unrar 工具：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install rar unrar</div></pre></td></tr></table></figure>
+</li>
+<li><p>从指定文件或目录创建压缩包或添加文件到压缩包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ rm *.zip</div><div class="line">$ rar a shiyanlou.rar .</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面的命令使用 a 参数添加一个目录 ～ 到一个归档文件中，如果该文件不存在就会自动创建。  </p>
+<blockquote>
+<p>注意：rar 的命令参数没有 -，如果加上会报错。</p>
+</blockquote>
+<p>从指定压缩包文件中删除某个文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rar d shiyanlou.rar .zshrc</div></pre></td></tr></table></figure></p>
+<p>查看不解压文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rar l shiyanlou.rar</div></pre></td></tr></table></figure></p>
+<p>使用 unrar 解压 rar 文件<br>全路径解压：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ unrar x shiyanlou.rar</div></pre></td></tr></table></figure></p>
+<p>去掉路径解压：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ mkdir tmp</div><div class="line">$ unrar e shiyanlou.rar tmp/</div></pre></td></tr></table></figure></p>
+<p>rar 命令参数非常多，上面只涉及了一些基本操作。  </p>
+<h1 id="tar-打包工具"><a href="#tar-打包工具" class="headerlink" title="tar 打包工具"></a>tar 打包工具</h1><p>在 Linux 上面更常用的是 tar 工具，tar 原本只是一个打包工具，只是同时还是实现了对 7z、gzip、xz、bzip2 等工具的支持，这些压缩工具本身只能实现对文件或目录（单独压缩目录中的文件）的压缩，没有实现对文件的打包压缩，所以我们也无需再单独去学习其他几个工具，tar 的解压和压缩都是同一个命令，只需参数不同，使用比较方便。  </p>
+<p>先掌握 tar 命令一些基本的使用方式，即不进行压缩只是进行打包（创建归档文件）和解包的操作。</p>
+<p>创建一个 tar 包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -cf shiyanlou.tar ~</div></pre></td></tr></table></figure></p>
+<p>上面命令中，-c 表示创建一个 tar 包文件，-f 用于指定创建的文件名，注意文件名必须紧跟在 -f 参数之后，比如不能写成 tar -fc shiyanlou.tar，可以写成 tar -f shiyanlou.tar -c ~。你还可以加上 -v 参数以可视的的方式输出打包的文件。上面会自动去掉表示绝对路径的 /，你也可以使用 -P 保留绝对路径符  </p>
+<ul>
+<li><p>解包一个文件（-x 参数）到指定路径的<strong>已存在</strong>目录（-C 参数）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ mkdir tardir</div><div class="line">$ tar -xf shiyanlou.tar -C tardir</div></pre></td></tr></table></figure>
+</li>
+<li><p>只查看不解包文件 -t 参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -tf shiyanlou.tar</div></pre></td></tr></table></figure>
+</li>
+<li><p>保留文件属性和跟随链接（符号链接或软链接），有时候我们使用 tar 备份文件当你在其他主机还原时希望保留文件的属性（-p 参数）和备份链接指向的源文件而不是链接本身（-h 参数）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -cphf etc.tar /etc</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对于创建不同的压缩格式的文件，对于 tar 来说是相当简单的，需要的只是换一个参数，这里我们就以使用 gzip 工具创建 *.tar.gz 文件为例来说明。  </p>
+<ul>
+<li><p>我们只需要在创建 tar 文件的基础上添加 -z 参数，使用 gzip 来压缩文件：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -czf shiyanlou.tar.gz ~</div></pre></td></tr></table></figure>
+</li>
+<li><p>解压 *.tar.gz 文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xzf shiyanlou.tar.gz</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>现在我们要使用其它的压缩工具创建或解压相应文件只需要更改一个参数即可：  </p>
+<table>
+<thead>
+<tr>
+<th>压缩文件格式</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*.tar.gz</td>
+<td>-z</td>
+</tr>
+<tr>
+<td>*.tar.xz</td>
+<td>-J</td>
+</tr>
+<tr>
+<td>*tar.bz2</td>
+<td>-j</td>
+</tr>
+</tbody>
+</table>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>常用命令：</p>
+<ul>
+<li><p>zip：<br>  打包 ：zip something.zip something （目录请加 -r 参数）<br>  解包：unzip something<br>  指定路径：-d 参数  </p>
+</li>
+<li><p>tar：<br>  打包：tar -zcvf something.tar something<br>  解包：tar -zxvf something.tar<br>  指定路径：-C 参数  </p>
+</li>
+</ul>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-07-07  08:59:47</span></li>
+                
+                <li>最后编辑日期: <span>2017-07-07  08:59:47</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/Linux/">Linux</a>
+                    
+                    <a href="/categories/Linux/基础/">基础</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Linux基础/">Linux基础</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/07/07/Linux/Base/02_Linux 目录结构及文件基本操作(tree,cd,pwd,touch,mkdir,cp,rm,mv,rename,cat,tac,nl,more,less,head,tail)/" class="pre-post fa fa-caret-left">02_Linux 目录结构</a>
+        
+        
+        <a href="/2017/07/07/Linux/Base/11_正则表达式(grep,sed,awk)/" class="next-post fa">11_Linux 正则表达式</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#文件打包与压缩"><span class="toc-number">1.</span> <span class="toc-text">文件打包与压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#zip-压缩打包程序"><span class="toc-number">2.</span> <span class="toc-text">zip 压缩打包程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用-unzip-命令解压缩-zip-文件"><span class="toc-number">3.</span> <span class="toc-text">使用 unzip 命令解压缩 zip 文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rar-打包压缩命令"><span class="toc-number">4.</span> <span class="toc-text">rar 打包压缩命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tar-打包工具"><span class="toc-number">5.</span> <span class="toc-text">tar 打包工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

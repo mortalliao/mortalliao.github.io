@@ -1,0 +1,430 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>10_Linux 数据流重定向 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/基础/"><i class="fa" aria-hidden="true">基础</i></a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/JavaScript/"><i class="fa" aria-hidden="true">JavaScript</i></a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #2f649c">JavaScript</a> <a href="/tags/CSS/" style="font-size: 0.16rem; color: #4175ac">CSS</a> <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/logback/" style="font-size: 0.15rem; color: #5487bc">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #1c528c">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="10_Linux 数据流重定向">
+                
+                10_Linux 数据流重定向
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>基础</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Linux基础
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/07/07</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/07/07/Linux/Base/10_数据流重定向/" data-thread-key="/2017/07/07/Linux/Base/10_数据流重定向/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="10_Linux 数据流重定向"
+              data-leadcloud-url="/2017/07/07/Linux/Base/10_数据流重定向/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="数据流重定向"><a href="#数据流重定向" class="headerlink" title="数据流重定向"></a>数据流重定向</h1><p>Linux 默认提供了三个特殊设备，用于终端的显示和输出，分别为stdin（标准输入,对应于你在终端的输入），stdout（标准输出，对应于终端的输出），stderr（标准错误输出，对应于终端的输出）。  </p>
+<p>Linux 默认提供了三个特殊设备，用于终端的显示和输出，分别为stdin（标准输入,对应于你在终端的输入），stdout（标准输出，对应于终端的输出），stderr（标准错误输出，对应于终端的输出）。  </p>
+<table>
+<thead>
+<tr>
+<th>文件描述符</th>
+<th>设备文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>/dev/stdin</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>1</td>
+<td>/dev/stdout</td>
+<td>标准输出</td>
+</tr>
+<tr>
+<td>2</td>
+<td>/dev/stderr</td>
+<td>标准错误</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>文件描述符：文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。在程序设计中，一些涉及底层的程序编写往往会围绕着文件描述符展开。但是文件描述符这一概念往往只适用于 UNIX、Linux 这样的操作系统。  </p>
+</blockquote>
+<p>另外还有一个符号-,它可以同时作为前一个命令的。  </p>
+<p>我们可以这样使用这些文件描述符：  </p>
+<p>默认使用终端的标准输入作为命令的输入和标准输出作为命令的输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat </div><div class="line">（按Ctrl+C退出）\</div></pre></td></tr></table></figure></p>
+<p>将cat的连续输出（heredoc方式）重定向到一个文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ mkdir Documents</div><div class="line">$ cat &gt; Documents/test.c &lt;&lt;EOF</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    printf(&quot;hello world\n&quot;);</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">EOF</div></pre></td></tr></table></figure></p>
+<p>将一个文件作为命令的输入，标准输出作为命令的输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat Documents/test.c</div></pre></td></tr></table></figure></p>
+<p>将echo命令通过管道传过来的数据作为cat命令的输入，将标准输出作为命令的输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;hi&apos; | cat</div></pre></td></tr></table></figure></p>
+<p>将echo命令的输出从默认的标准输出重定向到一个普通文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;hello shiyanlou&apos; &gt; redirect</div><div class="line">$ cat redirect</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/qvu4wha.png" alt="">  </p>
+<p>不要将管道和重定向混淆，管道默认是连接前一个命令的输出到下一个命令的输入，而重定向通常是需要一个文件来建立两个命令的连接，你可以仔细体会一下上述第三个操作和最后两个操作的异同点。  </p>
+<h1 id="标准错误重定向"><a href="#标准错误重定向" class="headerlink" title="标准错误重定向"></a>标准错误重定向</h1><p>重定向标准输出到文件，这是一个很实用的操作，另一个很实用的操作是将标准错误重定向，标准输出和标准错误都被指向伪终端的屏幕显示，所以我们经常看到的一个命令的输出通常是同时包含了标准输出和标准错误的结果的。比如下面的操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 使用cat 命令同时读取两个文件，其中一个存在，另一个不存在</div><div class="line">$ cat Documents/test.c hello.c</div><div class="line"># 你可以看到除了正确输出了前一个文件的内容，还在末尾出现了一条错误信息</div><div class="line"># 下面我们将输出重定向到一个文件，根据我们前面的经验，这里将在看不到任何输出了</div><div class="line">$ cat Documents/test.c hello.c &gt; somefile</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/fwOu6Ag.png" alt="">  </p>
+<p>标准输出和标准错误虽然都指向终端屏幕，实际它们并不一样。  </p>
+<p>隐藏某些错误或者警告<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 将标准错误重定向到标准输出，再将标准输出重定向到文件，注意要将重定向到文件写到前面</div><div class="line">$ cat Documents/test.c hello.c &gt;somefile  2&gt;&amp;1</div><div class="line"># 或者只用bash提供的特殊的重定向符号&quot;&amp;&quot;将标准错误和标准输出同时重定向到文件</div><div class="line">$ cat Documents/test.c hello.c &amp;&gt;somefilehell</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意你应该在输出重定向文件描述符前加上&amp;,否则shell会当做重定向到一个文件名为1的文件中</p>
+</blockquote>
+<p><img src="http://i.imgur.com/DgADysY.png" alt="">  </p>
+<h1 id="使用tee命令同时重定向到多个文件"><a href="#使用tee命令同时重定向到多个文件" class="headerlink" title="使用tee命令同时重定向到多个文件"></a>使用tee命令同时重定向到多个文件</h1><p>经常可能还有这样的需求，除了将需要将输出重定向到文件之外也需要将信息打印在终端，那么你可以使用tee命令来实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;hello shiyanlou&apos; | tee hello</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/nZsrUeT.png" alt="">  </p>
+<h1 id="永久重定向"><a href="#永久重定向" class="headerlink" title="永久重定向"></a>永久重定向</h1><p>前面的重定向操作都只是临时性的，即只对当前命令有效，如何做到“永久”有效呢，比如在一个脚本中，你需要某一部分的命令的输出全部进行重定向，难道要在每个命令上面加上临时重定向的操作嘛，当然不需要，可以使用exec命令实现“永久”重定向。exec命令的作用是使用指定的命令替换当前的 Shell，及使用一个进程替换当前进程，或者指定新的重定向：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 先开启一个子 Shell</div><div class="line">$ zsh</div><div class="line"># 使用exec替换当前进程的重定向，将标准输出重定向到一个文件</div><div class="line">$ exec 1&gt;somefile</div><div class="line"># 后面你执行的命令的输出都将被重定向到文件中,直到你退出当前子shell，或取消exec的重定向（后面将告诉你怎么做）</div><div class="line">$ ls</div><div class="line">$ exit</div><div class="line">$ cat somefile</div></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/44lTnGF.png" alt="">  </p>
+<h1 id="创建输出文件描述符"><a href="#创建输出文件描述符" class="headerlink" title="创建输出文件描述符"></a>创建输出文件描述符</h1><p>默认在 Shell 中可以有9个打开的文件描述符，上面使用了也是它默认提供的0,1,2号文件描述符，另外还可以使用3-8的文件描述符，只是它们默认没有打开而已，可以使用下面命令查看当前 Shell 进程中打开的文件描述符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cd /dev/fd/;ls -Al</div></pre></td></tr></table></figure></p>
+<p>同样使用exec命令可以创建新的文件描述符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ zsh</div><div class="line">$ exec 3&gt;somefile</div><div class="line"># 先进入目录，再查看，否则你可能不能得到正确的结果，然后再回到上一次的目录</div><div class="line">$ cd /dev/fd/;ls -Al;cd -</div><div class="line"># 注意下面的命令&gt;与&amp;之间不应该有空格，如果有空格则会出错</div><div class="line">$ echo &quot;this is test&quot; &gt;&amp;3</div><div class="line">$ cat somefile</div><div class="line">$ exit</div></pre></td></tr></table></figure></p>
+<h1 id="关闭文件描述符"><a href="#关闭文件描述符" class="headerlink" title="关闭文件描述符"></a>关闭文件描述符</h1><p>如上面打开的3号文件描述符，可以使用如下操作将它关闭：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ exec 3&gt;&amp;-</div><div class="line">$ cd /dev/fd;ls -Al;cd -</div></pre></td></tr></table></figure></p>
+<h1 id="完全屏蔽命令的输出"><a href="#完全屏蔽命令的输出" class="headerlink" title="完全屏蔽命令的输出"></a>完全屏蔽命令的输出</h1><p>在 Linux 中有一个被称为“黑洞”的设备文件,所以导入它的数据都将被“吞噬”。</p>
+<p>在类 UNIX 系统中，/dev/null，或称空设备，是一个特殊的设备文件，它通常被用于丢弃不需要的输出流，或作为用于输入流的空文件，这些操作通常由重定向完成。读取它则会立即得到一个EOF。<br>我们可以利用设个/dev/null屏蔽命令的输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat Documents/test.c nefile 1&gt;/dev/null 2&gt;&amp;1</div></pre></td></tr></table></figure></p>
+<p>上面这样的操作将使你得不到任何输出结果。</p>
+<h1 id="使用-xargs-分割参数列表"><a href="#使用-xargs-分割参数列表" class="headerlink" title="使用 xargs 分割参数列表"></a>使用 xargs 分割参数列表</h1><p>xargs 是一条 UNIX 和类 UNIX 操作系统的常用命令。它的作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题。<br>这个命令在有些时候十分有用，特别是当用来处理产生大量输出结果的命令如 find，locate 和 grep 的结果，详细用法请参看 man 文档。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cut -d: -f1 &lt; /etc/passwd | sort | xargs echo</div></pre></td></tr></table></figure></p>
+<p>上面这个命令用于将/etc/passwd文件按:分割取第一个字段排序后，使用echo命令生成一个列表。</p>
+<h1 id="使用文本处理"><a href="#使用文本处理" class="headerlink" title="使用文本处理"></a>使用文本处理</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat data1 | cut -c 8- | sort|uniq -dc|sort -rn -k1 |head -3 &gt; /home/shiyanlou/result</div></pre></td></tr></table></figure>
+<p>解释:</p>
+<ol>
+<li><p>cut -c 8- 取出每行的第八个字符以后的所有字符</p>
+</li>
+<li><p>sort将文件/文本的每一行作为一个单位，相互比较，比较原则是从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。</p>
+</li>
+<li><p>uniq -dc 只显示重复行，并在输出行前面加上每行在输入文件中出现的次数</p>
+</li>
+<li><p>sort -rn -k1 把3的结果反向按照数字进行排序 -k1是取第一个区间进行排序(第一个区间即是每行出现的次数)</p>
+</li>
+<li><p>head -3 把排序好的结果取前三个即为出现频率最高的三个</p>
+</li>
+</ol>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-07-07  08:59:47</span></li>
+                
+                <li>最后编辑日期: <span>2017-07-07  08:59:47</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/Linux/">Linux</a>
+                    
+                    <a href="/categories/Linux/基础/">基础</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Linux基础/">Linux基础</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/07/07/Linux/Base/07_Linux任务计划crontab/" class="pre-post fa fa-caret-left">07_Linux crontab</a>
+        
+        
+        <a href="/2017/07/07/Linux/Base/05_文件系统操作与磁盘管理(df,du,dd,mkfs,mount,fdisk,losetup)/" class="next-post fa">05_Linux 文件系统操作与磁盘管理</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据流重定向"><span class="toc-number">1.</span> <span class="toc-text">数据流重定向</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#标准错误重定向"><span class="toc-number">2.</span> <span class="toc-text">标准错误重定向</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用tee命令同时重定向到多个文件"><span class="toc-number">3.</span> <span class="toc-text">使用tee命令同时重定向到多个文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#永久重定向"><span class="toc-number">4.</span> <span class="toc-text">永久重定向</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建输出文件描述符"><span class="toc-number">5.</span> <span class="toc-text">创建输出文件描述符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关闭文件描述符"><span class="toc-number">6.</span> <span class="toc-text">关闭文件描述符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完全屏蔽命令的输出"><span class="toc-number">7.</span> <span class="toc-text">完全屏蔽命令的输出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用-xargs-分割参数列表"><span class="toc-number">8.</span> <span class="toc-text">使用 xargs 分割参数列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用文本处理"><span class="toc-number">9.</span> <span class="toc-text">使用文本处理</span></a></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>
