@@ -1,0 +1,467 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>01_Python基础 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/基础/"><i class="fa" aria-hidden="true">基础</i></a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/JavaScript/"><i class="fa" aria-hidden="true">JavaScript</i></a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Python/"><i class="fa" aria-hidden="true">Python</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Python/函数/"><i class="fa" aria-hidden="true">函数</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Python/基础/"><i class="fa" aria-hidden="true">基础</i></a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #295e97">JavaScript</a> <a href="/tags/Python/" style="font-size: 0.15rem; color: #578abf">Python</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #477bb1">logback</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #194f89">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="01_Python基础">
+                
+                01_Python基础
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>基础</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Python
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/07/16</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/07/16/Backend/Python/Base/01_Python基础/" data-thread-key="/2017/07/16/Backend/Python/Base/01_Python基础/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="01_Python基础"
+              data-leadcloud-url="/2017/07/16/Backend/Python/Base/01_Python基础/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="Python介绍"><a href="#Python介绍" class="headerlink" title="Python介绍"></a>Python介绍</h1><ul>
+<li><p>Python适合的领域<br>Web网站和各种网络服务<br>系统工具和脚本<br>作为“胶水”语言把其它语言开发和模块包装起来方便使用  </p>
+</li>
+<li><p>Python不适合的领域<br>贴近硬件的代码（首选C）<br>移动开发：iOS/Android有各自的开发语言（ObjC,Swift/Java）<br>游戏开发：C/C++</p>
+</li>
+<li><p>Python和其它语言对比<br>|      |   类型   |   运行速度   |   代码量   |<br>| —- | —- | —- | —- |<br>|   C   |   编译为机器码   |   非常快   |   非常多   |<br>|   Java   |   编译为字节码   |   快   |   多   |<br>|   Python   |   解释执行       |   慢   |   少   |</p>
+</li>
+</ul>
+<ul>
+<li>Python源码不能加密  </li>
+</ul>
+<h1 id="Python文件类型"><a href="#Python文件类型" class="headerlink" title="Python文件类型"></a>Python文件类型</h1><p>Hello.py -&gt; python解释器 -&gt; 字节码文件 -&gt; python解释器 -&gt; 二进制文件 -&gt; 内存、运行 -&gt; 打印结果  </p>
+<p>字节码文件：<br>.pyc<br>.pyo  </p>
+<p>python -V  </p>
+<p>生成pyc文件<br>python -m py_compile hello.py  </p>
+<p>python hello.pyc  </p>
+<p>生成pyo文件<br>python -o -m py_compile hello.py  </p>
+<p>python hello.pyo  </p>
+<p>ord(‘A’)<br>65  </p>
+<p>chr(66)<br>‘B’  </p>
+<p>‘ABC’.encode(‘ascii’)<br>b’ABC’  </p>
+<p> b’ABC’.decode(‘ascii’)<br>‘ABC’  </p>
+<p>len(‘ABC’)  </p>
+<p>float(String)<br>int(String)<br>str(integer)<br>str(float)  </p>
+<p>type(var)  </p>
+<p><code># -*- coding: utf-8 -*-</code>  </p>
+<h1 id="str"><a href="#str" class="headerlink" title="str"></a>str</h1><p>想要分几行输入字符串，并且希望行尾的换行符自动包含到字符串当中，可以使用三对引号：”””…””” 或 ‘’’…’’’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; print(&quot;&quot;&quot;\</div><div class="line">... Usage: thingy [OPTIONS]</div><div class="line">...      -h                        Display this usage message</div><div class="line">...      -H hostname               Hostname to connect to</div><div class="line">... &quot;&quot;&quot;)</div><div class="line">Usage: thingy [OPTIONS]</div><div class="line">     -h                        Display this usage message</div><div class="line">     -H hostname               Hostname to connect to</div></pre></td></tr></table></figure></p>
+<p>方法 title() 返回字符串的标题版本，即单词首字母大写其余字母小写。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &quot;shi yan lou&quot;</div><div class="line">&gt;&gt;&gt; s.title()</div><div class="line">&apos;Shi Yan Lou&apos;</div></pre></td></tr></table></figure></p>
+<p>方法 upper() 返回字符串全部大写的版本，反之 lower() 返回字符串的全部小写版本。<br>方法 swapcase() 返回字符串大小写交换后的版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &quot;I am A pRoGraMMer&quot;</div><div class="line">&gt;&gt; s.swapcase()</div><div class="line">&apos;i AM a PrOgRAmmER&apos;</div></pre></td></tr></table></figure></p>
+<p>方法 isalnum() 检查所有字符是否为字母数字，字符串 s 中包含空格字符，所以返回 False。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &quot;jdwb 2323bjb&quot;</div><div class="line">&gt;&gt;&gt; s.isalnum()</div><div class="line">False</div><div class="line">&gt;&gt;&gt; s = &quot;jdwb2323bjb&quot;</div><div class="line">&gt;&gt;&gt; s.isalnum()</div><div class="line">True</div></pre></td></tr></table></figure></p>
+<p>方法 isalpha() 检查字符串之中是否只有字母。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &quot;SankarshanSir&quot;</div><div class="line">&gt;&gt;&gt; s.isalpha()</div><div class="line">True</div><div class="line">&gt;&gt;&gt; s = &quot;Sankarshan Sir&quot;</div><div class="line">&gt;&gt;&gt; s.isalpha()</div><div class="line">False</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &quot;1234&quot;</div><div class="line">&gt;&gt;&gt; s.isdigit() # 检查字符串是否所有字符为数字</div><div class="line">True</div><div class="line">&gt;&gt;&gt; s = &quot;ShiYanLou is coming&quot;</div><div class="line">&gt;&gt;&gt; s.islower() # 检查字符串是否所有字符为小写</div><div class="line">False</div><div class="line">&gt;&gt;&gt; s = &quot;Shiyanlou Is Coming&quot;</div><div class="line">&gt;&gt;&gt; s.istitle() # To 检查字符串是否为标题样式</div><div class="line">True</div><div class="line">&gt;&gt;&gt; s = &quot;CHINA&quot;</div><div class="line">&gt;&gt;&gt; s.isupper() # 检查字符串是否所有字符为大写</div><div class="line">True</div></pre></td></tr></table></figure>
+<p>使用 split() 分割任意字符串，split() 允许有一个参数，用来指定字符串以什么字符分隔（默认为 “ “），它返回一个包含所有分割后的字符串的列表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &quot;We all love Python&quot;</div><div class="line">&gt;&gt;&gt; s.split()</div><div class="line">[&apos;We&apos;, &apos;all&apos;, &apos;love&apos;, &apos;Python&apos;]</div><div class="line">&gt;&gt;&gt; x = &quot;shiyanlou:is:waiting&quot;</div><div class="line">&gt;&gt;&gt; x.split(&apos;:&apos;)</div><div class="line">[&apos;shiyanlou&apos;, &apos;is&apos;, &apos;waiting&apos;]</div></pre></td></tr></table></figure></p>
+<p>方法 join() 使用指定字符连接多个字符串，它需要一个包含字符串元素的列表作为输入然后连接列表内的字符串元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; &quot;-&quot;.join(&quot;GNU/Linux is great&quot;.split())</div><div class="line">&apos;GNU/Linux-is-great&apos;</div></pre></td></tr></table></figure></p>
+<p>strip(chars)，用来剥离字符串首尾中指定的字符，它允许有一个字符串参数，这个参数为剥离哪些字符提供依据。不指定参数则默认剥离掉首尾的空格和换行符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &quot;  a bc\n &quot;</div><div class="line">&gt;&gt;&gt; s.strip()</div><div class="line">&apos;a bc&apos;</div></pre></td></tr></table></figure></p>
+<p>使用 lstrip(chars) 或 rstrip(chars) 只对字符串左或右剥离。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &quot;www.foss.in&quot; </div><div class="line">&gt;&gt;&gt; s.lstrip(&quot;cwsd.&quot;) #删除在字符串左边出现的&apos;c&apos;,&apos;w&apos;,&apos;s&apos;,&apos;d&apos;,&apos;.&apos;字符</div><div class="line">&apos;foss.in&apos;</div><div class="line">&gt;&gt;&gt; s.rstrip(&quot;cnwdi.&quot;) #删除在字符串右边出现的&apos;c&apos;,&apos;n&apos;,&apos;w&apos;,&apos;d&apos;,&apos;i&apos;,&apos;.&apos;字符</div><div class="line">&apos;www.foss&apos;</div></pre></td></tr></table></figure></p>
+<p>文本搜索<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = &quot;faulty for a reason&quot;</div><div class="line">&gt;&gt;&gt; s.find(&quot;for&quot;)</div><div class="line">7</div><div class="line">&gt;&gt;&gt; s.find(&quot;fora&quot;)</div><div class="line">-1</div><div class="line">&gt;&gt;&gt; s.startswith(&quot;fa&quot;) # 检查字符串是否以 fa 开头</div><div class="line">True</div><div class="line">&gt;&gt;&gt; s.endswith(&quot;reason&quot;) # 检查字符串是否以 reason 结尾</div><div class="line">True</div></pre></td></tr></table></figure></p>
+<p>回文是一种无论从左还是从右读都一样的字符序列。比如 “madam”。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python3</div><div class="line">s = input(&quot;Please enter a string: &quot;)</div><div class="line">z = s[::-1]</div><div class="line">if s == z:</div><div class="line">    print(&quot;The string is a palindrome&quot;)</div><div class="line">else:</div><div class="line">    print(&quot;The string is not a palindrome&quot;)</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python3</div><div class="line">s = input(&quot;Enter a line: &quot;)</div><div class="line">print(&quot;The number of words in the line are %d&quot; % (len(s.split(&quot; &quot;))))</div></pre></td></tr></table></figure>
+<p>%d    整数<br>%f    浮点数<br>%s    字符串<br>%x    十六进制整数  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; &apos;Hello, %s&apos; % &apos;world&apos;</div><div class="line">&apos;Hello, world&apos;</div><div class="line">&gt;&gt;&gt; &apos;Hi, %s, you have $%d.&apos; % (&apos;Michael&apos;, 1000000)</div><div class="line">&apos;Hi, Michael, you have $1000000.&apos;</div><div class="line"></div><div class="line">&gt;&gt;&gt; &apos;%2d-%02d&apos; % (3, 1)</div><div class="line">&apos; 3-01&apos;</div><div class="line">&gt;&gt;&gt; &apos;%.2f&apos; % 3.1415926</div><div class="line">&apos;3.14&apos;</div><div class="line"></div><div class="line">&gt;&gt;&gt; &apos;Age: %s. Gender: %s&apos; % (25, True)</div><div class="line">&apos;Age: 25. Gender: True&apos;</div><div class="line"></div><div class="line">&gt;&gt;&gt; &apos;growth rate: %d %%&apos; % 7</div><div class="line">&apos;growth rate: 7 %&apos;</div></pre></td></tr></table></figure>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; classmates = [&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</div><div class="line">&gt;&gt;&gt; classmates</div><div class="line">[&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</div><div class="line"></div><div class="line">&gt;&gt;&gt; classmates[0]</div><div class="line">&apos;Michael&apos;</div><div class="line">&gt;&gt;&gt; classmates[1]</div><div class="line">&apos;Bob&apos;</div></pre></td></tr></table></figure>
+<p>len(list)  </p>
+<p>list.append(‘ABC’)</p>
+<p>list.insert(0, 111)<br>在列表索引 0 位置添加元素 111  </p>
+<p>list.pop()<br>list.pop(i)  </p>
+<p>list.count(‘ABC’)<br>列表方法 count(s) 会返回列表元素中 s 的数量。  </p>
+<p>list.remove(‘ABC’)<br>在列表中移除任意指定值  </p>
+<p>del a[-1]<br>也能使用 del 关键字删除指定位置的列表元素。</p>
+<p>list.reverse()<br>反转整个列表  </p>
+<p>b=[45, 56, 90]<br>list.extend(b)<br>将一个列表的所有元素添加到另一个列表的末尾  </p>
+<p>a.sort()<br>给列表排序，排序的前提是列表的元素是可比较的  </p>
+<p>squares = list(map(lambda x: x<strong>2, range(10)))<br>等价于下面的列表推导式。<br>squares = [x</strong>2 for x in range(10)]  </p>
+<p>列表推导式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; [(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]</div><div class="line">[(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]</div></pre></td></tr></table></figure></p>
+<h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><p>元组是由数个逗号分割的值组成。  </p>
+<p>tuple一旦初始化就不能修改  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; classmates = (&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;)</div><div class="line">&gt;&gt;&gt; t = (1, 2)</div><div class="line">&gt;&gt;&gt; t</div><div class="line">(1, 2)</div></pre></td></tr></table></figure>
+<p>定义一个空的tuple<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; t = ()</div><div class="line">&gt;&gt;&gt; t</div><div class="line">()</div></pre></td></tr></table></figure></p>
+<p>定义的不是tuple，是1这个数！这是因为括号()既可以表示tuple，又可以表示数学公式中的小括号，这就产生了歧义，因此，Python规定，这种情况下，按小括号进行计算，计算结果自然是1。</p>
+<p>所以，只有1个元素的tuple定义时必须加一个逗号,，来消除歧义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; t = (1,)</div><div class="line">&gt;&gt;&gt; t</div><div class="line">(1,)</div><div class="line">```</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>t = (‘a’, ‘b’, [‘A’, ‘B’])<br>t[2][0] = ‘X’<br>t[2][1] = ‘Y’<br>t<br>(‘a’, ‘b’, [‘X’, ‘Y’])<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">## if</div></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>if &lt;条件判断1&gt;:<br>    &lt;执行1&gt;<br>elif &lt;条件判断2&gt;:<br>    &lt;执行2&gt;<br>elif &lt;条件判断3&gt;:<br>    &lt;执行3&gt;<br>else:<br>    &lt;执行4&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">int(str) 字符串转数字  </div><div class="line"></div><div class="line">replace</div></pre></td></tr></table></figure></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = ‘abc’<br>b = a.replace(‘a’, ‘A’)<br>b<br>‘Abc’<br>a<br>‘abc’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">## for</div></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>names = [‘Michael’, ‘Bob’, ‘Tracy’]<br>for name in names:<br>    print(name)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">range()函数，可以生成一个整数序列，再通过list()函数可以转换为list</div></pre></td></tr></table></figure></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>list(range(5))<br>[0, 1, 2, 3, 4]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">## while</div></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>sum = 0<br>n = 99<br>while n &gt; 0:<br>    sum = sum + n<br>    n = n - 2<br>print(sum)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">break  </div><div class="line"></div><div class="line">continue  </div><div class="line"></div><div class="line"></div><div class="line">## dict</div><div class="line">无序的键值对（key:value）集合，同一个字典内的键必须是互不相同的。  </div><div class="line"></div><div class="line">一对大括号 &#123;&#125; 创建一个空字典。</div></pre></td></tr></table></figure></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>d = {‘Michael’: 95, ‘Bob’: 75, ‘Tracy’: 85}<br>d[‘Michael’]<br>95<br>d[‘test’]=’50’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">dict() 可以从包含键值对的元组中创建字典。</div></pre></td></tr></table></figure></p>
+<p>dict(((‘Indian’,’Delhi’),(‘Bangladesh’,’Dhaka’)))<br>{‘Indian’: ‘Delhi’, ‘Bangladesh’: ‘Dhaka’}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">如果你想要遍历一个字典，使用字典的 items() 方法。</div></pre></td></tr></table></figure></p>
+<p>data = {‘kushal’:’Fedora’, ‘kart<em>‘:’Debian’, ‘Jace’:’Mac’}<br>for x, y in data.items():<br>…     print(“{} uses {}”.format(x, y))<br>…<br>Kushal uses Fedora<br>Jace uses Mac<br>kart</em> uses Debian<br>parthan uses Ubuntu<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">如果key不存在，dict就会报错：</div><div class="line"></div><div class="line"></div><div class="line">要避免key不存在的错误，有两种办法：</div><div class="line"></div><div class="line">一是通过in判断key是否存在：</div><div class="line">in</div></pre></td></tr></table></figure></p>
+<p>‘Thomas’ in d<br>False<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">二是通过dict提供的get方法，如果key不存在，可以返回None，或者自己指定的value：</div><div class="line">get</div></pre></td></tr></table></figure></p>
+<p>d.get(‘Thomas’)<br>d.get(‘Thomas’, -1)<br>-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">pop</div></pre></td></tr></table></figure></p>
+<p>d.pop(‘Bob’)<br>75<br>d<br>{‘Michael’: 95, ‘Tracy’: 85}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">使用 del 关键字删除任意指定的键值对：</div></pre></td></tr></table></figure></p>
+<p>del d[‘test’]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">必须知道的是，字典中的键必须是不可变类型，比如你不能使用列表作为键。  </div><div class="line"></div><div class="line">dict.setdefault(key, default)  </div><div class="line">往字典中的元素添加数据，我们首先要判断这个元素是否存在，不存在则创建一个默认值。</div></pre></td></tr></table></figure></p>
+<p>data = {}<br>data.setdefault(‘names’, []).append(‘Ruby’)<br>data<br>{‘names’: [‘Ruby’]}<br>data.setdefault(‘names’, []).append(‘Python’)<br>data<br>{‘names’: [‘Ruby’, ‘Python’]}<br>data.setdefault(‘names’, []).append(‘C’)<br>data<br>{‘names’: [‘Ruby’, ‘Python’, ‘C’]}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">试图索引一个不存在的键将会抛出一个 keyError 错误。我们可以使用 dict.get(key, default) 来索引键，如果键不存在，那么返回指定的 default 值。</div></pre></td></tr></table></figure></p>
+<p>data[‘foo’]<br>Traceback (most recent call last):<br>File “<stdin>“, line 1, in <module><br>KeyError: ‘foo’<br>data.get(‘foo’, 0)<br>0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">在遍历列表（或任何序列类型）的同时获得元素索引值，你可以使用 enumerate()。</div></pre></td></tr></table></figure></module></stdin></p>
+<p>for i, j in enumerate([‘a’, ‘b’, ‘c’]):<br>…     print(i, j)<br>…<br>0 a<br>1 b<br>2 c<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">同时遍历两个序列类型，可以使用 zip() 函数。</div></pre></td></tr></table></figure></p>
+<p>a = [‘Pradeepto’, ‘Kushal’]<br>b = [‘OpenSUSE’, ‘Fedora’]<br>for x, y in zip(a, b):<br>…     print(“{} uses {}”.format(x, y))<br>…<br>Pradeepto uses OpenSUSE<br>Kushal uses Fedora<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">## set</div><div class="line">set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。  </div><div class="line"></div><div class="line">大括号或 set() 函数可以用来创建集合。注意：想要创建空集合，你必须使用 set() 而不是 &#123;&#125;。  </div><div class="line">  </div><div class="line">要创建一个set，需要提供一个list作为输入集合：</div></pre></td></tr></table></figure></p>
+<p>s = set([1, 1, 2, 2, 3, 3])<br>s<br>{1, 2, 3}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">add</div></pre></td></tr></table></figure></p>
+<p>s.add(4)<br>s<br>{1, 2, 3, 4}<br>s.add(4)<br>s<br>{1, 2, 3, 4}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">pop</div></pre></td></tr></table></figure></p>
+<p>s.pop()<br>1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">remove</div></pre></td></tr></table></figure></p>
+<p>s.remove(4)<br>s<br>{1, 2, 3}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&amp;   |</div></pre></td></tr></table></figure></p>
+<p>s1 = set([1, 2, 3])<br>s2 = set([2, 3, 4])<br>s1 &amp; s2<br>{2, 3}<br>s1 | s2<br>{1, 2, 3, 4}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">演示对两个单词中的字母进行集合操作</div></pre></td></tr></table></figure></p>
+<p>a = set(‘abracadabra’)<br>b = set(‘alacazam’)<br>a                                  # a 去重后的字母<br>{‘a’, ‘r’, ‘b’, ‘c’, ‘d’}<br>a - b                              # a 有而 b 没有的字母<br>{‘r’, ‘d’, ‘b’}<br>a | b                              # 存在于 a 或 b 的字母<br>{‘a’, ‘c’, ‘r’, ‘d’, ‘b’, ‘m’, ‘z’, ‘l’}<br>a &amp; b                              # a 和 b 都有的字母<br>{‘a’, ‘c’}<br>a ^ b                              # 存在于 a 或 b 但不同时存在的字母<br>{‘r’, ‘d’, ‘b’, ‘m’, ‘z’, ‘l’}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">in</div></pre></td></tr></table></figure></p>
+<p>basket = {‘apple’, ‘orange’, ‘apple’, ‘pear’, ‘orange’, ‘banana’}<br>print(basket)                      # 你可以看到重复的元素被去除<br>{‘orange’, ‘banana’, ‘pear’, ‘apple’}<br>‘orange’ in basket<br>True<br>‘crabgrass’ in basket<br>False<br>```</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-07-16  03:23:07</span></li>
+                
+                <li>最后编辑日期: <span>2017-07-16  03:23:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/后端开发/">后端开发</a>
+                    
+                    <a href="/categories/后端开发/Python/">Python</a>
+                    
+                    <a href="/categories/后端开发/Python/基础/">基础</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Python/">Python</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/07/16/Backend/Python/Base/02_函数/" class="pre-post fa fa-caret-left">02_Python函数</a>
+        
+        
+        <a href="/2017/07/07/Linux/Base/12_Linux 下软件安装(apt-get,dpkg)/" class="next-post fa">12_Linux 软件安装</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python介绍"><span class="toc-number">1.</span> <span class="toc-text">Python介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python文件类型"><span class="toc-number">2.</span> <span class="toc-text">Python文件类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#str"><span class="toc-number">3.</span> <span class="toc-text">str</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#list"><span class="toc-number">3.1.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tuple"><span class="toc-number">3.2.</span> <span class="toc-text">tuple</span></a></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>
