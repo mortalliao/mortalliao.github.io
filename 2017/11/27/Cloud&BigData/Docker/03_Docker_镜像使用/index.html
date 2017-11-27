@@ -1,0 +1,412 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>03_Docker_镜像使用 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p>目前正在找Java开发工作, 如果我的<a href="http://mortalliao.win/resume/"
+            title="fork me">个人情况</a>符合贵公司的要求, 请把我收入碗中吧~</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Cloud-BigData/"><i class="fa" aria-hidden="true">Cloud&BigData</i></a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cloud-BigData/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/基础/"><i class="fa" aria-hidden="true">基础</i></a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/JavaScript/"><i class="fa" aria-hidden="true">JavaScript</i></a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/容器/"><i class="fa" aria-hidden="true">容器</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/并发/"><i class="fa" aria-hidden="true">并发</i></a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Python/"><i class="fa" aria-hidden="true">Python</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Python/基础/"><i class="fa" aria-hidden="true">基础</i></a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #245993">JavaScript</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #31669e">CSS</a> <a href="/tags/Docker/" style="font-size: 0.17rem; color: #3f73aa">Docker</a> <a href="/tags/Java容器/" style="font-size: 0.15rem; color: #598cc1">Java容器</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #4c80b5">logback</a> <a href="/tags/Python/" style="font-size: 0.15rem; color: #598cc1">Python</a> <a href="/tags/Java并发/" style="font-size: 0.17rem; color: #3f73aa">Java并发</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #174d87">Hibernate</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="03_Docker_镜像使用">
+                
+                03_Docker_镜像使用
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Docker</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Docker
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/11/27</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/03_Docker_镜像使用/" data-thread-key="/2017/11/27/Cloud&BigData/Docker/03_Docker_镜像使用/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="03_Docker_镜像使用"
+              data-leadcloud-url="/2017/11/27/Cloud&BigData/Docker/03_Docker_镜像使用/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="Docker-镜像使用"><a href="#Docker-镜像使用" class="headerlink" title="Docker 镜像使用"></a>Docker 镜像使用</h1><p>当运行容器时，使用的镜像如果在本地中不存在，docker 就会自动从 docker 镜像仓库中下载，默认是从 Docker Hub 公共镜像源下载。  </p>
+<h2 id="列出镜像列表"><a href="#列出镜像列表" class="headerlink" title="列出镜像列表"></a>列出镜像列表</h2><p>使用 <strong>docker images</strong> 来列出本地主机上的镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images           </div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div></pre></td></tr></table></figure></p>
+<p>各个选项说明:  </p>
+<ul>
+<li>REPOSTITORY：表示镜像的仓库源</li>
+<li>TAG：镜像的标签</li>
+<li>IMAGE ID：镜像ID</li>
+<li>CREATED：镜像创建时间</li>
+<li>SIZE：镜像大小</li>
+</ul>
+<p>同一仓库源可以有多个 TAG，代表这个仓库源的不同个版本，如ubuntu仓库源里，有15.10、14.04等多个不同的版本，我们使用 REPOSTITORY:TAG 来定义不同的镜像。  </p>
+<p>如果不指定一个镜像的版本标签，例如你只使用 ubuntu，docker 将默认使用 ubuntu:latest 镜像。</p>
+<h2 id="获取一个新的镜像"><a href="#获取一个新的镜像" class="headerlink" title="获取一个新的镜像"></a>获取一个新的镜像</h2><p>当在本地主机上使用一个不存在的镜像时 Docker 就会自动下载这个镜像。如果想预先下载这个镜像，可以使用 <strong>docker pull</strong> 命令来下载它。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Crunoob@runoob:~$ docker pull ubuntu:13.10</div></pre></td></tr></table></figure></p>
+<p>下载完成后，可以直接使用这个镜像来运行容器。</p>
+<h2 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h2><p>可以从 Docker Hub 网站来搜索镜像，Docker Hub 网址为： <a href="https://hub.docker.com/" target="_blank" rel="external">https://hub.docker.com/</a><br>也可以使用 <strong>docker search</strong> 命令来搜索镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$  docker search nginx</div></pre></td></tr></table></figure></p>
+<ul>
+<li>NAME:镜像仓库源的名称</li>
+<li>DESCRIPTION:镜像的描述</li>
+<li>OFFICIAL:是否docker官方发布</li>
+</ul>
+<h2 id="拖取镜像"><a href="#拖取镜像" class="headerlink" title="拖取镜像"></a>拖取镜像</h2><p>使用命令 docker pull 来下载镜像。</p>
+<h1 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h1><p>当从docker镜像仓库中下载的镜像不能满足需求时，可以通过以下两种方式对镜像进行更改。  </p>
+<ol>
+<li>从已经创建的容器中更新镜像，并且提交这个镜像  </li>
+<li>使用 Dockerfile 指令来创建一个新的镜像  </li>
+</ol>
+<h2 id="更新镜像"><a href="#更新镜像" class="headerlink" title="更新镜像"></a>更新镜像</h2><p>更新镜像之前，我们需要使用镜像来创建一个容器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -i -t ubuntu:15.10 /bin/bash</div><div class="line">root@e218edb10161:/#</div></pre></td></tr></table></figure></p>
+<p>在运行的容器内使用 apt-get update 命令进行更新。<br>在完成操作之后，输入 exit命令来退出这个容器。  </p>
+<p>此时ID为e218edb10161的容器，是按我们的需求更改的容器。我们可以通过命令 docker commit来提交容器副本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker commit -m=&quot;has update&quot; -a=&quot;runoob&quot; e218edb10161 runoob/ubuntu:v2</div><div class="line">sha256:70bf1840fd7c0d2d8ef0a42a817eb29f854c1af8f7c59fc03ac7bdee9545aff8</div></pre></td></tr></table></figure></p>
+<p>各个参数说明：  </p>
+<ul>
+<li>m:提交的描述信息</li>
+<li>a:指定镜像作者</li>
+<li>e218edb10161：容器ID</li>
+<li>runoob/ubuntu:v2:指定要创建的目标镜像名</li>
+</ul>
+<p>使用 docker images 命令来查看我们的新镜像 runoob/ubuntu:v2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images</div></pre></td></tr></table></figure></p>
+<p>使用新镜像 runoob/ubuntu 来启动一个容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -i -t runoob/ubuntu:v2 /bin/bash</div></pre></td></tr></table></figure></p>
+<h2 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h2><p>使用命令 <strong>docker build</strong> ， 从零开始来创建一个新的镜像。为此，需要创建一个 Dockerfile 文件，其中包含一组指令来告诉 Docker 如何构建新的镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ cat Dockerfile </div><div class="line">FROM    centos:6.7</div><div class="line">MAINTAINER      Fisher &quot;fisher@sudops.com&quot;</div><div class="line"></div><div class="line">RUN     /bin/echo &apos;root:123456&apos; |chpasswd</div><div class="line">RUN     useradd runoob</div><div class="line">RUN     /bin/echo &apos;runoob:123456&apos; |chpasswd</div><div class="line">RUN     /bin/echo -e &quot;LANG=\&quot;en_US.UTF-8\&quot;&quot; &gt;/etc/default/local</div><div class="line">EXPOSE  22</div><div class="line">EXPOSE  80</div><div class="line">CMD     /usr/sbin/sshd -D</div></pre></td></tr></table></figure></p>
+<p>每一个指令都会在镜像上创建一个新的层，每一个指令的前缀都必须是大写的。<br>第一条FROM，指定使用哪个镜像源<br>RUN 指令告诉docker 在镜像内执行命令，安装了什么。<br>然后，我们使用 Dockerfile 文件，通过 docker build 命令来构建一个镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker build -t runoob/centos:6.7 .</div><div class="line">Sending build context to Docker daemon 17.92 kB</div><div class="line">Step 1 : FROM centos:6.7</div><div class="line"> ---&amp;gt; d95b5ca17cc3</div><div class="line">Step 2 : MAINTAINER Fisher &quot;fisher@sudops.com&quot;</div><div class="line"> ---&amp;gt; Using cache</div><div class="line"> ---&amp;gt; 0c92299c6f03</div><div class="line">Step 3 : RUN /bin/echo &apos;root:123456&apos; |chpasswd</div><div class="line"> ---&amp;gt; Using cache</div><div class="line"> ---&amp;gt; 0397ce2fbd0a</div><div class="line">Step 4 : RUN useradd runoob</div><div class="line">......</div></pre></td></tr></table></figure></p>
+<p>参数说明：  </p>
+<ul>
+<li>t ：指定要创建的目标镜像名  </li>
+<li>. ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径  </li>
+</ul>
+<p>使用docker images 查看创建的镜像已经在列表中存在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images</div></pre></td></tr></table></figure></p>
+<p>可以使用新的镜像来创建容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -t -i runoob/centos:6.7  /bin/bash</div><div class="line">[root@41c28d18b5fb /]# id runoob</div><div class="line">uid=500(runoob) gid=500(runoob) groups=500(runoob)</div></pre></td></tr></table></figure></p>
+<h2 id="设置镜像标签"><a href="#设置镜像标签" class="headerlink" title="设置镜像标签"></a>设置镜像标签</h2><p>可以使用 <strong>docker tag</strong> 命令，为镜像添加一个新的标签。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker tag 860c279d2fec runoob/centos:dev</div></pre></td></tr></table></figure></p>
+<p>docker tag 镜像ID，这里是 860c279d2fec ,用户名称、镜像源名(repository name)和新的标签名(tag)。  </p>
+<p>使用 docker images 命令可以看到，ID为860c279d2fec的镜像多一个标签。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">runoob/centos       6.7                 860c279d2fec        5 hours ago         190.6 MB</div><div class="line">runoob/centos       dev                 860c279d2fec        5 hours ago         190.6 MB</div></pre></td></tr></table></figure></p>
+<h2 id="Docker-容器镜像删除"><a href="#Docker-容器镜像删除" class="headerlink" title="Docker 容器镜像删除"></a>Docker 容器镜像删除</h2><h3 id="停止所有的container，这样才能够删除其中的images："><a href="#停止所有的container，这样才能够删除其中的images：" class="headerlink" title="停止所有的container，这样才能够删除其中的images："></a>停止所有的container，这样才能够删除其中的images：</h3><p>docker stop $(docker ps -a -q)</p>
+<p>如果想要删除所有container的话再加一个指令：<br>docker rm $(docker ps -a -q)</p>
+<h3 id="查看当前有哪些images"><a href="#查看当前有哪些images" class="headerlink" title="查看当前有哪些images"></a>查看当前有哪些images</h3><p>docker images</p>
+<h3 id="删除images，通过image的id来指定删除镜像"><a href="#删除images，通过image的id来指定删除镜像" class="headerlink" title="删除images，通过image的id来指定删除镜像"></a>删除images，通过image的id来指定删除镜像</h3><p>docker rmi <image id=""></image></p>
+<p>想要删除untagged images，也就是那些id为<none>的image的话可以用<br>docker rmi $(docker images | grep “^<none>“ | awk “{print $3}”)</none></none></p>
+<p>要删除全部image的话<br>docker rmi $(docker images -q)</p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2017-11-27  02:15:50</span></li>
+                
+                <li>最后编辑日期: <span>2017-11-27  02:15:50</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/Cloud-BigData/">Cloud&amp;BigData</a>
+                    
+                    <a href="/categories/Cloud-BigData/Docker/">Docker</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Docker/">Docker</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2017/11/27/Cloud&BigData/Docker/02_Docker_容器使用/" class="pre-post fa fa-caret-left">02_Docker_容器使用</a>
+        
+        
+        <a href="/2017/11/27/Cloud&BigData/Docker/01_Docker_Hello_World/" class="next-post fa">01_Docker_Hello_World</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2017.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-镜像使用"><span class="toc-number">1.</span> <span class="toc-text">Docker 镜像使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#列出镜像列表"><span class="toc-number">1.1.</span> <span class="toc-text">列出镜像列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取一个新的镜像"><span class="toc-number">1.2.</span> <span class="toc-text">获取一个新的镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查找镜像"><span class="toc-number">1.3.</span> <span class="toc-text">查找镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拖取镜像"><span class="toc-number">1.4.</span> <span class="toc-text">拖取镜像</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建镜像"><span class="toc-number">2.</span> <span class="toc-text">创建镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#更新镜像"><span class="toc-number">2.1.</span> <span class="toc-text">更新镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建镜像"><span class="toc-number">2.2.</span> <span class="toc-text">构建镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置镜像标签"><span class="toc-number">2.3.</span> <span class="toc-text">设置镜像标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-容器镜像删除"><span class="toc-number">2.4.</span> <span class="toc-text">Docker 容器镜像删除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#停止所有的container，这样才能够删除其中的images："><span class="toc-number">2.4.1.</span> <span class="toc-text">停止所有的container，这样才能够删除其中的images：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看当前有哪些images"><span class="toc-number">2.4.2.</span> <span class="toc-text">查看当前有哪些images</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除images，通过image的id来指定删除镜像"><span class="toc-number">2.4.3.</span> <span class="toc-text">删除images，通过image的id来指定删除镜像</span></a></li></ol></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>
