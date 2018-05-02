@@ -1,0 +1,397 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+<meta name="description" content=liaoyujian/>
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>05_Git操作 | mortalLiao</title>
+
+<link rel="alternate" href="/atom.xml" title="mortalLiao" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+    <!--script-->
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    
+    
+</head>
+
+<body>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">mortalLiao</h1>
+        </a>
+        
+        <h2 class="subtitle">Keep learning</h2>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        
+            <li><a href="/project"><i class="fa fa-code"></i>项目</a></li>
+        
+            <li><a href="/about"><i class="fa fa-user-circle-o"></i>关于我</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        <p><a href="http://mortalliao.win/resume/" title="fork me">提醒自己，坚持不懈的学习</a></p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">分类</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Cloud-BigData/"><i class="fa" aria-hidden="true">Cloud&BigData</i></a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cloud-BigData/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/vim/"><i class="fa" aria-hidden="true">vim</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/基础/"><i class="fa" aria-hidden="true">基础</i></a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/VCS/"><i class="fa" aria-hidden="true">VCS</i></a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/VCS/Git/"><i class="fa" aria-hidden="true">Git</i></a><span class="category-list-count">7</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/"><i class="fa" aria-hidden="true">前端开发</i></a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/CSS/"><i class="fa" aria-hidden="true">CSS</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/JavaScript/"><i class="fa" aria-hidden="true">JavaScript</i></a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/"><i class="fa" aria-hidden="true">后端开发</i></a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/"><i class="fa" aria-hidden="true">ORM</i></a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/ORM/Hibernate/"><i class="fa" aria-hidden="true">Hibernate</i></a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/logback/"><i class="fa" aria-hidden="true">logback</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/容器/"><i class="fa" aria-hidden="true">容器</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Java/并发/"><i class="fa" aria-hidden="true">并发</i></a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Python/"><i class="fa" aria-hidden="true">Python</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/后端开发/Python/基础/"><i class="fa" aria-hidden="true">基础</i></a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/Oracle/"><i class="fa" aria-hidden="true">Oracle</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">17</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">热门文章</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">标签云</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/Git/" style="font-size: 0.18rem; color: #2d619a">Git</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/Docker/" style="font-size: 0.16rem; color: #4478ae">Docker</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #215690">JavaScript</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #4f83b8">logback</a> <a href="/tags/Java容器/" style="font-size: 0.16rem; color: #4f83b8">Java容器</a> <a href="/tags/Java并发/" style="font-size: 0.16rem; color: #4478ae">Java并发</a> <a href="/tags/Python/" style="font-size: 0.15rem; color: #5b8ec2">Python</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #164b86">Hibernate</a>
+  </div>
+</li>
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">友链</h3><br/>
+
+    
+        <a href="http://mortalliao.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="05_Git操作">
+                
+                05_Git操作
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Git</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Git
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2018/05/02</span>
+    </span>
+    
+    <span  class=" fa-wrap">
+        <i class="fa fa-comment-o"></i>
+        <span id="comments-count" class="comments-meta disqus-comment-count ds-thread-count comments" data-disqus-url="http://yoursite.com/2018/05/02/VCS/Git/05_Git操作/" data-thread-key="/2018/05/02/VCS/Git/05_Git操作/"
+           data-count-type="comments"></span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="05_Git操作"
+              data-leadcloud-url="/2018/05/02/VCS/Git/05_Git操作/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="git-操作"><a href="#git-操作" class="headerlink" title="git 操作"></a>git 操作</h1><h2 id="git-克隆操作"><a href="#git-克隆操作" class="headerlink" title="git 克隆操作"></a>git 克隆操作</h2><p>git clone  </p>
+<h2 id="git-提交更改"><a href="#git-提交更改" class="headerlink" title="git 提交更改"></a>git 提交更改</h2><p>git status -s  </p>
+<p>git add XXX.XXX  </p>
+<p>git commit -m ‘some message’  </p>
+<p>git log  </p>
+<h2 id="git-审查更改"><a href="#git-审查更改" class="headerlink" title="git 审查更改"></a>git 审查更改</h2><p>git log  </p>
+<p>git show SHA-1.ID  </p>
+<p>git diff  </p>
+<h2 id="git-推送操作"><a href="#git-推送操作" class="headerlink" title="git 推送操作"></a>git 推送操作</h2><p>git push origin master  </p>
+<h2 id="git-取最新变化"><a href="#git-取最新变化" class="headerlink" title="git 取最新变化"></a>git 取最新变化</h2><p>git pull  </p>
+<h2 id="git-藏匿操作"><a href="#git-藏匿操作" class="headerlink" title="git 藏匿操作"></a>git 藏匿操作</h2><p>不能提交部分代码，也不能扔掉变化。所以，需要一些临时空间，在那里可以存储部分修改，以便以后再提交。  </p>
+<p>在Git中，藏匿操作需要修改的跟踪文件和阶段的变化，并将其保存在栈上未完成的更改，可以在任何时候重新。<br><strong>git stash</strong>  </p>
+<p>现在可以安全地切换分支和做其他工作。使用 git stash list 命令看到的藏匿的变化列表。<br><strong>git stash list</strong>  </p>
+<p>只要执行git stash pop 命令，它会从堆栈中删除的变化，并把它放在当前工作目录。<br><strong>git stash pop</strong>  </p>
+<h2 id="git-移动-重命名-操作"><a href="#git-移动-重命名-操作" class="headerlink" title="git 移动(重命名)操作"></a>git 移动(重命名)操作</h2><p>(move )操作移动目录或文件从一个位置到另一个。<br><strong>git mv string.c src/  </strong>  </p>
+<p>要进行这些永久性更改，以便其他开发人员可以看到这一点，必须修改的目录结构推到远程存储库。<br>git commit -m “Modified directory structure”  </p>
+<p>git push origin master  </p>
+<h2 id="git-删除操作"><a href="#git-删除操作" class="headerlink" title="git 删除操作"></a>git 删除操作</h2><p><strong>git rm string.c</strong>  </p>
+<p>git commit -m “Removed executable binary”  </p>
+<h2 id="git-修正错误"><a href="#git-修正错误" class="headerlink" title="git 修正错误"></a>git 修正错误</h2><h3 id="恢复未提交的更改"><a href="#恢复未提交的更改" class="headerlink" title="恢复未提交的更改"></a>恢复未提交的更改</h3><p>git checkout modified.file</p>
+<p>即是是工作目录中删除了的文件  </p>
+<h3 id="删除临时区域变化"><a href="#删除临时区域变化" class="headerlink" title="删除临时区域变化"></a>删除临时区域变化</h3><p>在Git是一个HEAD指针始终指向最新提交。<br>如果想撤销变更分阶段区域，那么可以使用git checkout命令，但checkout命令，必须提供额外的参数HEAD指针。<br>额外提交指针参数指示的git checkout命令，重置工作树，还能够去除分阶段。  </p>
+<p>git add modified.file  </p>
+<p>git checkout HEAD – modified.file  </p>
+<h3 id="将HEAD指针与Git复位"><a href="#将HEAD指针与Git复位" class="headerlink" title="将HEAD指针与Git复位"></a>将HEAD指针与Git复位</h3><h4 id="SOFT"><a href="#SOFT" class="headerlink" title="SOFT"></a>SOFT</h4><p>每个分支都有HEAD 指针指向最新提交。如果我们使用git  –soft复位命令选项，随后提交ID，然后将只有头指针复位，不破坏任何东西。  </p>
+<p>.git/refs/heads/master 文件存储的提交ID 的HEAD 指针。可以通过使用git log -1 命令验证它<br>cat .git/refs/heads/master  </p>
+<p>现在查看最新提交的ID，这将配合上述提交ID。<br>git log -2  </p>
+<p>重设HEAD 指针。<br><strong>git reset –soft HEAD</strong>~  </p>
+<h4 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h4><p>Git的复位 – mixed选项从分段区域尚未提交还原更改。它仅恢复变化形成暂存区。实际所做的更改到工作副本的文件不受影响。默认的Git的复位相当于git的复位 – mixed。  </p>
+<h4 id="HARD"><a href="#HARD" class="headerlink" title="HARD"></a>HARD</h4><p>如果使用 - hard选项用 Git复位命令，它会清除暂存区域，它会重设HEAD 指针，以最后一次提交的具体提交ID，也删除本地文件的变化。  </p>
+<p>检查提交的ID：  </p>
+<p>git log -1  </p>
+<p>修改文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ head -2 string_operations.c</div><div class="line">/* This line be removed by git reset operation */</div><div class="line">#include &lt;stdio.h&gt;</div></pre></td></tr></table></figure></p>
+<p>git status -s  </p>
+<p>将修改后的文件添加到分期区域，并验证git的状态运行  </p>
+<p>git add string_operations.c  </p>
+<p>git status  </p>
+<p>git的状态，显示该文件实在临时区域，现在重置HEAD 用 –hard选项  </p>
+<p><strong>git reset –hard SHA-1.ID</strong>  </p>
+<p>git服务命令成功，这将从分段区恢复文件，以及删除本地文件所做的更改  </p>
+<p>git状态显示，从分段区恢复文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ head -2 string_operations.c</div><div class="line">#include &lt;stdio.h&gt;</div></pre></td></tr></table></figure></p>
+<p>Head 命令还显示，复位操作删除局部变化。  </p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242433441&di=48208127820d4a22f78d8dfc07212967&imgtype=0&src=http%3A%2F%2Fqq1234.org%2Fuploads%2Fallimg%2F141226%2F3_141226103042_10.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>作者:
+                    
+                    <a href="/about">mortalLiao</a>
+                </li>
+                <li>发表日期: <span>2018-05-02  04:44:07</span></li>
+                
+                <li>最后编辑日期: <span>2018-05-02  04:44:07</span></li>
+                
+                <li class="post-category">
+                    文章分类:
+                    
+                    <a href="/categories/VCS/">VCS</a>
+                    
+                    <a href="/categories/VCS/Git/">Git</a>
+                    
+                </li>
+                <li class="post-tags">
+                    文章标签:
+                    
+                    <a href="/tags/Git/">Git</a>
+                    
+                </li>
+                
+                <li> 版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+本文版权归作者所有，欢迎转载，但如未经作者同意，应在文章页面给出原文连接。
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2018/05/02/VCS/Git/04_Git创建操作/" class="pre-post fa fa-caret-left">04_Git创建操作</a>
+        
+        
+        <a href="/2018/05/02/VCS/Git/06_Git标签&补丁操作/" class="next-post fa">06_Git标签&amp;补丁操作</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">mortalLiao</a>&copy;2016 - 2018.All Rights
+        Reserved.
+    </div>
+   <!-- <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>-->
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-spin"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git-操作"><span class="toc-number">1.</span> <span class="toc-text">git 操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-克隆操作"><span class="toc-number">1.1.</span> <span class="toc-text">git 克隆操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-提交更改"><span class="toc-number">1.2.</span> <span class="toc-text">git 提交更改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-审查更改"><span class="toc-number">1.3.</span> <span class="toc-text">git 审查更改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-推送操作"><span class="toc-number">1.4.</span> <span class="toc-text">git 推送操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-取最新变化"><span class="toc-number">1.5.</span> <span class="toc-text">git 取最新变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-藏匿操作"><span class="toc-number">1.6.</span> <span class="toc-text">git 藏匿操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-移动-重命名-操作"><span class="toc-number">1.7.</span> <span class="toc-text">git 移动(重命名)操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-删除操作"><span class="toc-number">1.8.</span> <span class="toc-text">git 删除操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-修正错误"><span class="toc-number">1.9.</span> <span class="toc-text">git 修正错误</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#恢复未提交的更改"><span class="toc-number">1.9.1.</span> <span class="toc-text">恢复未提交的更改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除临时区域变化"><span class="toc-number">1.9.2.</span> <span class="toc-text">删除临时区域变化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将HEAD指针与Git复位"><span class="toc-number">1.9.3.</span> <span class="toc-text">将HEAD指针与Git复位</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SOFT"><span class="toc-number">1.9.3.1.</span> <span class="toc-text">SOFT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#混合"><span class="toc-number">1.9.3.2.</span> <span class="toc-text">混合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HARD"><span class="toc-number">1.9.3.3.</span> <span class="toc-text">HARD</span></a></li></ol></li></ol></li></ol></li></ol>
+
+
+
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>
