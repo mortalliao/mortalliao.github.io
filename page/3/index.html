@@ -125,7 +125,7 @@
   <h3 class="fa fa-tags widget-title">标签云</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/Git/" style="font-size: 0.18rem; color: #2d619a">Git</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/Docker/" style="font-size: 0.16rem; color: #4478ae">Docker</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #215690">JavaScript</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #4f83b8">logback</a> <a href="/tags/Java容器/" style="font-size: 0.16rem; color: #4f83b8">Java容器</a> <a href="/tags/Java并发/" style="font-size: 0.16rem; color: #4478ae">Java并发</a> <a href="/tags/Python/" style="font-size: 0.15rem; color: #5b8ec2">Python</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #164b86">Hibernate</a>
+      <a href="/tags/Git/" style="font-size: 0.18rem; color: #2d619a">Git</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #386da4">CSS</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/JavaScript/" style="font-size: 0.18rem; color: #215690">JavaScript</a> <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/Docker/" style="font-size: 0.16rem; color: #4478ae">Docker</a> <a href="/tags/logback/" style="font-size: 0.16rem; color: #4f83b8">logback</a> <a href="/tags/Java并发/" style="font-size: 0.16rem; color: #4478ae">Java并发</a> <a href="/tags/Java容器/" style="font-size: 0.16rem; color: #4f83b8">Java容器</a> <a href="/tags/Python/" style="font-size: 0.15rem; color: #5b8ec2">Python</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #164b86">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
   </div>
 </li>
 
@@ -155,67 +155,24 @@
     
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/04_文件打包与压缩(zip,rar,tar)/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255109379&di=eeaee45b7dc274f830bc8af7c7392a9a&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Da5dda3cf7bf0f736d8ab44053f659f2f%2Fb03533fa828ba61ea66a5d9f4234970a314e59fd.jpg>
+    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/05_文件系统操作与磁盘管理(df,du,dd,mkfs,mount,fdisk,losetup)/">
+        <div class="article-img img-ajax" data-src= http://i.imgur.com/GF4b7xu.png>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
             
-            <a class="article-title-link" href="/2017/07/07/Linux/Base/04_文件打包与压缩(zip,rar,tar)/">
-                <h2 class="article-title">04_Linux 文件打包与压缩</h2>
+            <a class="article-title-link" href="/2017/07/07/Linux/Base/05_文件系统操作与磁盘管理(df,du,dd,mkfs,mount,fdisk,losetup)/">
+                <h2 class="article-title">05_Linux 文件系统操作与磁盘管理</h2>
             </a>
             
             <p class="article-content">
-                文件打包与压缩在 Windows 上最常见的不外乎这三种*.zip，*.rar，*.7z后缀的压缩文件，而在 Linux 上面常见常用的除了以上三种外，还有*.gz，*.xz，*.bz2，*.tar，*.tar.gz，*.tar.xz，*.tar.bz2，简单介绍如下：
+                文件系统操作与磁盘管理使用 df 命令查看磁盘的容量1$ df
+  
+一般使用情况下，更多只是关心第一行的内容也就是环境中的rootfs或者物理主机上的/dev/sda2  
 
+“rootfs” : （Root File System）它是 Ramfs（Ramfs 是一个非常简单的 Linux 文件系统用于实现磁盘缓存机制作为动态可调整大小的基于 ram 的文件系统）或者 tmpfs 的一个特殊实例，它作为系统启动时内核载入内存之后，在挂载真正的磁盘之前的一个临时文件系统。通常的主机会在系统启动后用磁盘上的文件系统替换，只是在一些嵌入式系统中会只存在一个 rootfs ，或者像我们目前遇到的情况运行在虚拟环境中共享主机资源的系统也可能会采用这种方式。
 
-
-文件后缀名
-说明
-
-
-
-
-*.zip
-zip 程序打包压缩的文件
-
-
-*.rar
-rar 程序压缩的文件
-
-
-*.7z
-7zip 程序压缩的文件
-
-
-*.tar
-tar 程序打包，未压缩的文件
-
-
-*.gz
-gzip 程序（GNU zip）压缩的文件
-
-
-*.xz
-xz程序压缩的文件
-
-
-*.bz2
-bzip2 程序压缩的文件
-
-
-*.tar.gz
-tar 打包，gzip 程序压缩的文件
-
-
-*.tar.xz
-tar 打包，xz 程序压缩的文件
-
-
-*tar.bz2
-tar 打包，bzip2 程序压缩的文件
-
-...
+物理主机上的 /dev/sda2 是对应着主机硬盘的分区，后面的数字表示分区号，数字前面的字母 a 表示第几块硬盘（也可能是可移动磁...
             </p>
             <div class="article-meta">
     
@@ -244,12 +201,69 @@ tar 打包，bzip2 程序压缩的文件
     
     <span class="fa-wrap">
             <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="04_Linux 文件打包与压缩"
-              data-leadcloud-url="/2017/07/07/Linux/Base/04_文件打包与压缩(zip,rar,tar)/"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="hits hits-meta " data-leadcloud-title="05_Linux 文件系统操作与磁盘管理"
+              data-leadcloud-url="/2017/07/07/Linux/Base/05_文件系统操作与磁盘管理(df,du,dd,mkfs,mount,fdisk,losetup)/"><i class="fa fa-spinner fa-spin"></i></span>
     </span>
     
     
-    <a href="/2017/07/07/Linux/Base/04_文件打包与压缩(zip,rar,tar)/" class="read-article">阅读全文</a>
+    <a href="/2017/07/07/Linux/Base/05_文件系统操作与磁盘管理(df,du,dd,mkfs,mount,fdisk,losetup)/" class="read-article">阅读全文</a>
+    
+</div>
+
+        </div>
+        
+    </li>
+    
+    
+    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/06_Linux下的帮助命令(help,man,info)/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255155249&di=ecb38db71be7b5de262d509aee8ed9a4&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D4019228056%2C1867106425%26fm%3D214%26gp%3D0.jpg>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/07/07/Linux/Base/06_Linux下的帮助命令(help,man,info)/">
+                <h2 class="article-title">06_Linux 内建命令与外部命令</h2>
+            </a>
+            
+            <p class="article-content">
+                内建命令与外部命令什么是内建命令，什么是外部命令呢？这和帮助命令又有什么关系呢？  
+因为有一些查看帮助的工具在内建命令与外建命令上是有区别对待的。  
+内建命令实际上是 shell 程序的一部分，其中包含的是一些比较简单的 Linux 系统命令，这些命令是写在bash源码的builtins里面的，并由 shell 程序识别并在 shell 程序内部完成运行，通常在 Linux 系统加载运行时 shell 就被加载并驻留在系统内存中。而且解析内部命令 shell 不需要创建子进程，因此其执行速度比外部命令快。比如：history、cd、exit 等等。  
+外部命令是 Linux 系统中的实用程序部分，因为实用程序的功能通常都比较强大，所以其包含的程序量也会很大，在系统加载时并不随系统一起被加载到内存中，而是在需要时才将其调用内存。虽然其不包含在 shell 中，但是其命令执行过程是...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>基础</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Linux基础
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/07/07</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="06_Linux 内建命令与外部命令"
+              data-leadcloud-url="/2017/07/07/Linux/Base/06_Linux下的帮助命令(help,man,info)/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/07/07/Linux/Base/06_Linux下的帮助命令(help,man,info)/" class="read-article">阅读全文</a>
     
 </div>
 
@@ -315,7 +329,7 @@ crontab 的格式12345678# Example of job definition:# .---------------- minute 
     
     
     <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/08_命令执行顺序控制与管道(cut,grep,wc,sort,uniq)/">
-        <div class="article-img img-ajax" data-src= http://i.imgur.com/pQsr7fv.png>
+        <div class="article-img img-ajax" data-src= http://i.imgur.com/CwynQOp.png>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -370,21 +384,47 @@ crontab 的格式12345678# Example of job definition:# .---------------- minute 
     </li>
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/06_Linux下的帮助命令(help,man,info)/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255087186&di=227b10e14b0823fc184bc7b950b2186e&imgtype=0&src=http%3A%2F%2Ffile06.16sucai.com%2F2016%2F0222%2Fa06c24ed5231c1b8ce163d75ca62aa24.jpg>
+    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/10_数据流重定向/">
+        <div class="article-img img-ajax" data-src= http://i.imgur.com/nZsrUeT.png>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
             
-            <a class="article-title-link" href="/2017/07/07/Linux/Base/06_Linux下的帮助命令(help,man,info)/">
-                <h2 class="article-title">06_Linux 内建命令与外部命令</h2>
+            <a class="article-title-link" href="/2017/07/07/Linux/Base/10_数据流重定向/">
+                <h2 class="article-title">10_Linux 数据流重定向</h2>
             </a>
             
             <p class="article-content">
-                内建命令与外部命令什么是内建命令，什么是外部命令呢？这和帮助命令又有什么关系呢？  
-因为有一些查看帮助的工具在内建命令与外建命令上是有区别对待的。  
-内建命令实际上是 shell 程序的一部分，其中包含的是一些比较简单的 Linux 系统命令，这些命令是写在bash源码的builtins里面的，并由 shell 程序识别并在 shell 程序内部完成运行，通常在 Linux 系统加载运行时 shell 就被加载并驻留在系统内存中。而且解析内部命令 shell 不需要创建子进程，因此其执行速度比外部命令快。比如：history、cd、exit 等等。  
-外部命令是 Linux 系统中的实用程序部分，因为实用程序的功能通常都比较强大，所以其包含的程序量也会很大，在系统加载时并不随系统一起被加载到内存中，而是在需要时才将其调用内存。虽然其不包含在 shell 中，但是其命令执行过程是...
+                数据流重定向Linux 默认提供了三个特殊设备，用于终端的显示和输出，分别为stdin（标准输入,对应于你在终端的输入），stdout（标准输出，对应于终端的输出），stderr（标准错误输出，对应于终端的输出）。  
+Linux 默认提供了三个特殊设备，用于终端的显示和输出，分别为stdin（标准输入,对应于你在终端的输入），stdout（标准输出，对应于终端的输出），stderr（标准错误输出，对应于终端的输出）。  
+
+
+
+文件描述符
+设备文件
+说明
+
+
+
+
+0
+/dev/stdin
+标准输入
+
+
+1
+/dev/stdout
+标准输出
+
+
+2
+/dev/stderr
+标准错误
+
+
+
+
+文件描述符：文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。...
             </p>
             <div class="article-meta">
     
@@ -413,77 +453,12 @@ crontab 的格式12345678# Example of job definition:# .---------------- minute 
     
     <span class="fa-wrap">
             <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="06_Linux 内建命令与外部命令"
-              data-leadcloud-url="/2017/07/07/Linux/Base/06_Linux下的帮助命令(help,man,info)/"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="hits hits-meta " data-leadcloud-title="10_Linux 数据流重定向"
+              data-leadcloud-url="/2017/07/07/Linux/Base/10_数据流重定向/"><i class="fa fa-spinner fa-spin"></i></span>
     </span>
     
     
-    <a href="/2017/07/07/Linux/Base/06_Linux下的帮助命令(help,man,info)/" class="read-article">阅读全文</a>
-    
-</div>
-
-        </div>
-        
-    </li>
-    
-    
-    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/12_Linux 下软件安装(apt-get,dpkg)/">
-        <div class="article-img img-ajax" data-src= http://i.imgur.com/0vwHZuF.png>
-           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
-        </div>
-        <div class="article-excerpt">
-            
-            <a class="article-title-link" href="/2017/07/07/Linux/Base/12_Linux 下软件安装(apt-get,dpkg)/">
-                <h2 class="article-title">12_Linux 软件安装</h2>
-            </a>
-            
-            <p class="article-content">
-                Linux 下软件安装通常 Linux 上的软件安装主要有四种方式：
-
-在线安装
-从磁盘安装deb软件包
-从二进制软件包安装
-从源代码编译安装
-
-在不同的linux发行版上面在线安装方式会有一些差异包括使用的命令及它们的包管理工具  
-apt 包管理工具介绍
-APT是Advance Packaging Tool（高级包装工具）的缩写，是Debian及其派生发行版的软件包管理器，APT可以自动下载，配置，安装二进制或者源代码格式的软件包，因此简化了Unix系统上管理软件的过程。APT最早被设计成dpkg的前端，用来处理deb格式的软件包。现在经过APT-RPM组织修改，APT已经可以安装在支持RPM的系统管理RPM包。这个包管理器包含以 apt- 开头的的多个工具，如 apt-get apt-cache apt-cdrom 等，在Debian系列的发行版中使用。
-
-当你在执行安装操作时...
-            </p>
-            <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>基础</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Linux基础
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2017/07/07</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-            <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="12_Linux 软件安装"
-              data-leadcloud-url="/2017/07/07/Linux/Base/12_Linux 下软件安装(apt-get,dpkg)/"><i class="fa fa-spinner fa-spin"></i></span>
-    </span>
-    
-    
-    <a href="/2017/07/07/Linux/Base/12_Linux 下软件安装(apt-get,dpkg)/" class="read-article">阅读全文</a>
+    <a href="/2017/07/07/Linux/Base/10_数据流重定向/" class="read-article">阅读全文</a>
     
 </div>
 
@@ -568,7 +543,7 @@ APT是Advance Packaging Tool（高级包装工具）的缩写，是Debian及其�
     
     
     <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/11_正则表达式(grep,sed,awk)/">
-        <div class="article-img img-ajax" data-src= http://i.imgur.com/UImKOok.png>
+        <div class="article-img img-ajax" data-src= http://i.imgur.com/n9CXqfL.png>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -625,22 +600,20 @@ APT是Advance Packaging Tool（高级包装工具）的缩写，是Debian及其�
     </li>
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/03_环境变量与文件查找(PATH,whereis,locate,which,find)/">
-        <div class="article-img img-ajax" data-src= http://i.imgur.com/f8Dll3O.png>
+    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/01_用户及文件权限管理(sudo,su -,su,groups,ls,chown,chmod, adduser,useradd,deluser,userdel)/">
+        <div class="article-img img-ajax" data-src= http://i.imgur.com/6tKnGVZ.png>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
             
-            <a class="article-title-link" href="/2017/07/07/Linux/Base/03_环境变量与文件查找(PATH,whereis,locate,which,find)/">
-                <h2 class="article-title">03_Linux 环境变量</h2>
+            <a class="article-title-link" href="/2017/07/07/Linux/Base/01_用户及文件权限管理(sudo,su -,su,groups,ls,chown,chmod, adduser,useradd,deluser,userdel)/">
+                <h2 class="article-title">01_用户及文件权限管理</h2>
             </a>
             
             <p class="article-content">
-                环境变量变量要解释环境变量，得先明白变量是什么，准确的说应该是 Shell 变量，所谓变量就是计算机中用于记录一个值（不一定是数值，也可以是字符或字符串）的符号，而这些符号将用于不同的运算处理中。通常变量与值是一对一的关系，可以通过表达式读取它的值并赋值给其它变量，也可以直接指定数值赋值给任意变量。为了便于运算和处理，大部分的编程语言会区分变量的类型，用于分别记录数值、字符或者字符串等等数据类型。Shell 中的变量也基本如此，有不同类型（但不用专门指定类型名），可以参与运算，有作用域限定。
-
-变量的作用域即变量的有效范围（比如一个函数中、一个源文件中或者全局范围），在该范围内只能有一个同名变量。一旦离开则该变量无效，如同不存在这个变量一般。  
-
-使用 declare 命令创建一个变量名为 tmp 的变量：123declare tmp# 使用 = 号赋值运算符，将变量 tmp 赋值...
+                用户及文件权限管理Linux用户管理查看用户12who am i  liaoyujian pts/0 2017-11-19 17:10(:1.0)
+输出的第一列表示打开当前伪终端的用户的用户名（要查看当前登录用户的用户名，去掉空格直接使用 whoami 即可），第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言的，还记得上一节讲终端时的那七个使用 [Ctrl]+[Alt]+[F1]～[F7] 进行切换的 /dev/tty 设备么,这是“真终端”，伪终端就是当你在图形用户界面使用 /dev/tty7 时每打开一个终端就会产生一个伪终端， pts/0 后面那个数字就表示打开的伪终端序号，你可以尝试再打开一个终端，然后在里面输入 who am i ，看第二列是不是就变成 pts/1 了，第三列则表示当前伪终端的启动时间。  
+who 命令其它常用参数 ...
             </p>
             <div class="article-meta">
     
@@ -669,67 +642,12 @@ APT是Advance Packaging Tool（高级包装工具）的缩写，是Debian及其�
     
     <span class="fa-wrap">
             <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="03_Linux 环境变量"
-              data-leadcloud-url="/2017/07/07/Linux/Base/03_环境变量与文件查找(PATH,whereis,locate,which,find)/"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="hits hits-meta " data-leadcloud-title="01_用户及文件权限管理"
+              data-leadcloud-url="/2017/07/07/Linux/Base/01_用户及文件权限管理(sudo,su -,su,groups,ls,chown,chmod, adduser,useradd,deluser,userdel)/"><i class="fa fa-spinner fa-spin"></i></span>
     </span>
     
     
-    <a href="/2017/07/07/Linux/Base/03_环境变量与文件查找(PATH,whereis,locate,which,find)/" class="read-article">阅读全文</a>
-    
-</div>
-
-        </div>
-        
-    </li>
-    
-    
-    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/02_Linux 目录结构及文件基本操作(tree,cd,pwd,touch,mkdir,cp,rm,mv,rename,cat,tac,nl,more,less,head,tail)/">
-        <div class="article-img img-ajax" data-src= http://i.imgur.com/Tg0PZPn.png>
-           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
-        </div>
-        <div class="article-excerpt">
-            
-            <a class="article-title-link" href="/2017/07/07/Linux/Base/02_Linux 目录结构及文件基本操作(tree,cd,pwd,touch,mkdir,cp,rm,mv,rename,cat,tac,nl,more,less,head,tail)/">
-                <h2 class="article-title">02_Linux 目录结构</h2>
-            </a>
-            
-            <p class="article-content">
-                Linux 目录结构在讲 Linux 目录结构之前，你首先要清楚一点，那就是 Linux 的目录与 Windows 的目录的区别，或许对于一般操作上的感受来说没有多大不同，但从它们的实现机制来说是完全不同的。  
-一种不同是体现在目录与存储介质（磁盘，内存，DVD 等）的关系上，以往的 Windows 一直是以存储介质为主的，主要以盘符（C 盘，D 盘…）及分区来实现文件管理，然后之下才是目录，目录就显得不是那么重要，除系统文件之外的用户文件放在任何地方任何目录也是没有多大关系。所以通常 Windows 在使用一段时间后，磁盘上面的文件目录会显得杂乱无章（少数善于整理的用户除外吧）。然而 UNIX/Linux 恰好相反，UNIX 是以目录为主的，Linux 也继承了这一优良特性。 Linux 是以树形目录结构的形式来构建整个系统的，可以理解为树形目录是一个用户可操作系统的骨架。虽然本...
-            </p>
-            <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>基础</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Linux基础
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2017/07/07</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-            <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="02_Linux 目录结构"
-              data-leadcloud-url="/2017/07/07/Linux/Base/02_Linux 目录结构及文件基本操作(tree,cd,pwd,touch,mkdir,cp,rm,mv,rename,cat,tac,nl,more,less,head,tail)/"><i class="fa fa-spinner fa-spin"></i></span>
-    </span>
-    
-    
-    <a href="/2017/07/07/Linux/Base/02_Linux 目录结构及文件基本操作(tree,cd,pwd,touch,mkdir,cp,rm,mv,rename,cat,tac,nl,more,less,head,tail)/" class="read-article">阅读全文</a>
+    <a href="/2017/07/07/Linux/Base/01_用户及文件权限管理(sudo,su -,su,groups,ls,chown,chmod, adduser,useradd,deluser,userdel)/" class="read-article">阅读全文</a>
     
 </div>
 
@@ -739,7 +657,7 @@ APT是Advance Packaging Tool（高级包装工具）的缩写，是Debian及其�
     
     
     <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/13_Linux 进程(pstree,&,jobs,fg,bg,kill)/">
-        <div class="article-img img-ajax" data-src= http://i.imgur.com/wWiI1wb.png>
+        <div class="article-img img-ajax" data-src= http://i.imgur.com/ooBuH04.png>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -796,8 +714,92 @@ APT是Advance Packaging Tool（高级包装工具）的缩写，是Debian及其�
     </li>
     
     
+    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/14_Linux 进程管理(top,ps,pstree)/">
+        <div class="article-img img-ajax" data-src= http://i.imgur.com/zUBIXpi.png>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/07/07/Linux/Base/14_Linux 进程管理(top,ps,pstree)/">
+                <h2 class="article-title">14_Linux 进程的查看</h2>
+            </a>
+            
+            <p class="article-content">
+                进程的查看可以通过 top 实时得查看进程的状态，以及系统的一些信息（如 CPU、内存信息等），我们还可以通过 ps 来静态查看当前的进程信息，同时我们还可以使用 pstree 来查看当前活跃进程的树形结构。
+top 工具的使用top 工具是我们常用的一个查看工具，能实时的查看我们系统的一些关键信息的变化:1top
+  
+top 是一个在前台执行的程序，所以执行后便进入到这样的一个交互界面，正是因为交互界面我们才可以实时的获取到系统与进程的信息。在交互界面中我们可以通过一些指令来操作和筛选。在此之前我们先来了解显示了哪些信息。  
+我们看到 top 显示的第一排，
+
+
+
+内容
+解释
+
+
+
+
+top
+表示当前程序的名称
+
+
+11:05:18
+表示当前的系统的时间
+
+
+up 8 days,17:12
+表示该机器已经启动了多长时间
+
+
+1 user
+表示当前系统中只有一个用户
+
+
+load...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>基础</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Linux基础
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/07/07</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="14_Linux 进程的查看"
+              data-leadcloud-url="/2017/07/07/Linux/Base/14_Linux 进程管理(top,ps,pstree)/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/07/07/Linux/Base/14_Linux 进程管理(top,ps,pstree)/" class="read-article">阅读全文</a>
+    
+</div>
+
+        </div>
+        
+    </li>
+    
+    
     <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/15_Linux 日志系统/">
-        <div class="article-img img-ajax" data-src= http://i.imgur.com/8nYxtpg.png>
+        <div class="article-img img-ajax" data-src= http://i.imgur.com/whmmuPD.png>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -885,47 +887,19 @@ auth.log
     </li>
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/10_数据流重定向/">
-        <div class="article-img img-ajax" data-src= http://i.imgur.com/qvu4wha.png>
+    <li  class="article-excerpt-wrap " _href = "/2017/07/07/Linux/Base/02_Linux 目录结构及文件基本操作(tree,cd,pwd,touch,mkdir,cp,rm,mv,rename,cat,tac,nl,more,less,head,tail)/">
+        <div class="article-img img-ajax" data-src= http://i.imgur.com/DcLyTb0.png>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
             
-            <a class="article-title-link" href="/2017/07/07/Linux/Base/10_数据流重定向/">
-                <h2 class="article-title">10_Linux 数据流重定向</h2>
+            <a class="article-title-link" href="/2017/07/07/Linux/Base/02_Linux 目录结构及文件基本操作(tree,cd,pwd,touch,mkdir,cp,rm,mv,rename,cat,tac,nl,more,less,head,tail)/">
+                <h2 class="article-title">02_Linux 目录结构</h2>
             </a>
             
             <p class="article-content">
-                数据流重定向Linux 默认提供了三个特殊设备，用于终端的显示和输出，分别为stdin（标准输入,对应于你在终端的输入），stdout（标准输出，对应于终端的输出），stderr（标准错误输出，对应于终端的输出）。  
-Linux 默认提供了三个特殊设备，用于终端的显示和输出，分别为stdin（标准输入,对应于你在终端的输入），stdout（标准输出，对应于终端的输出），stderr（标准错误输出，对应于终端的输出）。  
-
-
-
-文件描述符
-设备文件
-说明
-
-
-
-
-0
-/dev/stdin
-标准输入
-
-
-1
-/dev/stdout
-标准输出
-
-
-2
-/dev/stderr
-标准错误
-
-
-
-
-文件描述符：文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。...
+                Linux 目录结构在讲 Linux 目录结构之前，你首先要清楚一点，那就是 Linux 的目录与 Windows 的目录的区别，或许对于一般操作上的感受来说没有多大不同，但从它们的实现机制来说是完全不同的。  
+一种不同是体现在目录与存储介质（磁盘，内存，DVD 等）的关系上，以往的 Windows 一直是以存储介质为主的，主要以盘符（C 盘，D 盘…）及分区来实现文件管理，然后之下才是目录，目录就显得不是那么重要，除系统文件之外的用户文件放在任何地方任何目录也是没有多大关系。所以通常 Windows 在使用一段时间后，磁盘上面的文件目录会显得杂乱无章（少数善于整理的用户除外吧）。然而 UNIX/Linux 恰好相反，UNIX 是以目录为主的，Linux 也继承了这一优良特性。 Linux 是以树形目录结构的形式来构建整个系统的，可以理解为树形目录是一个用户可操作系统的骨架。虽然本...
             </p>
             <div class="article-meta">
     
@@ -954,12 +928,12 @@ Linux 默认提供了三个特殊设备，用于终端的显示和输出，分�
     
     <span class="fa-wrap">
             <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="10_Linux 数据流重定向"
-              data-leadcloud-url="/2017/07/07/Linux/Base/10_数据流重定向/"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="hits hits-meta " data-leadcloud-title="02_Linux 目录结构"
+              data-leadcloud-url="/2017/07/07/Linux/Base/02_Linux 目录结构及文件基本操作(tree,cd,pwd,touch,mkdir,cp,rm,mv,rename,cat,tac,nl,more,less,head,tail)/"><i class="fa fa-spinner fa-spin"></i></span>
     </span>
     
     
-    <a href="/2017/07/07/Linux/Base/10_数据流重定向/" class="read-article">阅读全文</a>
+    <a href="/2017/07/07/Linux/Base/02_Linux 目录结构及文件基本操作(tree,cd,pwd,touch,mkdir,cp,rm,mv,rename,cat,tac,nl,more,less,head,tail)/" class="read-article">阅读全文</a>
     
 </div>
 

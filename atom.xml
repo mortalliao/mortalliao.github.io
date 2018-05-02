@@ -16,6 +16,60 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>01_Git了解</title>
+    <link href="http://yoursite.com/2018/05/02/VCS/Git/01_Git%E4%BA%86%E8%A7%A3/"/>
+    <id>http://yoursite.com/2018/05/02/VCS/Git/01_Git了解/</id>
+    <published>2018-05-02T08:44:07.000Z</published>
+    <updated>2018-05-02T08:44:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Git三种状态"><a href="#Git三种状态" class="headerlink" title="Git三种状态"></a>Git三种状态</h1><p> Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modified)和已暂存(staged)。  </p>
+<p><img src="http://i.imgur.com/i9rgs8D.png" alt="">  </p>
+<p>已提交表示数据已经安全的保存在本地数据库中。 已修改表示修改了文件，但还没保存到数据库中。 已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。  </p>
+<h1 id="工作目录、暂存区域以及-Git-仓库"><a href="#工作目录、暂存区域以及-Git-仓库" class="headerlink" title="工作目录、暂存区域以及 Git 仓库."></a>工作目录、暂存区域以及 Git 仓库.</h1><p>Git 仓库目录是 Git 用来保存项目的元数据和对象数据库的地方。 这是 Git 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。  </p>
+<p>工作目录是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。  </p>
+<p>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。 有时候也被称作`‘索引’’，不过一般说法还是叫暂存区域  </p>
+<p>基本的 Git 工作流程如下：  </p>
+<ol>
+<li>在工作目录中修改文件。</li>
+<li>暂存文件，将文件的快照放入暂存区域。</li>
+<li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。</li>
+</ol>
+<p>如果 Git 目录中保存着的特定版本文件，就属于已提交状态。<br>如果作了修改并已放入暂存区域，就属于已暂存状态。<br>如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。  </p>
+<h1 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h1><p>Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
+<ul>
+<li><p>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 –system 选项的 git config 时，它会从此文件读写配置变量。</p>
+</li>
+<li><p>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 可以传递 –global选项让 Git 读写此文件。</p>
+</li>
+<li><p>当前使用仓库的 Git 目录中的 config 文件(就是 .git/config)：针对该仓库。</p>
+</li>
+</ul>
+<p>每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。  </p>
+<h2 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h2><p>当安装完 Git 应该做的第一件事就是设置你的用户名称与邮件地址。 这样做很重要，因为每一个 Git 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Daniu Su&quot;</div><div class="line">$ git config --global user.email daniu.su@example.com</div></pre></td></tr></table></figure>
+<p>如果使用了 –global 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情， Git 都会使用那些信息。 当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 –global 选项的命令来配置。  </p>
+<h2 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global core.editor emacs</div></pre></td></tr></table></figure>
+<h2 id="检查配置信息"><a href="#检查配置信息" class="headerlink" title="检查配置信息"></a>检查配置信息</h2><p>如果想要检查你的配置，可以使用 git config –list 命令来列出所有 Git 当时能找到的配置。  </p>
+<p>你可能会看到重复的变量名，因为 Git 会从不同的文件中读取同一个配置(例如：/etc/gitconfig 与 ~/.gitconfig)。 这种情况下，Git 会使用它找到的每一个变量的最后一个配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git config --list</div><div class="line">user.name=Daniu Su</div><div class="line">user.email=daniu.su@example.com</div><div class="line">color.status=auto</div><div class="line">color.branch=auto</div><div class="line">color.interactive=auto</div><div class="line">color.diff=auto</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>可以通过输入 git config <key>： 来检查 Git 的某一项配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config user.name</div><div class="line">Daniu Su</div></pre></td></tr></table></figure></key></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Git三种状态&quot;&gt;&lt;a href=&quot;#Git三种状态&quot; class=&quot;headerlink&quot; title=&quot;Git三种状态&quot;&gt;&lt;/a&gt;Git三种状态&lt;/h1&gt;&lt;p&gt; Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modifie
+    
+    </summary>
+    
+      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>02_获取Git仓库</title>
     <link href="http://yoursite.com/2018/05/02/VCS/Git/02_%E8%8E%B7%E5%8F%96Git%E4%BB%93%E5%BA%93/"/>
     <id>http://yoursite.com/2018/05/02/VCS/Git/02_获取Git仓库/</id>
@@ -324,60 +378,6 @@
   </entry>
   
   <entry>
-    <title>01_Git了解</title>
-    <link href="http://yoursite.com/2018/05/02/VCS/Git/01_Git%E4%BA%86%E8%A7%A3/"/>
-    <id>http://yoursite.com/2018/05/02/VCS/Git/01_Git了解/</id>
-    <published>2018-05-02T08:44:07.000Z</published>
-    <updated>2018-05-02T08:44:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Git三种状态"><a href="#Git三种状态" class="headerlink" title="Git三种状态"></a>Git三种状态</h1><p> Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modified)和已暂存(staged)。  </p>
-<p><img src="http://i.imgur.com/i9rgs8D.png" alt="">  </p>
-<p>已提交表示数据已经安全的保存在本地数据库中。 已修改表示修改了文件，但还没保存到数据库中。 已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。  </p>
-<h1 id="工作目录、暂存区域以及-Git-仓库"><a href="#工作目录、暂存区域以及-Git-仓库" class="headerlink" title="工作目录、暂存区域以及 Git 仓库."></a>工作目录、暂存区域以及 Git 仓库.</h1><p>Git 仓库目录是 Git 用来保存项目的元数据和对象数据库的地方。 这是 Git 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。  </p>
-<p>工作目录是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。  </p>
-<p>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。 有时候也被称作`‘索引’’，不过一般说法还是叫暂存区域  </p>
-<p>基本的 Git 工作流程如下：  </p>
-<ol>
-<li>在工作目录中修改文件。</li>
-<li>暂存文件，将文件的快照放入暂存区域。</li>
-<li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。</li>
-</ol>
-<p>如果 Git 目录中保存着的特定版本文件，就属于已提交状态。<br>如果作了修改并已放入暂存区域，就属于已暂存状态。<br>如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。  </p>
-<h1 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h1><p>Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
-<ul>
-<li><p>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 –system 选项的 git config 时，它会从此文件读写配置变量。</p>
-</li>
-<li><p>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 可以传递 –global选项让 Git 读写此文件。</p>
-</li>
-<li><p>当前使用仓库的 Git 目录中的 config 文件(就是 .git/config)：针对该仓库。</p>
-</li>
-</ul>
-<p>每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。  </p>
-<h2 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h2><p>当安装完 Git 应该做的第一件事就是设置你的用户名称与邮件地址。 这样做很重要，因为每一个 Git 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Daniu Su&quot;</div><div class="line">$ git config --global user.email daniu.su@example.com</div></pre></td></tr></table></figure>
-<p>如果使用了 –global 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情， Git 都会使用那些信息。 当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 –global 选项的命令来配置。  </p>
-<h2 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global core.editor emacs</div></pre></td></tr></table></figure>
-<h2 id="检查配置信息"><a href="#检查配置信息" class="headerlink" title="检查配置信息"></a>检查配置信息</h2><p>如果想要检查你的配置，可以使用 git config –list 命令来列出所有 Git 当时能找到的配置。  </p>
-<p>你可能会看到重复的变量名，因为 Git 会从不同的文件中读取同一个配置(例如：/etc/gitconfig 与 ~/.gitconfig)。 这种情况下，Git 会使用它找到的每一个变量的最后一个配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git config --list</div><div class="line">user.name=Daniu Su</div><div class="line">user.email=daniu.su@example.com</div><div class="line">color.status=auto</div><div class="line">color.branch=auto</div><div class="line">color.interactive=auto</div><div class="line">color.diff=auto</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>可以通过输入 git config <key>： 来检查 Git 的某一项配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config user.name</div><div class="line">Daniu Su</div></pre></td></tr></table></figure></key></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Git三种状态&quot;&gt;&lt;a href=&quot;#Git三种状态&quot; class=&quot;headerlink&quot; title=&quot;Git三种状态&quot;&gt;&lt;/a&gt;Git三种状态&lt;/h1&gt;&lt;p&gt; Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modifie
-    
-    </summary>
-    
-      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
-    
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
     <title>02_Java容器篇_String</title>
     <link href="http://yoursite.com/2018/04/14/Backend/Java/container/02_Java%E5%AE%B9%E5%99%A8%E7%AF%87_String/"/>
     <id>http://yoursite.com/2018/04/14/Backend/Java/container/02_Java容器篇_String/</id>
@@ -443,6 +443,122 @@
     
     
       <category term="Java容器" scheme="http://yoursite.com/tags/Java%E5%AE%B9%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>04_Docker_容器连接</title>
+    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_%E5%AE%B9%E5%99%A8%E8%BF%9E%E6%8E%A5/"/>
+    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_容器连接/</id>
+    <published>2017-11-27T06:15:50.000Z</published>
+    <updated>2017-11-27T06:15:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="网络端口映射"><a href="#网络端口映射" class="headerlink" title="网络端口映射"></a>网络端口映射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P training/webapp python app.py</div><div class="line">fce072cc88cee71b1cdceb57c2821d054a4a59f67da6b416fceb5593f059fc6d</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 5000:5000 training/webapp python app.py</div><div class="line">33e4523d30aaf0258915c368e66e03b49535de0ef20317d3f639d40222ba6bc0</div></pre></td></tr></table></figure>
+<ul>
+<li>-P :是容器内部端口随机映射到主机的高端口。</li>
+<li>-p : 是容器内部端口绑定到指定的主机端口。</li>
+</ul>
+<p>使用 docker ps 来看到端口5000绑定主机端口32768。</p>
+<p>可以指定容器绑定的网络地址，比如绑定127.0.0.1。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5001:5002 training/webapp python app.py</div><div class="line">95c6ceef88ca3e71eaf303c2833fd6701d8d1b2572b5613b5a932dfdfe8a857c</div></pre></td></tr></table></figure></p>
+<p>默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 /udp。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py</div><div class="line">6779686f06f6204579c1d655dd8b2b31e8e809b245a97b2d3a8e35abe9dcd22a</div></pre></td></tr></table></figure></p>
+<p><strong>docker port</strong> 命令可以让我们快捷地查看端口的绑定情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker port adoring_stonebraker 5002</div></pre></td></tr></table></figure></p>
+<h2 id="Docker容器连接"><a href="#Docker容器连接" class="headerlink" title="Docker容器连接"></a>Docker容器连接</h2><p>端口映射并不是唯一把 docker 连接到另一个容器的方法。<br>docker有一个连接系统允许将多个容器连接在一起，共享连接信息。<br>docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。  </p>
+<h3 id="容器命名"><a href="#容器命名" class="headerlink" title="容器命名"></a>容器命名</h3><p>当我们创建一个容器的时候，docker会自动对它进行命名。另外，我们也可以使用–name标识来命名容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P --name runoob training/webapp python app.py</div><div class="line">43780a6eabaaf14e590b6e849235c75f3012995403f97749775e38436db9a441</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;网络端口映射&quot;&gt;&lt;a href=&quot;#网络端口映射&quot; class=&quot;headerlink&quot; title=&quot;网络端口映射&quot;&gt;&lt;/a&gt;网络端口映射&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
+    
+    </summary>
+    
+      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
+    
+      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
+    
+    
+      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>03_Docker_镜像使用</title>
+    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/03_Docker_%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/03_Docker_镜像使用/</id>
+    <published>2017-11-27T06:15:50.000Z</published>
+    <updated>2017-11-27T06:15:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker-镜像使用"><a href="#Docker-镜像使用" class="headerlink" title="Docker 镜像使用"></a>Docker 镜像使用</h1><p>当运行容器时，使用的镜像如果在本地中不存在，docker 就会自动从 docker 镜像仓库中下载，默认是从 Docker Hub 公共镜像源下载。  </p>
+<h2 id="列出镜像列表"><a href="#列出镜像列表" class="headerlink" title="列出镜像列表"></a>列出镜像列表</h2><p>使用 <strong>docker images</strong> 来列出本地主机上的镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images           </div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div></pre></td></tr></table></figure></p>
+<p>各个选项说明:  </p>
+<ul>
+<li>REPOSTITORY：表示镜像的仓库源</li>
+<li>TAG：镜像的标签</li>
+<li>IMAGE ID：镜像ID</li>
+<li>CREATED：镜像创建时间</li>
+<li>SIZE：镜像大小</li>
+</ul>
+<p>同一仓库源可以有多个 TAG，代表这个仓库源的不同个版本，如ubuntu仓库源里，有15.10、14.04等多个不同的版本，我们使用 REPOSTITORY:TAG 来定义不同的镜像。  </p>
+<p>如果不指定一个镜像的版本标签，例如你只使用 ubuntu，docker 将默认使用 ubuntu:latest 镜像。</p>
+<h2 id="获取一个新的镜像"><a href="#获取一个新的镜像" class="headerlink" title="获取一个新的镜像"></a>获取一个新的镜像</h2><p>当在本地主机上使用一个不存在的镜像时 Docker 就会自动下载这个镜像。如果想预先下载这个镜像，可以使用 <strong>docker pull</strong> 命令来下载它。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Crunoob@runoob:~$ docker pull ubuntu:13.10</div></pre></td></tr></table></figure></p>
+<p>下载完成后，可以直接使用这个镜像来运行容器。</p>
+<h2 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h2><p>可以从 Docker Hub 网站来搜索镜像，Docker Hub 网址为： <a href="https://hub.docker.com/" target="_blank" rel="external">https://hub.docker.com/</a><br>也可以使用 <strong>docker search</strong> 命令来搜索镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$  docker search nginx</div></pre></td></tr></table></figure></p>
+<ul>
+<li>NAME:镜像仓库源的名称</li>
+<li>DESCRIPTION:镜像的描述</li>
+<li>OFFICIAL:是否docker官方发布</li>
+</ul>
+<h2 id="拖取镜像"><a href="#拖取镜像" class="headerlink" title="拖取镜像"></a>拖取镜像</h2><p>使用命令 docker pull 来下载镜像。</p>
+<h1 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h1><p>当从docker镜像仓库中下载的镜像不能满足需求时，可以通过以下两种方式对镜像进行更改。  </p>
+<ol>
+<li>从已经创建的容器中更新镜像，并且提交这个镜像  </li>
+<li>使用 Dockerfile 指令来创建一个新的镜像  </li>
+</ol>
+<h2 id="更新镜像"><a href="#更新镜像" class="headerlink" title="更新镜像"></a>更新镜像</h2><p>更新镜像之前，我们需要使用镜像来创建一个容器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -i -t ubuntu:15.10 /bin/bash</div><div class="line">root@e218edb10161:/#</div></pre></td></tr></table></figure></p>
+<p>在运行的容器内使用 apt-get update 命令进行更新。<br>在完成操作之后，输入 exit命令来退出这个容器。  </p>
+<p>此时ID为e218edb10161的容器，是按我们的需求更改的容器。我们可以通过命令 docker commit来提交容器副本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker commit -m=&quot;has update&quot; -a=&quot;runoob&quot; e218edb10161 runoob/ubuntu:v2</div><div class="line">sha256:70bf1840fd7c0d2d8ef0a42a817eb29f854c1af8f7c59fc03ac7bdee9545aff8</div></pre></td></tr></table></figure></p>
+<p>各个参数说明：  </p>
+<ul>
+<li>m:提交的描述信息</li>
+<li>a:指定镜像作者</li>
+<li>e218edb10161：容器ID</li>
+<li>runoob/ubuntu:v2:指定要创建的目标镜像名</li>
+</ul>
+<p>使用 docker images 命令来查看我们的新镜像 runoob/ubuntu:v2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images</div></pre></td></tr></table></figure></p>
+<p>使用新镜像 runoob/ubuntu 来启动一个容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -i -t runoob/ubuntu:v2 /bin/bash</div></pre></td></tr></table></figure></p>
+<h2 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h2><p>使用命令 <strong>docker build</strong> ， 从零开始来创建一个新的镜像。为此，需要创建一个 Dockerfile 文件，其中包含一组指令来告诉 Docker 如何构建新的镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ cat Dockerfile </div><div class="line">FROM    centos:6.7</div><div class="line">MAINTAINER      Fisher &quot;fisher@sudops.com&quot;</div><div class="line"></div><div class="line">RUN     /bin/echo &apos;root:123456&apos; |chpasswd</div><div class="line">RUN     useradd runoob</div><div class="line">RUN     /bin/echo &apos;runoob:123456&apos; |chpasswd</div><div class="line">RUN     /bin/echo -e &quot;LANG=\&quot;en_US.UTF-8\&quot;&quot; &gt;/etc/default/local</div><div class="line">EXPOSE  22</div><div class="line">EXPOSE  80</div><div class="line">CMD     /usr/sbin/sshd -D</div></pre></td></tr></table></figure></p>
+<p>每一个指令都会在镜像上创建一个新的层，每一个指令的前缀都必须是大写的。<br>第一条FROM，指定使用哪个镜像源<br>RUN 指令告诉docker 在镜像内执行命令，安装了什么。<br>然后，我们使用 Dockerfile 文件，通过 docker build 命令来构建一个镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker build -t runoob/centos:6.7 .</div><div class="line">Sending build context to Docker daemon 17.92 kB</div><div class="line">Step 1 : FROM centos:6.7</div><div class="line"> ---&amp;gt; d95b5ca17cc3</div><div class="line">Step 2 : MAINTAINER Fisher &quot;fisher@sudops.com&quot;</div><div class="line"> ---&amp;gt; Using cache</div><div class="line"> ---&amp;gt; 0c92299c6f03</div><div class="line">Step 3 : RUN /bin/echo &apos;root:123456&apos; |chpasswd</div><div class="line"> ---&amp;gt; Using cache</div><div class="line"> ---&amp;gt; 0397ce2fbd0a</div><div class="line">Step 4 : RUN useradd runoob</div><div class="line">......</div></pre></td></tr></table></figure></p>
+<p>参数说明：  </p>
+<ul>
+<li>t ：指定要创建的目标镜像名  </li>
+<li>. ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径  </li>
+</ul>
+<p>使用docker images 查看创建的镜像已经在列表中存在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images</div></pre></td></tr></table></figure></p>
+<p>可以使用新的镜像来创建容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -t -i runoob/centos:6.7  /bin/bash</div><div class="line">[root@41c28d18b5fb /]# id runoob</div><div class="line">uid=500(runoob) gid=500(runoob) groups=500(runoob)</div></pre></td></tr></table></figure></p>
+<h2 id="设置镜像标签"><a href="#设置镜像标签" class="headerlink" title="设置镜像标签"></a>设置镜像标签</h2><p>可以使用 <strong>docker tag</strong> 命令，为镜像添加一个新的标签。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker tag 860c279d2fec runoob/centos:dev</div></pre></td></tr></table></figure></p>
+<p>docker tag 镜像ID，这里是 860c279d2fec ,用户名称、镜像源名(repository name)和新的标签名(tag)。  </p>
+<p>使用 docker images 命令可以看到，ID为860c279d2fec的镜像多一个标签。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">runoob/centos       6.7                 860c279d2fec        5 hours ago         190.6 MB</div><div class="line">runoob/centos       dev                 860c279d2fec        5 hours ago         190.6 MB</div></pre></td></tr></table></figure></p>
+<h2 id="Docker-容器镜像删除"><a href="#Docker-容器镜像删除" class="headerlink" title="Docker 容器镜像删除"></a>Docker 容器镜像删除</h2><h3 id="停止所有的container，这样才能够删除其中的images："><a href="#停止所有的container，这样才能够删除其中的images：" class="headerlink" title="停止所有的container，这样才能够删除其中的images："></a>停止所有的container，这样才能够删除其中的images：</h3><p>docker stop $(docker ps -a -q)</p>
+<p>如果想要删除所有container的话再加一个指令：<br>docker rm $(docker ps -a -q)</p>
+<h3 id="查看当前有哪些images"><a href="#查看当前有哪些images" class="headerlink" title="查看当前有哪些images"></a>查看当前有哪些images</h3><p>docker images</p>
+<h3 id="删除images，通过image的id来指定删除镜像"><a href="#删除images，通过image的id来指定删除镜像" class="headerlink" title="删除images，通过image的id来指定删除镜像"></a>删除images，通过image的id来指定删除镜像</h3><p>docker rmi <image id=""></image></p>
+<p>想要删除untagged images，也就是那些id为<none>的image的话可以用<br>docker rmi $(docker images | grep “^<none>“ | awk “{print $3}”)</none></none></p>
+<p>要删除全部image的话<br>docker rmi $(docker images -q)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Docker-镜像使用&quot;&gt;&lt;a href=&quot;#Docker-镜像使用&quot; class=&quot;headerlink&quot; title=&quot;Docker 镜像使用&quot;&gt;&lt;/a&gt;Docker 镜像使用&lt;/h1&gt;&lt;p&gt;当运行容器时，使用的镜像如果在本地中不存在，docker 就会自动从
+    
+    </summary>
+    
+      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
+    
+      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
+    
+    
+      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
     
   </entry>
   
@@ -766,86 +882,6 @@
   </entry>
   
   <entry>
-    <title>03_Docker_镜像使用</title>
-    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/03_Docker_%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/03_Docker_镜像使用/</id>
-    <published>2017-11-27T06:15:50.000Z</published>
-    <updated>2017-11-27T06:15:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Docker-镜像使用"><a href="#Docker-镜像使用" class="headerlink" title="Docker 镜像使用"></a>Docker 镜像使用</h1><p>当运行容器时，使用的镜像如果在本地中不存在，docker 就会自动从 docker 镜像仓库中下载，默认是从 Docker Hub 公共镜像源下载。  </p>
-<h2 id="列出镜像列表"><a href="#列出镜像列表" class="headerlink" title="列出镜像列表"></a>列出镜像列表</h2><p>使用 <strong>docker images</strong> 来列出本地主机上的镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images           </div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div></pre></td></tr></table></figure></p>
-<p>各个选项说明:  </p>
-<ul>
-<li>REPOSTITORY：表示镜像的仓库源</li>
-<li>TAG：镜像的标签</li>
-<li>IMAGE ID：镜像ID</li>
-<li>CREATED：镜像创建时间</li>
-<li>SIZE：镜像大小</li>
-</ul>
-<p>同一仓库源可以有多个 TAG，代表这个仓库源的不同个版本，如ubuntu仓库源里，有15.10、14.04等多个不同的版本，我们使用 REPOSTITORY:TAG 来定义不同的镜像。  </p>
-<p>如果不指定一个镜像的版本标签，例如你只使用 ubuntu，docker 将默认使用 ubuntu:latest 镜像。</p>
-<h2 id="获取一个新的镜像"><a href="#获取一个新的镜像" class="headerlink" title="获取一个新的镜像"></a>获取一个新的镜像</h2><p>当在本地主机上使用一个不存在的镜像时 Docker 就会自动下载这个镜像。如果想预先下载这个镜像，可以使用 <strong>docker pull</strong> 命令来下载它。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Crunoob@runoob:~$ docker pull ubuntu:13.10</div></pre></td></tr></table></figure></p>
-<p>下载完成后，可以直接使用这个镜像来运行容器。</p>
-<h2 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h2><p>可以从 Docker Hub 网站来搜索镜像，Docker Hub 网址为： <a href="https://hub.docker.com/" target="_blank" rel="external">https://hub.docker.com/</a><br>也可以使用 <strong>docker search</strong> 命令来搜索镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$  docker search nginx</div></pre></td></tr></table></figure></p>
-<ul>
-<li>NAME:镜像仓库源的名称</li>
-<li>DESCRIPTION:镜像的描述</li>
-<li>OFFICIAL:是否docker官方发布</li>
-</ul>
-<h2 id="拖取镜像"><a href="#拖取镜像" class="headerlink" title="拖取镜像"></a>拖取镜像</h2><p>使用命令 docker pull 来下载镜像。</p>
-<h1 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h1><p>当从docker镜像仓库中下载的镜像不能满足需求时，可以通过以下两种方式对镜像进行更改。  </p>
-<ol>
-<li>从已经创建的容器中更新镜像，并且提交这个镜像  </li>
-<li>使用 Dockerfile 指令来创建一个新的镜像  </li>
-</ol>
-<h2 id="更新镜像"><a href="#更新镜像" class="headerlink" title="更新镜像"></a>更新镜像</h2><p>更新镜像之前，我们需要使用镜像来创建一个容器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -i -t ubuntu:15.10 /bin/bash</div><div class="line">root@e218edb10161:/#</div></pre></td></tr></table></figure></p>
-<p>在运行的容器内使用 apt-get update 命令进行更新。<br>在完成操作之后，输入 exit命令来退出这个容器。  </p>
-<p>此时ID为e218edb10161的容器，是按我们的需求更改的容器。我们可以通过命令 docker commit来提交容器副本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker commit -m=&quot;has update&quot; -a=&quot;runoob&quot; e218edb10161 runoob/ubuntu:v2</div><div class="line">sha256:70bf1840fd7c0d2d8ef0a42a817eb29f854c1af8f7c59fc03ac7bdee9545aff8</div></pre></td></tr></table></figure></p>
-<p>各个参数说明：  </p>
-<ul>
-<li>m:提交的描述信息</li>
-<li>a:指定镜像作者</li>
-<li>e218edb10161：容器ID</li>
-<li>runoob/ubuntu:v2:指定要创建的目标镜像名</li>
-</ul>
-<p>使用 docker images 命令来查看我们的新镜像 runoob/ubuntu:v2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images</div></pre></td></tr></table></figure></p>
-<p>使用新镜像 runoob/ubuntu 来启动一个容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -i -t runoob/ubuntu:v2 /bin/bash</div></pre></td></tr></table></figure></p>
-<h2 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h2><p>使用命令 <strong>docker build</strong> ， 从零开始来创建一个新的镜像。为此，需要创建一个 Dockerfile 文件，其中包含一组指令来告诉 Docker 如何构建新的镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ cat Dockerfile </div><div class="line">FROM    centos:6.7</div><div class="line">MAINTAINER      Fisher &quot;fisher@sudops.com&quot;</div><div class="line"></div><div class="line">RUN     /bin/echo &apos;root:123456&apos; |chpasswd</div><div class="line">RUN     useradd runoob</div><div class="line">RUN     /bin/echo &apos;runoob:123456&apos; |chpasswd</div><div class="line">RUN     /bin/echo -e &quot;LANG=\&quot;en_US.UTF-8\&quot;&quot; &gt;/etc/default/local</div><div class="line">EXPOSE  22</div><div class="line">EXPOSE  80</div><div class="line">CMD     /usr/sbin/sshd -D</div></pre></td></tr></table></figure></p>
-<p>每一个指令都会在镜像上创建一个新的层，每一个指令的前缀都必须是大写的。<br>第一条FROM，指定使用哪个镜像源<br>RUN 指令告诉docker 在镜像内执行命令，安装了什么。<br>然后，我们使用 Dockerfile 文件，通过 docker build 命令来构建一个镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker build -t runoob/centos:6.7 .</div><div class="line">Sending build context to Docker daemon 17.92 kB</div><div class="line">Step 1 : FROM centos:6.7</div><div class="line"> ---&amp;gt; d95b5ca17cc3</div><div class="line">Step 2 : MAINTAINER Fisher &quot;fisher@sudops.com&quot;</div><div class="line"> ---&amp;gt; Using cache</div><div class="line"> ---&amp;gt; 0c92299c6f03</div><div class="line">Step 3 : RUN /bin/echo &apos;root:123456&apos; |chpasswd</div><div class="line"> ---&amp;gt; Using cache</div><div class="line"> ---&amp;gt; 0397ce2fbd0a</div><div class="line">Step 4 : RUN useradd runoob</div><div class="line">......</div></pre></td></tr></table></figure></p>
-<p>参数说明：  </p>
-<ul>
-<li>t ：指定要创建的目标镜像名  </li>
-<li>. ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径  </li>
-</ul>
-<p>使用docker images 查看创建的镜像已经在列表中存在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images</div></pre></td></tr></table></figure></p>
-<p>可以使用新的镜像来创建容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -t -i runoob/centos:6.7  /bin/bash</div><div class="line">[root@41c28d18b5fb /]# id runoob</div><div class="line">uid=500(runoob) gid=500(runoob) groups=500(runoob)</div></pre></td></tr></table></figure></p>
-<h2 id="设置镜像标签"><a href="#设置镜像标签" class="headerlink" title="设置镜像标签"></a>设置镜像标签</h2><p>可以使用 <strong>docker tag</strong> 命令，为镜像添加一个新的标签。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker tag 860c279d2fec runoob/centos:dev</div></pre></td></tr></table></figure></p>
-<p>docker tag 镜像ID，这里是 860c279d2fec ,用户名称、镜像源名(repository name)和新的标签名(tag)。  </p>
-<p>使用 docker images 命令可以看到，ID为860c279d2fec的镜像多一个标签。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">runoob/centos       6.7                 860c279d2fec        5 hours ago         190.6 MB</div><div class="line">runoob/centos       dev                 860c279d2fec        5 hours ago         190.6 MB</div></pre></td></tr></table></figure></p>
-<h2 id="Docker-容器镜像删除"><a href="#Docker-容器镜像删除" class="headerlink" title="Docker 容器镜像删除"></a>Docker 容器镜像删除</h2><h3 id="停止所有的container，这样才能够删除其中的images："><a href="#停止所有的container，这样才能够删除其中的images：" class="headerlink" title="停止所有的container，这样才能够删除其中的images："></a>停止所有的container，这样才能够删除其中的images：</h3><p>docker stop $(docker ps -a -q)</p>
-<p>如果想要删除所有container的话再加一个指令：<br>docker rm $(docker ps -a -q)</p>
-<h3 id="查看当前有哪些images"><a href="#查看当前有哪些images" class="headerlink" title="查看当前有哪些images"></a>查看当前有哪些images</h3><p>docker images</p>
-<h3 id="删除images，通过image的id来指定删除镜像"><a href="#删除images，通过image的id来指定删除镜像" class="headerlink" title="删除images，通过image的id来指定删除镜像"></a>删除images，通过image的id来指定删除镜像</h3><p>docker rmi <image id=""></image></p>
-<p>想要删除untagged images，也就是那些id为<none>的image的话可以用<br>docker rmi $(docker images | grep “^<none>“ | awk “{print $3}”)</none></none></p>
-<p>要删除全部image的话<br>docker rmi $(docker images -q)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Docker-镜像使用&quot;&gt;&lt;a href=&quot;#Docker-镜像使用&quot; class=&quot;headerlink&quot; title=&quot;Docker 镜像使用&quot;&gt;&lt;/a&gt;Docker 镜像使用&lt;/h1&gt;&lt;p&gt;当运行容器时，使用的镜像如果在本地中不存在，docker 就会自动从
-    
-    </summary>
-    
-      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
-    
-      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
-    
-    
-      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
     <title>01_Docker_Hello_World</title>
     <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/"/>
     <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/</id>
@@ -897,55 +933,38 @@
   </entry>
   
   <entry>
-    <title>04_Docker_容器连接</title>
-    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_%E5%AE%B9%E5%99%A8%E8%BF%9E%E6%8E%A5/"/>
-    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_容器连接/</id>
-    <published>2017-11-27T06:15:50.000Z</published>
-    <updated>2017-11-27T06:15:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="网络端口映射"><a href="#网络端口映射" class="headerlink" title="网络端口映射"></a>网络端口映射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P training/webapp python app.py</div><div class="line">fce072cc88cee71b1cdceb57c2821d054a4a59f67da6b416fceb5593f059fc6d</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 5000:5000 training/webapp python app.py</div><div class="line">33e4523d30aaf0258915c368e66e03b49535de0ef20317d3f639d40222ba6bc0</div></pre></td></tr></table></figure>
-<ul>
-<li>-P :是容器内部端口随机映射到主机的高端口。</li>
-<li>-p : 是容器内部端口绑定到指定的主机端口。</li>
-</ul>
-<p>使用 docker ps 来看到端口5000绑定主机端口32768。</p>
-<p>可以指定容器绑定的网络地址，比如绑定127.0.0.1。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5001:5002 training/webapp python app.py</div><div class="line">95c6ceef88ca3e71eaf303c2833fd6701d8d1b2572b5613b5a932dfdfe8a857c</div></pre></td></tr></table></figure></p>
-<p>默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 /udp。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py</div><div class="line">6779686f06f6204579c1d655dd8b2b31e8e809b245a97b2d3a8e35abe9dcd22a</div></pre></td></tr></table></figure></p>
-<p><strong>docker port</strong> 命令可以让我们快捷地查看端口的绑定情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker port adoring_stonebraker 5002</div></pre></td></tr></table></figure></p>
-<h2 id="Docker容器连接"><a href="#Docker容器连接" class="headerlink" title="Docker容器连接"></a>Docker容器连接</h2><p>端口映射并不是唯一把 docker 连接到另一个容器的方法。<br>docker有一个连接系统允许将多个容器连接在一起，共享连接信息。<br>docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。  </p>
-<h3 id="容器命名"><a href="#容器命名" class="headerlink" title="容器命名"></a>容器命名</h3><p>当我们创建一个容器的时候，docker会自动对它进行命名。另外，我们也可以使用–name标识来命名容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P --name runoob training/webapp python app.py</div><div class="line">43780a6eabaaf14e590b6e849235c75f3012995403f97749775e38436db9a441</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;网络端口映射&quot;&gt;&lt;a href=&quot;#网络端口映射&quot; class=&quot;headerlink&quot; title=&quot;网络端口映射&quot;&gt;&lt;/a&gt;网络端口映射&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
-    
-    </summary>
-    
-      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
-    
-      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
-    
-    
-      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>01_Java并发篇_前言</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/01_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E5%89%8D%E8%A8%80/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/01_Java并发篇_前言/</id>
+    <title>10_Java容器篇_ThreadLocal</title>
+    <link href="http://yoursite.com/2017/07/29/Backend/Java/container/10_Java%E5%AE%B9%E5%99%A8%E7%AF%87_ThreadLocal/"/>
+    <id>http://yoursite.com/2017/07/29/Backend/Java/container/10_Java容器篇_ThreadLocal/</id>
     <published>2017-07-29T12:57:13.000Z</published>
     <updated>2017-07-29T12:57:13.000Z</updated>
     
-    <content type="html"><![CDATA[<p>并发很重要的，前言中记录事件与体会</p>
+    <content type="html"><![CDATA[<h1 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h1><p>ThreadLocal为变量在每个线程中都创建了一个副本，那么每个线程可以访问自己内部的副本变量。</p>
+<h1 id="ThreadLocal类提供的方法："><a href="#ThreadLocal类提供的方法：" class="headerlink" title="ThreadLocal类提供的方法："></a>ThreadLocal类提供的方法：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public T get() &#123; &#125;</div><div class="line">public void set(T value) &#123; &#125;</div><div class="line">public void remove() &#123; &#125;</div><div class="line">protected T initialValue() &#123; &#125;</div></pre></td></tr></table></figure>
+<p>get()方法是用来获取ThreadLocal在当前线程中保存的变量副本，<br>set()用来设置当前线程中变量的副本，<br>remove()用来移除当前线程中变量的副本，<br>initialValue()是一个protected方法，一般是用来在使用时进行重写的，它是一个延迟加载方法  </p>
+<h2 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h2><p><img src="http://i.imgur.com/A9nfw1e.jpg" alt="">  </p>
+<p>第一句是取得当前线程，然后通过getMap(t)方法获取到一个map，map的类型为ThreadLocalMap。然后接着下面获取到<key,value>键值对，注意这里获取键值对传进去的是  this，而不是当前线程t。  </key,value></p>
+<p>如果获取成功，则返回value值。  </p>
+<p>如果map为空，则调用setInitialValue方法返回value。  </p>
+<p>getMap()<br><img src="http://i.imgur.com/OyctcgA.jpg" alt="">  </p>
+<p>在getMap中，是调用当期线程t，返回当前线程t中的一个成员变量threadLocals。<br><img src="http://i.imgur.com/qPnpfOa.jpg" alt="">  </p>
+<p>实际上就是一个ThreadLocalMap，这个类型是ThreadLocal类的一个内部类:<br><img src="http://i.imgur.com/2g2gaS2.jpg" alt=""><br>ThreadLocalMap的Entry继承了WeakReference，并且使用ThreadLocal作为键值。  </p>
+<h2 id="setInitialValue"><a href="#setInitialValue" class="headerlink" title="setInitialValue()"></a>setInitialValue()</h2><p><img src="http://i.imgur.com/6ROXpdf.jpg" alt=""><br>如果map不为空，就设置键值对，为空，再创建Map<br><img src="http://i.imgur.com/gf3RhcN.jpg" alt="">  </p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在每个线程Thread内部有一个ThreadLocal.ThreadLocalMap类型的成员变量threadLocals，这个threadLocals就是用来存储实际的变量副本的，键值为当前ThreadLocal变量，value为变量副本（即T类型的变量）。  </p>
+<p>初始时，在Thread里面，threadLocals为空，当通过ThreadLocal变量调用get()方法或者set()方法，就会对Thread类中的threadLocals进行初始化，并且以当前ThreadLocal变量为键值，以ThreadLocal要保存的副本变量为value，存到threadLocals。  </p>
+<p>然后在当前线程里面，如果要使用副本变量，就可以通过get方法在threadLocals里面查找。  </p>
+<p>1）实际的通过ThreadLocal创建的副本是存储在每个线程自己的threadLocals中的；</p>
+<p>2）为何threadLocals的类型ThreadLocalMap的键值为ThreadLocal对象，因为每个线程中可有多个类型不同的threadLocal变量；</p>
+<p>3）在进行get之前，必须先set，否则会报空指针异常；  </p>
+<p>如果想在get之前不需要调用set就能正常访问的话，必须重写initialValue()方法。  </p>
+<p>如果没有先set的话，即在map中查找不到对应的存储，则会通过调用setInitialValue方法返回i，而在setInitialValue方法中，有一个语句是T value = initialValue()， 而默认情况下，initialValue方法返回的是null</p>
+<p><img src="http://i.imgur.com/7QdrQ0S.jpg" alt="">  </p>
+<h1 id="ThreadLocal的应用场景"><a href="#ThreadLocal的应用场景" class="headerlink" title="ThreadLocal的应用场景"></a>ThreadLocal的应用场景</h1><p>最常见的ThreadLocal使用场景为 用来解决 数据库连接、Session管理等。  </p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;并发很重要的，前言中记录事件与体会&lt;/p&gt;
-
+      &lt;h1 id=&quot;ThreadLocal&quot;&gt;&lt;a href=&quot;#ThreadLocal&quot; class=&quot;headerlink&quot; title=&quot;ThreadLocal&quot;&gt;&lt;/a&gt;ThreadLocal&lt;/h1&gt;&lt;p&gt;ThreadLocal为变量在每个线程中都创建了一个副本，那么每个线
     
     </summary>
     
@@ -953,10 +972,10 @@
     
       <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
     
-      <category term="并发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%B9%B6%E5%8F%91/"/>
+      <category term="容器" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%AE%B9%E5%99%A8/"/>
     
     
-      <category term="Java并发" scheme="http://yoursite.com/tags/Java%E5%B9%B6%E5%8F%91/"/>
+      <category term="Java容器" scheme="http://yoursite.com/tags/Java%E5%AE%B9%E5%99%A8/"/>
     
   </entry>
   
@@ -992,44 +1011,55 @@
   </entry>
   
   <entry>
-    <title>04_Java并发篇_死锁</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/04_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E6%AD%BB%E9%94%81/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/04_Java并发篇_死锁/</id>
+    <title>05_Java并发篇_饥饿与公平</title>
+    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/05_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E9%A5%A5%E9%A5%BF%E4%B8%8E%E5%85%AC%E5%B9%B3/"/>
+    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/05_Java并发篇_饥饿与公平/</id>
     <published>2017-07-29T12:57:13.000Z</published>
     <updated>2017-07-29T12:57:13.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>死锁是两个或更多线程阻塞着等待其它处于死锁状态的线程所持有的锁。死锁通常发生在多个线程同时但以不同的顺序请求同一组锁的时候。  </p>
-<p>例如：<br>如果线程1锁住了A，然后尝试对B进行加锁，同时线程2已经锁住了B，接着尝试对A进行加锁，这时死锁就发生了。<br>线程1永远得不到B，线程2也永远得不到A，并且它们永远也不会知道发生了这样的事情。为了得到彼此的对象（A和B），它们将永远阻塞下去。这种情况就是一个死锁。  </p>
-<h1 id="数据库的死锁"><a href="#数据库的死锁" class="headerlink" title="数据库的死锁"></a>数据库的死锁</h1><p>更加复杂的死锁场景发生在数据库事务中。一个数据库事务可能由多条SQL更新请求组成。<br><strong>当在一个事务中更新一条记录，这条记录就会被锁住避免其他事务的更新请求，直到第一个事务结束。</strong><br>同一个事务中每一个更新请求都可能会锁住一些记录。  </p>
-<p>当多个事务同时需要对一些相同的记录做更新操作时，就很有可能发生死锁，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Transaction 1, request 1, locks record 1 for update</div><div class="line">Transaction 2, request 1, locks record 2 for update</div><div class="line">Transaction 1, request 2, tries to lock record 2 for update.</div><div class="line">Transaction 2, request 2, tries to lock record 1 for update.</div></pre></td></tr></table></figure></p>
-<p>因为锁发生在不同的请求中，并且对于一个事务来说不可能提前知道所有它需要的锁，因此很难检测和避免数据库事务中的死锁。  </p>
-<h1 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h1><p>在有些情况下死锁是可以避免的。  </p>
-<ol>
-<li>加锁顺序</li>
-<li>加锁时限</li>
-<li>死锁检测</li>
+    <content type="html"><![CDATA[<h1 id="饥饿和公平"><a href="#饥饿和公平" class="headerlink" title="饥饿和公平"></a>饥饿和公平</h1><p>如果一个线程因为CPU时间全部被其他线程抢走而得不到CPU运行时间，这种状态被称之为“饥饿”。<br>而该线程被“饥饿致死”正是因为它得不到CPU运行时间的机会。<br>解决饥饿的方案被称之为“公平性” – 即所有线程均能公平地获得运行机会。  </p>
+<h2 id="Java中导致饥饿的原因："><a href="#Java中导致饥饿的原因：" class="headerlink" title="Java中导致饥饿的原因："></a>Java中导致饥饿的原因：</h2><ol>
+<li><p>高优先级线程吞噬所有的低优先级线程的CPU时间。  </p>
+</li>
+<li><p>线程被永久堵塞在一个等待进入同步块的状态，因为其他线程总是能在它之前持续地对该同步块进行访问。  </p>
+</li>
+<li><p>线程在等待一个本身(在其上调用wait())也处于永久等待完成的对象，因为其他线程总是被持续地获得唤醒。  </p>
+</li>
 </ol>
-<h2 id="加锁顺序"><a href="#加锁顺序" class="headerlink" title="加锁顺序"></a>加锁顺序</h2><p>当多个线程需要相同的一些锁，但是按照不同的顺序加锁，死锁就很容易发生。  </p>
-<p>如果能确保所有的线程都是按照相同的顺序获得锁，那么死锁就不会发生<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Thread 1:</div><div class="line">  lock A </div><div class="line">  lock B</div><div class="line">  </div><div class="line">Thread 2:</div><div class="line">   wait for A</div><div class="line">   lock C (when A locked)</div><div class="line">  </div><div class="line">Thread 3:</div><div class="line">   wait for A</div><div class="line">   wait for B</div><div class="line">   wait for C</div></pre></td></tr></table></figure></p>
-<p>按照顺序加锁是一种有效的死锁预防机制。但是，这种方式需要你事先知道所有可能会用到的锁(译者注：并对这些锁做适当的排序)，但总有些时候是无法预知的。  </p>
-<h2 id="加锁时限"><a href="#加锁时限" class="headerlink" title="加锁时限"></a>加锁时限</h2><p>另外一个可以避免死锁的方法是在尝试获取锁的时候加一个超时时间，这也就意味着在尝试获取锁的过程中若超过了这个时限该线程则放弃对该锁请求。<br>若一个线程没有在给定的时限内成功获得所有需要的锁，则会进行回退并释放所有已经获得的锁，然后等待一段随机的时间再重试。  </p>
-<p>这段随机的等待时间让其它线程有机会尝试获取相同的这些锁，并且让该应用在没有获得锁的时候可以继续运行(注：加锁超时后可以先继续运行干点其它事情，再回头来重复之前加锁的逻辑)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Thread 1 locks A</div><div class="line">Thread 2 locks B</div><div class="line">  </div><div class="line">Thread 1 attempts to lock B but is blocked</div><div class="line">Thread 2 attempts to lock A but is blocked</div><div class="line">  </div><div class="line">Thread 1&apos;s lock attempt on B times out</div><div class="line">Thread 1 backs up and releases A as well</div><div class="line">Thread 1 waits randomly (e.g. 257 millis) before retrying.</div><div class="line">  </div><div class="line">Thread 2&apos;s lock attempt on A times out</div><div class="line">Thread 2 backs up and releases B as well</div><div class="line">Thread 2 waits randomly (e.g. 43 millis) before retrying.</div></pre></td></tr></table></figure></p>
-<p>需要注意的是，由于存在锁的超时，所以我们不能认为这种场景就一定是出现了死锁。也可能是因为获得了锁的线程（导致其它线程超时）需要很长的时间去完成它的任务。  </p>
-<p>此外，如果有非常多的线程同一时间去竞争同一批资源，就算有超时和回退机制，还是可能会导致这些线程重复地尝试但却始终得不到锁。如果只有两个线程，并且重试的超时时间设定为0到500毫秒之间，这种现象可能不会发生，但是如果是10个或20个线程情况就不同了。因为这些线程等待相等的重试时间的概率就高的多（或者非常接近以至于会出现问题）。  </p>
-<h2 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h2><p>死锁检测是一个更好的死锁预防机制，它主要是针对那些不可能实现按序加锁并且锁超时也不可行的场景。  </p>
-<p>每当一个线程获得了锁，会在线程和锁相关的数据结构中（map、graph等等）将其记下。除此之外，每当有线程请求锁，也需要记录在这个数据结构中。  </p>
-<p>当一个线程请求锁失败时，这个线程可以遍历锁的关系图看看是否有死锁发生。例如，线程A请求锁7，但是锁7这个时候被线程B持有，这时线程A就可以检查一下线程B是否已经请求了线程A当前所持有的锁。如果线程B确实有这样的请求，那么就是发生了死锁（线程A拥有锁1，请求锁7；线程B拥有锁7，请求锁1）。  </p>
-<p>当然，死锁一般要比两个线程互相持有对方的锁这种情况要复杂的多。线程A等待线程B，线程B等待线程C，线程C等待线程D，线程D又在等待线程A。线程A为了检测死锁，它需要递进地检测所有被B请求的锁。从线程B所请求的锁开始，线程A找到了线程C，然后又找到了线程D，发现线程D请求的锁被线程A自己持有着。这是它就知道发生了死锁。  </p>
-<p>可以被用来检测死锁的数据结构。<br><img src="http://i.imgur.com/wW4vN5G.png" alt="">  </p>
-<p>那么当检测出死锁时，这些线程该做些什么呢？  </p>
-<p>一个可行的做法是释放所有锁，回退，并且等待一段随机的时间后重试。这个和简单的加锁超时类似，不一样的是只有死锁已经发生了才回退，而不会是因为加锁的请求超时了。虽然有回退和等待，但是如果有大量的线程竞争同一批锁，它们还是会重复地死锁（编者注：原因同超时类似，不能从根本上减轻竞争）。  </p>
-<p>一个更好的方案是给这些线程设置优先级，让一个（或几个）线程回退，剩下的线程就像没发生死锁一样继续保持着它们需要的锁。如果赋予这些线程的优先级是固定不变的，同一批线程总是会拥有更高的优先级。为避免这个问题，可以在死锁发生的时候设置随机的优先级。  </p>
+<p>如果多个线程处在wait()方法执行上，而对其调用notify()不会保证哪一个线程会获得唤醒，任何线程都有可能处于继续等待的状态。因此存在这样一个风险：一个等待线程从来得不到唤醒，因为其他等待线程总是能被获得唤醒。</p>
+<h3 id="高优先级线程吞噬所有的低优先级线程的CPU时间"><a href="#高优先级线程吞噬所有的低优先级线程的CPU时间" class="headerlink" title="高优先级线程吞噬所有的低优先级线程的CPU时间"></a>高优先级线程吞噬所有的低优先级线程的CPU时间</h3><p>你能为每个线程设置独自的线程优先级，优先级越高的线程获得的CPU时间越多，线程优先级值设置在1到10之间，而这些优先级值所表示行为的准确解释则依赖于你的应用运行平台。对大多数应用来说，你最好是不要改变其优先级值。  </p>
+<h3 id="线程被永久堵塞在一个等待进入同步块的状态"><a href="#线程被永久堵塞在一个等待进入同步块的状态" class="headerlink" title="线程被永久堵塞在一个等待进入同步块的状态"></a>线程被永久堵塞在一个等待进入同步块的状态</h3><p>Java的同步代码区也是一个导致饥饿的因素。Java的同步代码区对哪个线程允许进入的次序没有任何保障。这就意味着理论上存在一个试图进入该同步区的线程处于被永久堵塞的风险，因为其他线程总是能持续地先于它获得访问，这即是“饥饿”问题，而一个线程被“饥饿致死”正是因为它得不到CPU运行时间的机会。  </p>
+<h3 id="线程在等待一个本身-在其上调用wait-也处于永久等待完成的对象"><a href="#线程在等待一个本身-在其上调用wait-也处于永久等待完成的对象" class="headerlink" title="线程在等待一个本身(在其上调用wait())也处于永久等待完成的对象"></a>线程在等待一个本身(在其上调用wait())也处于永久等待完成的对象</h3><p>如果多个线程处在wait()方法执行上，而对其调用notify()不会保证哪一个线程会获得唤醒，任何线程都有可能处于继续等待的状态。因此存在这样一个风险：一个等待线程从来得不到唤醒，因为其他等待线程总是能被获得唤醒。  </p>
+<h2 id="在Java中实现公平性方案"><a href="#在Java中实现公平性方案" class="headerlink" title="在Java中实现公平性方案"></a>在Java中实现公平性方案</h2><ol>
+<li>使用锁，而不是同步块。</li>
+<li>公平锁。</li>
+<li>注意性能方面。</li>
+</ol>
+<p>Java不可能实现100%的公平性，我们依然可以通过同步结构在线程间实现公平性的提高。</p>
+<h3 id="同步态代码"><a href="#同步态代码" class="headerlink" title="同步态代码"></a>同步态代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public class Synchronizer&#123;</div><div class="line">  </div><div class="line">    public synchronized void doSynchronized()&#123;</div><div class="line">        //do a lot of work which takes a long time</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果有一个以上的线程调用doSynchronized()方法，在第一个获得访问的线程未完成前，其他线程将一直处于阻塞状态，而且在这种多线程被阻塞的场景下，接下来将是哪个线程获得访问是没有保障的。  </p>
+<h3 id="使用锁方式替代同步块"><a href="#使用锁方式替代同步块" class="headerlink" title="使用锁方式替代同步块"></a>使用锁方式替代同步块</h3><p>为了提高等待线程的公平性，使用锁方式来替代同步块。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class Synchronizer&#123;</div><div class="line">    Lock lock = new Lock();</div><div class="line">    public void doSynchronized() throws InterruptedException&#123;</div><div class="line">        this.lock.lock();</div><div class="line">        //critical section, do a lot of work which takes a long time</div><div class="line">        this.lock.unlock();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>doSynchronized()不再声明为synchronized，而是用lock.lock()和lock.unlock()来替代。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">public class Lock&#123;</div><div class="line">  </div><div class="line">    private boolean isLocked      = false;</div><div class="line">    private Thread lockingThread = null;</div><div class="line">  </div><div class="line">    public synchronized void lock() throws InterruptedException&#123;</div><div class="line">  </div><div class="line">        while(isLocked)&#123;</div><div class="line">            wait();</div><div class="line">        &#125;</div><div class="line">  </div><div class="line">        isLocked = true;</div><div class="line">        lockingThread = Thread.currentThread();</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    public synchronized void unlock()&#123;</div><div class="line">  </div><div class="line">        if(this.lockingThread != Thread.currentThread())&#123;</div><div class="line">  </div><div class="line">             throw new IllegalMonitorStateException(</div><div class="line">                  &quot;Calling thread has not locked this lock&quot;);</div><div class="line">             &#125;</div><div class="line">  </div><div class="line">        isLocked = false;</div><div class="line">        lockingThread = null;</div><div class="line">        notify();</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果存在多线程并发访问lock()，这些线程将阻塞在对lock()方法的访问上。另外，如果锁已经锁上（校对注：这里指的是isLocked等于true时），这些线程将阻塞在while(isLocked)循环的wait()调用里面。要记住的是，当线程正在等待进入lock() 时，可以调用wait()释放其锁实例对应的同步锁，使得其他多个线程可以进入lock()方法，并调用wait()方法。  </p>
+<p>在lock()和unlock()之间：在这两个调用之间的代码将运行很长一段时间。进一步设想，这段代码将长时间运行，和进入lock()并调用wait()来比较的话。这意味着大部分时间用在等待进入锁和进入临界区的过程是用在wait()的等待中，而不是被阻塞在试图进入lock()方法中。  </p>
+<p>同步块不会对等待进入的多个线程谁能获得访问做任何保障，同样当调用notify()时，也不会做保障一定能唤醒线程。因此这个的Lock类和doSynchronized()那个就保障公平性而言，没有任何区别。</p>
+<p>但是，如果每个线程在不同的对象上调用wait()，那么只有一个线程会在该对象上调用wait()，Lock类可以决定哪个对象能对其调用notify()，因此能做到有效的选择唤醒哪个线程。</p>
+<h3 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h3><p>每一个调用lock()的线程都会进入一个队列，当解锁后，只有队列里的第一个线程被允许锁住Farlock实例，所有其它的线程都将处于等待状态，直到他们处于队列头部。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public class FairLock &#123;</div><div class="line">    private boolean           isLocked       = false;</div><div class="line">    private Thread            lockingThread  = null;</div><div class="line">    private List&lt;QueueObject&gt; waitingThreads = new ArrayList&lt;QueueObject&gt;();</div><div class="line"></div><div class="line">  public void lock() throws InterruptedException&#123;</div><div class="line">    QueueObject queueObject = new QueueObject();</div><div class="line">    boolean isLockedForThisThread = true;</div><div class="line">    synchronized(this)&#123;</div><div class="line">        waitingThreads.add(queueObject);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    while(isLockedForThisThread)&#123;</div><div class="line">      synchronized(this)&#123;</div><div class="line">        isLockedForThisThread =</div><div class="line">            isLocked || waitingThreads.get(0) != queueObject;</div><div class="line">        if(!isLockedForThisThread)&#123;</div><div class="line">          isLocked = true;</div><div class="line">           waitingThreads.remove(queueObject);</div><div class="line">           lockingThread = Thread.currentThread();</div><div class="line">           return;</div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">      try&#123;</div><div class="line">        queueObject.doWait();</div><div class="line">      &#125;catch(InterruptedException e)&#123;</div><div class="line">        synchronized(this) &#123; waitingThreads.remove(queueObject); &#125;</div><div class="line">        throw e;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  public synchronized void unlock()&#123;</div><div class="line">    if(this.lockingThread != Thread.currentThread())&#123;</div><div class="line">      throw new IllegalMonitorStateException(</div><div class="line">        &quot;Calling thread has not locked this lock&quot;);</div><div class="line">    &#125;</div><div class="line">    isLocked      = false;</div><div class="line">    lockingThread = null;</div><div class="line">    if(waitingThreads.size() &gt; 0)&#123;</div><div class="line">      waitingThreads.get(0).doNotify();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class QueueObject &#123;</div><div class="line">  </div><div class="line">    private boolean isNotified = false;</div><div class="line">  </div><div class="line">    public synchronized void doWait() throws InterruptedException &#123;</div><div class="line"></div><div class="line">        while(!isNotified)&#123;</div><div class="line">            this.wait();</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">        this.isNotified = false;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    public synchronized void doNotify() &#123;</div><div class="line">        this.isNotified = true;</div><div class="line">        this.notify();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public boolean equals(Object o) &#123;</div><div class="line">        return this == o;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>lock()方法不在声明为synchronized，取而代之的是对必需同步的代码，在synchronized中进行嵌套。  </p>
+<p>FairLock新创建了一个QueueObject的实例，并对每个调用lock()的线程进行入队列。调用unlock()的线程将从队列头部获取QueueObject，并对其调用doNotify()，以唤醒在该对象上等待的线程。通过这种方式，在同一时间仅有一个等待线程获得唤醒，而不是所有的等待线程。这也是实现FairLock公平性的核心所在。  </p>
+<p>请注意，在同一个同步块中，锁状态依然被检查和设置，以避免出现滑漏条件。  </p>
+<p>还需注意到，QueueObject实际是一个semaphore。doWait()和doNotify()方法在QueueObject中保存着信号。这样做以避免一个线程在调用queueObject.doWait()之前被另一个调用unlock()并随之调用queueObject.doNotify()的线程重入，从而导致信号丢失。queueObject.doWait()调用放置在synchronized(this)块之外，以避免被monitor嵌套锁死，所以另外的线程可以解锁，只要当没有线程在lock方法的synchronized(this)块中执行即可。  </p>
+<p>最后，注意到queueObject.doWait()在try – catch块中是怎样调用的。在InterruptedException抛出的情况下，线程得以离开lock()，并需让它从队列中移除。  </p>
+<h3 id="性能考虑"><a href="#性能考虑" class="headerlink" title="性能考虑"></a>性能考虑</h3><p>如果比较Lock和FairLock类，你会注意到在FairLock类中lock()和unlock()还有更多需要深入的地方。这些额外的代码会导致FairLock的同步机制实现比Lock要稍微慢些。究竟存在多少影响，还依赖于应用在FairLock临界区执行的时长。执行时长越大，FairLock带来的负担影响就越小，当然这也和代码执行的频繁度相关。  </p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;死锁&quot;&gt;&lt;a href=&quot;#死锁&quot; class=&quot;headerlink&quot; title=&quot;死锁&quot;&gt;&lt;/a&gt;死锁&lt;/h1&gt;&lt;p&gt;死锁是两个或更多线程阻塞着等待其它处于死锁状态的线程所持有的锁。死锁通常发生在多个线程同时但以不同的顺序请求同一组锁的时候。  &lt;/p&gt;
-&lt;
+      &lt;h1 id=&quot;饥饿和公平&quot;&gt;&lt;a href=&quot;#饥饿和公平&quot; class=&quot;headerlink&quot; title=&quot;饥饿和公平&quot;&gt;&lt;/a&gt;饥饿和公平&lt;/h1&gt;&lt;p&gt;如果一个线程因为CPU时间全部被其他线程抢走而得不到CPU运行时间，这种状态被称之为“饥饿”。&lt;br&gt;而该线程被“饥
     
     </summary>
     
@@ -1155,55 +1185,19 @@
   </entry>
   
   <entry>
-    <title>05_Java并发篇_饥饿与公平</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/05_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E9%A5%A5%E9%A5%BF%E4%B8%8E%E5%85%AC%E5%B9%B3/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/05_Java并发篇_饥饿与公平/</id>
+    <title>01_Java并发篇_前言</title>
+    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/01_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E5%89%8D%E8%A8%80/"/>
+    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/01_Java并发篇_前言/</id>
     <published>2017-07-29T12:57:13.000Z</published>
     <updated>2017-07-29T12:57:13.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="饥饿和公平"><a href="#饥饿和公平" class="headerlink" title="饥饿和公平"></a>饥饿和公平</h1><p>如果一个线程因为CPU时间全部被其他线程抢走而得不到CPU运行时间，这种状态被称之为“饥饿”。<br>而该线程被“饥饿致死”正是因为它得不到CPU运行时间的机会。<br>解决饥饿的方案被称之为“公平性” – 即所有线程均能公平地获得运行机会。  </p>
-<h2 id="Java中导致饥饿的原因："><a href="#Java中导致饥饿的原因：" class="headerlink" title="Java中导致饥饿的原因："></a>Java中导致饥饿的原因：</h2><ol>
-<li><p>高优先级线程吞噬所有的低优先级线程的CPU时间。  </p>
-</li>
-<li><p>线程被永久堵塞在一个等待进入同步块的状态，因为其他线程总是能在它之前持续地对该同步块进行访问。  </p>
-</li>
-<li><p>线程在等待一个本身(在其上调用wait())也处于永久等待完成的对象，因为其他线程总是被持续地获得唤醒。  </p>
-</li>
-</ol>
-<p>如果多个线程处在wait()方法执行上，而对其调用notify()不会保证哪一个线程会获得唤醒，任何线程都有可能处于继续等待的状态。因此存在这样一个风险：一个等待线程从来得不到唤醒，因为其他等待线程总是能被获得唤醒。</p>
-<h3 id="高优先级线程吞噬所有的低优先级线程的CPU时间"><a href="#高优先级线程吞噬所有的低优先级线程的CPU时间" class="headerlink" title="高优先级线程吞噬所有的低优先级线程的CPU时间"></a>高优先级线程吞噬所有的低优先级线程的CPU时间</h3><p>你能为每个线程设置独自的线程优先级，优先级越高的线程获得的CPU时间越多，线程优先级值设置在1到10之间，而这些优先级值所表示行为的准确解释则依赖于你的应用运行平台。对大多数应用来说，你最好是不要改变其优先级值。  </p>
-<h3 id="线程被永久堵塞在一个等待进入同步块的状态"><a href="#线程被永久堵塞在一个等待进入同步块的状态" class="headerlink" title="线程被永久堵塞在一个等待进入同步块的状态"></a>线程被永久堵塞在一个等待进入同步块的状态</h3><p>Java的同步代码区也是一个导致饥饿的因素。Java的同步代码区对哪个线程允许进入的次序没有任何保障。这就意味着理论上存在一个试图进入该同步区的线程处于被永久堵塞的风险，因为其他线程总是能持续地先于它获得访问，这即是“饥饿”问题，而一个线程被“饥饿致死”正是因为它得不到CPU运行时间的机会。  </p>
-<h3 id="线程在等待一个本身-在其上调用wait-也处于永久等待完成的对象"><a href="#线程在等待一个本身-在其上调用wait-也处于永久等待完成的对象" class="headerlink" title="线程在等待一个本身(在其上调用wait())也处于永久等待完成的对象"></a>线程在等待一个本身(在其上调用wait())也处于永久等待完成的对象</h3><p>如果多个线程处在wait()方法执行上，而对其调用notify()不会保证哪一个线程会获得唤醒，任何线程都有可能处于继续等待的状态。因此存在这样一个风险：一个等待线程从来得不到唤醒，因为其他等待线程总是能被获得唤醒。  </p>
-<h2 id="在Java中实现公平性方案"><a href="#在Java中实现公平性方案" class="headerlink" title="在Java中实现公平性方案"></a>在Java中实现公平性方案</h2><ol>
-<li>使用锁，而不是同步块。</li>
-<li>公平锁。</li>
-<li>注意性能方面。</li>
-</ol>
-<p>Java不可能实现100%的公平性，我们依然可以通过同步结构在线程间实现公平性的提高。</p>
-<h3 id="同步态代码"><a href="#同步态代码" class="headerlink" title="同步态代码"></a>同步态代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public class Synchronizer&#123;</div><div class="line">  </div><div class="line">    public synchronized void doSynchronized()&#123;</div><div class="line">        //do a lot of work which takes a long time</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果有一个以上的线程调用doSynchronized()方法，在第一个获得访问的线程未完成前，其他线程将一直处于阻塞状态，而且在这种多线程被阻塞的场景下，接下来将是哪个线程获得访问是没有保障的。  </p>
-<h3 id="使用锁方式替代同步块"><a href="#使用锁方式替代同步块" class="headerlink" title="使用锁方式替代同步块"></a>使用锁方式替代同步块</h3><p>为了提高等待线程的公平性，使用锁方式来替代同步块。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class Synchronizer&#123;</div><div class="line">    Lock lock = new Lock();</div><div class="line">    public void doSynchronized() throws InterruptedException&#123;</div><div class="line">        this.lock.lock();</div><div class="line">        //critical section, do a lot of work which takes a long time</div><div class="line">        this.lock.unlock();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>doSynchronized()不再声明为synchronized，而是用lock.lock()和lock.unlock()来替代。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">public class Lock&#123;</div><div class="line">  </div><div class="line">    private boolean isLocked      = false;</div><div class="line">    private Thread lockingThread = null;</div><div class="line">  </div><div class="line">    public synchronized void lock() throws InterruptedException&#123;</div><div class="line">  </div><div class="line">        while(isLocked)&#123;</div><div class="line">            wait();</div><div class="line">        &#125;</div><div class="line">  </div><div class="line">        isLocked = true;</div><div class="line">        lockingThread = Thread.currentThread();</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    public synchronized void unlock()&#123;</div><div class="line">  </div><div class="line">        if(this.lockingThread != Thread.currentThread())&#123;</div><div class="line">  </div><div class="line">             throw new IllegalMonitorStateException(</div><div class="line">                  &quot;Calling thread has not locked this lock&quot;);</div><div class="line">             &#125;</div><div class="line">  </div><div class="line">        isLocked = false;</div><div class="line">        lockingThread = null;</div><div class="line">        notify();</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果存在多线程并发访问lock()，这些线程将阻塞在对lock()方法的访问上。另外，如果锁已经锁上（校对注：这里指的是isLocked等于true时），这些线程将阻塞在while(isLocked)循环的wait()调用里面。要记住的是，当线程正在等待进入lock() 时，可以调用wait()释放其锁实例对应的同步锁，使得其他多个线程可以进入lock()方法，并调用wait()方法。  </p>
-<p>在lock()和unlock()之间：在这两个调用之间的代码将运行很长一段时间。进一步设想，这段代码将长时间运行，和进入lock()并调用wait()来比较的话。这意味着大部分时间用在等待进入锁和进入临界区的过程是用在wait()的等待中，而不是被阻塞在试图进入lock()方法中。  </p>
-<p>同步块不会对等待进入的多个线程谁能获得访问做任何保障，同样当调用notify()时，也不会做保障一定能唤醒线程。因此这个的Lock类和doSynchronized()那个就保障公平性而言，没有任何区别。</p>
-<p>但是，如果每个线程在不同的对象上调用wait()，那么只有一个线程会在该对象上调用wait()，Lock类可以决定哪个对象能对其调用notify()，因此能做到有效的选择唤醒哪个线程。</p>
-<h3 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h3><p>每一个调用lock()的线程都会进入一个队列，当解锁后，只有队列里的第一个线程被允许锁住Farlock实例，所有其它的线程都将处于等待状态，直到他们处于队列头部。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public class FairLock &#123;</div><div class="line">    private boolean           isLocked       = false;</div><div class="line">    private Thread            lockingThread  = null;</div><div class="line">    private List&lt;QueueObject&gt; waitingThreads = new ArrayList&lt;QueueObject&gt;();</div><div class="line"></div><div class="line">  public void lock() throws InterruptedException&#123;</div><div class="line">    QueueObject queueObject = new QueueObject();</div><div class="line">    boolean isLockedForThisThread = true;</div><div class="line">    synchronized(this)&#123;</div><div class="line">        waitingThreads.add(queueObject);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    while(isLockedForThisThread)&#123;</div><div class="line">      synchronized(this)&#123;</div><div class="line">        isLockedForThisThread =</div><div class="line">            isLocked || waitingThreads.get(0) != queueObject;</div><div class="line">        if(!isLockedForThisThread)&#123;</div><div class="line">          isLocked = true;</div><div class="line">           waitingThreads.remove(queueObject);</div><div class="line">           lockingThread = Thread.currentThread();</div><div class="line">           return;</div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">      try&#123;</div><div class="line">        queueObject.doWait();</div><div class="line">      &#125;catch(InterruptedException e)&#123;</div><div class="line">        synchronized(this) &#123; waitingThreads.remove(queueObject); &#125;</div><div class="line">        throw e;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  public synchronized void unlock()&#123;</div><div class="line">    if(this.lockingThread != Thread.currentThread())&#123;</div><div class="line">      throw new IllegalMonitorStateException(</div><div class="line">        &quot;Calling thread has not locked this lock&quot;);</div><div class="line">    &#125;</div><div class="line">    isLocked      = false;</div><div class="line">    lockingThread = null;</div><div class="line">    if(waitingThreads.size() &gt; 0)&#123;</div><div class="line">      waitingThreads.get(0).doNotify();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class QueueObject &#123;</div><div class="line">  </div><div class="line">    private boolean isNotified = false;</div><div class="line">  </div><div class="line">    public synchronized void doWait() throws InterruptedException &#123;</div><div class="line"></div><div class="line">        while(!isNotified)&#123;</div><div class="line">            this.wait();</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">        this.isNotified = false;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    public synchronized void doNotify() &#123;</div><div class="line">        this.isNotified = true;</div><div class="line">        this.notify();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public boolean equals(Object o) &#123;</div><div class="line">        return this == o;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>lock()方法不在声明为synchronized，取而代之的是对必需同步的代码，在synchronized中进行嵌套。  </p>
-<p>FairLock新创建了一个QueueObject的实例，并对每个调用lock()的线程进行入队列。调用unlock()的线程将从队列头部获取QueueObject，并对其调用doNotify()，以唤醒在该对象上等待的线程。通过这种方式，在同一时间仅有一个等待线程获得唤醒，而不是所有的等待线程。这也是实现FairLock公平性的核心所在。  </p>
-<p>请注意，在同一个同步块中，锁状态依然被检查和设置，以避免出现滑漏条件。  </p>
-<p>还需注意到，QueueObject实际是一个semaphore。doWait()和doNotify()方法在QueueObject中保存着信号。这样做以避免一个线程在调用queueObject.doWait()之前被另一个调用unlock()并随之调用queueObject.doNotify()的线程重入，从而导致信号丢失。queueObject.doWait()调用放置在synchronized(this)块之外，以避免被monitor嵌套锁死，所以另外的线程可以解锁，只要当没有线程在lock方法的synchronized(this)块中执行即可。  </p>
-<p>最后，注意到queueObject.doWait()在try – catch块中是怎样调用的。在InterruptedException抛出的情况下，线程得以离开lock()，并需让它从队列中移除。  </p>
-<h3 id="性能考虑"><a href="#性能考虑" class="headerlink" title="性能考虑"></a>性能考虑</h3><p>如果比较Lock和FairLock类，你会注意到在FairLock类中lock()和unlock()还有更多需要深入的地方。这些额外的代码会导致FairLock的同步机制实现比Lock要稍微慢些。究竟存在多少影响，还依赖于应用在FairLock临界区执行的时长。执行时长越大，FairLock带来的负担影响就越小，当然这也和代码执行的频繁度相关。  </p>
+    <content type="html"><![CDATA[<p>并发很重要的，前言中记录事件与体会</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;饥饿和公平&quot;&gt;&lt;a href=&quot;#饥饿和公平&quot; class=&quot;headerlink&quot; title=&quot;饥饿和公平&quot;&gt;&lt;/a&gt;饥饿和公平&lt;/h1&gt;&lt;p&gt;如果一个线程因为CPU时间全部被其他线程抢走而得不到CPU运行时间，这种状态被称之为“饥饿”。&lt;br&gt;而该线程被“饥
+      &lt;p&gt;并发很重要的，前言中记录事件与体会&lt;/p&gt;
+
     
     </summary>
     
@@ -1219,38 +1213,44 @@
   </entry>
   
   <entry>
-    <title>10_Java容器篇_ThreadLocal</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/container/10_Java%E5%AE%B9%E5%99%A8%E7%AF%87_ThreadLocal/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/container/10_Java容器篇_ThreadLocal/</id>
+    <title>04_Java并发篇_死锁</title>
+    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/04_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E6%AD%BB%E9%94%81/"/>
+    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/04_Java并发篇_死锁/</id>
     <published>2017-07-29T12:57:13.000Z</published>
     <updated>2017-07-29T12:57:13.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h1><p>ThreadLocal为变量在每个线程中都创建了一个副本，那么每个线程可以访问自己内部的副本变量。</p>
-<h1 id="ThreadLocal类提供的方法："><a href="#ThreadLocal类提供的方法：" class="headerlink" title="ThreadLocal类提供的方法："></a>ThreadLocal类提供的方法：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public T get() &#123; &#125;</div><div class="line">public void set(T value) &#123; &#125;</div><div class="line">public void remove() &#123; &#125;</div><div class="line">protected T initialValue() &#123; &#125;</div></pre></td></tr></table></figure>
-<p>get()方法是用来获取ThreadLocal在当前线程中保存的变量副本，<br>set()用来设置当前线程中变量的副本，<br>remove()用来移除当前线程中变量的副本，<br>initialValue()是一个protected方法，一般是用来在使用时进行重写的，它是一个延迟加载方法  </p>
-<h2 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h2><p><img src="http://i.imgur.com/A9nfw1e.jpg" alt="">  </p>
-<p>第一句是取得当前线程，然后通过getMap(t)方法获取到一个map，map的类型为ThreadLocalMap。然后接着下面获取到<key,value>键值对，注意这里获取键值对传进去的是  this，而不是当前线程t。  </key,value></p>
-<p>如果获取成功，则返回value值。  </p>
-<p>如果map为空，则调用setInitialValue方法返回value。  </p>
-<p>getMap()<br><img src="http://i.imgur.com/OyctcgA.jpg" alt="">  </p>
-<p>在getMap中，是调用当期线程t，返回当前线程t中的一个成员变量threadLocals。<br><img src="http://i.imgur.com/qPnpfOa.jpg" alt="">  </p>
-<p>实际上就是一个ThreadLocalMap，这个类型是ThreadLocal类的一个内部类:<br><img src="http://i.imgur.com/2g2gaS2.jpg" alt=""><br>ThreadLocalMap的Entry继承了WeakReference，并且使用ThreadLocal作为键值。  </p>
-<h2 id="setInitialValue"><a href="#setInitialValue" class="headerlink" title="setInitialValue()"></a>setInitialValue()</h2><p><img src="http://i.imgur.com/6ROXpdf.jpg" alt=""><br>如果map不为空，就设置键值对，为空，再创建Map<br><img src="http://i.imgur.com/gf3RhcN.jpg" alt="">  </p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在每个线程Thread内部有一个ThreadLocal.ThreadLocalMap类型的成员变量threadLocals，这个threadLocals就是用来存储实际的变量副本的，键值为当前ThreadLocal变量，value为变量副本（即T类型的变量）。  </p>
-<p>初始时，在Thread里面，threadLocals为空，当通过ThreadLocal变量调用get()方法或者set()方法，就会对Thread类中的threadLocals进行初始化，并且以当前ThreadLocal变量为键值，以ThreadLocal要保存的副本变量为value，存到threadLocals。  </p>
-<p>然后在当前线程里面，如果要使用副本变量，就可以通过get方法在threadLocals里面查找。  </p>
-<p>1）实际的通过ThreadLocal创建的副本是存储在每个线程自己的threadLocals中的；</p>
-<p>2）为何threadLocals的类型ThreadLocalMap的键值为ThreadLocal对象，因为每个线程中可有多个类型不同的threadLocal变量；</p>
-<p>3）在进行get之前，必须先set，否则会报空指针异常；  </p>
-<p>如果想在get之前不需要调用set就能正常访问的话，必须重写initialValue()方法。  </p>
-<p>如果没有先set的话，即在map中查找不到对应的存储，则会通过调用setInitialValue方法返回i，而在setInitialValue方法中，有一个语句是T value = initialValue()， 而默认情况下，initialValue方法返回的是null</p>
-<p><img src="http://i.imgur.com/7QdrQ0S.jpg" alt="">  </p>
-<h1 id="ThreadLocal的应用场景"><a href="#ThreadLocal的应用场景" class="headerlink" title="ThreadLocal的应用场景"></a>ThreadLocal的应用场景</h1><p>最常见的ThreadLocal使用场景为 用来解决 数据库连接、Session管理等。  </p>
+    <content type="html"><![CDATA[<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>死锁是两个或更多线程阻塞着等待其它处于死锁状态的线程所持有的锁。死锁通常发生在多个线程同时但以不同的顺序请求同一组锁的时候。  </p>
+<p>例如：<br>如果线程1锁住了A，然后尝试对B进行加锁，同时线程2已经锁住了B，接着尝试对A进行加锁，这时死锁就发生了。<br>线程1永远得不到B，线程2也永远得不到A，并且它们永远也不会知道发生了这样的事情。为了得到彼此的对象（A和B），它们将永远阻塞下去。这种情况就是一个死锁。  </p>
+<h1 id="数据库的死锁"><a href="#数据库的死锁" class="headerlink" title="数据库的死锁"></a>数据库的死锁</h1><p>更加复杂的死锁场景发生在数据库事务中。一个数据库事务可能由多条SQL更新请求组成。<br><strong>当在一个事务中更新一条记录，这条记录就会被锁住避免其他事务的更新请求，直到第一个事务结束。</strong><br>同一个事务中每一个更新请求都可能会锁住一些记录。  </p>
+<p>当多个事务同时需要对一些相同的记录做更新操作时，就很有可能发生死锁，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Transaction 1, request 1, locks record 1 for update</div><div class="line">Transaction 2, request 1, locks record 2 for update</div><div class="line">Transaction 1, request 2, tries to lock record 2 for update.</div><div class="line">Transaction 2, request 2, tries to lock record 1 for update.</div></pre></td></tr></table></figure></p>
+<p>因为锁发生在不同的请求中，并且对于一个事务来说不可能提前知道所有它需要的锁，因此很难检测和避免数据库事务中的死锁。  </p>
+<h1 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h1><p>在有些情况下死锁是可以避免的。  </p>
+<ol>
+<li>加锁顺序</li>
+<li>加锁时限</li>
+<li>死锁检测</li>
+</ol>
+<h2 id="加锁顺序"><a href="#加锁顺序" class="headerlink" title="加锁顺序"></a>加锁顺序</h2><p>当多个线程需要相同的一些锁，但是按照不同的顺序加锁，死锁就很容易发生。  </p>
+<p>如果能确保所有的线程都是按照相同的顺序获得锁，那么死锁就不会发生<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Thread 1:</div><div class="line">  lock A </div><div class="line">  lock B</div><div class="line">  </div><div class="line">Thread 2:</div><div class="line">   wait for A</div><div class="line">   lock C (when A locked)</div><div class="line">  </div><div class="line">Thread 3:</div><div class="line">   wait for A</div><div class="line">   wait for B</div><div class="line">   wait for C</div></pre></td></tr></table></figure></p>
+<p>按照顺序加锁是一种有效的死锁预防机制。但是，这种方式需要你事先知道所有可能会用到的锁(译者注：并对这些锁做适当的排序)，但总有些时候是无法预知的。  </p>
+<h2 id="加锁时限"><a href="#加锁时限" class="headerlink" title="加锁时限"></a>加锁时限</h2><p>另外一个可以避免死锁的方法是在尝试获取锁的时候加一个超时时间，这也就意味着在尝试获取锁的过程中若超过了这个时限该线程则放弃对该锁请求。<br>若一个线程没有在给定的时限内成功获得所有需要的锁，则会进行回退并释放所有已经获得的锁，然后等待一段随机的时间再重试。  </p>
+<p>这段随机的等待时间让其它线程有机会尝试获取相同的这些锁，并且让该应用在没有获得锁的时候可以继续运行(注：加锁超时后可以先继续运行干点其它事情，再回头来重复之前加锁的逻辑)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Thread 1 locks A</div><div class="line">Thread 2 locks B</div><div class="line">  </div><div class="line">Thread 1 attempts to lock B but is blocked</div><div class="line">Thread 2 attempts to lock A but is blocked</div><div class="line">  </div><div class="line">Thread 1&apos;s lock attempt on B times out</div><div class="line">Thread 1 backs up and releases A as well</div><div class="line">Thread 1 waits randomly (e.g. 257 millis) before retrying.</div><div class="line">  </div><div class="line">Thread 2&apos;s lock attempt on A times out</div><div class="line">Thread 2 backs up and releases B as well</div><div class="line">Thread 2 waits randomly (e.g. 43 millis) before retrying.</div></pre></td></tr></table></figure></p>
+<p>需要注意的是，由于存在锁的超时，所以我们不能认为这种场景就一定是出现了死锁。也可能是因为获得了锁的线程（导致其它线程超时）需要很长的时间去完成它的任务。  </p>
+<p>此外，如果有非常多的线程同一时间去竞争同一批资源，就算有超时和回退机制，还是可能会导致这些线程重复地尝试但却始终得不到锁。如果只有两个线程，并且重试的超时时间设定为0到500毫秒之间，这种现象可能不会发生，但是如果是10个或20个线程情况就不同了。因为这些线程等待相等的重试时间的概率就高的多（或者非常接近以至于会出现问题）。  </p>
+<h2 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h2><p>死锁检测是一个更好的死锁预防机制，它主要是针对那些不可能实现按序加锁并且锁超时也不可行的场景。  </p>
+<p>每当一个线程获得了锁，会在线程和锁相关的数据结构中（map、graph等等）将其记下。除此之外，每当有线程请求锁，也需要记录在这个数据结构中。  </p>
+<p>当一个线程请求锁失败时，这个线程可以遍历锁的关系图看看是否有死锁发生。例如，线程A请求锁7，但是锁7这个时候被线程B持有，这时线程A就可以检查一下线程B是否已经请求了线程A当前所持有的锁。如果线程B确实有这样的请求，那么就是发生了死锁（线程A拥有锁1，请求锁7；线程B拥有锁7，请求锁1）。  </p>
+<p>当然，死锁一般要比两个线程互相持有对方的锁这种情况要复杂的多。线程A等待线程B，线程B等待线程C，线程C等待线程D，线程D又在等待线程A。线程A为了检测死锁，它需要递进地检测所有被B请求的锁。从线程B所请求的锁开始，线程A找到了线程C，然后又找到了线程D，发现线程D请求的锁被线程A自己持有着。这是它就知道发生了死锁。  </p>
+<p>可以被用来检测死锁的数据结构。<br><img src="http://i.imgur.com/wW4vN5G.png" alt="">  </p>
+<p>那么当检测出死锁时，这些线程该做些什么呢？  </p>
+<p>一个可行的做法是释放所有锁，回退，并且等待一段随机的时间后重试。这个和简单的加锁超时类似，不一样的是只有死锁已经发生了才回退，而不会是因为加锁的请求超时了。虽然有回退和等待，但是如果有大量的线程竞争同一批锁，它们还是会重复地死锁（编者注：原因同超时类似，不能从根本上减轻竞争）。  </p>
+<p>一个更好的方案是给这些线程设置优先级，让一个（或几个）线程回退，剩下的线程就像没发生死锁一样继续保持着它们需要的锁。如果赋予这些线程的优先级是固定不变的，同一批线程总是会拥有更高的优先级。为避免这个问题，可以在死锁发生的时候设置随机的优先级。  </p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;ThreadLocal&quot;&gt;&lt;a href=&quot;#ThreadLocal&quot; class=&quot;headerlink&quot; title=&quot;ThreadLocal&quot;&gt;&lt;/a&gt;ThreadLocal&lt;/h1&gt;&lt;p&gt;ThreadLocal为变量在每个线程中都创建了一个副本，那么每个线
+      &lt;h1 id=&quot;死锁&quot;&gt;&lt;a href=&quot;#死锁&quot; class=&quot;headerlink&quot; title=&quot;死锁&quot;&gt;&lt;/a&gt;死锁&lt;/h1&gt;&lt;p&gt;死锁是两个或更多线程阻塞着等待其它处于死锁状态的线程所持有的锁。死锁通常发生在多个线程同时但以不同的顺序请求同一组锁的时候。  &lt;/p&gt;
+&lt;
     
     </summary>
     
@@ -1258,10 +1258,10 @@
     
       <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
     
-      <category term="容器" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%AE%B9%E5%99%A8/"/>
+      <category term="并发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%B9%B6%E5%8F%91/"/>
     
     
-      <category term="Java容器" scheme="http://yoursite.com/tags/Java%E5%AE%B9%E5%99%A8/"/>
+      <category term="Java并发" scheme="http://yoursite.com/tags/Java%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   
