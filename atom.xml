@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-02T08:44:07.000Z</updated>
+  <updated>2018-05-16T10:52:56.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,416 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>04_数据库_七个spring事务传播特性</title>
+    <link href="http://yoursite.com/2018/05/16/Database/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/04.%E6%95%B0%E6%8D%AE%E5%BA%93_%E4%B8%83%E4%B8%AAspring%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E7%89%B9%E6%80%A7/"/>
+    <id>http://yoursite.com/2018/05/16/Database/关系型数据库/04.数据库_七个spring事务传播特性/</id>
+    <published>2018-05-16T10:52:56.000Z</published>
+    <updated>2018-05-16T10:52:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="七个spring事务传播特性"><a href="#七个spring事务传播特性" class="headerlink" title="七个spring事务传播特性"></a>七个spring事务传播特性</h2><p>事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。spring支持7种事务传播行为：</p>
+<p>1.propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。</p>
+<p>2.propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。</p>
+<p>3.propagation_mandatory：使用当前事务，如果没有当前事务，就抛出异常。</p>
+<p>4.propagation_required_new：新建事务，如果当前存在事务，把当前事务挂起。</p>
+<p>5.propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。</p>
+<p>6.propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。</p>
+<p>7.propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;七个spring事务传播特性&quot;&gt;&lt;a href=&quot;#七个spring事务传播特性&quot; class=&quot;headerlink&quot; title=&quot;七个spring事务传播特性&quot;&gt;&lt;/a&gt;七个spring事务传播特性&lt;/h2&gt;&lt;p&gt;事务传播行为就是多个事务方法相互调用时，事务
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="关系型数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="关系型数据库" scheme="http://yoursite.com/tags/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>01_数据库设计——三大范式</title>
+    <link href="http://yoursite.com/2018/05/16/Database/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/01.%E6%95%B0%E6%8D%AE%E5%BA%93_%E4%B8%89%E5%A4%A7%E8%8C%83%E5%BC%8F/"/>
+    <id>http://yoursite.com/2018/05/16/Database/关系型数据库/01.数据库_三大范式/</id>
+    <published>2018-05-16T10:52:56.000Z</published>
+    <updated>2018-05-16T10:52:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="数据库设计——三大范式"><a href="#数据库设计——三大范式" class="headerlink" title="数据库设计——三大范式"></a>数据库设计——三大范式</h1><h2 id="数据库设计范式"><a href="#数据库设计范式" class="headerlink" title="数据库设计范式"></a>数据库设计范式</h2><h3 id="什么是范式："><a href="#什么是范式：" class="headerlink" title="什么是范式："></a>什么是范式：</h3><p>简言之就是，数据库设计对数据的存储性能，还有开发人员对数据的操作都有莫大的关系。所以建立科学的，规范的的数据库是需要满足一些规范的来优化数据数据存储方式。在关系型数据库中这些规范就可以称为范式。</p>
+<h3 id="什么是三大范式："><a href="#什么是三大范式：" class="headerlink" title="什么是三大范式："></a>什么是三大范式：</h3><ul>
+<li><p>第一范式：<br>当关系模式R的所有属性都不能在分解为更基本的数据单位时，称R是满足第一范式的，简记为1NF。满足第一范式是关系模式规范化的最低要求，否则，将有很多基本操作在这样的关系模式中实现不了。</p>
+</li>
+<li><p>第二范式：<br>如果关系模式R满足第一范式，并且R得所有非主属性都完全依赖于R的每一个候选关键属性，称R满足第二范式，简记为2NF。</p>
+</li>
+<li><p>第三范式：<br>设R是一个满足第一范式条件的关系模式，X是R的任意属性集，如果X非传递依赖于R的任意一个候选关键字，称R满足第三范式，简记为3NF.</p>
+</li>
+</ul>
+<p>注：关系实质上是一张二维表，其中每一行是一个元组，每一列是一个属性</p>
+<h2 id="理解三大范式"><a href="#理解三大范式" class="headerlink" title="理解三大范式"></a>理解三大范式</h2><h3 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h3><ol>
+<li>每一列属性都是不可再分的属性值，确保每一列的原子性</li>
+<li>两列的属性相近或相似或一样，尽量合并属性一样的列，确保不产生冗余数据。</li>
+</ol>
+<p>举例：<br><img src="https://i.imgur.com/fvOnHv6.jpg" alt="">  </p>
+<p><img src="https://i.imgur.com/DvChYBQ.jpg" alt="">  </p>
+<p>如果需求知道那个省那个市并按其分类，那么显然第一个表格是不容易满足需求的，也不符合第一范式。</p>
+<h3 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h3><p>每一行的数据只能与其中一列相关，即一行数据只做一件事。只要数据列中出现数据重复，就要把表拆分开来。  </p>
+<p>举例：<br><img src="https://i.imgur.com/kEaPtzL.jpg" alt="">  </p>
+<p>一个人同时订几个房间，就会出来一个订单号多条数据，这样子联系人都是重复的，就会造成数据冗余。我们应该把他拆开来。</p>
+<p><img src="https://i.imgur.com/SwTWl8T.jpg" alt="">  </p>
+<p><img src="https://i.imgur.com/nlB5wh1.jpg" alt="">  </p>
+<p>这样便实现啦一条数据做一件事，不掺杂复杂的关系逻辑。同时对表数据的更新维护也更易操作。</p>
+<h3 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h3><p>数据不能存在传递关系，即每个属性都跟主键有直接关系而不是间接关系。像：a–&gt;b–&gt;c  属性之间含有这样的关系，是不符合第三范式的。  </p>
+<p>比如Student表（学号，姓名，年龄，性别，所在院校，院校地址，院校电话）</p>
+<p>这样一个表结构，就存在上述关系。 学号–&gt; 所在院校 –&gt; (院校地址，院校电话)</p>
+<p>这样的表结构，我们应该拆开来，如下。</p>
+<p>（学号，姓名，年龄，性别，所在院校）–（所在院校，院校地址，院校电话）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;数据库设计——三大范式&quot;&gt;&lt;a href=&quot;#数据库设计——三大范式&quot; class=&quot;headerlink&quot; title=&quot;数据库设计——三大范式&quot;&gt;&lt;/a&gt;数据库设计——三大范式&lt;/h1&gt;&lt;h2 id=&quot;数据库设计范式&quot;&gt;&lt;a href=&quot;#数据库设计范式&quot; c
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="关系型数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="关系型数据库" scheme="http://yoursite.com/tags/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>02_数据库_四大特性ACID</title>
+    <link href="http://yoursite.com/2018/05/16/Database/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/02.%E6%95%B0%E6%8D%AE%E5%BA%93_%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7ACID/"/>
+    <id>http://yoursite.com/2018/05/16/Database/关系型数据库/02.数据库_四大特性ACID/</id>
+    <published>2018-05-16T10:52:56.000Z</published>
+    <updated>2018-05-16T10:52:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><p>ACID，指在数据库管理系统（DBMS）中事务所具有的四个特性：<br><strong>原子性（Atomicity）</strong>、<br><strong>一致性（Consistency）</strong>、<br><strong>隔离性（Isolation）</strong>、<br><strong>持久性（Durability）</strong>。</p>
+<p>在数据库系统中，<strong>一个事务是指由一系列数据库操作组成的一个完整的逻辑过程</strong>。例如银行转帐，从原账户扣除金额，以及向目标账户添加金额，这两个数据库操作的总和构成一个完整的逻辑过程，不可拆分。这个过程被称为一个事务，具有ACID特性。</p>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。<br>事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</p>
+<h3 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h3><p>在事务开始之前和事务结束以后，数据库的完整性约束没有被破坏。</p>
+<p>事务将数据库从一个一致性状态带入另一个一致性状态。 比如说，在一个银行事务（在描述关系数据库事务的特性时，基本上都是用银行事务来作为描述对象的）中，需要从存储账户扣除款项，然后在支付账户中增加款项。 如果在这个中转的过程发生了失败，那么绝对不能让数据库只执行其中一个账户的操作，因为这样会导致数据处于不一致的状态（这样的话，银行的账目上，借贷就不平衡了）。</p>
+<p>如果数据库系统运行中发生故障，有些事物尚未完成就被迫中断了，系统就将此事务中对数据库的所有已经完成的操作全部撤销，滚回到事务开始时的一致状态。</p>
+<h3 id="隔离性"><a href="#隔离性" class="headerlink" title="隔离性"></a>隔离性</h3><p>两个事务的执行是互不干扰的，一个事务不可能看到其他事务运行时，中间某一时刻的数据。  </p>
+<p>这个特性是说，直到事务结束时（commit/rollback），其他事务（或者会话）对此事务所操作的数据都不可见（但并不是说其他会话的读取会被阻塞）。 比如说，一个用户正在修改hr.employees表，但是没有提交，那么其他用户在这个修改没有提交之前是看不到这个修改的。  </p>
+<h3 id="持久性"><a href="#持久性" class="headerlink" title="持久性"></a>持久性</h3><p>在事务完成以后，该事务所对数据库所作的更改便持久的保存在数据库之中，并不会被回滚。</p>
+<p>指的是只要事务成功结束，它对数据库所做的更新就必须永久保存下来。即使发生系统崩溃，重新启动数据库系统后，数据库还能恢复到事务成功结束时的状态。</p>
+<p>被提交的更改会永久地保存到数据库中（并不是说以后就不可以修改）。 事务提交之后，数据库必须通过“恢复机制”来确保事务更改的数据不会丢失。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;ACID&quot;&gt;&lt;a href=&quot;#ACID&quot; class=&quot;headerlink&quot; title=&quot;ACID&quot;&gt;&lt;/a&gt;ACID&lt;/h2&gt;&lt;p&gt;ACID，指在数据库管理系统（DBMS）中事务所具有的四个特性：&lt;br&gt;&lt;strong&gt;原子性（Atomicity）&lt;/st
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="关系型数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="关系型数据库" scheme="http://yoursite.com/tags/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>03_数据库_四大隔离级别</title>
+    <link href="http://yoursite.com/2018/05/16/Database/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/03.%E6%95%B0%E6%8D%AE%E5%BA%93_%E5%9B%9B%E5%A4%A7%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/"/>
+    <id>http://yoursite.com/2018/05/16/Database/关系型数据库/03.数据库_四大隔离级别/</id>
+    <published>2018-05-16T10:52:56.000Z</published>
+    <updated>2018-05-16T10:52:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="四种隔离级别"><a href="#四种隔离级别" class="headerlink" title="四种隔离级别"></a>四种隔离级别</h2><ul>
+<li><p><strong>read uncommited(读未提交)</strong>：<br>是最低的事务隔离级别，它允许另外一个事务可以看到这个事务未提交的数据。可防止丢失更新。<br>实现原理：读数据时候不加锁，写数据时候加行级共享锁，提交时释放锁(防止丢失更新)。</p>
+</li>
+<li><p><strong>read commited(读已提交)</strong>：<br>保证一个事物提交后才能被另外一个事务读取。另外一个事务不能读取该事物未提交的数据。可以防止脏读问题。<br>实现原理：事务读取数据（读到数据的时候）加行级共享锁，读完释放；事务写数据时候（写操作发生的瞬间）加行级排他锁，事务结束释放。</p>
+</li>
+<li><p><strong>repeatable read(重复读)</strong>：<br>这种事务隔离级别可以防止脏读，不可重复读。但是可能会出现幻象读。<br>实现原理：和读提交数据不同的是，事务读取数据在读操作开始的瞬间就加上行级共享锁，而且在事务结束的时候才释放。事务写数据时候（写操作发生的瞬间）加行级排他锁，事务结束释放。</p>
+</li>
+<li><p><strong>serializable(序列化)</strong>：<br>这是花费最高代价但最可靠的事务隔离级别。事务被处理为顺序执行。除了防止脏读，不可重复读之外，还避免了幻象读。<br>实现原理：在读操作时，加表级共享锁，事务结束时释放；写操作时候，加表级排他锁，事务结束时释放 </p>
+</li>
+</ul>
+<h3 id="Read-uncommitted-读未提交"><a href="#Read-uncommitted-读未提交" class="headerlink" title="Read uncommitted 读未提交"></a>Read uncommitted 读未提交</h3><p>举例：<br>公司发工资了，领导把5000元打到singo的账号上，但是该事务并未提交，而singo正好去查看账户，发现工资已经到账，是5000元整，非常高兴。可是不幸的是，领导发现发给singo的工资金额不对，是2000元，于是迅速回滚了事务，修改金额后，将事务提交，最后singo实际的工资只有2000元，singo空欢喜一场。  </p>
+<p>出现上述情况，即我们所说的脏读，两个并发的事务，“事务A：领导给singo发工资”、“事务B：singo查询工资账户”，事务B读取了事务A尚未提交的数据。  </p>
+<p>当隔离级别设置为Read uncommitted时，就可能出现脏读，如何避免脏读，请看下一个隔离级别。</p>
+<h3 id="Read-committed-读提交"><a href="#Read-committed-读提交" class="headerlink" title="Read committed 读提交"></a>Read committed 读提交</h3><p>singo拿着工资卡去消费，系统读取到卡里确实有2000元，而此时她的老婆也正好在网上转账，把singo工资卡的2000元转到另一账户，并在singo之前提交了事务，当singo扣款时，系统检查到singo的工资卡已经没有钱，扣款失败，singo十分纳闷，明明卡里有钱，为何……</p>
+<p>出现上述情况，即我们所说的不可重复读，两个并发的事务，“事务A：singo消费”、“事务B：singo的老婆网上转账”，事务A事先读取了数据，事务B紧接了更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了改变。</p>
+<p>当隔离级别设置为Read committed时，避免了脏读，但是可能会造成不可重复读。</p>
+<p><strong>大多数数据库的默认级别就是Read committed，比如Sql Server , Oracle。</strong>如何解决不可重复读这一问题，请看下一个隔离级别。</p>
+<h3 id="Repeatable-read-重复读"><a href="#Repeatable-read-重复读" class="headerlink" title="Repeatable read 重复读"></a>Repeatable read 重复读</h3><p>当隔离级别设置为Repeatable read时，可以避免不可重复读。当singo拿着工资卡去消费时，一旦系统开始读取工资卡信息（即事务开始），singo的老婆就不可能对该记录进行修改，也就是singo的老婆不能在此时转账。  </p>
+<p>虽然Repeatable read避免了不可重复读，但还有可能出现幻读。  </p>
+<p>singo的老婆工作在银行部门，她时常通过银行内部系统查看singo的信用卡消费记录。有一天，她正在查询到singo当月信用卡的总消费金额（select sum(amount) from transaction where month = 本月）为80元，而singo此时正好在外面胡吃海塞后在收银台买单，消费1000元，即新增了一条1000元的消费记录（insert transaction … ），并提交了事务，随后singo的老婆将singo当月信用卡消费的明细打印到A4纸上，却发现消费总额为1080元，singo的老婆很诧异，以为出现了幻觉，幻读就这样产生了。  </p>
+<p><strong>MySQL的默认隔离级别就是Repeatable read。</strong></p>
+<h3 id="Serializable-序列化"><a href="#Serializable-序列化" class="headerlink" title="Serializable 序列化"></a>Serializable 序列化</h3><p>Serializable是最高的事务隔离级别，同时代价也花费最高，性能很低，一般很少使用，在该级别下，事务顺序执行，不仅可以避免脏读、不可重复读，还避免了幻像读。</p>
+<h2 id="概念说明"><a href="#概念说明" class="headerlink" title="概念说明"></a>概念说明</h2><p>脏读: 指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。因为这个数据是还没有提交的数据， 那么另外一 个事务读到的这个数据是脏数据，依据脏数据所做的操作可能是不正确的。</p>
+<p>不可重复读: 指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。 那么，在第一个事务中的两次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。</p>
+<p>幻觉读: 指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，这种修改涉及 到表中的全部数据行。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样。</p>
+<h2 id="mysql-oracle-sql-server中的默认事务隔离级别查看-更改"><a href="#mysql-oracle-sql-server中的默认事务隔离级别查看-更改" class="headerlink" title="mysql,oracle,sql server中的默认事务隔离级别查看,更改"></a>mysql,oracle,sql server中的默认事务隔离级别查看,更改</h2><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><p>mysql默认的事务处理级别是’REPEATABLE-READ’,也就是可重复读  </p>
+<p>1.查看当前会话隔离级别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select @@tx_isolation;</div></pre></td></tr></table></figure></p>
+<p>2.查看系统当前隔离级别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select @@global.tx_isolation;</div></pre></td></tr></table></figure></p>
+<p>3.设置当前会话隔离级别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set session transaction isolatin level repeatable read;</div></pre></td></tr></table></figure></p>
+<p>4.设置系统当前隔离级别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set global transaction isolation level repeatable read;</div></pre></td></tr></table></figure></p>
+<h3 id="Oracle"><a href="#Oracle" class="headerlink" title="Oracle"></a>Oracle</h3><p>oracle数据库支持READ COMMITTED 和 SERIALIZABLE这两种事务隔离级别。  </p>
+<p>默认系统事务隔离级别是READ COMMITTED,也就是读已提交  </p>
+<p>查看系统默认事务隔离级别,也是当前会话隔离级别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">--首先创建一个事务</div><div class="line">declare</div><div class="line">     trans_id Varchar2(100);</div><div class="line">  begin</div><div class="line">     trans_id := dbms_transaction.local_transaction_id( TRUE );</div><div class="line">  end; </div><div class="line">--查看事务隔离级别</div><div class="line"></div><div class="line">SELECT s.sid, s.serial#,</div><div class="line"></div><div class="line">　　CASE BITAND(t.flag, POWER(2, 28))</div><div class="line">　　　　WHEN 0 THEN &apos;READ COMMITTED&apos;</div><div class="line">　　　　ELSE &apos;SERIALIZABLE&apos;</div><div class="line">　　END AS isolation_level</div><div class="line">FROM v$transaction t</div><div class="line">JOIN v$session s ON t.addr = s.taddr AND s.sid = sys_context(&apos;USERENV&apos;, &apos;SID&apos;);</div></pre></td></tr></table></figure></p>
+<h3 id="SQL-Server"><a href="#SQL-Server" class="headerlink" title="SQL Server"></a>SQL Server</h3><p>默认系统事务隔离级别是read committed,也就是读已提交</p>
+<ol>
+<li><p>查看系统当前隔离级别  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DBCC USEROPTIONS </div><div class="line">isolation level 这一项的 Value 既是当前的隔离级别设置值</div></pre></td></tr></table></figure>
+</li>
+<li><p>设置系统当前隔离级别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SET TRANSACTION ISOLATION LEVEL Read UnCommitted;</div><div class="line">其中Read UnCommitted为需要设置的值</div></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;四种隔离级别&quot;&gt;&lt;a href=&quot;#四种隔离级别&quot; class=&quot;headerlink&quot; title=&quot;四种隔离级别&quot;&gt;&lt;/a&gt;四种隔离级别&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;read uncommited(读未提交)&lt;/strong&gt;：&lt;br&gt;是最
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="关系型数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="关系型数据库" scheme="http://yoursite.com/tags/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>01_Git了解</title>
+    <link href="http://yoursite.com/2018/05/02/VCS/Git/01_Git%E4%BA%86%E8%A7%A3/"/>
+    <id>http://yoursite.com/2018/05/02/VCS/Git/01_Git了解/</id>
+    <published>2018-05-02T08:44:07.000Z</published>
+    <updated>2018-05-02T08:44:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Git三种状态"><a href="#Git三种状态" class="headerlink" title="Git三种状态"></a>Git三种状态</h1><p> Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modified)和已暂存(staged)。  </p>
+<p><img src="http://i.imgur.com/i9rgs8D.png" alt="">  </p>
+<p>已提交表示数据已经安全的保存在本地数据库中。 已修改表示修改了文件，但还没保存到数据库中。 已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。  </p>
+<h1 id="工作目录、暂存区域以及-Git-仓库"><a href="#工作目录、暂存区域以及-Git-仓库" class="headerlink" title="工作目录、暂存区域以及 Git 仓库."></a>工作目录、暂存区域以及 Git 仓库.</h1><p>Git 仓库目录是 Git 用来保存项目的元数据和对象数据库的地方。 这是 Git 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。  </p>
+<p>工作目录是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。  </p>
+<p>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。 有时候也被称作`‘索引’’，不过一般说法还是叫暂存区域  </p>
+<p>基本的 Git 工作流程如下：  </p>
+<ol>
+<li>在工作目录中修改文件。</li>
+<li>暂存文件，将文件的快照放入暂存区域。</li>
+<li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。</li>
+</ol>
+<p>如果 Git 目录中保存着的特定版本文件，就属于已提交状态。<br>如果作了修改并已放入暂存区域，就属于已暂存状态。<br>如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。  </p>
+<h1 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h1><p>Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
+<ul>
+<li><p>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 –system 选项的 git config 时，它会从此文件读写配置变量。</p>
+</li>
+<li><p>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 可以传递 –global选项让 Git 读写此文件。</p>
+</li>
+<li><p>当前使用仓库的 Git 目录中的 config 文件(就是 .git/config)：针对该仓库。</p>
+</li>
+</ul>
+<p>每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。  </p>
+<h2 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h2><p>当安装完 Git 应该做的第一件事就是设置你的用户名称与邮件地址。 这样做很重要，因为每一个 Git 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Daniu Su&quot;</div><div class="line">$ git config --global user.email daniu.su@example.com</div></pre></td></tr></table></figure>
+<p>如果使用了 –global 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情， Git 都会使用那些信息。 当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 –global 选项的命令来配置。  </p>
+<h2 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global core.editor emacs</div></pre></td></tr></table></figure>
+<h2 id="检查配置信息"><a href="#检查配置信息" class="headerlink" title="检查配置信息"></a>检查配置信息</h2><p>如果想要检查你的配置，可以使用 git config –list 命令来列出所有 Git 当时能找到的配置。  </p>
+<p>你可能会看到重复的变量名，因为 Git 会从不同的文件中读取同一个配置(例如：/etc/gitconfig 与 ~/.gitconfig)。 这种情况下，Git 会使用它找到的每一个变量的最后一个配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git config --list</div><div class="line">user.name=Daniu Su</div><div class="line">user.email=daniu.su@example.com</div><div class="line">color.status=auto</div><div class="line">color.branch=auto</div><div class="line">color.interactive=auto</div><div class="line">color.diff=auto</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>可以通过输入 git config <key>： 来检查 Git 的某一项配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config user.name</div><div class="line">Daniu Su</div></pre></td></tr></table></figure></key></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Git三种状态&quot;&gt;&lt;a href=&quot;#Git三种状态&quot; class=&quot;headerlink&quot; title=&quot;Git三种状态&quot;&gt;&lt;/a&gt;Git三种状态&lt;/h1&gt;&lt;p&gt; Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modifie
+    
+    </summary>
+    
+      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>07_Git分支管理</title>
+    <link href="http://yoursite.com/2018/05/02/VCS/Git/07_Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/"/>
+    <id>http://yoursite.com/2018/05/02/VCS/Git/07_Git分支管理/</id>
+    <published>2018-05-02T08:44:07.000Z</published>
+    <updated>2018-05-02T08:44:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Git管理分支"><a href="#Git管理分支" class="headerlink" title="Git管理分支"></a>Git管理分支</h1><p>分支操作可以创造另一条线的发展</p>
+<h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><p>使用Git分支<branch name=""> 命令创建新的分支。<br>从现有的，我们可以创建一个新的分支。我们可以使用特定的提交或标签作为一个起点。如果没有提供任何具体的提交ID，然后分支将HEAD 创建作为一个起点  </branch></p>
+<p><strong>git branch new_branch </strong>  </p>
+<p><strong>git branch</strong><br><code>*</code> master<br>new_branch  </p>
+<h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><p>使用git checkout命令到分支之间切换。  </p>
+<p><strong>git checkout new_branch</strong>  </p>
+<p>git branch<br>master<br><code>*</code> new_branch  </p>
+<h2 id="创建和切换分支的快捷方式"><a href="#创建和切换分支的快捷方式" class="headerlink" title="创建和切换分支的快捷方式"></a>创建和切换分支的快捷方式</h2><p>Git提供checkout命令 -b选项，此操作将创建新的分支，并立即切换到新的分支。  </p>
+<p><strong>git checkout -b test_branch</strong>  </p>
+<p>git branch<br>master<br>new_branch<br><code>*</code> test_branch  </p>
+<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><p>一个分支可以用git branch命令的-D选项被删除。但在此之前，切换到其他分支。  </p>
+<p>git branch<br>master<br>new_branch<br><code>*</code> test_branch  </p>
+<p>git checkout master  </p>
+<p>git branch -D test_branch  </p>
+<p>git branch<br><code>*</code> master<br>new_branch  </p>
+<h2 id="重命名分支"><a href="#重命名分支" class="headerlink" title="重命名分支"></a>重命名分支</h2><p>通过使用-m选项，其次是旧分支名称和新分支名称变更分支名称。  </p>
+<p>git branch<br><code>*</code> master<br>new_branch  </p>
+<p>git branch -m new_branch wchar_support  </p>
+<p>git branch<br><code>*</code> master<br>wchar_support  </p>
+<h2 id="合并两个分支"><a href="#合并两个分支" class="headerlink" title="合并两个分支"></a>合并两个分支</h2><p>git branch<br><code>*</code> master<br>wchar_support  </p>
+<p>git push origin wchar_support  </p>
+<h2 id="重订分支"><a href="#重订分支" class="headerlink" title="重订分支"></a>重订分支</h2><p>Git 的 rebase命令的一个分支合并的命令，但不同的是，它修改提交的顺序。  </p>
+<p>Git merge命令，试图把从其他分支提交当前的本地分支的HEAD上。例如 本地的分支已经提交A-&gt; B-&gt; C-&gt; D和合并分支已提交A-&gt; B-&gt; X&gt; Y，则Git合并将当前转换像这样的本地分行A-&gt; B-&gt; C-&gt; D-&gt; X-&gt; Y  </p>
+<p>Git 的rebase命令试图找到当前的本地分支和合并分支之间的共同祖先。然后把修改提交的顺序，在当前的本地分支提交中的本地分支。例如，如果当地的分支已提交A-&gt; B-&gt; C-&gt; D和合并分支已提交A-&gt; B-&gt; X-&gt; Y，Git衍合的类似A-&gt; B转换成当前的本地分支A−&gt;B−&gt;X−&gt;Y−&gt;C−&gt;D  </p>
+<p>当多个开发人员在一个单一的远程资源库的工作，你不能在远程仓库提交修改订单。在这种情况下，可以使用变基操作把本地提交的远程仓库之上的提交，可以推送这些变化。  </p>
+<h1 id="Git-冲突处理"><a href="#Git-冲突处理" class="headerlink" title="Git 冲突处理"></a>Git 冲突处理</h1><h1 id="Git-不同的平台"><a href="#Git-不同的平台" class="headerlink" title="Git 不同的平台"></a>Git 不同的平台</h1><p>GNU/ Linux 和 Mac OS使用换行符（LF）或新行作为行结束字符，而Windows 使用换行和回车（LFCR）的组合来表示行结束字符。  </p>
+<p>为了避免不必要的提交，因为这些行结束的差异，Git客户端配置写在同一行结束 Git 仓库。  </p>
+<p>对于Windows系统中，我们可以配置的Git客户端换行符转换为CRLF格式，同时检查了，并把它们转换回LF格式提交操作过程中  </p>
+<p>git config –global core.autocrlf true  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Git管理分支&quot;&gt;&lt;a href=&quot;#Git管理分支&quot; class=&quot;headerlink&quot; title=&quot;Git管理分支&quot;&gt;&lt;/a&gt;Git管理分支&lt;/h1&gt;&lt;p&gt;分支操作可以创造另一条线的发展&lt;/p&gt;
+&lt;h2 id=&quot;创建分支&quot;&gt;&lt;a href=&quot;#创建分支&quot; 
+    
+    </summary>
+    
+      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>06_Git标签&amp;补丁操作</title>
+    <link href="http://yoursite.com/2018/05/02/VCS/Git/06_Git%E6%A0%87%E7%AD%BE&amp;%E8%A1%A5%E4%B8%81%E6%93%8D%E4%BD%9C/"/>
+    <id>http://yoursite.com/2018/05/02/VCS/Git/06_Git标签&amp;补丁操作/</id>
+    <published>2018-05-02T08:44:07.000Z</published>
+    <updated>2018-05-02T08:44:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Git-标签操作"><a href="#Git-标签操作" class="headerlink" title="Git 标签操作"></a>Git 标签操作</h1><p>有意义的名称到一个特定的版本库中的标签操作。  </p>
+<h2 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h2><p>标记当前HEAD使用git tag命令。  </p>
+<p>提供的标记名称前加上-a选项，使用-m选项，并提供标签信息。  </p>
+<p><strong>git tag -a ‘Release_1_0’ -m ‘Tagged basic string’</strong>  </p>
+<p><strong>git push origin tag Release_1_0</strong>  </p>
+<h2 id="查看标签"><a href="#查看标签" class="headerlink" title="查看标签"></a>查看标签</h2><p>通过使用Git tag命令 使用-l选项 查看所有可用标签。</p>
+<p>git pull  </p>
+<p><strong>git tag -l</strong>  </p>
+<p>使用Git的show命令后跟标记名称的有关标签查看更多细节。</p>
+<p><strong>git show Release_1_0</strong>  </p>
+<h2 id="删除标签"><a href="#删除标签" class="headerlink" title="删除标签"></a>删除标签</h2><p>git tag  </p>
+<p><strong>git tag -d Release_1_0</strong>  </p>
+<p>git push origin :Release_1_0  </p>
+<h1 id="Git-补丁操作"><a href="#Git-补丁操作" class="headerlink" title="Git 补丁操作"></a>Git 补丁操作</h1><p>补丁是文本文件，其内容是相似于Git diff，但随着代码，它也有元数据有关提交，如提交ID，日期，提交信息等，我们可以创建补丁提交和其他人可以将它们应用到自己的资料库。</p>
+<p>git status -s  </p>
+<p>git add string_operations.c  </p>
+<p>git commit -m “Added my_strcat function”  </p>
+<p>git format-patch -1  </p>
+<p>Git提供两个命令来应用补丁调幅分别为： git am 和 git apply .<br>git apply命令修改本地文件时，而无需创建提交，<br>git am命令修改文件，会一并创建提交。  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Git-标签操作&quot;&gt;&lt;a href=&quot;#Git-标签操作&quot; class=&quot;headerlink&quot; title=&quot;Git 标签操作&quot;&gt;&lt;/a&gt;Git 标签操作&lt;/h1&gt;&lt;p&gt;有意义的名称到一个特定的版本库中的标签操作。  &lt;/p&gt;
+&lt;h2 id=&quot;创建标签&quot;&gt;&lt;a 
+    
+    </summary>
+    
+      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>04_Git创建操作</title>
+    <link href="http://yoursite.com/2018/05/02/VCS/Git/04_Git%E5%88%9B%E5%BB%BA%E6%93%8D%E4%BD%9C/"/>
+    <id>http://yoursite.com/2018/05/02/VCS/Git/04_Git创建操作/</id>
+    <published>2018-05-02T08:44:07.000Z</published>
+    <updated>2018-05-02T08:44:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Git创建操作"><a href="#Git创建操作" class="headerlink" title="Git创建操作"></a>Git创建操作</h1><p>作为Git服务器。需要一个的Git服务器允许团队协作。</p>
+<h2 id="创建新用户"><a href="#创建新用户" class="headerlink" title="创建新用户"></a>创建新用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># add new group</div><div class="line">[root@CentOS ~]# groupadd dev</div><div class="line">  </div><div class="line"># add new user</div><div class="line">[root@CentOS ~]# useradd -G devs -d /home/gituser -m -s /bin/bash gituser</div><div class="line">  </div><div class="line"># change password</div><div class="line">[root@CentOS ~]# passwd gituser</div></pre></td></tr></table></figure>
+<h2 id="创建一个裸库"><a href="#创建一个裸库" class="headerlink" title="创建一个裸库"></a>创建一个裸库</h2><p>初始化一个新的资料库使用init命令后面加上 -bare选项。它初始化没有工作目录库。按照惯例裸库必须命名为 .git。  </p>
+<h2 id="生成公共-私有RSA密钥对"><a href="#生成公共-私有RSA密钥对" class="headerlink" title="生成公共/私有RSA密钥对"></a>生成公共/私有RSA密钥对</h2><p>遍历Git服务器端的配置过程中，使用ssh-keygen实用程序生成公共/私有RSA密钥对，使用这些键进行用户认证。  </p>
+<p>打开一个终端并输入以下命令，直接按回车为每个输入。成功完成后，它会创建主目录 .ssh目录内。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[tom@CentOS ~]$ pwd</div><div class="line">/home/tom</div><div class="line">  </div><div class="line">[tom@CentOS ~]$ ssh-keygen</div></pre></td></tr></table></figure>
+<p>ssh-keygen 已经产生了两个键，第一个是私有的（即id_rsa），另一个是公共（即id_rsa.pub文件）。  </p>
+<h2 id="添加键-authorized-keys"><a href="#添加键-authorized-keys" class="headerlink" title="添加键 authorized_keys"></a>添加键 authorized_keys</h2><p>假设有两个开发项目即Tom 和Jerry工作。两个用户生成公钥。让我们来看看如何使用这些密钥进行身份验证。  </p>
+<p>Tom 添加他的公钥服务器使用 ssh-copy-id这个命令下面给出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[tom@CentOS ~]$ pwd</div><div class="line">/home/tom</div><div class="line">  </div><div class="line">[tom@CentOS ~]$ ssh-copy-id -i ~/.ssh/id_rsa.pub gituser@git.server.com</div></pre></td></tr></table></figure></p>
+<p>上面的命令会产生以下结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">gituser@git.server.com&apos;s password:</div><div class="line">Now try logging into the machine, with &quot;ssh &apos;gituser@git.server.com&apos;&quot;, and check in:</div><div class="line">.ssh/authorized_keys</div><div class="line">to make sure we haven&apos;t added extra keys that you weren&apos;t expecting.</div></pre></td></tr></table></figure></p>
+<p>同样，Jerry 也增加了他的公共密钥服务器使用 ssh-copy-id 这个命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[jerry@CentOS ~]$ pwd</div><div class="line">/home/jerry</div><div class="line">  </div><div class="line">[jerry@CentOS ~]$ ssh-copy-id -i ~/.ssh/id_rsa gituser@git.server.com</div></pre></td></tr></table></figure></p>
+<p>上面的命令会产生以下结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">gituser@git.server.com&apos;s password:</div><div class="line">Now try logging into the machine, with &quot;ssh &apos;gituser@git.server.com&apos;&quot;, and check in:</div><div class="line">.ssh/authorized_keys</div><div class="line">to make sure we haven&apos;t added extra keys that you weren&apos;t expecting.</div></pre></td></tr></table></figure></p>
+<h2 id="推修改到版本库"><a href="#推修改到版本库" class="headerlink" title="推修改到版本库"></a>推修改到版本库</h2><p>Git的init命令创建 .git 目录来存储元数据的存储库。每次读取配置从 .git/config 文件.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[tom@CentOS tom_repo]$ git init</div><div class="line">Initialized empty Git repository in /home/tom/tom_repo/.git/</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ echo &apos;TODO: Add contents for README&apos; &gt; README</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ git status -s</div><div class="line">?? README</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ git add .</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ git status -s</div><div class="line">A README</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ git commit -m &apos;Initial commit&apos;</div></pre></td></tr></table></figure></p>
+<p>执行git 的日志命令，检查日志消息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[tom@CentOS tom_repo]$ git log</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Git创建操作&quot;&gt;&lt;a href=&quot;#Git创建操作&quot; class=&quot;headerlink&quot; title=&quot;Git创建操作&quot;&gt;&lt;/a&gt;Git创建操作&lt;/h1&gt;&lt;p&gt;作为Git服务器。需要一个的Git服务器允许团队协作。&lt;/p&gt;
+&lt;h2 id=&quot;创建新用户&quot;&gt;&lt;a 
+    
+    </summary>
+    
+      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>03_Git环境设置</title>
+    <link href="http://yoursite.com/2018/05/02/VCS/Git/03_Git%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://yoursite.com/2018/05/02/VCS/Git/03_Git环境设置/</id>
+    <published>2018-05-02T08:44:07.000Z</published>
+    <updated>2018-05-02T08:44:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Git环境设置"><a href="#Git环境设置" class="headerlink" title="Git环境设置"></a>Git环境设置</h1><h2 id="Git客户端安装"><a href="#Git客户端安装" class="headerlink" title="Git客户端安装"></a>Git客户端安装</h2><p>sudo apt-get install git-core  </p>
+<h1 id="自定义Git环境"><a href="#自定义Git环境" class="headerlink" title="自定义Git环境"></a>自定义Git环境</h1><h2 id="设置用户名"><a href="#设置用户名" class="headerlink" title="设置用户名"></a>设置用户名</h2><p>git config –global user.name “mortal”  </p>
+<h2 id="设置电子邮件ID"><a href="#设置电子邮件ID" class="headerlink" title="设置电子邮件ID"></a>设置电子邮件ID</h2><p>git config –global user.email “mortalliaoyujian@163.com”  </p>
+<h2 id="避免PULLING提交合并"><a href="#避免PULLING提交合并" class="headerlink" title="避免PULLING提交合并"></a>避免PULLING提交合并</h2><p>git config –global branch.autosetuprebase always  </p>
+<h2 id="颜色高亮"><a href="#颜色高亮" class="headerlink" title="颜色高亮"></a>颜色高亮</h2><p>使颜色突出显示在控制台的Git。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git config --global color.ui true</div><div class="line">  </div><div class="line">$ git config --global color.status auto</div><div class="line">  </div><div class="line">$ git config --global color.branch auto</div></pre></td></tr></table></figure></p>
+<h2 id="设置默认编辑器"><a href="#设置默认编辑器" class="headerlink" title="设置默认编辑器"></a>设置默认编辑器</h2><p>$ git config –global core.editor vim  </p>
+<h2 id="设置默认的合并工具"><a href="#设置默认的合并工具" class="headerlink" title="设置默认的合并工具"></a>设置默认的合并工具</h2><p>Git不会提供一个默认的合并工具整合到工作树冲突的更改。我们可以设置默认的合并工具，通过启用以下设置。  </p>
+<p>$ git config –global merge.tool vimdiff  </p>
+<h2 id="列出GIT设置"><a href="#列出GIT设置" class="headerlink" title="列出GIT设置"></a>列出GIT设置</h2><p>$ git config –list  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Git环境设置&quot;&gt;&lt;a href=&quot;#Git环境设置&quot; class=&quot;headerlink&quot; title=&quot;Git环境设置&quot;&gt;&lt;/a&gt;Git环境设置&lt;/h1&gt;&lt;h2 id=&quot;Git客户端安装&quot;&gt;&lt;a href=&quot;#Git客户端安装&quot; class=&quot;headerli
+    
+    </summary>
+    
+      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>05_Git操作</title>
@@ -154,230 +564,6 @@
   </entry>
   
   <entry>
-    <title>03_Git环境设置</title>
-    <link href="http://yoursite.com/2018/05/02/VCS/Git/03_Git%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE/"/>
-    <id>http://yoursite.com/2018/05/02/VCS/Git/03_Git环境设置/</id>
-    <published>2018-05-02T08:44:07.000Z</published>
-    <updated>2018-05-02T08:44:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Git环境设置"><a href="#Git环境设置" class="headerlink" title="Git环境设置"></a>Git环境设置</h1><h2 id="Git客户端安装"><a href="#Git客户端安装" class="headerlink" title="Git客户端安装"></a>Git客户端安装</h2><p>sudo apt-get install git-core  </p>
-<h1 id="自定义Git环境"><a href="#自定义Git环境" class="headerlink" title="自定义Git环境"></a>自定义Git环境</h1><h2 id="设置用户名"><a href="#设置用户名" class="headerlink" title="设置用户名"></a>设置用户名</h2><p>git config –global user.name “mortal”  </p>
-<h2 id="设置电子邮件ID"><a href="#设置电子邮件ID" class="headerlink" title="设置电子邮件ID"></a>设置电子邮件ID</h2><p>git config –global user.email “mortalliaoyujian@163.com”  </p>
-<h2 id="避免PULLING提交合并"><a href="#避免PULLING提交合并" class="headerlink" title="避免PULLING提交合并"></a>避免PULLING提交合并</h2><p>git config –global branch.autosetuprebase always  </p>
-<h2 id="颜色高亮"><a href="#颜色高亮" class="headerlink" title="颜色高亮"></a>颜色高亮</h2><p>使颜色突出显示在控制台的Git。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git config --global color.ui true</div><div class="line">  </div><div class="line">$ git config --global color.status auto</div><div class="line">  </div><div class="line">$ git config --global color.branch auto</div></pre></td></tr></table></figure></p>
-<h2 id="设置默认编辑器"><a href="#设置默认编辑器" class="headerlink" title="设置默认编辑器"></a>设置默认编辑器</h2><p>$ git config –global core.editor vim  </p>
-<h2 id="设置默认的合并工具"><a href="#设置默认的合并工具" class="headerlink" title="设置默认的合并工具"></a>设置默认的合并工具</h2><p>Git不会提供一个默认的合并工具整合到工作树冲突的更改。我们可以设置默认的合并工具，通过启用以下设置。  </p>
-<p>$ git config –global merge.tool vimdiff  </p>
-<h2 id="列出GIT设置"><a href="#列出GIT设置" class="headerlink" title="列出GIT设置"></a>列出GIT设置</h2><p>$ git config –list  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Git环境设置&quot;&gt;&lt;a href=&quot;#Git环境设置&quot; class=&quot;headerlink&quot; title=&quot;Git环境设置&quot;&gt;&lt;/a&gt;Git环境设置&lt;/h1&gt;&lt;h2 id=&quot;Git客户端安装&quot;&gt;&lt;a href=&quot;#Git客户端安装&quot; class=&quot;headerli
-    
-    </summary>
-    
-      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
-    
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>01_Git了解</title>
-    <link href="http://yoursite.com/2018/05/02/VCS/Git/01_Git%E4%BA%86%E8%A7%A3/"/>
-    <id>http://yoursite.com/2018/05/02/VCS/Git/01_Git了解/</id>
-    <published>2018-05-02T08:44:07.000Z</published>
-    <updated>2018-05-02T08:44:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Git三种状态"><a href="#Git三种状态" class="headerlink" title="Git三种状态"></a>Git三种状态</h1><p> Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modified)和已暂存(staged)。  </p>
-<p><img src="http://i.imgur.com/i9rgs8D.png" alt="">  </p>
-<p>已提交表示数据已经安全的保存在本地数据库中。 已修改表示修改了文件，但还没保存到数据库中。 已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。  </p>
-<h1 id="工作目录、暂存区域以及-Git-仓库"><a href="#工作目录、暂存区域以及-Git-仓库" class="headerlink" title="工作目录、暂存区域以及 Git 仓库."></a>工作目录、暂存区域以及 Git 仓库.</h1><p>Git 仓库目录是 Git 用来保存项目的元数据和对象数据库的地方。 这是 Git 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。  </p>
-<p>工作目录是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。  </p>
-<p>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。 有时候也被称作`‘索引’’，不过一般说法还是叫暂存区域  </p>
-<p>基本的 Git 工作流程如下：  </p>
-<ol>
-<li>在工作目录中修改文件。</li>
-<li>暂存文件，将文件的快照放入暂存区域。</li>
-<li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。</li>
-</ol>
-<p>如果 Git 目录中保存着的特定版本文件，就属于已提交状态。<br>如果作了修改并已放入暂存区域，就属于已暂存状态。<br>如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。  </p>
-<h1 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h1><p>Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
-<ul>
-<li><p>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 –system 选项的 git config 时，它会从此文件读写配置变量。</p>
-</li>
-<li><p>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 可以传递 –global选项让 Git 读写此文件。</p>
-</li>
-<li><p>当前使用仓库的 Git 目录中的 config 文件(就是 .git/config)：针对该仓库。</p>
-</li>
-</ul>
-<p>每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。  </p>
-<h2 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h2><p>当安装完 Git 应该做的第一件事就是设置你的用户名称与邮件地址。 这样做很重要，因为每一个 Git 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Daniu Su&quot;</div><div class="line">$ git config --global user.email daniu.su@example.com</div></pre></td></tr></table></figure>
-<p>如果使用了 –global 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情， Git 都会使用那些信息。 当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 –global 选项的命令来配置。  </p>
-<h2 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global core.editor emacs</div></pre></td></tr></table></figure>
-<h2 id="检查配置信息"><a href="#检查配置信息" class="headerlink" title="检查配置信息"></a>检查配置信息</h2><p>如果想要检查你的配置，可以使用 git config –list 命令来列出所有 Git 当时能找到的配置。  </p>
-<p>你可能会看到重复的变量名，因为 Git 会从不同的文件中读取同一个配置(例如：/etc/gitconfig 与 ~/.gitconfig)。 这种情况下，Git 会使用它找到的每一个变量的最后一个配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git config --list</div><div class="line">user.name=Daniu Su</div><div class="line">user.email=daniu.su@example.com</div><div class="line">color.status=auto</div><div class="line">color.branch=auto</div><div class="line">color.interactive=auto</div><div class="line">color.diff=auto</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>可以通过输入 git config <key>： 来检查 Git 的某一项配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config user.name</div><div class="line">Daniu Su</div></pre></td></tr></table></figure></key></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Git三种状态&quot;&gt;&lt;a href=&quot;#Git三种状态&quot; class=&quot;headerlink&quot; title=&quot;Git三种状态&quot;&gt;&lt;/a&gt;Git三种状态&lt;/h1&gt;&lt;p&gt; Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modifie
-    
-    </summary>
-    
-      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
-    
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>04_Git创建操作</title>
-    <link href="http://yoursite.com/2018/05/02/VCS/Git/04_Git%E5%88%9B%E5%BB%BA%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2018/05/02/VCS/Git/04_Git创建操作/</id>
-    <published>2018-05-02T08:44:07.000Z</published>
-    <updated>2018-05-02T08:44:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Git创建操作"><a href="#Git创建操作" class="headerlink" title="Git创建操作"></a>Git创建操作</h1><p>作为Git服务器。需要一个的Git服务器允许团队协作。</p>
-<h2 id="创建新用户"><a href="#创建新用户" class="headerlink" title="创建新用户"></a>创建新用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># add new group</div><div class="line">[root@CentOS ~]# groupadd dev</div><div class="line">  </div><div class="line"># add new user</div><div class="line">[root@CentOS ~]# useradd -G devs -d /home/gituser -m -s /bin/bash gituser</div><div class="line">  </div><div class="line"># change password</div><div class="line">[root@CentOS ~]# passwd gituser</div></pre></td></tr></table></figure>
-<h2 id="创建一个裸库"><a href="#创建一个裸库" class="headerlink" title="创建一个裸库"></a>创建一个裸库</h2><p>初始化一个新的资料库使用init命令后面加上 -bare选项。它初始化没有工作目录库。按照惯例裸库必须命名为 .git。  </p>
-<h2 id="生成公共-私有RSA密钥对"><a href="#生成公共-私有RSA密钥对" class="headerlink" title="生成公共/私有RSA密钥对"></a>生成公共/私有RSA密钥对</h2><p>遍历Git服务器端的配置过程中，使用ssh-keygen实用程序生成公共/私有RSA密钥对，使用这些键进行用户认证。  </p>
-<p>打开一个终端并输入以下命令，直接按回车为每个输入。成功完成后，它会创建主目录 .ssh目录内。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[tom@CentOS ~]$ pwd</div><div class="line">/home/tom</div><div class="line">  </div><div class="line">[tom@CentOS ~]$ ssh-keygen</div></pre></td></tr></table></figure>
-<p>ssh-keygen 已经产生了两个键，第一个是私有的（即id_rsa），另一个是公共（即id_rsa.pub文件）。  </p>
-<h2 id="添加键-authorized-keys"><a href="#添加键-authorized-keys" class="headerlink" title="添加键 authorized_keys"></a>添加键 authorized_keys</h2><p>假设有两个开发项目即Tom 和Jerry工作。两个用户生成公钥。让我们来看看如何使用这些密钥进行身份验证。  </p>
-<p>Tom 添加他的公钥服务器使用 ssh-copy-id这个命令下面给出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[tom@CentOS ~]$ pwd</div><div class="line">/home/tom</div><div class="line">  </div><div class="line">[tom@CentOS ~]$ ssh-copy-id -i ~/.ssh/id_rsa.pub gituser@git.server.com</div></pre></td></tr></table></figure></p>
-<p>上面的命令会产生以下结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">gituser@git.server.com&apos;s password:</div><div class="line">Now try logging into the machine, with &quot;ssh &apos;gituser@git.server.com&apos;&quot;, and check in:</div><div class="line">.ssh/authorized_keys</div><div class="line">to make sure we haven&apos;t added extra keys that you weren&apos;t expecting.</div></pre></td></tr></table></figure></p>
-<p>同样，Jerry 也增加了他的公共密钥服务器使用 ssh-copy-id 这个命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[jerry@CentOS ~]$ pwd</div><div class="line">/home/jerry</div><div class="line">  </div><div class="line">[jerry@CentOS ~]$ ssh-copy-id -i ~/.ssh/id_rsa gituser@git.server.com</div></pre></td></tr></table></figure></p>
-<p>上面的命令会产生以下结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">gituser@git.server.com&apos;s password:</div><div class="line">Now try logging into the machine, with &quot;ssh &apos;gituser@git.server.com&apos;&quot;, and check in:</div><div class="line">.ssh/authorized_keys</div><div class="line">to make sure we haven&apos;t added extra keys that you weren&apos;t expecting.</div></pre></td></tr></table></figure></p>
-<h2 id="推修改到版本库"><a href="#推修改到版本库" class="headerlink" title="推修改到版本库"></a>推修改到版本库</h2><p>Git的init命令创建 .git 目录来存储元数据的存储库。每次读取配置从 .git/config 文件.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[tom@CentOS tom_repo]$ git init</div><div class="line">Initialized empty Git repository in /home/tom/tom_repo/.git/</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ echo &apos;TODO: Add contents for README&apos; &gt; README</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ git status -s</div><div class="line">?? README</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ git add .</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ git status -s</div><div class="line">A README</div><div class="line">  </div><div class="line">[tom@CentOS tom_repo]$ git commit -m &apos;Initial commit&apos;</div></pre></td></tr></table></figure></p>
-<p>执行git 的日志命令，检查日志消息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[tom@CentOS tom_repo]$ git log</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Git创建操作&quot;&gt;&lt;a href=&quot;#Git创建操作&quot; class=&quot;headerlink&quot; title=&quot;Git创建操作&quot;&gt;&lt;/a&gt;Git创建操作&lt;/h1&gt;&lt;p&gt;作为Git服务器。需要一个的Git服务器允许团队协作。&lt;/p&gt;
-&lt;h2 id=&quot;创建新用户&quot;&gt;&lt;a 
-    
-    </summary>
-    
-      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
-    
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>06_Git标签&amp;补丁操作</title>
-    <link href="http://yoursite.com/2018/05/02/VCS/Git/06_Git%E6%A0%87%E7%AD%BE&amp;%E8%A1%A5%E4%B8%81%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2018/05/02/VCS/Git/06_Git标签&amp;补丁操作/</id>
-    <published>2018-05-02T08:44:07.000Z</published>
-    <updated>2018-05-02T08:44:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Git-标签操作"><a href="#Git-标签操作" class="headerlink" title="Git 标签操作"></a>Git 标签操作</h1><p>有意义的名称到一个特定的版本库中的标签操作。  </p>
-<h2 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h2><p>标记当前HEAD使用git tag命令。  </p>
-<p>提供的标记名称前加上-a选项，使用-m选项，并提供标签信息。  </p>
-<p><strong>git tag -a ‘Release_1_0’ -m ‘Tagged basic string’</strong>  </p>
-<p><strong>git push origin tag Release_1_0</strong>  </p>
-<h2 id="查看标签"><a href="#查看标签" class="headerlink" title="查看标签"></a>查看标签</h2><p>通过使用Git tag命令 使用-l选项 查看所有可用标签。</p>
-<p>git pull  </p>
-<p><strong>git tag -l</strong>  </p>
-<p>使用Git的show命令后跟标记名称的有关标签查看更多细节。</p>
-<p><strong>git show Release_1_0</strong>  </p>
-<h2 id="删除标签"><a href="#删除标签" class="headerlink" title="删除标签"></a>删除标签</h2><p>git tag  </p>
-<p><strong>git tag -d Release_1_0</strong>  </p>
-<p>git push origin :Release_1_0  </p>
-<h1 id="Git-补丁操作"><a href="#Git-补丁操作" class="headerlink" title="Git 补丁操作"></a>Git 补丁操作</h1><p>补丁是文本文件，其内容是相似于Git diff，但随着代码，它也有元数据有关提交，如提交ID，日期，提交信息等，我们可以创建补丁提交和其他人可以将它们应用到自己的资料库。</p>
-<p>git status -s  </p>
-<p>git add string_operations.c  </p>
-<p>git commit -m “Added my_strcat function”  </p>
-<p>git format-patch -1  </p>
-<p>Git提供两个命令来应用补丁调幅分别为： git am 和 git apply .<br>git apply命令修改本地文件时，而无需创建提交，<br>git am命令修改文件，会一并创建提交。  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Git-标签操作&quot;&gt;&lt;a href=&quot;#Git-标签操作&quot; class=&quot;headerlink&quot; title=&quot;Git 标签操作&quot;&gt;&lt;/a&gt;Git 标签操作&lt;/h1&gt;&lt;p&gt;有意义的名称到一个特定的版本库中的标签操作。  &lt;/p&gt;
-&lt;h2 id=&quot;创建标签&quot;&gt;&lt;a 
-    
-    </summary>
-    
-      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
-    
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>07_Git分支管理</title>
-    <link href="http://yoursite.com/2018/05/02/VCS/Git/07_Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/"/>
-    <id>http://yoursite.com/2018/05/02/VCS/Git/07_Git分支管理/</id>
-    <published>2018-05-02T08:44:07.000Z</published>
-    <updated>2018-05-02T08:44:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Git管理分支"><a href="#Git管理分支" class="headerlink" title="Git管理分支"></a>Git管理分支</h1><p>分支操作可以创造另一条线的发展</p>
-<h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><p>使用Git分支<branch name=""> 命令创建新的分支。<br>从现有的，我们可以创建一个新的分支。我们可以使用特定的提交或标签作为一个起点。如果没有提供任何具体的提交ID，然后分支将HEAD 创建作为一个起点  </branch></p>
-<p><strong>git branch new_branch </strong>  </p>
-<p><strong>git branch</strong><br><code>*</code> master<br>new_branch  </p>
-<h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><p>使用git checkout命令到分支之间切换。  </p>
-<p><strong>git checkout new_branch</strong>  </p>
-<p>git branch<br>master<br><code>*</code> new_branch  </p>
-<h2 id="创建和切换分支的快捷方式"><a href="#创建和切换分支的快捷方式" class="headerlink" title="创建和切换分支的快捷方式"></a>创建和切换分支的快捷方式</h2><p>Git提供checkout命令 -b选项，此操作将创建新的分支，并立即切换到新的分支。  </p>
-<p><strong>git checkout -b test_branch</strong>  </p>
-<p>git branch<br>master<br>new_branch<br><code>*</code> test_branch  </p>
-<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><p>一个分支可以用git branch命令的-D选项被删除。但在此之前，切换到其他分支。  </p>
-<p>git branch<br>master<br>new_branch<br><code>*</code> test_branch  </p>
-<p>git checkout master  </p>
-<p>git branch -D test_branch  </p>
-<p>git branch<br><code>*</code> master<br>new_branch  </p>
-<h2 id="重命名分支"><a href="#重命名分支" class="headerlink" title="重命名分支"></a>重命名分支</h2><p>通过使用-m选项，其次是旧分支名称和新分支名称变更分支名称。  </p>
-<p>git branch<br><code>*</code> master<br>new_branch  </p>
-<p>git branch -m new_branch wchar_support  </p>
-<p>git branch<br><code>*</code> master<br>wchar_support  </p>
-<h2 id="合并两个分支"><a href="#合并两个分支" class="headerlink" title="合并两个分支"></a>合并两个分支</h2><p>git branch<br><code>*</code> master<br>wchar_support  </p>
-<p>git push origin wchar_support  </p>
-<h2 id="重订分支"><a href="#重订分支" class="headerlink" title="重订分支"></a>重订分支</h2><p>Git 的 rebase命令的一个分支合并的命令，但不同的是，它修改提交的顺序。  </p>
-<p>Git merge命令，试图把从其他分支提交当前的本地分支的HEAD上。例如 本地的分支已经提交A-&gt; B-&gt; C-&gt; D和合并分支已提交A-&gt; B-&gt; X&gt; Y，则Git合并将当前转换像这样的本地分行A-&gt; B-&gt; C-&gt; D-&gt; X-&gt; Y  </p>
-<p>Git 的rebase命令试图找到当前的本地分支和合并分支之间的共同祖先。然后把修改提交的顺序，在当前的本地分支提交中的本地分支。例如，如果当地的分支已提交A-&gt; B-&gt; C-&gt; D和合并分支已提交A-&gt; B-&gt; X-&gt; Y，Git衍合的类似A-&gt; B转换成当前的本地分支A−&gt;B−&gt;X−&gt;Y−&gt;C−&gt;D  </p>
-<p>当多个开发人员在一个单一的远程资源库的工作，你不能在远程仓库提交修改订单。在这种情况下，可以使用变基操作把本地提交的远程仓库之上的提交，可以推送这些变化。  </p>
-<h1 id="Git-冲突处理"><a href="#Git-冲突处理" class="headerlink" title="Git 冲突处理"></a>Git 冲突处理</h1><h1 id="Git-不同的平台"><a href="#Git-不同的平台" class="headerlink" title="Git 不同的平台"></a>Git 不同的平台</h1><p>GNU/ Linux 和 Mac OS使用换行符（LF）或新行作为行结束字符，而Windows 使用换行和回车（LFCR）的组合来表示行结束字符。  </p>
-<p>为了避免不必要的提交，因为这些行结束的差异，Git客户端配置写在同一行结束 Git 仓库。  </p>
-<p>对于Windows系统中，我们可以配置的Git客户端换行符转换为CRLF格式，同时检查了，并把它们转换回LF格式提交操作过程中  </p>
-<p>git config –global core.autocrlf true  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Git管理分支&quot;&gt;&lt;a href=&quot;#Git管理分支&quot; class=&quot;headerlink&quot; title=&quot;Git管理分支&quot;&gt;&lt;/a&gt;Git管理分支&lt;/h1&gt;&lt;p&gt;分支操作可以创造另一条线的发展&lt;/p&gt;
-&lt;h2 id=&quot;创建分支&quot;&gt;&lt;a href=&quot;#创建分支&quot; 
-    
-    </summary>
-    
-      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
-    
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
     <title>02_Java容器篇_String</title>
     <link href="http://yoursite.com/2018/04/14/Backend/Java/container/02_Java%E5%AE%B9%E5%99%A8%E7%AF%87_String/"/>
     <id>http://yoursite.com/2018/04/14/Backend/Java/container/02_Java容器篇_String/</id>
@@ -443,57 +629,6 @@
     
     
       <category term="Java容器" scheme="http://yoursite.com/tags/Java%E5%AE%B9%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>01_Docker_Hello_World</title>
-    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/"/>
-    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/</id>
-    <published>2017-11-27T06:15:50.000Z</published>
-    <updated>2017-11-27T06:15:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Docker-Hello-World"><a href="#Docker-Hello-World" class="headerlink" title="Docker Hello World"></a>Docker Hello World</h1><p>Docker 允许你在容器内运行应用程序， 使用 docker run 命令来在容器内运行一个应用程序。<br>输出Hello world</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run ubuntu:15.10 /bin/echo &quot;Hello world&quot;</div><div class="line">Hello world</div></pre></td></tr></table></figure>
-<p>各个参数解析：</p>
-<ul>
-<li>docker: Docker 的二进制执行文件。</li>
-<li>run:与前面的 docker 组合来运行一个容器。</li>
-<li>ubuntu:15.10指定要运行的镜像，Docker首先从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像。</li>
-<li>/bin/echo “Hello world”: 在启动的容器里执行的命令</li>
-</ul>
-<h1 id="运行交互式的容器"><a href="#运行交互式的容器" class="headerlink" title="运行交互式的容器"></a>运行交互式的容器</h1><p>通过docker的两个参数 -i -t，让docker运行的容器实现”对话”的能力</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -i -t ubuntu:15.10 /bin/bash</div><div class="line">root@dc0050c79503:/#</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run –i -t –-name nginx_test[这个名字可以随便起] 904d6c400333[IMAGE ID] /bin/bash</div></pre></td></tr></table></figure>
-<p>各个参数解析：</p>
-<ul>
-<li>t:在新容器内指定一个伪终端或终端。</li>
-<li>i:允许你对容器内的标准输入 (STDIN) 进行交互。</li>
-</ul>
-<p>此时已进入一个 ubuntu15.10系统的容器<br>尝试在容器中运行命令 cat /proc/version和ls分别查看当前系统的版本信息和当前目录下的文件列表<br><img src="https://i.imgur.com/oiv1hkR.png" alt=""><br>可以通过运行exit命令或者使用CTRL+D来退出容器。</p>
-<h1 id="启动容器（后台模式）"><a href="#启动容器（后台模式）" class="headerlink" title="启动容器（后台模式）"></a>启动容器（后台模式）</h1><p>使用以下命令创建一个以进程方式运行的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -d ubuntu:15.10 /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;</div><div class="line">2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63</div></pre></td></tr></table></figure></p>
-<p>在输出中，我们没有看到期望的”hello world”，而是一串长字符<br>2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63<br>这个长字符串叫做容器ID，对每个容器来说都是唯一的，我们可以通过容器ID来查看对应的容器发生了什么。<br>首先，我们需要确认容器有在运行，可以通过 <strong>docker ps</strong> 来查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
-<p>CONTAINER ID:容器ID<br>NAMES:自动分配的容器名称</p>
-<p>在容器内使用 <strong>docker logs</strong> 命令，查看容器内的标准输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs 2b1b7a428627</div></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs amazing_cori</div></pre></td></tr></table></figure></p>
-<h1 id="git-bash连接"><a href="#git-bash连接" class="headerlink" title="git-bash连接"></a>git-bash连接</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-machine ssh default</div></pre></td></tr></table></figure>
-<h1 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h1><p>使用 <strong>docker stop</strong> 命令来停止容器:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker stop 2b1b7a428627</div></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs amazing_cori</div></pre></td></tr></table></figure></p>
-<p>通过docker ps查看，容器已经停止工作:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Docker-Hello-World&quot;&gt;&lt;a href=&quot;#Docker-Hello-World&quot; class=&quot;headerlink&quot; title=&quot;Docker Hello World&quot;&gt;&lt;/a&gt;Docker Hello World&lt;/h1&gt;&lt;p&gt;Docker
-    
-    </summary>
-    
-      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
-    
-      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
-    
-    
-      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
     
   </entry>
   
@@ -565,6 +700,145 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Docker-镜像使用&quot;&gt;&lt;a href=&quot;#Docker-镜像使用&quot; class=&quot;headerlink&quot; title=&quot;Docker 镜像使用&quot;&gt;&lt;/a&gt;Docker 镜像使用&lt;/h1&gt;&lt;p&gt;当运行容器时，使用的镜像如果在本地中不存在，docker 就会自动从
+    
+    </summary>
+    
+      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
+    
+      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
+    
+    
+      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>04_Docker_容器连接</title>
+    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_%E5%AE%B9%E5%99%A8%E8%BF%9E%E6%8E%A5/"/>
+    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_容器连接/</id>
+    <published>2017-11-27T06:15:50.000Z</published>
+    <updated>2017-11-27T06:15:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="网络端口映射"><a href="#网络端口映射" class="headerlink" title="网络端口映射"></a>网络端口映射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P training/webapp python app.py</div><div class="line">fce072cc88cee71b1cdceb57c2821d054a4a59f67da6b416fceb5593f059fc6d</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 5000:5000 training/webapp python app.py</div><div class="line">33e4523d30aaf0258915c368e66e03b49535de0ef20317d3f639d40222ba6bc0</div></pre></td></tr></table></figure>
+<ul>
+<li>-P :是容器内部端口随机映射到主机的高端口。</li>
+<li>-p : 是容器内部端口绑定到指定的主机端口。</li>
+</ul>
+<p>使用 docker ps 来看到端口5000绑定主机端口32768。</p>
+<p>可以指定容器绑定的网络地址，比如绑定127.0.0.1。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5001:5002 training/webapp python app.py</div><div class="line">95c6ceef88ca3e71eaf303c2833fd6701d8d1b2572b5613b5a932dfdfe8a857c</div></pre></td></tr></table></figure></p>
+<p>默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 /udp。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py</div><div class="line">6779686f06f6204579c1d655dd8b2b31e8e809b245a97b2d3a8e35abe9dcd22a</div></pre></td></tr></table></figure></p>
+<p><strong>docker port</strong> 命令可以让我们快捷地查看端口的绑定情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker port adoring_stonebraker 5002</div></pre></td></tr></table></figure></p>
+<h2 id="Docker容器连接"><a href="#Docker容器连接" class="headerlink" title="Docker容器连接"></a>Docker容器连接</h2><p>端口映射并不是唯一把 docker 连接到另一个容器的方法。<br>docker有一个连接系统允许将多个容器连接在一起，共享连接信息。<br>docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。  </p>
+<h3 id="容器命名"><a href="#容器命名" class="headerlink" title="容器命名"></a>容器命名</h3><p>当我们创建一个容器的时候，docker会自动对它进行命名。另外，我们也可以使用–name标识来命名容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P --name runoob training/webapp python app.py</div><div class="line">43780a6eabaaf14e590b6e849235c75f3012995403f97749775e38436db9a441</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;网络端口映射&quot;&gt;&lt;a href=&quot;#网络端口映射&quot; class=&quot;headerlink&quot; title=&quot;网络端口映射&quot;&gt;&lt;/a&gt;网络端口映射&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
+    
+    </summary>
+    
+      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
+    
+      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
+    
+    
+      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>02_Docker_容器使用</title>
+    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/02_Docker_%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/02_Docker_容器使用/</id>
+    <published>2017-11-27T06:15:50.000Z</published>
+    <updated>2017-11-27T06:15:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker-容器使用"><a href="#Docker-容器使用" class="headerlink" title="Docker 容器使用"></a>Docker 容器使用</h1><h2 id="Docker-客户端"><a href="#Docker-客户端" class="headerlink" title="Docker 客户端"></a>Docker 客户端</h2><p>可以直接输入 docker 命令来查看到 Docker 客户端的所有命令选项。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~# docker</div></pre></td></tr></table></figure></p>
+<p><img src="https://i.imgur.com/sjan9rZ.png" alt="">  </p>
+<p>可以通过命令 <strong>docker command –help</strong> 更深入的了解指定的 Docker 命令使用方法。<br>例如要查看 docker stats 指令的具体使用方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~# docker stats --help</div></pre></td></tr></table></figure></p>
+<p><img src="https://i.imgur.com/BA4GSFY.png" alt="">  </p>
+<h2 id="运行一个web应用"><a href="#运行一个web应用" class="headerlink" title="运行一个web应用"></a>运行一个web应用</h2><p>使用 docker 构建一个 web 应用程序。<br>在docker容器中运行一个 Python Flask 应用来运行一个web应用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~# docker run -d -P training/webapp python app.py</div></pre></td></tr></table></figure></p>
+<p>参数说明:</p>
+<ul>
+<li>d:让容器在后台运行。</li>
+<li>P:将容器内部使用的网络端口映射到我们使用的主机上。</li>
+</ul>
+<h2 id="查看-WEB-应用容器"><a href="#查看-WEB-应用容器" class="headerlink" title="查看 WEB 应用容器"></a>查看 WEB 应用容器</h2><p>使用 <strong>docker ps</strong> 来查看我们正在运行的容器<br>使用 <strong>docker inspect</strong> 命令可以查看更详细的关于某一个容器的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
+<p>多了端口信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PORTS</div><div class="line">0.0.0.0:32769-&gt;5000/tcp</div></pre></td></tr></table></figure></p>
+<p>Docker 开放了 5000 端口（默认 Python Flask 端口）映射到主机端口 32769 上。</p>
+<p>也可以指定 -p 标识来绑定指定端口。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -d -p 5000:5000 training/webapp python app.py</div></pre></td></tr></table></figure></p>
+<p>docker ps查看正在运行的容器<br>容器内部的 5000 端口映射到我们本地主机的 5000 端口上。  </p>
+<h2 id="网络端口的快捷方式"><a href="#网络端口的快捷方式" class="headerlink" title="网络端口的快捷方式"></a>网络端口的快捷方式</h2><p>通过 <strong>docker ps</strong> 命令可以查看到容器的端口映射<br>docker还提供了另一个快捷方式： <strong>docker port</strong> ,使用 docker port 可以查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker port 7a38a1ad55c6</div><div class="line">5000/tcp -&gt; 0.0.0.0:5000</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker port determined_swanson</div><div class="line">5000/tcp -&gt; 0.0.0.0:5000</div></pre></td></tr></table></figure></p>
+<h2 id="查看WEB应用程序日志"><a href="#查看WEB应用程序日志" class="headerlink" title="查看WEB应用程序日志"></a>查看WEB应用程序日志</h2><p><strong>docker logs [ID或者名字]</strong> 可以查看容器内部的标准输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs -f 7a38a1ad55c6</div><div class="line"> * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)</div><div class="line">192.168.239.1 - - [09/May/2016 16:30:37] &quot;GET / HTTP/1.1&quot; 200 -</div><div class="line">192.168.239.1 - - [09/May/2016 16:30:37] &quot;GET /favicon.ico HTTP/1.1&quot; 404 -</div></pre></td></tr></table></figure>
+<p>-f:让 dokcer logs 像使用 tail -f 一样来输出容器内部的标准输出。<br>从上面，可以看到应用程序使用的是 5000 端口并且能够查看到应用程序的访问日志。  </p>
+<h2 id="查看WEB应用程序容器的进程"><a href="#查看WEB应用程序容器的进程" class="headerlink" title="查看WEB应用程序容器的进程"></a>查看WEB应用程序容器的进程</h2><p>使用 <strong>docker top</strong> 来查看容器内部运行的进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker top determined_swanson</div></pre></td></tr></table></figure></p>
+<h2 id="检查WEB应用程序"><a href="#检查WEB应用程序" class="headerlink" title="检查WEB应用程序"></a>检查WEB应用程序</h2><p>使用 <strong>docker inspect</strong> 来查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker inspect determined_swanson</div><div class="line">[</div><div class="line">    &#123;</div><div class="line">        &quot;Id&quot;: &quot;7a38a1ad55c6914b360b565819604733db751d86afd2575236a70a2519527361&quot;,</div><div class="line">        &quot;Created&quot;: &quot;2016-05-09T16:20:45.427996598Z&quot;,</div><div class="line">        &quot;Path&quot;: &quot;python&quot;,</div><div class="line">        &quot;Args&quot;: [</div><div class="line">            &quot;app.py&quot;</div><div class="line">        ],</div><div class="line">        &quot;State&quot;: &#123;</div><div class="line">            &quot;Status&quot;: &quot;running&quot;,</div><div class="line">......</div></pre></td></tr></table></figure></p>
+<h2 id="停止WEB应用容器"><a href="#停止WEB应用容器" class="headerlink" title="停止WEB应用容器"></a>停止WEB应用容器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker stop determined_swanson   </div><div class="line">determined_swanson</div></pre></td></tr></table></figure>
+<h2 id="重启WEB应用容器"><a href="#重启WEB应用容器" class="headerlink" title="重启WEB应用容器"></a>重启WEB应用容器</h2><p>已经停止的容器，可以使用命令 docker start 来启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker start determined_swanson</div><div class="line">determined_swanson</div></pre></td></tr></table></figure></p>
+<p>docker ps -l 查询最后一次创建的容器  </p>
+<p>正在运行的容器，我们可以使用 docker restart 命令来重启  </p>
+<h2 id="移除WEB应用容器"><a href="#移除WEB应用容器" class="headerlink" title="移除WEB应用容器"></a>移除WEB应用容器</h2><p>可以使用 <strong>docker rm</strong> 命令来删除不需要的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker rm determined_swanson  </div><div class="line">determined_swanson</div></pre></td></tr></table></figure></p>
+<p>删除容器时，容器必须是停止状态，否则会报如下错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker rm determined_swanson</div><div class="line">Error response from daemon: You cannot remove a running container 7a38a1ad55c6914b360b565819604733db751d86afd2575236a70a2519527361. Stop the container before attempting removal or use -f</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Docker-容器使用&quot;&gt;&lt;a href=&quot;#Docker-容器使用&quot; class=&quot;headerlink&quot; title=&quot;Docker 容器使用&quot;&gt;&lt;/a&gt;Docker 容器使用&lt;/h1&gt;&lt;h2 id=&quot;Docker-客户端&quot;&gt;&lt;a href=&quot;#Docker-
+    
+    </summary>
+    
+      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
+    
+      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
+    
+    
+      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>01_Docker_Hello_World</title>
+    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/"/>
+    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/</id>
+    <published>2017-11-27T06:15:50.000Z</published>
+    <updated>2017-11-27T06:15:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker-Hello-World"><a href="#Docker-Hello-World" class="headerlink" title="Docker Hello World"></a>Docker Hello World</h1><p>Docker 允许你在容器内运行应用程序， 使用 docker run 命令来在容器内运行一个应用程序。<br>输出Hello world</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run ubuntu:15.10 /bin/echo &quot;Hello world&quot;</div><div class="line">Hello world</div></pre></td></tr></table></figure>
+<p>各个参数解析：</p>
+<ul>
+<li>docker: Docker 的二进制执行文件。</li>
+<li>run:与前面的 docker 组合来运行一个容器。</li>
+<li>ubuntu:15.10指定要运行的镜像，Docker首先从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像。</li>
+<li>/bin/echo “Hello world”: 在启动的容器里执行的命令</li>
+</ul>
+<h1 id="运行交互式的容器"><a href="#运行交互式的容器" class="headerlink" title="运行交互式的容器"></a>运行交互式的容器</h1><p>通过docker的两个参数 -i -t，让docker运行的容器实现”对话”的能力</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -i -t ubuntu:15.10 /bin/bash</div><div class="line">root@dc0050c79503:/#</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run –i -t –-name nginx_test[这个名字可以随便起] 904d6c400333[IMAGE ID] /bin/bash</div></pre></td></tr></table></figure>
+<p>各个参数解析：</p>
+<ul>
+<li>t:在新容器内指定一个伪终端或终端。</li>
+<li>i:允许你对容器内的标准输入 (STDIN) 进行交互。</li>
+</ul>
+<p>此时已进入一个 ubuntu15.10系统的容器<br>尝试在容器中运行命令 cat /proc/version和ls分别查看当前系统的版本信息和当前目录下的文件列表<br><img src="https://i.imgur.com/oiv1hkR.png" alt=""><br>可以通过运行exit命令或者使用CTRL+D来退出容器。</p>
+<h1 id="启动容器（后台模式）"><a href="#启动容器（后台模式）" class="headerlink" title="启动容器（后台模式）"></a>启动容器（后台模式）</h1><p>使用以下命令创建一个以进程方式运行的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -d ubuntu:15.10 /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;</div><div class="line">2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63</div></pre></td></tr></table></figure></p>
+<p>在输出中，我们没有看到期望的”hello world”，而是一串长字符<br>2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63<br>这个长字符串叫做容器ID，对每个容器来说都是唯一的，我们可以通过容器ID来查看对应的容器发生了什么。<br>首先，我们需要确认容器有在运行，可以通过 <strong>docker ps</strong> 来查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
+<p>CONTAINER ID:容器ID<br>NAMES:自动分配的容器名称</p>
+<p>在容器内使用 <strong>docker logs</strong> 命令，查看容器内的标准输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs 2b1b7a428627</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs amazing_cori</div></pre></td></tr></table></figure></p>
+<h1 id="git-bash连接"><a href="#git-bash连接" class="headerlink" title="git-bash连接"></a>git-bash连接</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-machine ssh default</div></pre></td></tr></table></figure>
+<h1 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h1><p>使用 <strong>docker stop</strong> 命令来停止容器:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker stop 2b1b7a428627</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs amazing_cori</div></pre></td></tr></table></figure></p>
+<p>通过docker ps查看，容器已经停止工作:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Docker-Hello-World&quot;&gt;&lt;a href=&quot;#Docker-Hello-World&quot; class=&quot;headerlink&quot; title=&quot;Docker Hello World&quot;&gt;&lt;/a&gt;Docker Hello World&lt;/h1&gt;&lt;p&gt;Docker
     
     </summary>
     
@@ -841,294 +1115,6 @@
     
     
       <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>02_Docker_容器使用</title>
-    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/02_Docker_%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/02_Docker_容器使用/</id>
-    <published>2017-11-27T06:15:50.000Z</published>
-    <updated>2017-11-27T06:15:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Docker-容器使用"><a href="#Docker-容器使用" class="headerlink" title="Docker 容器使用"></a>Docker 容器使用</h1><h2 id="Docker-客户端"><a href="#Docker-客户端" class="headerlink" title="Docker 客户端"></a>Docker 客户端</h2><p>可以直接输入 docker 命令来查看到 Docker 客户端的所有命令选项。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~# docker</div></pre></td></tr></table></figure></p>
-<p><img src="https://i.imgur.com/sjan9rZ.png" alt="">  </p>
-<p>可以通过命令 <strong>docker command –help</strong> 更深入的了解指定的 Docker 命令使用方法。<br>例如要查看 docker stats 指令的具体使用方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~# docker stats --help</div></pre></td></tr></table></figure></p>
-<p><img src="https://i.imgur.com/BA4GSFY.png" alt="">  </p>
-<h2 id="运行一个web应用"><a href="#运行一个web应用" class="headerlink" title="运行一个web应用"></a>运行一个web应用</h2><p>使用 docker 构建一个 web 应用程序。<br>在docker容器中运行一个 Python Flask 应用来运行一个web应用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~# docker run -d -P training/webapp python app.py</div></pre></td></tr></table></figure></p>
-<p>参数说明:</p>
-<ul>
-<li>d:让容器在后台运行。</li>
-<li>P:将容器内部使用的网络端口映射到我们使用的主机上。</li>
-</ul>
-<h2 id="查看-WEB-应用容器"><a href="#查看-WEB-应用容器" class="headerlink" title="查看 WEB 应用容器"></a>查看 WEB 应用容器</h2><p>使用 <strong>docker ps</strong> 来查看我们正在运行的容器<br>使用 <strong>docker inspect</strong> 命令可以查看更详细的关于某一个容器的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
-<p>多了端口信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PORTS</div><div class="line">0.0.0.0:32769-&gt;5000/tcp</div></pre></td></tr></table></figure></p>
-<p>Docker 开放了 5000 端口（默认 Python Flask 端口）映射到主机端口 32769 上。</p>
-<p>也可以指定 -p 标识来绑定指定端口。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -d -p 5000:5000 training/webapp python app.py</div></pre></td></tr></table></figure></p>
-<p>docker ps查看正在运行的容器<br>容器内部的 5000 端口映射到我们本地主机的 5000 端口上。  </p>
-<h2 id="网络端口的快捷方式"><a href="#网络端口的快捷方式" class="headerlink" title="网络端口的快捷方式"></a>网络端口的快捷方式</h2><p>通过 <strong>docker ps</strong> 命令可以查看到容器的端口映射<br>docker还提供了另一个快捷方式： <strong>docker port</strong> ,使用 docker port 可以查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker port 7a38a1ad55c6</div><div class="line">5000/tcp -&gt; 0.0.0.0:5000</div></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker port determined_swanson</div><div class="line">5000/tcp -&gt; 0.0.0.0:5000</div></pre></td></tr></table></figure></p>
-<h2 id="查看WEB应用程序日志"><a href="#查看WEB应用程序日志" class="headerlink" title="查看WEB应用程序日志"></a>查看WEB应用程序日志</h2><p><strong>docker logs [ID或者名字]</strong> 可以查看容器内部的标准输出。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs -f 7a38a1ad55c6</div><div class="line"> * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)</div><div class="line">192.168.239.1 - - [09/May/2016 16:30:37] &quot;GET / HTTP/1.1&quot; 200 -</div><div class="line">192.168.239.1 - - [09/May/2016 16:30:37] &quot;GET /favicon.ico HTTP/1.1&quot; 404 -</div></pre></td></tr></table></figure>
-<p>-f:让 dokcer logs 像使用 tail -f 一样来输出容器内部的标准输出。<br>从上面，可以看到应用程序使用的是 5000 端口并且能够查看到应用程序的访问日志。  </p>
-<h2 id="查看WEB应用程序容器的进程"><a href="#查看WEB应用程序容器的进程" class="headerlink" title="查看WEB应用程序容器的进程"></a>查看WEB应用程序容器的进程</h2><p>使用 <strong>docker top</strong> 来查看容器内部运行的进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker top determined_swanson</div></pre></td></tr></table></figure></p>
-<h2 id="检查WEB应用程序"><a href="#检查WEB应用程序" class="headerlink" title="检查WEB应用程序"></a>检查WEB应用程序</h2><p>使用 <strong>docker inspect</strong> 来查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker inspect determined_swanson</div><div class="line">[</div><div class="line">    &#123;</div><div class="line">        &quot;Id&quot;: &quot;7a38a1ad55c6914b360b565819604733db751d86afd2575236a70a2519527361&quot;,</div><div class="line">        &quot;Created&quot;: &quot;2016-05-09T16:20:45.427996598Z&quot;,</div><div class="line">        &quot;Path&quot;: &quot;python&quot;,</div><div class="line">        &quot;Args&quot;: [</div><div class="line">            &quot;app.py&quot;</div><div class="line">        ],</div><div class="line">        &quot;State&quot;: &#123;</div><div class="line">            &quot;Status&quot;: &quot;running&quot;,</div><div class="line">......</div></pre></td></tr></table></figure></p>
-<h2 id="停止WEB应用容器"><a href="#停止WEB应用容器" class="headerlink" title="停止WEB应用容器"></a>停止WEB应用容器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker stop determined_swanson   </div><div class="line">determined_swanson</div></pre></td></tr></table></figure>
-<h2 id="重启WEB应用容器"><a href="#重启WEB应用容器" class="headerlink" title="重启WEB应用容器"></a>重启WEB应用容器</h2><p>已经停止的容器，可以使用命令 docker start 来启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker start determined_swanson</div><div class="line">determined_swanson</div></pre></td></tr></table></figure></p>
-<p>docker ps -l 查询最后一次创建的容器  </p>
-<p>正在运行的容器，我们可以使用 docker restart 命令来重启  </p>
-<h2 id="移除WEB应用容器"><a href="#移除WEB应用容器" class="headerlink" title="移除WEB应用容器"></a>移除WEB应用容器</h2><p>可以使用 <strong>docker rm</strong> 命令来删除不需要的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker rm determined_swanson  </div><div class="line">determined_swanson</div></pre></td></tr></table></figure></p>
-<p>删除容器时，容器必须是停止状态，否则会报如下错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker rm determined_swanson</div><div class="line">Error response from daemon: You cannot remove a running container 7a38a1ad55c6914b360b565819604733db751d86afd2575236a70a2519527361. Stop the container before attempting removal or use -f</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Docker-容器使用&quot;&gt;&lt;a href=&quot;#Docker-容器使用&quot; class=&quot;headerlink&quot; title=&quot;Docker 容器使用&quot;&gt;&lt;/a&gt;Docker 容器使用&lt;/h1&gt;&lt;h2 id=&quot;Docker-客户端&quot;&gt;&lt;a href=&quot;#Docker-
-    
-    </summary>
-    
-      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
-    
-      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
-    
-    
-      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>04_Docker_容器连接</title>
-    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_%E5%AE%B9%E5%99%A8%E8%BF%9E%E6%8E%A5/"/>
-    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_容器连接/</id>
-    <published>2017-11-27T06:15:50.000Z</published>
-    <updated>2017-11-27T06:15:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="网络端口映射"><a href="#网络端口映射" class="headerlink" title="网络端口映射"></a>网络端口映射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P training/webapp python app.py</div><div class="line">fce072cc88cee71b1cdceb57c2821d054a4a59f67da6b416fceb5593f059fc6d</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 5000:5000 training/webapp python app.py</div><div class="line">33e4523d30aaf0258915c368e66e03b49535de0ef20317d3f639d40222ba6bc0</div></pre></td></tr></table></figure>
-<ul>
-<li>-P :是容器内部端口随机映射到主机的高端口。</li>
-<li>-p : 是容器内部端口绑定到指定的主机端口。</li>
-</ul>
-<p>使用 docker ps 来看到端口5000绑定主机端口32768。</p>
-<p>可以指定容器绑定的网络地址，比如绑定127.0.0.1。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5001:5002 training/webapp python app.py</div><div class="line">95c6ceef88ca3e71eaf303c2833fd6701d8d1b2572b5613b5a932dfdfe8a857c</div></pre></td></tr></table></figure></p>
-<p>默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 /udp。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py</div><div class="line">6779686f06f6204579c1d655dd8b2b31e8e809b245a97b2d3a8e35abe9dcd22a</div></pre></td></tr></table></figure></p>
-<p><strong>docker port</strong> 命令可以让我们快捷地查看端口的绑定情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker port adoring_stonebraker 5002</div></pre></td></tr></table></figure></p>
-<h2 id="Docker容器连接"><a href="#Docker容器连接" class="headerlink" title="Docker容器连接"></a>Docker容器连接</h2><p>端口映射并不是唯一把 docker 连接到另一个容器的方法。<br>docker有一个连接系统允许将多个容器连接在一起，共享连接信息。<br>docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。  </p>
-<h3 id="容器命名"><a href="#容器命名" class="headerlink" title="容器命名"></a>容器命名</h3><p>当我们创建一个容器的时候，docker会自动对它进行命名。另外，我们也可以使用–name标识来命名容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P --name runoob training/webapp python app.py</div><div class="line">43780a6eabaaf14e590b6e849235c75f3012995403f97749775e38436db9a441</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;网络端口映射&quot;&gt;&lt;a href=&quot;#网络端口映射&quot; class=&quot;headerlink&quot; title=&quot;网络端口映射&quot;&gt;&lt;/a&gt;网络端口映射&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
-    
-    </summary>
-    
-      <category term="Cloud&amp;BigData" scheme="http://yoursite.com/categories/Cloud-BigData/"/>
-    
-      <category term="Docker" scheme="http://yoursite.com/categories/Cloud-BigData/Docker/"/>
-    
-    
-      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>10_Java容器篇_ThreadLocal</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/container/10_Java%E5%AE%B9%E5%99%A8%E7%AF%87_ThreadLocal/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/container/10_Java容器篇_ThreadLocal/</id>
-    <published>2017-07-29T12:57:13.000Z</published>
-    <updated>2017-07-29T12:57:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h1><p>ThreadLocal为变量在每个线程中都创建了一个副本，那么每个线程可以访问自己内部的副本变量。</p>
-<h1 id="ThreadLocal类提供的方法："><a href="#ThreadLocal类提供的方法：" class="headerlink" title="ThreadLocal类提供的方法："></a>ThreadLocal类提供的方法：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public T get() &#123; &#125;</div><div class="line">public void set(T value) &#123; &#125;</div><div class="line">public void remove() &#123; &#125;</div><div class="line">protected T initialValue() &#123; &#125;</div></pre></td></tr></table></figure>
-<p>get()方法是用来获取ThreadLocal在当前线程中保存的变量副本，<br>set()用来设置当前线程中变量的副本，<br>remove()用来移除当前线程中变量的副本，<br>initialValue()是一个protected方法，一般是用来在使用时进行重写的，它是一个延迟加载方法  </p>
-<h2 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h2><p><img src="http://i.imgur.com/A9nfw1e.jpg" alt="">  </p>
-<p>第一句是取得当前线程，然后通过getMap(t)方法获取到一个map，map的类型为ThreadLocalMap。然后接着下面获取到<key,value>键值对，注意这里获取键值对传进去的是  this，而不是当前线程t。  </key,value></p>
-<p>如果获取成功，则返回value值。  </p>
-<p>如果map为空，则调用setInitialValue方法返回value。  </p>
-<p>getMap()<br><img src="http://i.imgur.com/OyctcgA.jpg" alt="">  </p>
-<p>在getMap中，是调用当期线程t，返回当前线程t中的一个成员变量threadLocals。<br><img src="http://i.imgur.com/qPnpfOa.jpg" alt="">  </p>
-<p>实际上就是一个ThreadLocalMap，这个类型是ThreadLocal类的一个内部类:<br><img src="http://i.imgur.com/2g2gaS2.jpg" alt=""><br>ThreadLocalMap的Entry继承了WeakReference，并且使用ThreadLocal作为键值。  </p>
-<h2 id="setInitialValue"><a href="#setInitialValue" class="headerlink" title="setInitialValue()"></a>setInitialValue()</h2><p><img src="http://i.imgur.com/6ROXpdf.jpg" alt=""><br>如果map不为空，就设置键值对，为空，再创建Map<br><img src="http://i.imgur.com/gf3RhcN.jpg" alt="">  </p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在每个线程Thread内部有一个ThreadLocal.ThreadLocalMap类型的成员变量threadLocals，这个threadLocals就是用来存储实际的变量副本的，键值为当前ThreadLocal变量，value为变量副本（即T类型的变量）。  </p>
-<p>初始时，在Thread里面，threadLocals为空，当通过ThreadLocal变量调用get()方法或者set()方法，就会对Thread类中的threadLocals进行初始化，并且以当前ThreadLocal变量为键值，以ThreadLocal要保存的副本变量为value，存到threadLocals。  </p>
-<p>然后在当前线程里面，如果要使用副本变量，就可以通过get方法在threadLocals里面查找。  </p>
-<p>1）实际的通过ThreadLocal创建的副本是存储在每个线程自己的threadLocals中的；</p>
-<p>2）为何threadLocals的类型ThreadLocalMap的键值为ThreadLocal对象，因为每个线程中可有多个类型不同的threadLocal变量；</p>
-<p>3）在进行get之前，必须先set，否则会报空指针异常；  </p>
-<p>如果想在get之前不需要调用set就能正常访问的话，必须重写initialValue()方法。  </p>
-<p>如果没有先set的话，即在map中查找不到对应的存储，则会通过调用setInitialValue方法返回i，而在setInitialValue方法中，有一个语句是T value = initialValue()， 而默认情况下，initialValue方法返回的是null</p>
-<p><img src="http://i.imgur.com/7QdrQ0S.jpg" alt="">  </p>
-<h1 id="ThreadLocal的应用场景"><a href="#ThreadLocal的应用场景" class="headerlink" title="ThreadLocal的应用场景"></a>ThreadLocal的应用场景</h1><p>最常见的ThreadLocal使用场景为 用来解决 数据库连接、Session管理等。  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;ThreadLocal&quot;&gt;&lt;a href=&quot;#ThreadLocal&quot; class=&quot;headerlink&quot; title=&quot;ThreadLocal&quot;&gt;&lt;/a&gt;ThreadLocal&lt;/h1&gt;&lt;p&gt;ThreadLocal为变量在每个线程中都创建了一个副本，那么每个线
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="容器" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="Java容器" scheme="http://yoursite.com/tags/Java%E5%AE%B9%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>01_Java容器篇_前言</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/container/01_Java%E5%AE%B9%E5%99%A8%E7%AF%87_%E5%89%8D%E8%A8%80/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/container/01_Java容器篇_前言/</id>
-    <published>2017-07-29T12:57:13.000Z</published>
-    <updated>2017-07-29T12:57:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>这几天一直在面试，跟一个面试官聊了挺多，其中有一点感悟特别深，也提点了我。</p>
-<p>是啊，有些知识点可能永远也用不上，像ArrayList和LinkedList，源码这辈子不知道都没关系，可惜，用不到不能够是偷懒就不学的理由，积少成多才能质变。</p>
-<p>所以从现在必须花时间看源码上。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这几天一直在面试，跟一个面试官聊了挺多，其中有一点感悟特别深，也提点了我。&lt;/p&gt;
-&lt;p&gt;是啊，有些知识点可能永远也用不上，像ArrayList和LinkedList，源码这辈子不知道都没关系，可惜，用不到不能够是偷懒就不学的理由，积少成多才能质变。&lt;/p&gt;
-&lt;p&gt;所以从现
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="容器" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="Java容器" scheme="http://yoursite.com/tags/Java%E5%AE%B9%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>03_Java并发篇_Java同步块</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/03_Java%E5%B9%B6%E5%8F%91%E7%AF%87_Java%E5%90%8C%E6%AD%A5%E5%9D%97/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/03_Java并发篇_Java同步块/</id>
-    <published>2017-07-29T12:57:13.000Z</published>
-    <updated>2017-07-29T12:57:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Java-同步关键字（synchronized）"><a href="#Java-同步关键字（synchronized）" class="headerlink" title="Java 同步关键字（synchronized）"></a>Java 同步关键字（synchronized）</h1><p>Java中的同步块用synchronized标记。同步块在Java中是同步在某个对象上。所有同步在一个对象上的同步块在同时只能被一个线程进入并执行操作。所有其他等待进入该同步块的线程将被阻塞，直到执行该同步块中的线程退出。  </p>
-<p>有四种不同的同步块：  </p>
-<ol>
-<li>实例方法</li>
-<li>静态方法</li>
-<li>实例方法中的同步块</li>
-<li>静态方法中的同步块</li>
-</ol>
-<h1 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h1><p>1、通过共享对象通信</p>
-<p>2、忙等待</p>
-<p>3、wait(),notify()和notifyAll()</p>
-<p>4、丢失的信号</p>
-<p>5、不要对常量字符串或全局对象调用wait()</p>
-<h2 id="通过共享对象通信"><a href="#通过共享对象通信" class="headerlink" title="通过共享对象通信"></a>通过共享对象通信</h2><p>线程间发送信号的一个简单方式是在共享对象的变量里设置信号值。线程A在一个同步块里设置boolean型成员变量hasDataToProcess为true，线程B也在同步块里读取hasDataToProcess这个成员变量。这个简单的例子使用了一个持有信号的对象，并提供了set和check方法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class MySignal&#123;</div><div class="line">  </div><div class="line">  protected boolean hasDataToProcess = false;</div><div class="line">  </div><div class="line">  public synchronized boolean hasDataToProcess()&#123;</div><div class="line">    return this.hasDataToProcess;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  public synchronized void setHasDataToProcess(boolean hasData)&#123;</div><div class="line">    this.hasDataToProcess = hasData;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>线程A和B必须获得指向一个MySignal共享实例的引用，以便进行通信。如果它们持有的引用指向不同的MySingal实例，那么彼此将不能检测到对方的信号。需要处理的数据可以存放在一个共享缓存区里，它和MySignal实例是分开存放的。</p>
-<h2 id="忙等待-Busy-Wait"><a href="#忙等待-Busy-Wait" class="headerlink" title="忙等待(Busy Wait)"></a>忙等待(Busy Wait)</h2><p>准备处理数据的线程B正在等待数据变为可用。换句话说，它在等待线程A的一个信号，这个信号使hasDataToProcess()返回true。线程B运行在一个循环里，以等待这个信号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">protected MySignal sharedSignal = ...</div><div class="line">...</div><div class="line">while(!sharedSignal.hasDataToProcess())&#123;</div><div class="line">  //do nothing... busy waiting</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="wait-notify-和notifyAll"><a href="#wait-notify-和notifyAll" class="headerlink" title="wait(),notify()和notifyAll()"></a>wait(),notify()和notifyAll()</h2><p>忙等待没有对运行等待线程的CPU进行有效的利用。否则，让等待线程进入睡眠或者非运行状态更为明智，直到它接收到它等待的信号。</p>
-<p>忙等待没有对运行等待线程的CPU进行有效的利用，除非平均等待时间非常短。否则，让等待线程进入睡眠或者非运行状态更为明智，直到它接收到它等待的信号。  </p>
-<p>Java有一个内建的等待机制来允许线程在等待信号的时候变为非运行状态。java.lang.Object 类定义了三个方法，wait()、notify()和notifyAll()来实现这个等待机制。  </p>
-<p>一个线程一旦调用了任意对象的wait()方法，就会变为非运行状态，直到另一个线程调用了同一个对象的notify()方法。为了调用wait()或者notify()，线程必须先获得那个对象的锁。也就是说，线程必须在同步块里调用wait()或者notify()。  </p>
-<p>当一个线程调用一个对象的notify()方法，正在等待该对象的所有线程中将有一个线程被唤醒并允许执行（校注：这个将被唤醒的线程是随机的，不可以指定唤醒哪个线程）。同时也提供了一个notifyAll()方法来唤醒正在等待一个给定对象的所有线程。  </p>
-<blockquote>
-<p>JVM是这么实现的，当你调用wait时候它首先要检查下当前线程是否是锁的拥有者，不是则抛出IllegalMonitorStateExcept，参考JVM源码的 1422行。  </p>
-</blockquote>
-<p>一旦一个线程被唤醒，不能立刻就退出wait()的方法调用，直到调用notify()的线程退出了它自己的同步块。换句话说：被唤醒的线程必须重新获得监视器对象的锁，才可以退出wait()的方法调用，因为wait方法调用运行在同步块里面。如果多个线程被notifyAll()唤醒，那么在同一时刻将只有一个线程可以退出wait()方法，因为每个线程在退出wait()前必须获得监视器对象的锁。  </p>
-<h2 id="丢失的信号（Missed-Signals）"><a href="#丢失的信号（Missed-Signals）" class="headerlink" title="丢失的信号（Missed Signals）"></a>丢失的信号（Missed Signals）</h2><p>notify()和notifyAll()方法不会保存调用它们的方法，因为当这两个方法被调用时，有可能没有线程处于等待状态。通知信号过后便丢弃了。因此，如果一个线程先于被通知线程调用wait()前调用了notify()，等待的线程将错过这个信号。这可能是也可能不是个问题。不过，在某些情况下，这可能使等待线程永远在等待，不再醒来，因为线程错过了唤醒信号。<br>为了避免丢失信号，必须把它们保存在信号类里。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class MyWaitNotify2&#123;</div><div class="line">  </div><div class="line">  MonitorObject myMonitorObject = new MonitorObject();</div><div class="line">  boolean wasSignalled = false;</div><div class="line">  </div><div class="line">  public void doWait()&#123;</div><div class="line">    synchronized(myMonitorObject)&#123;</div><div class="line">      if(!wasSignalled)&#123;</div><div class="line">        try&#123;</div><div class="line">          myMonitorObject.wait();</div><div class="line">         &#125; catch(InterruptedException e)&#123;...&#125;</div><div class="line">      &#125;</div><div class="line">      //clear signal and continue running.</div><div class="line">      wasSignalled = false;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  public void doNotify()&#123;</div><div class="line">    synchronized(myMonitorObject)&#123;</div><div class="line">      wasSignalled = true;</div><div class="line">      myMonitorObject.notify();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>留意doNotify()方法在调用notify()前把wasSignalled变量设为true。同时，留意doWait()方法在调用wait()前会检查wasSignalled变量。事实上，如果没有信号在前一次doWait()调用和这次doWait()调用之间的时间段里被接收到，它将只调用wait()。  </p>
-<p>（为了避免信号丢失， 用一个变量来保存是否被通知过。在notify前，设置自己已经被通知过。在wait后，设置自己没有被通知过，需要等待通知。）  </p>
-<h2 id="不要在字符串常量或全局对象中调用wait"><a href="#不要在字符串常量或全局对象中调用wait" class="headerlink" title="不要在字符串常量或全局对象中调用wait()"></a>不要在字符串常量或全局对象中调用wait()</h2><p>JVM/编译器内部会把常量字符串转换成同一个对象。这意味着，即使你有2个不同的MyWaitNotify实例，它们都引用了相同的空字符串实例。  </p>
-<p>在wait()/notify()机制中，不要使用全局对象，字符串常量等。应该使用对应唯一的对象。  </p>
-<p>管程 (Monitors，也称为监视器) 是对多个工作线程实现互斥访问共享资源的对象或模块。这些共享资源一般是硬件设备或一群变量。管程实现了在一个时间点，最多只有一个线程在执行它的某个子程序。与那些通过修改数据结构实现互斥访问的并发程序设计相比，管程很大程度上简化了程序设计。  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Java-同步关键字（synchronized）&quot;&gt;&lt;a href=&quot;#Java-同步关键字（synchronized）&quot; class=&quot;headerlink&quot; title=&quot;Java 同步关键字（synchronized）&quot;&gt;&lt;/a&gt;Java 同步关键字（syn
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="并发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%B9%B6%E5%8F%91/"/>
-    
-    
-      <category term="Java并发" scheme="http://yoursite.com/tags/Java%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>05_Java并发篇_饥饿与公平</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/05_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E9%A5%A5%E9%A5%BF%E4%B8%8E%E5%85%AC%E5%B9%B3/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/05_Java并发篇_饥饿与公平/</id>
-    <published>2017-07-29T12:57:13.000Z</published>
-    <updated>2017-07-29T12:57:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="饥饿和公平"><a href="#饥饿和公平" class="headerlink" title="饥饿和公平"></a>饥饿和公平</h1><p>如果一个线程因为CPU时间全部被其他线程抢走而得不到CPU运行时间，这种状态被称之为“饥饿”。<br>而该线程被“饥饿致死”正是因为它得不到CPU运行时间的机会。<br>解决饥饿的方案被称之为“公平性” – 即所有线程均能公平地获得运行机会。  </p>
-<h2 id="Java中导致饥饿的原因："><a href="#Java中导致饥饿的原因：" class="headerlink" title="Java中导致饥饿的原因："></a>Java中导致饥饿的原因：</h2><ol>
-<li><p>高优先级线程吞噬所有的低优先级线程的CPU时间。  </p>
-</li>
-<li><p>线程被永久堵塞在一个等待进入同步块的状态，因为其他线程总是能在它之前持续地对该同步块进行访问。  </p>
-</li>
-<li><p>线程在等待一个本身(在其上调用wait())也处于永久等待完成的对象，因为其他线程总是被持续地获得唤醒。  </p>
-</li>
-</ol>
-<p>如果多个线程处在wait()方法执行上，而对其调用notify()不会保证哪一个线程会获得唤醒，任何线程都有可能处于继续等待的状态。因此存在这样一个风险：一个等待线程从来得不到唤醒，因为其他等待线程总是能被获得唤醒。</p>
-<h3 id="高优先级线程吞噬所有的低优先级线程的CPU时间"><a href="#高优先级线程吞噬所有的低优先级线程的CPU时间" class="headerlink" title="高优先级线程吞噬所有的低优先级线程的CPU时间"></a>高优先级线程吞噬所有的低优先级线程的CPU时间</h3><p>你能为每个线程设置独自的线程优先级，优先级越高的线程获得的CPU时间越多，线程优先级值设置在1到10之间，而这些优先级值所表示行为的准确解释则依赖于你的应用运行平台。对大多数应用来说，你最好是不要改变其优先级值。  </p>
-<h3 id="线程被永久堵塞在一个等待进入同步块的状态"><a href="#线程被永久堵塞在一个等待进入同步块的状态" class="headerlink" title="线程被永久堵塞在一个等待进入同步块的状态"></a>线程被永久堵塞在一个等待进入同步块的状态</h3><p>Java的同步代码区也是一个导致饥饿的因素。Java的同步代码区对哪个线程允许进入的次序没有任何保障。这就意味着理论上存在一个试图进入该同步区的线程处于被永久堵塞的风险，因为其他线程总是能持续地先于它获得访问，这即是“饥饿”问题，而一个线程被“饥饿致死”正是因为它得不到CPU运行时间的机会。  </p>
-<h3 id="线程在等待一个本身-在其上调用wait-也处于永久等待完成的对象"><a href="#线程在等待一个本身-在其上调用wait-也处于永久等待完成的对象" class="headerlink" title="线程在等待一个本身(在其上调用wait())也处于永久等待完成的对象"></a>线程在等待一个本身(在其上调用wait())也处于永久等待完成的对象</h3><p>如果多个线程处在wait()方法执行上，而对其调用notify()不会保证哪一个线程会获得唤醒，任何线程都有可能处于继续等待的状态。因此存在这样一个风险：一个等待线程从来得不到唤醒，因为其他等待线程总是能被获得唤醒。  </p>
-<h2 id="在Java中实现公平性方案"><a href="#在Java中实现公平性方案" class="headerlink" title="在Java中实现公平性方案"></a>在Java中实现公平性方案</h2><ol>
-<li>使用锁，而不是同步块。</li>
-<li>公平锁。</li>
-<li>注意性能方面。</li>
-</ol>
-<p>Java不可能实现100%的公平性，我们依然可以通过同步结构在线程间实现公平性的提高。</p>
-<h3 id="同步态代码"><a href="#同步态代码" class="headerlink" title="同步态代码"></a>同步态代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public class Synchronizer&#123;</div><div class="line">  </div><div class="line">    public synchronized void doSynchronized()&#123;</div><div class="line">        //do a lot of work which takes a long time</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果有一个以上的线程调用doSynchronized()方法，在第一个获得访问的线程未完成前，其他线程将一直处于阻塞状态，而且在这种多线程被阻塞的场景下，接下来将是哪个线程获得访问是没有保障的。  </p>
-<h3 id="使用锁方式替代同步块"><a href="#使用锁方式替代同步块" class="headerlink" title="使用锁方式替代同步块"></a>使用锁方式替代同步块</h3><p>为了提高等待线程的公平性，使用锁方式来替代同步块。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class Synchronizer&#123;</div><div class="line">    Lock lock = new Lock();</div><div class="line">    public void doSynchronized() throws InterruptedException&#123;</div><div class="line">        this.lock.lock();</div><div class="line">        //critical section, do a lot of work which takes a long time</div><div class="line">        this.lock.unlock();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>doSynchronized()不再声明为synchronized，而是用lock.lock()和lock.unlock()来替代。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">public class Lock&#123;</div><div class="line">  </div><div class="line">    private boolean isLocked      = false;</div><div class="line">    private Thread lockingThread = null;</div><div class="line">  </div><div class="line">    public synchronized void lock() throws InterruptedException&#123;</div><div class="line">  </div><div class="line">        while(isLocked)&#123;</div><div class="line">            wait();</div><div class="line">        &#125;</div><div class="line">  </div><div class="line">        isLocked = true;</div><div class="line">        lockingThread = Thread.currentThread();</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    public synchronized void unlock()&#123;</div><div class="line">  </div><div class="line">        if(this.lockingThread != Thread.currentThread())&#123;</div><div class="line">  </div><div class="line">             throw new IllegalMonitorStateException(</div><div class="line">                  &quot;Calling thread has not locked this lock&quot;);</div><div class="line">             &#125;</div><div class="line">  </div><div class="line">        isLocked = false;</div><div class="line">        lockingThread = null;</div><div class="line">        notify();</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果存在多线程并发访问lock()，这些线程将阻塞在对lock()方法的访问上。另外，如果锁已经锁上（校对注：这里指的是isLocked等于true时），这些线程将阻塞在while(isLocked)循环的wait()调用里面。要记住的是，当线程正在等待进入lock() 时，可以调用wait()释放其锁实例对应的同步锁，使得其他多个线程可以进入lock()方法，并调用wait()方法。  </p>
-<p>在lock()和unlock()之间：在这两个调用之间的代码将运行很长一段时间。进一步设想，这段代码将长时间运行，和进入lock()并调用wait()来比较的话。这意味着大部分时间用在等待进入锁和进入临界区的过程是用在wait()的等待中，而不是被阻塞在试图进入lock()方法中。  </p>
-<p>同步块不会对等待进入的多个线程谁能获得访问做任何保障，同样当调用notify()时，也不会做保障一定能唤醒线程。因此这个的Lock类和doSynchronized()那个就保障公平性而言，没有任何区别。</p>
-<p>但是，如果每个线程在不同的对象上调用wait()，那么只有一个线程会在该对象上调用wait()，Lock类可以决定哪个对象能对其调用notify()，因此能做到有效的选择唤醒哪个线程。</p>
-<h3 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h3><p>每一个调用lock()的线程都会进入一个队列，当解锁后，只有队列里的第一个线程被允许锁住Farlock实例，所有其它的线程都将处于等待状态，直到他们处于队列头部。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public class FairLock &#123;</div><div class="line">    private boolean           isLocked       = false;</div><div class="line">    private Thread            lockingThread  = null;</div><div class="line">    private List&lt;QueueObject&gt; waitingThreads = new ArrayList&lt;QueueObject&gt;();</div><div class="line"></div><div class="line">  public void lock() throws InterruptedException&#123;</div><div class="line">    QueueObject queueObject = new QueueObject();</div><div class="line">    boolean isLockedForThisThread = true;</div><div class="line">    synchronized(this)&#123;</div><div class="line">        waitingThreads.add(queueObject);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    while(isLockedForThisThread)&#123;</div><div class="line">      synchronized(this)&#123;</div><div class="line">        isLockedForThisThread =</div><div class="line">            isLocked || waitingThreads.get(0) != queueObject;</div><div class="line">        if(!isLockedForThisThread)&#123;</div><div class="line">          isLocked = true;</div><div class="line">           waitingThreads.remove(queueObject);</div><div class="line">           lockingThread = Thread.currentThread();</div><div class="line">           return;</div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">      try&#123;</div><div class="line">        queueObject.doWait();</div><div class="line">      &#125;catch(InterruptedException e)&#123;</div><div class="line">        synchronized(this) &#123; waitingThreads.remove(queueObject); &#125;</div><div class="line">        throw e;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  public synchronized void unlock()&#123;</div><div class="line">    if(this.lockingThread != Thread.currentThread())&#123;</div><div class="line">      throw new IllegalMonitorStateException(</div><div class="line">        &quot;Calling thread has not locked this lock&quot;);</div><div class="line">    &#125;</div><div class="line">    isLocked      = false;</div><div class="line">    lockingThread = null;</div><div class="line">    if(waitingThreads.size() &gt; 0)&#123;</div><div class="line">      waitingThreads.get(0).doNotify();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class QueueObject &#123;</div><div class="line">  </div><div class="line">    private boolean isNotified = false;</div><div class="line">  </div><div class="line">    public synchronized void doWait() throws InterruptedException &#123;</div><div class="line"></div><div class="line">        while(!isNotified)&#123;</div><div class="line">            this.wait();</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">        this.isNotified = false;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    public synchronized void doNotify() &#123;</div><div class="line">        this.isNotified = true;</div><div class="line">        this.notify();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public boolean equals(Object o) &#123;</div><div class="line">        return this == o;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>lock()方法不在声明为synchronized，取而代之的是对必需同步的代码，在synchronized中进行嵌套。  </p>
-<p>FairLock新创建了一个QueueObject的实例，并对每个调用lock()的线程进行入队列。调用unlock()的线程将从队列头部获取QueueObject，并对其调用doNotify()，以唤醒在该对象上等待的线程。通过这种方式，在同一时间仅有一个等待线程获得唤醒，而不是所有的等待线程。这也是实现FairLock公平性的核心所在。  </p>
-<p>请注意，在同一个同步块中，锁状态依然被检查和设置，以避免出现滑漏条件。  </p>
-<p>还需注意到，QueueObject实际是一个semaphore。doWait()和doNotify()方法在QueueObject中保存着信号。这样做以避免一个线程在调用queueObject.doWait()之前被另一个调用unlock()并随之调用queueObject.doNotify()的线程重入，从而导致信号丢失。queueObject.doWait()调用放置在synchronized(this)块之外，以避免被monitor嵌套锁死，所以另外的线程可以解锁，只要当没有线程在lock方法的synchronized(this)块中执行即可。  </p>
-<p>最后，注意到queueObject.doWait()在try – catch块中是怎样调用的。在InterruptedException抛出的情况下，线程得以离开lock()，并需让它从队列中移除。  </p>
-<h3 id="性能考虑"><a href="#性能考虑" class="headerlink" title="性能考虑"></a>性能考虑</h3><p>如果比较Lock和FairLock类，你会注意到在FairLock类中lock()和unlock()还有更多需要深入的地方。这些额外的代码会导致FairLock的同步机制实现比Lock要稍微慢些。究竟存在多少影响，还依赖于应用在FairLock临界区执行的时长。执行时长越大，FairLock带来的负担影响就越小，当然这也和代码执行的频繁度相关。  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;饥饿和公平&quot;&gt;&lt;a href=&quot;#饥饿和公平&quot; class=&quot;headerlink&quot; title=&quot;饥饿和公平&quot;&gt;&lt;/a&gt;饥饿和公平&lt;/h1&gt;&lt;p&gt;如果一个线程因为CPU时间全部被其他线程抢走而得不到CPU运行时间，这种状态被称之为“饥饿”。&lt;br&gt;而该线程被“饥
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="并发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%B9%B6%E5%8F%91/"/>
-    
-    
-      <category term="Java并发" scheme="http://yoursite.com/tags/Java%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   
