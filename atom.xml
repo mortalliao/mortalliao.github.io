@@ -16,47 +16,59 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>01_Git了解</title>
-    <link href="http://yoursite.com/2018/05/02/VCS/Git/01_Git%E4%BA%86%E8%A7%A3/"/>
-    <id>http://yoursite.com/2018/05/02/VCS/Git/01_Git了解/</id>
+    <title>05_Git操作</title>
+    <link href="http://yoursite.com/2018/05/02/VCS/Git/05_Git%E6%93%8D%E4%BD%9C/"/>
+    <id>http://yoursite.com/2018/05/02/VCS/Git/05_Git操作/</id>
     <published>2018-05-02T08:44:07.000Z</published>
     <updated>2018-05-02T08:44:07.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Git三种状态"><a href="#Git三种状态" class="headerlink" title="Git三种状态"></a>Git三种状态</h1><p> Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modified)和已暂存(staged)。  </p>
-<p><img src="http://i.imgur.com/i9rgs8D.png" alt="">  </p>
-<p>已提交表示数据已经安全的保存在本地数据库中。 已修改表示修改了文件，但还没保存到数据库中。 已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。  </p>
-<h1 id="工作目录、暂存区域以及-Git-仓库"><a href="#工作目录、暂存区域以及-Git-仓库" class="headerlink" title="工作目录、暂存区域以及 Git 仓库."></a>工作目录、暂存区域以及 Git 仓库.</h1><p>Git 仓库目录是 Git 用来保存项目的元数据和对象数据库的地方。 这是 Git 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。  </p>
-<p>工作目录是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。  </p>
-<p>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。 有时候也被称作`‘索引’’，不过一般说法还是叫暂存区域  </p>
-<p>基本的 Git 工作流程如下：  </p>
-<ol>
-<li>在工作目录中修改文件。</li>
-<li>暂存文件，将文件的快照放入暂存区域。</li>
-<li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。</li>
-</ol>
-<p>如果 Git 目录中保存着的特定版本文件，就属于已提交状态。<br>如果作了修改并已放入暂存区域，就属于已暂存状态。<br>如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。  </p>
-<h1 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h1><p>Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
-<ul>
-<li><p>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 –system 选项的 git config 时，它会从此文件读写配置变量。</p>
-</li>
-<li><p>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 可以传递 –global选项让 Git 读写此文件。</p>
-</li>
-<li><p>当前使用仓库的 Git 目录中的 config 文件(就是 .git/config)：针对该仓库。</p>
-</li>
-</ul>
-<p>每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。  </p>
-<h2 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h2><p>当安装完 Git 应该做的第一件事就是设置你的用户名称与邮件地址。 这样做很重要，因为每一个 Git 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Daniu Su&quot;</div><div class="line">$ git config --global user.email daniu.su@example.com</div></pre></td></tr></table></figure>
-<p>如果使用了 –global 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情， Git 都会使用那些信息。 当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 –global 选项的命令来配置。  </p>
-<h2 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global core.editor emacs</div></pre></td></tr></table></figure>
-<h2 id="检查配置信息"><a href="#检查配置信息" class="headerlink" title="检查配置信息"></a>检查配置信息</h2><p>如果想要检查你的配置，可以使用 git config –list 命令来列出所有 Git 当时能找到的配置。  </p>
-<p>你可能会看到重复的变量名，因为 Git 会从不同的文件中读取同一个配置(例如：/etc/gitconfig 与 ~/.gitconfig)。 这种情况下，Git 会使用它找到的每一个变量的最后一个配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git config --list</div><div class="line">user.name=Daniu Su</div><div class="line">user.email=daniu.su@example.com</div><div class="line">color.status=auto</div><div class="line">color.branch=auto</div><div class="line">color.interactive=auto</div><div class="line">color.diff=auto</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>可以通过输入 git config <key>： 来检查 Git 的某一项配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config user.name</div><div class="line">Daniu Su</div></pre></td></tr></table></figure></key></p>
+    <content type="html"><![CDATA[<h1 id="git-操作"><a href="#git-操作" class="headerlink" title="git 操作"></a>git 操作</h1><h2 id="git-克隆操作"><a href="#git-克隆操作" class="headerlink" title="git 克隆操作"></a>git 克隆操作</h2><p>git clone  </p>
+<h2 id="git-提交更改"><a href="#git-提交更改" class="headerlink" title="git 提交更改"></a>git 提交更改</h2><p>git status -s  </p>
+<p>git add XXX.XXX  </p>
+<p>git commit -m ‘some message’  </p>
+<p>git log  </p>
+<h2 id="git-审查更改"><a href="#git-审查更改" class="headerlink" title="git 审查更改"></a>git 审查更改</h2><p>git log  </p>
+<p>git show SHA-1.ID  </p>
+<p>git diff  </p>
+<h2 id="git-推送操作"><a href="#git-推送操作" class="headerlink" title="git 推送操作"></a>git 推送操作</h2><p>git push origin master  </p>
+<h2 id="git-取最新变化"><a href="#git-取最新变化" class="headerlink" title="git 取最新变化"></a>git 取最新变化</h2><p>git pull  </p>
+<h2 id="git-藏匿操作"><a href="#git-藏匿操作" class="headerlink" title="git 藏匿操作"></a>git 藏匿操作</h2><p>不能提交部分代码，也不能扔掉变化。所以，需要一些临时空间，在那里可以存储部分修改，以便以后再提交。  </p>
+<p>在Git中，藏匿操作需要修改的跟踪文件和阶段的变化，并将其保存在栈上未完成的更改，可以在任何时候重新。<br><strong>git stash</strong>  </p>
+<p>现在可以安全地切换分支和做其他工作。使用 git stash list 命令看到的藏匿的变化列表。<br><strong>git stash list</strong>  </p>
+<p>只要执行git stash pop 命令，它会从堆栈中删除的变化，并把它放在当前工作目录。<br><strong>git stash pop</strong>  </p>
+<h2 id="git-移动-重命名-操作"><a href="#git-移动-重命名-操作" class="headerlink" title="git 移动(重命名)操作"></a>git 移动(重命名)操作</h2><p>(move )操作移动目录或文件从一个位置到另一个。<br><strong>git mv string.c src/  </strong>  </p>
+<p>要进行这些永久性更改，以便其他开发人员可以看到这一点，必须修改的目录结构推到远程存储库。<br>git commit -m “Modified directory structure”  </p>
+<p>git push origin master  </p>
+<h2 id="git-删除操作"><a href="#git-删除操作" class="headerlink" title="git 删除操作"></a>git 删除操作</h2><p><strong>git rm string.c</strong>  </p>
+<p>git commit -m “Removed executable binary”  </p>
+<h2 id="git-修正错误"><a href="#git-修正错误" class="headerlink" title="git 修正错误"></a>git 修正错误</h2><h3 id="恢复未提交的更改"><a href="#恢复未提交的更改" class="headerlink" title="恢复未提交的更改"></a>恢复未提交的更改</h3><p>git checkout modified.file</p>
+<p>即是是工作目录中删除了的文件  </p>
+<h3 id="删除临时区域变化"><a href="#删除临时区域变化" class="headerlink" title="删除临时区域变化"></a>删除临时区域变化</h3><p>在Git是一个HEAD指针始终指向最新提交。<br>如果想撤销变更分阶段区域，那么可以使用git checkout命令，但checkout命令，必须提供额外的参数HEAD指针。<br>额外提交指针参数指示的git checkout命令，重置工作树，还能够去除分阶段。  </p>
+<p>git add modified.file  </p>
+<p>git checkout HEAD – modified.file  </p>
+<h3 id="将HEAD指针与Git复位"><a href="#将HEAD指针与Git复位" class="headerlink" title="将HEAD指针与Git复位"></a>将HEAD指针与Git复位</h3><h4 id="SOFT"><a href="#SOFT" class="headerlink" title="SOFT"></a>SOFT</h4><p>每个分支都有HEAD 指针指向最新提交。如果我们使用git  –soft复位命令选项，随后提交ID，然后将只有头指针复位，不破坏任何东西。  </p>
+<p>.git/refs/heads/master 文件存储的提交ID 的HEAD 指针。可以通过使用git log -1 命令验证它<br>cat .git/refs/heads/master  </p>
+<p>现在查看最新提交的ID，这将配合上述提交ID。<br>git log -2  </p>
+<p>重设HEAD 指针。<br><strong>git reset –soft HEAD</strong>~  </p>
+<h4 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h4><p>Git的复位 – mixed选项从分段区域尚未提交还原更改。它仅恢复变化形成暂存区。实际所做的更改到工作副本的文件不受影响。默认的Git的复位相当于git的复位 – mixed。  </p>
+<h4 id="HARD"><a href="#HARD" class="headerlink" title="HARD"></a>HARD</h4><p>如果使用 - hard选项用 Git复位命令，它会清除暂存区域，它会重设HEAD 指针，以最后一次提交的具体提交ID，也删除本地文件的变化。  </p>
+<p>检查提交的ID：  </p>
+<p>git log -1  </p>
+<p>修改文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ head -2 string_operations.c</div><div class="line">/* This line be removed by git reset operation */</div><div class="line">#include &lt;stdio.h&gt;</div></pre></td></tr></table></figure></p>
+<p>git status -s  </p>
+<p>将修改后的文件添加到分期区域，并验证git的状态运行  </p>
+<p>git add string_operations.c  </p>
+<p>git status  </p>
+<p>git的状态，显示该文件实在临时区域，现在重置HEAD 用 –hard选项  </p>
+<p><strong>git reset –hard SHA-1.ID</strong>  </p>
+<p>git服务命令成功，这将从分段区恢复文件，以及删除本地文件所做的更改  </p>
+<p>git状态显示，从分段区恢复文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ head -2 string_operations.c</div><div class="line">#include &lt;stdio.h&gt;</div></pre></td></tr></table></figure></p>
+<p>Head 命令还显示，复位操作删除局部变化。  </p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Git三种状态&quot;&gt;&lt;a href=&quot;#Git三种状态&quot; class=&quot;headerlink&quot; title=&quot;Git三种状态&quot;&gt;&lt;/a&gt;Git三种状态&lt;/h1&gt;&lt;p&gt; Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modifie
+      &lt;h1 id=&quot;git-操作&quot;&gt;&lt;a href=&quot;#git-操作&quot; class=&quot;headerlink&quot; title=&quot;git 操作&quot;&gt;&lt;/a&gt;git 操作&lt;/h1&gt;&lt;h2 id=&quot;git-克隆操作&quot;&gt;&lt;a href=&quot;#git-克隆操作&quot; class=&quot;headerlink&quot; 
     
     </summary>
     
@@ -175,6 +187,60 @@
   </entry>
   
   <entry>
+    <title>01_Git了解</title>
+    <link href="http://yoursite.com/2018/05/02/VCS/Git/01_Git%E4%BA%86%E8%A7%A3/"/>
+    <id>http://yoursite.com/2018/05/02/VCS/Git/01_Git了解/</id>
+    <published>2018-05-02T08:44:07.000Z</published>
+    <updated>2018-05-02T08:44:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Git三种状态"><a href="#Git三种状态" class="headerlink" title="Git三种状态"></a>Git三种状态</h1><p> Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modified)和已暂存(staged)。  </p>
+<p><img src="http://i.imgur.com/i9rgs8D.png" alt="">  </p>
+<p>已提交表示数据已经安全的保存在本地数据库中。 已修改表示修改了文件，但还没保存到数据库中。 已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。  </p>
+<h1 id="工作目录、暂存区域以及-Git-仓库"><a href="#工作目录、暂存区域以及-Git-仓库" class="headerlink" title="工作目录、暂存区域以及 Git 仓库."></a>工作目录、暂存区域以及 Git 仓库.</h1><p>Git 仓库目录是 Git 用来保存项目的元数据和对象数据库的地方。 这是 Git 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。  </p>
+<p>工作目录是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。  </p>
+<p>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。 有时候也被称作`‘索引’’，不过一般说法还是叫暂存区域  </p>
+<p>基本的 Git 工作流程如下：  </p>
+<ol>
+<li>在工作目录中修改文件。</li>
+<li>暂存文件，将文件的快照放入暂存区域。</li>
+<li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。</li>
+</ol>
+<p>如果 Git 目录中保存着的特定版本文件，就属于已提交状态。<br>如果作了修改并已放入暂存区域，就属于已暂存状态。<br>如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。  </p>
+<h1 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h1><p>Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
+<ul>
+<li><p>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 –system 选项的 git config 时，它会从此文件读写配置变量。</p>
+</li>
+<li><p>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 可以传递 –global选项让 Git 读写此文件。</p>
+</li>
+<li><p>当前使用仓库的 Git 目录中的 config 文件(就是 .git/config)：针对该仓库。</p>
+</li>
+</ul>
+<p>每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。  </p>
+<h2 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h2><p>当安装完 Git 应该做的第一件事就是设置你的用户名称与邮件地址。 这样做很重要，因为每一个 Git 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Daniu Su&quot;</div><div class="line">$ git config --global user.email daniu.su@example.com</div></pre></td></tr></table></figure>
+<p>如果使用了 –global 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情， Git 都会使用那些信息。 当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 –global 选项的命令来配置。  </p>
+<h2 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global core.editor emacs</div></pre></td></tr></table></figure>
+<h2 id="检查配置信息"><a href="#检查配置信息" class="headerlink" title="检查配置信息"></a>检查配置信息</h2><p>如果想要检查你的配置，可以使用 git config –list 命令来列出所有 Git 当时能找到的配置。  </p>
+<p>你可能会看到重复的变量名，因为 Git 会从不同的文件中读取同一个配置(例如：/etc/gitconfig 与 ~/.gitconfig)。 这种情况下，Git 会使用它找到的每一个变量的最后一个配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git config --list</div><div class="line">user.name=Daniu Su</div><div class="line">user.email=daniu.su@example.com</div><div class="line">color.status=auto</div><div class="line">color.branch=auto</div><div class="line">color.interactive=auto</div><div class="line">color.diff=auto</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>可以通过输入 git config <key>： 来检查 Git 的某一项配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config user.name</div><div class="line">Daniu Su</div></pre></td></tr></table></figure></key></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Git三种状态&quot;&gt;&lt;a href=&quot;#Git三种状态&quot; class=&quot;headerlink&quot; title=&quot;Git三种状态&quot;&gt;&lt;/a&gt;Git三种状态&lt;/h1&gt;&lt;p&gt; Git 有三种状态，你的文件可能处于其中之一：已提交(committed)、已修改(modifie
+    
+    </summary>
+    
+      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>04_Git创建操作</title>
     <link href="http://yoursite.com/2018/05/02/VCS/Git/04_Git%E5%88%9B%E5%BB%BA%E6%93%8D%E4%BD%9C/"/>
     <id>http://yoursite.com/2018/05/02/VCS/Git/04_Git创建操作/</id>
@@ -201,72 +267,6 @@
     
       &lt;h1 id=&quot;Git创建操作&quot;&gt;&lt;a href=&quot;#Git创建操作&quot; class=&quot;headerlink&quot; title=&quot;Git创建操作&quot;&gt;&lt;/a&gt;Git创建操作&lt;/h1&gt;&lt;p&gt;作为Git服务器。需要一个的Git服务器允许团队协作。&lt;/p&gt;
 &lt;h2 id=&quot;创建新用户&quot;&gt;&lt;a 
-    
-    </summary>
-    
-      <category term="VCS" scheme="http://yoursite.com/categories/VCS/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/categories/VCS/Git/"/>
-    
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>05_Git操作</title>
-    <link href="http://yoursite.com/2018/05/02/VCS/Git/05_Git%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2018/05/02/VCS/Git/05_Git操作/</id>
-    <published>2018-05-02T08:44:07.000Z</published>
-    <updated>2018-05-02T08:44:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="git-操作"><a href="#git-操作" class="headerlink" title="git 操作"></a>git 操作</h1><h2 id="git-克隆操作"><a href="#git-克隆操作" class="headerlink" title="git 克隆操作"></a>git 克隆操作</h2><p>git clone  </p>
-<h2 id="git-提交更改"><a href="#git-提交更改" class="headerlink" title="git 提交更改"></a>git 提交更改</h2><p>git status -s  </p>
-<p>git add XXX.XXX  </p>
-<p>git commit -m ‘some message’  </p>
-<p>git log  </p>
-<h2 id="git-审查更改"><a href="#git-审查更改" class="headerlink" title="git 审查更改"></a>git 审查更改</h2><p>git log  </p>
-<p>git show SHA-1.ID  </p>
-<p>git diff  </p>
-<h2 id="git-推送操作"><a href="#git-推送操作" class="headerlink" title="git 推送操作"></a>git 推送操作</h2><p>git push origin master  </p>
-<h2 id="git-取最新变化"><a href="#git-取最新变化" class="headerlink" title="git 取最新变化"></a>git 取最新变化</h2><p>git pull  </p>
-<h2 id="git-藏匿操作"><a href="#git-藏匿操作" class="headerlink" title="git 藏匿操作"></a>git 藏匿操作</h2><p>不能提交部分代码，也不能扔掉变化。所以，需要一些临时空间，在那里可以存储部分修改，以便以后再提交。  </p>
-<p>在Git中，藏匿操作需要修改的跟踪文件和阶段的变化，并将其保存在栈上未完成的更改，可以在任何时候重新。<br><strong>git stash</strong>  </p>
-<p>现在可以安全地切换分支和做其他工作。使用 git stash list 命令看到的藏匿的变化列表。<br><strong>git stash list</strong>  </p>
-<p>只要执行git stash pop 命令，它会从堆栈中删除的变化，并把它放在当前工作目录。<br><strong>git stash pop</strong>  </p>
-<h2 id="git-移动-重命名-操作"><a href="#git-移动-重命名-操作" class="headerlink" title="git 移动(重命名)操作"></a>git 移动(重命名)操作</h2><p>(move )操作移动目录或文件从一个位置到另一个。<br><strong>git mv string.c src/  </strong>  </p>
-<p>要进行这些永久性更改，以便其他开发人员可以看到这一点，必须修改的目录结构推到远程存储库。<br>git commit -m “Modified directory structure”  </p>
-<p>git push origin master  </p>
-<h2 id="git-删除操作"><a href="#git-删除操作" class="headerlink" title="git 删除操作"></a>git 删除操作</h2><p><strong>git rm string.c</strong>  </p>
-<p>git commit -m “Removed executable binary”  </p>
-<h2 id="git-修正错误"><a href="#git-修正错误" class="headerlink" title="git 修正错误"></a>git 修正错误</h2><h3 id="恢复未提交的更改"><a href="#恢复未提交的更改" class="headerlink" title="恢复未提交的更改"></a>恢复未提交的更改</h3><p>git checkout modified.file</p>
-<p>即是是工作目录中删除了的文件  </p>
-<h3 id="删除临时区域变化"><a href="#删除临时区域变化" class="headerlink" title="删除临时区域变化"></a>删除临时区域变化</h3><p>在Git是一个HEAD指针始终指向最新提交。<br>如果想撤销变更分阶段区域，那么可以使用git checkout命令，但checkout命令，必须提供额外的参数HEAD指针。<br>额外提交指针参数指示的git checkout命令，重置工作树，还能够去除分阶段。  </p>
-<p>git add modified.file  </p>
-<p>git checkout HEAD – modified.file  </p>
-<h3 id="将HEAD指针与Git复位"><a href="#将HEAD指针与Git复位" class="headerlink" title="将HEAD指针与Git复位"></a>将HEAD指针与Git复位</h3><h4 id="SOFT"><a href="#SOFT" class="headerlink" title="SOFT"></a>SOFT</h4><p>每个分支都有HEAD 指针指向最新提交。如果我们使用git  –soft复位命令选项，随后提交ID，然后将只有头指针复位，不破坏任何东西。  </p>
-<p>.git/refs/heads/master 文件存储的提交ID 的HEAD 指针。可以通过使用git log -1 命令验证它<br>cat .git/refs/heads/master  </p>
-<p>现在查看最新提交的ID，这将配合上述提交ID。<br>git log -2  </p>
-<p>重设HEAD 指针。<br><strong>git reset –soft HEAD</strong>~  </p>
-<h4 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h4><p>Git的复位 – mixed选项从分段区域尚未提交还原更改。它仅恢复变化形成暂存区。实际所做的更改到工作副本的文件不受影响。默认的Git的复位相当于git的复位 – mixed。  </p>
-<h4 id="HARD"><a href="#HARD" class="headerlink" title="HARD"></a>HARD</h4><p>如果使用 - hard选项用 Git复位命令，它会清除暂存区域，它会重设HEAD 指针，以最后一次提交的具体提交ID，也删除本地文件的变化。  </p>
-<p>检查提交的ID：  </p>
-<p>git log -1  </p>
-<p>修改文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ head -2 string_operations.c</div><div class="line">/* This line be removed by git reset operation */</div><div class="line">#include &lt;stdio.h&gt;</div></pre></td></tr></table></figure></p>
-<p>git status -s  </p>
-<p>将修改后的文件添加到分期区域，并验证git的状态运行  </p>
-<p>git add string_operations.c  </p>
-<p>git status  </p>
-<p>git的状态，显示该文件实在临时区域，现在重置HEAD 用 –hard选项  </p>
-<p><strong>git reset –hard SHA-1.ID</strong>  </p>
-<p>git服务命令成功，这将从分段区恢复文件，以及删除本地文件所做的更改  </p>
-<p>git状态显示，从分段区恢复文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ head -2 string_operations.c</div><div class="line">#include &lt;stdio.h&gt;</div></pre></td></tr></table></figure></p>
-<p>Head 命令还显示，复位操作删除局部变化。  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;git-操作&quot;&gt;&lt;a href=&quot;#git-操作&quot; class=&quot;headerlink&quot; title=&quot;git 操作&quot;&gt;&lt;/a&gt;git 操作&lt;/h1&gt;&lt;h2 id=&quot;git-克隆操作&quot;&gt;&lt;a href=&quot;#git-克隆操作&quot; class=&quot;headerlink&quot; 
     
     </summary>
     
@@ -447,29 +447,44 @@
   </entry>
   
   <entry>
-    <title>04_Docker_容器连接</title>
-    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_%E5%AE%B9%E5%99%A8%E8%BF%9E%E6%8E%A5/"/>
-    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_容器连接/</id>
+    <title>01_Docker_Hello_World</title>
+    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/"/>
+    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/</id>
     <published>2017-11-27T06:15:50.000Z</published>
     <updated>2017-11-27T06:15:50.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="网络端口映射"><a href="#网络端口映射" class="headerlink" title="网络端口映射"></a>网络端口映射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P training/webapp python app.py</div><div class="line">fce072cc88cee71b1cdceb57c2821d054a4a59f67da6b416fceb5593f059fc6d</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 5000:5000 training/webapp python app.py</div><div class="line">33e4523d30aaf0258915c368e66e03b49535de0ef20317d3f639d40222ba6bc0</div></pre></td></tr></table></figure>
+    <content type="html"><![CDATA[<h1 id="Docker-Hello-World"><a href="#Docker-Hello-World" class="headerlink" title="Docker Hello World"></a>Docker Hello World</h1><p>Docker 允许你在容器内运行应用程序， 使用 docker run 命令来在容器内运行一个应用程序。<br>输出Hello world</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run ubuntu:15.10 /bin/echo &quot;Hello world&quot;</div><div class="line">Hello world</div></pre></td></tr></table></figure>
+<p>各个参数解析：</p>
 <ul>
-<li>-P :是容器内部端口随机映射到主机的高端口。</li>
-<li>-p : 是容器内部端口绑定到指定的主机端口。</li>
+<li>docker: Docker 的二进制执行文件。</li>
+<li>run:与前面的 docker 组合来运行一个容器。</li>
+<li>ubuntu:15.10指定要运行的镜像，Docker首先从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像。</li>
+<li>/bin/echo “Hello world”: 在启动的容器里执行的命令</li>
 </ul>
-<p>使用 docker ps 来看到端口5000绑定主机端口32768。</p>
-<p>可以指定容器绑定的网络地址，比如绑定127.0.0.1。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5001:5002 training/webapp python app.py</div><div class="line">95c6ceef88ca3e71eaf303c2833fd6701d8d1b2572b5613b5a932dfdfe8a857c</div></pre></td></tr></table></figure></p>
-<p>默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 /udp。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py</div><div class="line">6779686f06f6204579c1d655dd8b2b31e8e809b245a97b2d3a8e35abe9dcd22a</div></pre></td></tr></table></figure></p>
-<p><strong>docker port</strong> 命令可以让我们快捷地查看端口的绑定情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker port adoring_stonebraker 5002</div></pre></td></tr></table></figure></p>
-<h2 id="Docker容器连接"><a href="#Docker容器连接" class="headerlink" title="Docker容器连接"></a>Docker容器连接</h2><p>端口映射并不是唯一把 docker 连接到另一个容器的方法。<br>docker有一个连接系统允许将多个容器连接在一起，共享连接信息。<br>docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。  </p>
-<h3 id="容器命名"><a href="#容器命名" class="headerlink" title="容器命名"></a>容器命名</h3><p>当我们创建一个容器的时候，docker会自动对它进行命名。另外，我们也可以使用–name标识来命名容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P --name runoob training/webapp python app.py</div><div class="line">43780a6eabaaf14e590b6e849235c75f3012995403f97749775e38436db9a441</div></pre></td></tr></table></figure></p>
+<h1 id="运行交互式的容器"><a href="#运行交互式的容器" class="headerlink" title="运行交互式的容器"></a>运行交互式的容器</h1><p>通过docker的两个参数 -i -t，让docker运行的容器实现”对话”的能力</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -i -t ubuntu:15.10 /bin/bash</div><div class="line">root@dc0050c79503:/#</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run –i -t –-name nginx_test[这个名字可以随便起] 904d6c400333[IMAGE ID] /bin/bash</div></pre></td></tr></table></figure>
+<p>各个参数解析：</p>
+<ul>
+<li>t:在新容器内指定一个伪终端或终端。</li>
+<li>i:允许你对容器内的标准输入 (STDIN) 进行交互。</li>
+</ul>
+<p>此时已进入一个 ubuntu15.10系统的容器<br>尝试在容器中运行命令 cat /proc/version和ls分别查看当前系统的版本信息和当前目录下的文件列表<br><img src="https://i.imgur.com/oiv1hkR.png" alt=""><br>可以通过运行exit命令或者使用CTRL+D来退出容器。</p>
+<h1 id="启动容器（后台模式）"><a href="#启动容器（后台模式）" class="headerlink" title="启动容器（后台模式）"></a>启动容器（后台模式）</h1><p>使用以下命令创建一个以进程方式运行的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -d ubuntu:15.10 /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;</div><div class="line">2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63</div></pre></td></tr></table></figure></p>
+<p>在输出中，我们没有看到期望的”hello world”，而是一串长字符<br>2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63<br>这个长字符串叫做容器ID，对每个容器来说都是唯一的，我们可以通过容器ID来查看对应的容器发生了什么。<br>首先，我们需要确认容器有在运行，可以通过 <strong>docker ps</strong> 来查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
+<p>CONTAINER ID:容器ID<br>NAMES:自动分配的容器名称</p>
+<p>在容器内使用 <strong>docker logs</strong> 命令，查看容器内的标准输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs 2b1b7a428627</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs amazing_cori</div></pre></td></tr></table></figure></p>
+<h1 id="git-bash连接"><a href="#git-bash连接" class="headerlink" title="git-bash连接"></a>git-bash连接</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-machine ssh default</div></pre></td></tr></table></figure>
+<h1 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h1><p>使用 <strong>docker stop</strong> 命令来停止容器:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker stop 2b1b7a428627</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs amazing_cori</div></pre></td></tr></table></figure></p>
+<p>通过docker ps查看，容器已经停止工作:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;网络端口映射&quot;&gt;&lt;a href=&quot;#网络端口映射&quot; class=&quot;headerlink&quot; title=&quot;网络端口映射&quot;&gt;&lt;/a&gt;网络端口映射&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
+      &lt;h1 id=&quot;Docker-Hello-World&quot;&gt;&lt;a href=&quot;#Docker-Hello-World&quot; class=&quot;headerlink&quot; title=&quot;Docker Hello World&quot;&gt;&lt;/a&gt;Docker Hello World&lt;/h1&gt;&lt;p&gt;Docker
     
     </summary>
     
@@ -882,44 +897,29 @@
   </entry>
   
   <entry>
-    <title>01_Docker_Hello_World</title>
-    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/"/>
-    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/01_Docker_Hello_World/</id>
+    <title>04_Docker_容器连接</title>
+    <link href="http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_%E5%AE%B9%E5%99%A8%E8%BF%9E%E6%8E%A5/"/>
+    <id>http://yoursite.com/2017/11/27/Cloud&amp;BigData/Docker/04_Docker_容器连接/</id>
     <published>2017-11-27T06:15:50.000Z</published>
     <updated>2017-11-27T06:15:50.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Docker-Hello-World"><a href="#Docker-Hello-World" class="headerlink" title="Docker Hello World"></a>Docker Hello World</h1><p>Docker 允许你在容器内运行应用程序， 使用 docker run 命令来在容器内运行一个应用程序。<br>输出Hello world</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run ubuntu:15.10 /bin/echo &quot;Hello world&quot;</div><div class="line">Hello world</div></pre></td></tr></table></figure>
-<p>各个参数解析：</p>
+    <content type="html"><![CDATA[<h2 id="网络端口映射"><a href="#网络端口映射" class="headerlink" title="网络端口映射"></a>网络端口映射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P training/webapp python app.py</div><div class="line">fce072cc88cee71b1cdceb57c2821d054a4a59f67da6b416fceb5593f059fc6d</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 5000:5000 training/webapp python app.py</div><div class="line">33e4523d30aaf0258915c368e66e03b49535de0ef20317d3f639d40222ba6bc0</div></pre></td></tr></table></figure>
 <ul>
-<li>docker: Docker 的二进制执行文件。</li>
-<li>run:与前面的 docker 组合来运行一个容器。</li>
-<li>ubuntu:15.10指定要运行的镜像，Docker首先从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像。</li>
-<li>/bin/echo “Hello world”: 在启动的容器里执行的命令</li>
+<li>-P :是容器内部端口随机映射到主机的高端口。</li>
+<li>-p : 是容器内部端口绑定到指定的主机端口。</li>
 </ul>
-<h1 id="运行交互式的容器"><a href="#运行交互式的容器" class="headerlink" title="运行交互式的容器"></a>运行交互式的容器</h1><p>通过docker的两个参数 -i -t，让docker运行的容器实现”对话”的能力</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -i -t ubuntu:15.10 /bin/bash</div><div class="line">root@dc0050c79503:/#</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run –i -t –-name nginx_test[这个名字可以随便起] 904d6c400333[IMAGE ID] /bin/bash</div></pre></td></tr></table></figure>
-<p>各个参数解析：</p>
-<ul>
-<li>t:在新容器内指定一个伪终端或终端。</li>
-<li>i:允许你对容器内的标准输入 (STDIN) 进行交互。</li>
-</ul>
-<p>此时已进入一个 ubuntu15.10系统的容器<br>尝试在容器中运行命令 cat /proc/version和ls分别查看当前系统的版本信息和当前目录下的文件列表<br><img src="https://i.imgur.com/oiv1hkR.png" alt=""><br>可以通过运行exit命令或者使用CTRL+D来退出容器。</p>
-<h1 id="启动容器（后台模式）"><a href="#启动容器（后台模式）" class="headerlink" title="启动容器（后台模式）"></a>启动容器（后台模式）</h1><p>使用以下命令创建一个以进程方式运行的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker run -d ubuntu:15.10 /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;</div><div class="line">2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63</div></pre></td></tr></table></figure></p>
-<p>在输出中，我们没有看到期望的”hello world”，而是一串长字符<br>2b1b7a428627c51ab8810d541d759f072b4fc75487eed05812646b8534a2fe63<br>这个长字符串叫做容器ID，对每个容器来说都是唯一的，我们可以通过容器ID来查看对应的容器发生了什么。<br>首先，我们需要确认容器有在运行，可以通过 <strong>docker ps</strong> 来查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
-<p>CONTAINER ID:容器ID<br>NAMES:自动分配的容器名称</p>
-<p>在容器内使用 <strong>docker logs</strong> 命令，查看容器内的标准输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs 2b1b7a428627</div></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs amazing_cori</div></pre></td></tr></table></figure></p>
-<h1 id="git-bash连接"><a href="#git-bash连接" class="headerlink" title="git-bash连接"></a>git-bash连接</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-machine ssh default</div></pre></td></tr></table></figure>
-<h1 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h1><p>使用 <strong>docker stop</strong> 命令来停止容器:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker stop 2b1b7a428627</div></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker logs amazing_cori</div></pre></td></tr></table></figure></p>
-<p>通过docker ps查看，容器已经停止工作:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runoob@runoob:~$ docker ps</div></pre></td></tr></table></figure></p>
+<p>使用 docker ps 来看到端口5000绑定主机端口32768。</p>
+<p>可以指定容器绑定的网络地址，比如绑定127.0.0.1。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5001:5002 training/webapp python app.py</div><div class="line">95c6ceef88ca3e71eaf303c2833fd6701d8d1b2572b5613b5a932dfdfe8a857c</div></pre></td></tr></table></figure></p>
+<p>默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 /udp。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py</div><div class="line">6779686f06f6204579c1d655dd8b2b31e8e809b245a97b2d3a8e35abe9dcd22a</div></pre></td></tr></table></figure></p>
+<p><strong>docker port</strong> 命令可以让我们快捷地查看端口的绑定情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker port adoring_stonebraker 5002</div></pre></td></tr></table></figure></p>
+<h2 id="Docker容器连接"><a href="#Docker容器连接" class="headerlink" title="Docker容器连接"></a>Docker容器连接</h2><p>端口映射并不是唯一把 docker 连接到另一个容器的方法。<br>docker有一个连接系统允许将多个容器连接在一起，共享连接信息。<br>docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。  </p>
+<h3 id="容器命名"><a href="#容器命名" class="headerlink" title="容器命名"></a>容器命名</h3><p>当我们创建一个容器的时候，docker会自动对它进行命名。另外，我们也可以使用–name标识来命名容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d -P --name runoob training/webapp python app.py</div><div class="line">43780a6eabaaf14e590b6e849235c75f3012995403f97749775e38436db9a441</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Docker-Hello-World&quot;&gt;&lt;a href=&quot;#Docker-Hello-World&quot; class=&quot;headerlink&quot; title=&quot;Docker Hello World&quot;&gt;&lt;/a&gt;Docker Hello World&lt;/h1&gt;&lt;p&gt;Docker
+      &lt;h2 id=&quot;网络端口映射&quot;&gt;&lt;a href=&quot;#网络端口映射&quot; class=&quot;headerlink&quot; title=&quot;网络端口映射&quot;&gt;&lt;/a&gt;网络端口映射&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
     
     </summary>
     
@@ -1011,6 +1011,64 @@
   </entry>
   
   <entry>
+    <title>03_Java并发篇_Java同步块</title>
+    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/03_Java%E5%B9%B6%E5%8F%91%E7%AF%87_Java%E5%90%8C%E6%AD%A5%E5%9D%97/"/>
+    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/03_Java并发篇_Java同步块/</id>
+    <published>2017-07-29T12:57:13.000Z</published>
+    <updated>2017-07-29T12:57:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java-同步关键字（synchronized）"><a href="#Java-同步关键字（synchronized）" class="headerlink" title="Java 同步关键字（synchronized）"></a>Java 同步关键字（synchronized）</h1><p>Java中的同步块用synchronized标记。同步块在Java中是同步在某个对象上。所有同步在一个对象上的同步块在同时只能被一个线程进入并执行操作。所有其他等待进入该同步块的线程将被阻塞，直到执行该同步块中的线程退出。  </p>
+<p>有四种不同的同步块：  </p>
+<ol>
+<li>实例方法</li>
+<li>静态方法</li>
+<li>实例方法中的同步块</li>
+<li>静态方法中的同步块</li>
+</ol>
+<h1 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h1><p>1、通过共享对象通信</p>
+<p>2、忙等待</p>
+<p>3、wait(),notify()和notifyAll()</p>
+<p>4、丢失的信号</p>
+<p>5、不要对常量字符串或全局对象调用wait()</p>
+<h2 id="通过共享对象通信"><a href="#通过共享对象通信" class="headerlink" title="通过共享对象通信"></a>通过共享对象通信</h2><p>线程间发送信号的一个简单方式是在共享对象的变量里设置信号值。线程A在一个同步块里设置boolean型成员变量hasDataToProcess为true，线程B也在同步块里读取hasDataToProcess这个成员变量。这个简单的例子使用了一个持有信号的对象，并提供了set和check方法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class MySignal&#123;</div><div class="line">  </div><div class="line">  protected boolean hasDataToProcess = false;</div><div class="line">  </div><div class="line">  public synchronized boolean hasDataToProcess()&#123;</div><div class="line">    return this.hasDataToProcess;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  public synchronized void setHasDataToProcess(boolean hasData)&#123;</div><div class="line">    this.hasDataToProcess = hasData;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>线程A和B必须获得指向一个MySignal共享实例的引用，以便进行通信。如果它们持有的引用指向不同的MySingal实例，那么彼此将不能检测到对方的信号。需要处理的数据可以存放在一个共享缓存区里，它和MySignal实例是分开存放的。</p>
+<h2 id="忙等待-Busy-Wait"><a href="#忙等待-Busy-Wait" class="headerlink" title="忙等待(Busy Wait)"></a>忙等待(Busy Wait)</h2><p>准备处理数据的线程B正在等待数据变为可用。换句话说，它在等待线程A的一个信号，这个信号使hasDataToProcess()返回true。线程B运行在一个循环里，以等待这个信号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">protected MySignal sharedSignal = ...</div><div class="line">...</div><div class="line">while(!sharedSignal.hasDataToProcess())&#123;</div><div class="line">  //do nothing... busy waiting</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="wait-notify-和notifyAll"><a href="#wait-notify-和notifyAll" class="headerlink" title="wait(),notify()和notifyAll()"></a>wait(),notify()和notifyAll()</h2><p>忙等待没有对运行等待线程的CPU进行有效的利用。否则，让等待线程进入睡眠或者非运行状态更为明智，直到它接收到它等待的信号。</p>
+<p>忙等待没有对运行等待线程的CPU进行有效的利用，除非平均等待时间非常短。否则，让等待线程进入睡眠或者非运行状态更为明智，直到它接收到它等待的信号。  </p>
+<p>Java有一个内建的等待机制来允许线程在等待信号的时候变为非运行状态。java.lang.Object 类定义了三个方法，wait()、notify()和notifyAll()来实现这个等待机制。  </p>
+<p>一个线程一旦调用了任意对象的wait()方法，就会变为非运行状态，直到另一个线程调用了同一个对象的notify()方法。为了调用wait()或者notify()，线程必须先获得那个对象的锁。也就是说，线程必须在同步块里调用wait()或者notify()。  </p>
+<p>当一个线程调用一个对象的notify()方法，正在等待该对象的所有线程中将有一个线程被唤醒并允许执行（校注：这个将被唤醒的线程是随机的，不可以指定唤醒哪个线程）。同时也提供了一个notifyAll()方法来唤醒正在等待一个给定对象的所有线程。  </p>
+<blockquote>
+<p>JVM是这么实现的，当你调用wait时候它首先要检查下当前线程是否是锁的拥有者，不是则抛出IllegalMonitorStateExcept，参考JVM源码的 1422行。  </p>
+</blockquote>
+<p>一旦一个线程被唤醒，不能立刻就退出wait()的方法调用，直到调用notify()的线程退出了它自己的同步块。换句话说：被唤醒的线程必须重新获得监视器对象的锁，才可以退出wait()的方法调用，因为wait方法调用运行在同步块里面。如果多个线程被notifyAll()唤醒，那么在同一时刻将只有一个线程可以退出wait()方法，因为每个线程在退出wait()前必须获得监视器对象的锁。  </p>
+<h2 id="丢失的信号（Missed-Signals）"><a href="#丢失的信号（Missed-Signals）" class="headerlink" title="丢失的信号（Missed Signals）"></a>丢失的信号（Missed Signals）</h2><p>notify()和notifyAll()方法不会保存调用它们的方法，因为当这两个方法被调用时，有可能没有线程处于等待状态。通知信号过后便丢弃了。因此，如果一个线程先于被通知线程调用wait()前调用了notify()，等待的线程将错过这个信号。这可能是也可能不是个问题。不过，在某些情况下，这可能使等待线程永远在等待，不再醒来，因为线程错过了唤醒信号。<br>为了避免丢失信号，必须把它们保存在信号类里。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class MyWaitNotify2&#123;</div><div class="line">  </div><div class="line">  MonitorObject myMonitorObject = new MonitorObject();</div><div class="line">  boolean wasSignalled = false;</div><div class="line">  </div><div class="line">  public void doWait()&#123;</div><div class="line">    synchronized(myMonitorObject)&#123;</div><div class="line">      if(!wasSignalled)&#123;</div><div class="line">        try&#123;</div><div class="line">          myMonitorObject.wait();</div><div class="line">         &#125; catch(InterruptedException e)&#123;...&#125;</div><div class="line">      &#125;</div><div class="line">      //clear signal and continue running.</div><div class="line">      wasSignalled = false;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  public void doNotify()&#123;</div><div class="line">    synchronized(myMonitorObject)&#123;</div><div class="line">      wasSignalled = true;</div><div class="line">      myMonitorObject.notify();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>留意doNotify()方法在调用notify()前把wasSignalled变量设为true。同时，留意doWait()方法在调用wait()前会检查wasSignalled变量。事实上，如果没有信号在前一次doWait()调用和这次doWait()调用之间的时间段里被接收到，它将只调用wait()。  </p>
+<p>（为了避免信号丢失， 用一个变量来保存是否被通知过。在notify前，设置自己已经被通知过。在wait后，设置自己没有被通知过，需要等待通知。）  </p>
+<h2 id="不要在字符串常量或全局对象中调用wait"><a href="#不要在字符串常量或全局对象中调用wait" class="headerlink" title="不要在字符串常量或全局对象中调用wait()"></a>不要在字符串常量或全局对象中调用wait()</h2><p>JVM/编译器内部会把常量字符串转换成同一个对象。这意味着，即使你有2个不同的MyWaitNotify实例，它们都引用了相同的空字符串实例。  </p>
+<p>在wait()/notify()机制中，不要使用全局对象，字符串常量等。应该使用对应唯一的对象。  </p>
+<p>管程 (Monitors，也称为监视器) 是对多个工作线程实现互斥访问共享资源的对象或模块。这些共享资源一般是硬件设备或一群变量。管程实现了在一个时间点，最多只有一个线程在执行它的某个子程序。与那些通过修改数据结构实现互斥访问的并发程序设计相比，管程很大程度上简化了程序设计。  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Java-同步关键字（synchronized）&quot;&gt;&lt;a href=&quot;#Java-同步关键字（synchronized）&quot; class=&quot;headerlink&quot; title=&quot;Java 同步关键字（synchronized）&quot;&gt;&lt;/a&gt;Java 同步关键字（syn
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
+    
+      <category term="并发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%B9%B6%E5%8F%91/"/>
+    
+    
+      <category term="Java并发" scheme="http://yoursite.com/tags/Java%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>05_Java并发篇_饥饿与公平</title>
     <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/05_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E9%A5%A5%E9%A5%BF%E4%B8%8E%E5%85%AC%E5%B9%B3/"/>
     <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/05_Java并发篇_饥饿与公平/</id>
@@ -1075,49 +1133,44 @@
   </entry>
   
   <entry>
-    <title>03_Java并发篇_Java同步块</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/03_Java%E5%B9%B6%E5%8F%91%E7%AF%87_Java%E5%90%8C%E6%AD%A5%E5%9D%97/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/03_Java并发篇_Java同步块/</id>
+    <title>04_Java并发篇_死锁</title>
+    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/04_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E6%AD%BB%E9%94%81/"/>
+    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/04_Java并发篇_死锁/</id>
     <published>2017-07-29T12:57:13.000Z</published>
     <updated>2017-07-29T12:57:13.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Java-同步关键字（synchronized）"><a href="#Java-同步关键字（synchronized）" class="headerlink" title="Java 同步关键字（synchronized）"></a>Java 同步关键字（synchronized）</h1><p>Java中的同步块用synchronized标记。同步块在Java中是同步在某个对象上。所有同步在一个对象上的同步块在同时只能被一个线程进入并执行操作。所有其他等待进入该同步块的线程将被阻塞，直到执行该同步块中的线程退出。  </p>
-<p>有四种不同的同步块：  </p>
+    <content type="html"><![CDATA[<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>死锁是两个或更多线程阻塞着等待其它处于死锁状态的线程所持有的锁。死锁通常发生在多个线程同时但以不同的顺序请求同一组锁的时候。  </p>
+<p>例如：<br>如果线程1锁住了A，然后尝试对B进行加锁，同时线程2已经锁住了B，接着尝试对A进行加锁，这时死锁就发生了。<br>线程1永远得不到B，线程2也永远得不到A，并且它们永远也不会知道发生了这样的事情。为了得到彼此的对象（A和B），它们将永远阻塞下去。这种情况就是一个死锁。  </p>
+<h1 id="数据库的死锁"><a href="#数据库的死锁" class="headerlink" title="数据库的死锁"></a>数据库的死锁</h1><p>更加复杂的死锁场景发生在数据库事务中。一个数据库事务可能由多条SQL更新请求组成。<br><strong>当在一个事务中更新一条记录，这条记录就会被锁住避免其他事务的更新请求，直到第一个事务结束。</strong><br>同一个事务中每一个更新请求都可能会锁住一些记录。  </p>
+<p>当多个事务同时需要对一些相同的记录做更新操作时，就很有可能发生死锁，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Transaction 1, request 1, locks record 1 for update</div><div class="line">Transaction 2, request 1, locks record 2 for update</div><div class="line">Transaction 1, request 2, tries to lock record 2 for update.</div><div class="line">Transaction 2, request 2, tries to lock record 1 for update.</div></pre></td></tr></table></figure></p>
+<p>因为锁发生在不同的请求中，并且对于一个事务来说不可能提前知道所有它需要的锁，因此很难检测和避免数据库事务中的死锁。  </p>
+<h1 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h1><p>在有些情况下死锁是可以避免的。  </p>
 <ol>
-<li>实例方法</li>
-<li>静态方法</li>
-<li>实例方法中的同步块</li>
-<li>静态方法中的同步块</li>
+<li>加锁顺序</li>
+<li>加锁时限</li>
+<li>死锁检测</li>
 </ol>
-<h1 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h1><p>1、通过共享对象通信</p>
-<p>2、忙等待</p>
-<p>3、wait(),notify()和notifyAll()</p>
-<p>4、丢失的信号</p>
-<p>5、不要对常量字符串或全局对象调用wait()</p>
-<h2 id="通过共享对象通信"><a href="#通过共享对象通信" class="headerlink" title="通过共享对象通信"></a>通过共享对象通信</h2><p>线程间发送信号的一个简单方式是在共享对象的变量里设置信号值。线程A在一个同步块里设置boolean型成员变量hasDataToProcess为true，线程B也在同步块里读取hasDataToProcess这个成员变量。这个简单的例子使用了一个持有信号的对象，并提供了set和check方法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class MySignal&#123;</div><div class="line">  </div><div class="line">  protected boolean hasDataToProcess = false;</div><div class="line">  </div><div class="line">  public synchronized boolean hasDataToProcess()&#123;</div><div class="line">    return this.hasDataToProcess;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  public synchronized void setHasDataToProcess(boolean hasData)&#123;</div><div class="line">    this.hasDataToProcess = hasData;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>线程A和B必须获得指向一个MySignal共享实例的引用，以便进行通信。如果它们持有的引用指向不同的MySingal实例，那么彼此将不能检测到对方的信号。需要处理的数据可以存放在一个共享缓存区里，它和MySignal实例是分开存放的。</p>
-<h2 id="忙等待-Busy-Wait"><a href="#忙等待-Busy-Wait" class="headerlink" title="忙等待(Busy Wait)"></a>忙等待(Busy Wait)</h2><p>准备处理数据的线程B正在等待数据变为可用。换句话说，它在等待线程A的一个信号，这个信号使hasDataToProcess()返回true。线程B运行在一个循环里，以等待这个信号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">protected MySignal sharedSignal = ...</div><div class="line">...</div><div class="line">while(!sharedSignal.hasDataToProcess())&#123;</div><div class="line">  //do nothing... busy waiting</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="wait-notify-和notifyAll"><a href="#wait-notify-和notifyAll" class="headerlink" title="wait(),notify()和notifyAll()"></a>wait(),notify()和notifyAll()</h2><p>忙等待没有对运行等待线程的CPU进行有效的利用。否则，让等待线程进入睡眠或者非运行状态更为明智，直到它接收到它等待的信号。</p>
-<p>忙等待没有对运行等待线程的CPU进行有效的利用，除非平均等待时间非常短。否则，让等待线程进入睡眠或者非运行状态更为明智，直到它接收到它等待的信号。  </p>
-<p>Java有一个内建的等待机制来允许线程在等待信号的时候变为非运行状态。java.lang.Object 类定义了三个方法，wait()、notify()和notifyAll()来实现这个等待机制。  </p>
-<p>一个线程一旦调用了任意对象的wait()方法，就会变为非运行状态，直到另一个线程调用了同一个对象的notify()方法。为了调用wait()或者notify()，线程必须先获得那个对象的锁。也就是说，线程必须在同步块里调用wait()或者notify()。  </p>
-<p>当一个线程调用一个对象的notify()方法，正在等待该对象的所有线程中将有一个线程被唤醒并允许执行（校注：这个将被唤醒的线程是随机的，不可以指定唤醒哪个线程）。同时也提供了一个notifyAll()方法来唤醒正在等待一个给定对象的所有线程。  </p>
-<blockquote>
-<p>JVM是这么实现的，当你调用wait时候它首先要检查下当前线程是否是锁的拥有者，不是则抛出IllegalMonitorStateExcept，参考JVM源码的 1422行。  </p>
-</blockquote>
-<p>一旦一个线程被唤醒，不能立刻就退出wait()的方法调用，直到调用notify()的线程退出了它自己的同步块。换句话说：被唤醒的线程必须重新获得监视器对象的锁，才可以退出wait()的方法调用，因为wait方法调用运行在同步块里面。如果多个线程被notifyAll()唤醒，那么在同一时刻将只有一个线程可以退出wait()方法，因为每个线程在退出wait()前必须获得监视器对象的锁。  </p>
-<h2 id="丢失的信号（Missed-Signals）"><a href="#丢失的信号（Missed-Signals）" class="headerlink" title="丢失的信号（Missed Signals）"></a>丢失的信号（Missed Signals）</h2><p>notify()和notifyAll()方法不会保存调用它们的方法，因为当这两个方法被调用时，有可能没有线程处于等待状态。通知信号过后便丢弃了。因此，如果一个线程先于被通知线程调用wait()前调用了notify()，等待的线程将错过这个信号。这可能是也可能不是个问题。不过，在某些情况下，这可能使等待线程永远在等待，不再醒来，因为线程错过了唤醒信号。<br>为了避免丢失信号，必须把它们保存在信号类里。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class MyWaitNotify2&#123;</div><div class="line">  </div><div class="line">  MonitorObject myMonitorObject = new MonitorObject();</div><div class="line">  boolean wasSignalled = false;</div><div class="line">  </div><div class="line">  public void doWait()&#123;</div><div class="line">    synchronized(myMonitorObject)&#123;</div><div class="line">      if(!wasSignalled)&#123;</div><div class="line">        try&#123;</div><div class="line">          myMonitorObject.wait();</div><div class="line">         &#125; catch(InterruptedException e)&#123;...&#125;</div><div class="line">      &#125;</div><div class="line">      //clear signal and continue running.</div><div class="line">      wasSignalled = false;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  public void doNotify()&#123;</div><div class="line">    synchronized(myMonitorObject)&#123;</div><div class="line">      wasSignalled = true;</div><div class="line">      myMonitorObject.notify();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>留意doNotify()方法在调用notify()前把wasSignalled变量设为true。同时，留意doWait()方法在调用wait()前会检查wasSignalled变量。事实上，如果没有信号在前一次doWait()调用和这次doWait()调用之间的时间段里被接收到，它将只调用wait()。  </p>
-<p>（为了避免信号丢失， 用一个变量来保存是否被通知过。在notify前，设置自己已经被通知过。在wait后，设置自己没有被通知过，需要等待通知。）  </p>
-<h2 id="不要在字符串常量或全局对象中调用wait"><a href="#不要在字符串常量或全局对象中调用wait" class="headerlink" title="不要在字符串常量或全局对象中调用wait()"></a>不要在字符串常量或全局对象中调用wait()</h2><p>JVM/编译器内部会把常量字符串转换成同一个对象。这意味着，即使你有2个不同的MyWaitNotify实例，它们都引用了相同的空字符串实例。  </p>
-<p>在wait()/notify()机制中，不要使用全局对象，字符串常量等。应该使用对应唯一的对象。  </p>
-<p>管程 (Monitors，也称为监视器) 是对多个工作线程实现互斥访问共享资源的对象或模块。这些共享资源一般是硬件设备或一群变量。管程实现了在一个时间点，最多只有一个线程在执行它的某个子程序。与那些通过修改数据结构实现互斥访问的并发程序设计相比，管程很大程度上简化了程序设计。  </p>
+<h2 id="加锁顺序"><a href="#加锁顺序" class="headerlink" title="加锁顺序"></a>加锁顺序</h2><p>当多个线程需要相同的一些锁，但是按照不同的顺序加锁，死锁就很容易发生。  </p>
+<p>如果能确保所有的线程都是按照相同的顺序获得锁，那么死锁就不会发生<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Thread 1:</div><div class="line">  lock A </div><div class="line">  lock B</div><div class="line">  </div><div class="line">Thread 2:</div><div class="line">   wait for A</div><div class="line">   lock C (when A locked)</div><div class="line">  </div><div class="line">Thread 3:</div><div class="line">   wait for A</div><div class="line">   wait for B</div><div class="line">   wait for C</div></pre></td></tr></table></figure></p>
+<p>按照顺序加锁是一种有效的死锁预防机制。但是，这种方式需要你事先知道所有可能会用到的锁(译者注：并对这些锁做适当的排序)，但总有些时候是无法预知的。  </p>
+<h2 id="加锁时限"><a href="#加锁时限" class="headerlink" title="加锁时限"></a>加锁时限</h2><p>另外一个可以避免死锁的方法是在尝试获取锁的时候加一个超时时间，这也就意味着在尝试获取锁的过程中若超过了这个时限该线程则放弃对该锁请求。<br>若一个线程没有在给定的时限内成功获得所有需要的锁，则会进行回退并释放所有已经获得的锁，然后等待一段随机的时间再重试。  </p>
+<p>这段随机的等待时间让其它线程有机会尝试获取相同的这些锁，并且让该应用在没有获得锁的时候可以继续运行(注：加锁超时后可以先继续运行干点其它事情，再回头来重复之前加锁的逻辑)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Thread 1 locks A</div><div class="line">Thread 2 locks B</div><div class="line">  </div><div class="line">Thread 1 attempts to lock B but is blocked</div><div class="line">Thread 2 attempts to lock A but is blocked</div><div class="line">  </div><div class="line">Thread 1&apos;s lock attempt on B times out</div><div class="line">Thread 1 backs up and releases A as well</div><div class="line">Thread 1 waits randomly (e.g. 257 millis) before retrying.</div><div class="line">  </div><div class="line">Thread 2&apos;s lock attempt on A times out</div><div class="line">Thread 2 backs up and releases B as well</div><div class="line">Thread 2 waits randomly (e.g. 43 millis) before retrying.</div></pre></td></tr></table></figure></p>
+<p>需要注意的是，由于存在锁的超时，所以我们不能认为这种场景就一定是出现了死锁。也可能是因为获得了锁的线程（导致其它线程超时）需要很长的时间去完成它的任务。  </p>
+<p>此外，如果有非常多的线程同一时间去竞争同一批资源，就算有超时和回退机制，还是可能会导致这些线程重复地尝试但却始终得不到锁。如果只有两个线程，并且重试的超时时间设定为0到500毫秒之间，这种现象可能不会发生，但是如果是10个或20个线程情况就不同了。因为这些线程等待相等的重试时间的概率就高的多（或者非常接近以至于会出现问题）。  </p>
+<h2 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h2><p>死锁检测是一个更好的死锁预防机制，它主要是针对那些不可能实现按序加锁并且锁超时也不可行的场景。  </p>
+<p>每当一个线程获得了锁，会在线程和锁相关的数据结构中（map、graph等等）将其记下。除此之外，每当有线程请求锁，也需要记录在这个数据结构中。  </p>
+<p>当一个线程请求锁失败时，这个线程可以遍历锁的关系图看看是否有死锁发生。例如，线程A请求锁7，但是锁7这个时候被线程B持有，这时线程A就可以检查一下线程B是否已经请求了线程A当前所持有的锁。如果线程B确实有这样的请求，那么就是发生了死锁（线程A拥有锁1，请求锁7；线程B拥有锁7，请求锁1）。  </p>
+<p>当然，死锁一般要比两个线程互相持有对方的锁这种情况要复杂的多。线程A等待线程B，线程B等待线程C，线程C等待线程D，线程D又在等待线程A。线程A为了检测死锁，它需要递进地检测所有被B请求的锁。从线程B所请求的锁开始，线程A找到了线程C，然后又找到了线程D，发现线程D请求的锁被线程A自己持有着。这是它就知道发生了死锁。  </p>
+<p>可以被用来检测死锁的数据结构。<br><img src="http://i.imgur.com/wW4vN5G.png" alt="">  </p>
+<p>那么当检测出死锁时，这些线程该做些什么呢？  </p>
+<p>一个可行的做法是释放所有锁，回退，并且等待一段随机的时间后重试。这个和简单的加锁超时类似，不一样的是只有死锁已经发生了才回退，而不会是因为加锁的请求超时了。虽然有回退和等待，但是如果有大量的线程竞争同一批锁，它们还是会重复地死锁（编者注：原因同超时类似，不能从根本上减轻竞争）。  </p>
+<p>一个更好的方案是给这些线程设置优先级，让一个（或几个）线程回退，剩下的线程就像没发生死锁一样继续保持着它们需要的锁。如果赋予这些线程的优先级是固定不变的，同一批线程总是会拥有更高的优先级。为避免这个问题，可以在死锁发生的时候设置随机的优先级。  </p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Java-同步关键字（synchronized）&quot;&gt;&lt;a href=&quot;#Java-同步关键字（synchronized）&quot; class=&quot;headerlink&quot; title=&quot;Java 同步关键字（synchronized）&quot;&gt;&lt;/a&gt;Java 同步关键字（syn
+      &lt;h1 id=&quot;死锁&quot;&gt;&lt;a href=&quot;#死锁&quot; class=&quot;headerlink&quot; title=&quot;死锁&quot;&gt;&lt;/a&gt;死锁&lt;/h1&gt;&lt;p&gt;死锁是两个或更多线程阻塞着等待其它处于死锁状态的线程所持有的锁。死锁通常发生在多个线程同时但以不同的顺序请求同一组锁的时候。  &lt;/p&gt;
+&lt;
     
     </summary>
     
@@ -1198,59 +1251,6 @@
     
       &lt;p&gt;并发很重要的，前言中记录事件与体会&lt;/p&gt;
 
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/"/>
-    
-      <category term="并发" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Java/%E5%B9%B6%E5%8F%91/"/>
-    
-    
-      <category term="Java并发" scheme="http://yoursite.com/tags/Java%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>04_Java并发篇_死锁</title>
-    <link href="http://yoursite.com/2017/07/29/Backend/Java/concurrency/04_Java%E5%B9%B6%E5%8F%91%E7%AF%87_%E6%AD%BB%E9%94%81/"/>
-    <id>http://yoursite.com/2017/07/29/Backend/Java/concurrency/04_Java并发篇_死锁/</id>
-    <published>2017-07-29T12:57:13.000Z</published>
-    <updated>2017-07-29T12:57:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>死锁是两个或更多线程阻塞着等待其它处于死锁状态的线程所持有的锁。死锁通常发生在多个线程同时但以不同的顺序请求同一组锁的时候。  </p>
-<p>例如：<br>如果线程1锁住了A，然后尝试对B进行加锁，同时线程2已经锁住了B，接着尝试对A进行加锁，这时死锁就发生了。<br>线程1永远得不到B，线程2也永远得不到A，并且它们永远也不会知道发生了这样的事情。为了得到彼此的对象（A和B），它们将永远阻塞下去。这种情况就是一个死锁。  </p>
-<h1 id="数据库的死锁"><a href="#数据库的死锁" class="headerlink" title="数据库的死锁"></a>数据库的死锁</h1><p>更加复杂的死锁场景发生在数据库事务中。一个数据库事务可能由多条SQL更新请求组成。<br><strong>当在一个事务中更新一条记录，这条记录就会被锁住避免其他事务的更新请求，直到第一个事务结束。</strong><br>同一个事务中每一个更新请求都可能会锁住一些记录。  </p>
-<p>当多个事务同时需要对一些相同的记录做更新操作时，就很有可能发生死锁，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Transaction 1, request 1, locks record 1 for update</div><div class="line">Transaction 2, request 1, locks record 2 for update</div><div class="line">Transaction 1, request 2, tries to lock record 2 for update.</div><div class="line">Transaction 2, request 2, tries to lock record 1 for update.</div></pre></td></tr></table></figure></p>
-<p>因为锁发生在不同的请求中，并且对于一个事务来说不可能提前知道所有它需要的锁，因此很难检测和避免数据库事务中的死锁。  </p>
-<h1 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h1><p>在有些情况下死锁是可以避免的。  </p>
-<ol>
-<li>加锁顺序</li>
-<li>加锁时限</li>
-<li>死锁检测</li>
-</ol>
-<h2 id="加锁顺序"><a href="#加锁顺序" class="headerlink" title="加锁顺序"></a>加锁顺序</h2><p>当多个线程需要相同的一些锁，但是按照不同的顺序加锁，死锁就很容易发生。  </p>
-<p>如果能确保所有的线程都是按照相同的顺序获得锁，那么死锁就不会发生<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Thread 1:</div><div class="line">  lock A </div><div class="line">  lock B</div><div class="line">  </div><div class="line">Thread 2:</div><div class="line">   wait for A</div><div class="line">   lock C (when A locked)</div><div class="line">  </div><div class="line">Thread 3:</div><div class="line">   wait for A</div><div class="line">   wait for B</div><div class="line">   wait for C</div></pre></td></tr></table></figure></p>
-<p>按照顺序加锁是一种有效的死锁预防机制。但是，这种方式需要你事先知道所有可能会用到的锁(译者注：并对这些锁做适当的排序)，但总有些时候是无法预知的。  </p>
-<h2 id="加锁时限"><a href="#加锁时限" class="headerlink" title="加锁时限"></a>加锁时限</h2><p>另外一个可以避免死锁的方法是在尝试获取锁的时候加一个超时时间，这也就意味着在尝试获取锁的过程中若超过了这个时限该线程则放弃对该锁请求。<br>若一个线程没有在给定的时限内成功获得所有需要的锁，则会进行回退并释放所有已经获得的锁，然后等待一段随机的时间再重试。  </p>
-<p>这段随机的等待时间让其它线程有机会尝试获取相同的这些锁，并且让该应用在没有获得锁的时候可以继续运行(注：加锁超时后可以先继续运行干点其它事情，再回头来重复之前加锁的逻辑)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Thread 1 locks A</div><div class="line">Thread 2 locks B</div><div class="line">  </div><div class="line">Thread 1 attempts to lock B but is blocked</div><div class="line">Thread 2 attempts to lock A but is blocked</div><div class="line">  </div><div class="line">Thread 1&apos;s lock attempt on B times out</div><div class="line">Thread 1 backs up and releases A as well</div><div class="line">Thread 1 waits randomly (e.g. 257 millis) before retrying.</div><div class="line">  </div><div class="line">Thread 2&apos;s lock attempt on A times out</div><div class="line">Thread 2 backs up and releases B as well</div><div class="line">Thread 2 waits randomly (e.g. 43 millis) before retrying.</div></pre></td></tr></table></figure></p>
-<p>需要注意的是，由于存在锁的超时，所以我们不能认为这种场景就一定是出现了死锁。也可能是因为获得了锁的线程（导致其它线程超时）需要很长的时间去完成它的任务。  </p>
-<p>此外，如果有非常多的线程同一时间去竞争同一批资源，就算有超时和回退机制，还是可能会导致这些线程重复地尝试但却始终得不到锁。如果只有两个线程，并且重试的超时时间设定为0到500毫秒之间，这种现象可能不会发生，但是如果是10个或20个线程情况就不同了。因为这些线程等待相等的重试时间的概率就高的多（或者非常接近以至于会出现问题）。  </p>
-<h2 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h2><p>死锁检测是一个更好的死锁预防机制，它主要是针对那些不可能实现按序加锁并且锁超时也不可行的场景。  </p>
-<p>每当一个线程获得了锁，会在线程和锁相关的数据结构中（map、graph等等）将其记下。除此之外，每当有线程请求锁，也需要记录在这个数据结构中。  </p>
-<p>当一个线程请求锁失败时，这个线程可以遍历锁的关系图看看是否有死锁发生。例如，线程A请求锁7，但是锁7这个时候被线程B持有，这时线程A就可以检查一下线程B是否已经请求了线程A当前所持有的锁。如果线程B确实有这样的请求，那么就是发生了死锁（线程A拥有锁1，请求锁7；线程B拥有锁7，请求锁1）。  </p>
-<p>当然，死锁一般要比两个线程互相持有对方的锁这种情况要复杂的多。线程A等待线程B，线程B等待线程C，线程C等待线程D，线程D又在等待线程A。线程A为了检测死锁，它需要递进地检测所有被B请求的锁。从线程B所请求的锁开始，线程A找到了线程C，然后又找到了线程D，发现线程D请求的锁被线程A自己持有着。这是它就知道发生了死锁。  </p>
-<p>可以被用来检测死锁的数据结构。<br><img src="http://i.imgur.com/wW4vN5G.png" alt="">  </p>
-<p>那么当检测出死锁时，这些线程该做些什么呢？  </p>
-<p>一个可行的做法是释放所有锁，回退，并且等待一段随机的时间后重试。这个和简单的加锁超时类似，不一样的是只有死锁已经发生了才回退，而不会是因为加锁的请求超时了。虽然有回退和等待，但是如果有大量的线程竞争同一批锁，它们还是会重复地死锁（编者注：原因同超时类似，不能从根本上减轻竞争）。  </p>
-<p>一个更好的方案是给这些线程设置优先级，让一个（或几个）线程回退，剩下的线程就像没发生死锁一样继续保持着它们需要的锁。如果赋予这些线程的优先级是固定不变的，同一批线程总是会拥有更高的优先级。为避免这个问题，可以在死锁发生的时候设置随机的优先级。  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;死锁&quot;&gt;&lt;a href=&quot;#死锁&quot; class=&quot;headerlink&quot; title=&quot;死锁&quot;&gt;&lt;/a&gt;死锁&lt;/h1&gt;&lt;p&gt;死锁是两个或更多线程阻塞着等待其它处于死锁状态的线程所持有的锁。死锁通常发生在多个线程同时但以不同的顺序请求同一组锁的时候。  &lt;/p&gt;
-&lt;
     
     </summary>
     
