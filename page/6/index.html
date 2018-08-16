@@ -125,7 +125,7 @@
   <h3 class="fa fa-tags widget-title">标签云</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/Docker/" style="font-size: 0.17rem; color: #3d71a8">Docker</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #3368a0">CSS</a> <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/JavaScript/" style="font-size: 0.19rem; color: #1e548e">JavaScript</a> <a href="/tags/关系型数据库/" style="font-size: 0.16rem; color: #477bb1">关系型数据库</a> <a href="/tags/Git/" style="font-size: 0.18rem; color: #295e97">Git</a> <a href="/tags/Python/" style="font-size: 0.15rem; color: #5c8fc3">Python</a> <a href="/tags/logback/" style="font-size: 0.15rem; color: #5285ba">logback</a> <a href="/tags/Java并发/" style="font-size: 0.17rem; color: #3d71a8">Java并发</a> <a href="/tags/Java容器/" style="font-size: 0.15rem; color: #5285ba">Java容器</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #144a85">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
+      <a href="/tags/Flex布局/" style="font-size: 0.14rem; color: #69c">Flex布局</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/Oracle/" style="font-size: 0.14rem; color: #69c">Oracle</a> <a href="/tags/关系型数据库/" style="font-size: 0.16rem; color: #477bb1">关系型数据库</a> <a href="/tags/Git/" style="font-size: 0.18rem; color: #295e97">Git</a> <a href="/tags/Linux基础/" style="font-size: 0.2rem; color: #0a407c">Linux基础</a> <a href="/tags/CSS/" style="font-size: 0.17rem; color: #3368a0">CSS</a> <a href="/tags/Docker/" style="font-size: 0.17rem; color: #3d71a8">Docker</a> <a href="/tags/JavaScript/" style="font-size: 0.19rem; color: #1e548e">JavaScript</a> <a href="/tags/logback/" style="font-size: 0.15rem; color: #5285ba">logback</a> <a href="/tags/Java并发/" style="font-size: 0.17rem; color: #3d71a8">Java并发</a> <a href="/tags/Java容器/" style="font-size: 0.15rem; color: #5285ba">Java容器</a> <a href="/tags/Python/" style="font-size: 0.15rem; color: #5c8fc3">Python</a> <a href="/tags/Hibernate/" style="font-size: 0.19rem; color: #144a85">Hibernate</a> <a href="/tags/Mybatis/" style="font-size: 0.14rem; color: #69c">Mybatis</a>
   </div>
 </li>
 
@@ -155,28 +155,29 @@
     
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/04/07/Frontend/CSS/05_CSS定位position/">
+    <li  class="article-excerpt-wrap " _href = "/2017/04/07/Frontend/CSS/04_CSS的overflow/">
         <div class="article-img img-ajax" data-src= /img/default-1.jpg>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
             
-            <a class="article-title-link" href="/2017/04/07/Frontend/CSS/05_CSS定位position/">
-                <h2 class="article-title">05_CSS定位position</h2>
+            <a class="article-title-link" href="/2017/04/07/Frontend/CSS/04_CSS的overflow/">
+                <h2 class="article-title">04_CSS的overflow</h2>
             </a>
             
             <p class="article-content">
-                position浮动是没有占据页面的位置的。绝对定位：也不占据页面的位置。  
-即：脱离了文档流  
-可以使用top,bottom,left,right属性进行定位
-相对定位position:relative在页面上会占据位置，相对定位是相对于原来的位置定位的。  
-总结：绝对定位相当于是一种特殊的”浮动”.  
-固定定位position:fixed;在页面上不会占据位置。表现：不管页面到了哪里，图片永远都停留在屏幕的同一位置。  
-决定定位position:relative;在页面上不会占据位置。如果给一个行内元素设置了position:absolute，那么这上行内元素会自动转成行内块元素。
+                CSS标签的显示和隐藏：overflow:
+hidden:超出部分隐藏。
+scroll:滚动条（超出的部分会显示在滚动条之内）
+auto:如果内容超出会显示滚动条，如果没有那么会自动隐藏。
 
-一般情况下定位的使用：子绝父相：将来在使用定位的时候最好在1）父元素中使用子元素定位，2）并且遵守一个约定：父元素使用相对定位，子元素使用绝对定位。
+display:none;   隐藏元素完全隐藏原来的div，不占位置display:none;  隐藏display:block;  显示  
+visibility:      隐藏元素visibility也会隐藏原来的div但是div还是会占据着自己的位置不放，屏幕上显示的是空白。
 
-
+visible;默认值。元素是可见的。
+hidden;元素是不可见的。
+collapse;当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 “hidden”。
+inherit;规定应该从父元素继承 visibilit...
             </p>
             <div class="article-meta">
     
@@ -205,12 +206,12 @@
     
     <span class="fa-wrap">
             <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="05_CSS定位position"
-              data-leadcloud-url="/2017/04/07/Frontend/CSS/05_CSS定位position/"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="hits hits-meta " data-leadcloud-title="04_CSS的overflow"
+              data-leadcloud-url="/2017/04/07/Frontend/CSS/04_CSS的overflow/"><i class="fa fa-spinner fa-spin"></i></span>
     </span>
     
     
-    <a href="/2017/04/07/Frontend/CSS/05_CSS定位position/" class="read-article">阅读全文</a>
+    <a href="/2017/04/07/Frontend/CSS/04_CSS的overflow/" class="read-article">阅读全文</a>
     
 </div>
 
@@ -220,7 +221,7 @@
     
     
     <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/02_Hibernate_CRUD/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242360143&di=25a23cf5c48b249edd1951cdde79003a&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140325%2F235100-14032502205024.jpg>
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255109379&di=eeaee45b7dc274f830bc8af7c7392a9a&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Da5dda3cf7bf0f736d8ab44053f659f2f%2Fb03533fa828ba61ea66a5d9f4234970a314e59fd.jpg>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -280,134 +281,8 @@
     </li>
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_查询缓存/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255109379&di=eeaee45b7dc274f830bc8af7c7392a9a&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Da5dda3cf7bf0f736d8ab44053f659f2f%2Fb03533fa828ba61ea66a5d9f4234970a314e59fd.jpg>
-           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
-        </div>
-        <div class="article-excerpt">
-            
-            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_查询缓存/">
-                <h2 class="article-title">08_Hibernate_查询缓存</h2>
-            </a>
-            
-            <p class="article-content">
-                Hibernate_查询缓存:
-默认是关闭的.
-它缓存得是hql语句.(内存中)
-
-使用查询缓存的步骤:第一步：配置开启查询缓存(hibernate.cfg.xml)12&lt;!-- 配置开启查询缓存 --&gt;&lt;property name=&quot;hibernate.cache.use_query_cache&quot;&gt;true&lt;/property&gt;
-第二步：查询时需要指定哪些hql语句存入查询缓存中123session.createQuery(hql)       .setCacheable(true) // 存入查询缓存       .list(); // 把所有的学生存入一级缓存
-缓存格式：Map
-            </p>
-            <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Hibernate</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Hibernate
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2017/04/02</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-            <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="08_Hibernate_查询缓存"
-              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_查询缓存/"><i class="fa fa-spinner fa-spin"></i></span>
-    </span>
-    
-    
-    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_查询缓存/" class="read-article">阅读全文</a>
-    
-</div>
-
-        </div>
-        
-    </li>
-    
-    
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242360143&di=25a23cf5c48b249edd1951cdde79003a&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140325%2F235100-14032502205024.jpg>
-           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
-        </div>
-        <div class="article-excerpt">
-            
-            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/">
-                <h2 class="article-title">04_Hibernate_JPA注解</h2>
-            </a>
-            
-            <p class="article-content">
-                Hibernate_JPA注解注解的作用: 将持久化类转换成表的相关信息.(表名、索引、唯一约束、列名的相关信息、关联).
-注解加在持久类上:
-@Entity : 把pojo转化成持久化类.
-
-@Table : 把持久化类转化成表的相关表信息.
-
-name(表名)
-indexes(用于指定表的引索列)
-schema(指定将数据表存入哪个数据库)
-catalog(指定将数据表存入哪个数据库)
-uniqueConstraints(用于指定唯一约束)
-
-123456@Table(name=&quot;USER_INFO&quot;, // 指定表名indexes=&#123;@Index(columnList=&quot;name&quot;, // 指定列名                name=&quot;IDX_NAME&quot;) // 指定索引的名称&#125;, // 用于...
-            </p>
-            <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Hibernate</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Hibernate
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2017/04/02</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-            <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="04_Hibernate_JPA注解"
-              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/"><i class="fa fa-spinner fa-spin"></i></span>
-    </span>
-    
-    
-    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/" class="read-article">阅读全文</a>
-    
-</div>
-
-        </div>
-        
-    </li>
-    
-    
     <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/01_Hibernate_介绍/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255155249&di=ecb38db71be7b5de262d509aee8ed9a4&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D4019228056%2C1867106425%26fm%3D214%26gp%3D0.jpg>
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255109379&di=eeaee45b7dc274f830bc8af7c7392a9a&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Da5dda3cf7bf0f736d8ab44053f659f2f%2Fb03533fa828ba61ea66a5d9f4234970a314e59fd.jpg>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -498,8 +373,265 @@ JPA: Java Persistence Api: java持久化a...
     </li>
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/05_Hibernate_HQL/">
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242360143&di=25a23cf5c48b249edd1951cdde79003a&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140325%2F235100-14032502205024.jpg>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/">
+                <h2 class="article-title">03_Hibernate_一级缓存</h2>
+            </a>
+            
+            <p class="article-content">
+                Hibernate的一级缓存.
+一级缓存，默认是开启的.
+它是跟Session相关(一级缓存是放在Session对象中).
+一级缓存是存放在内存中.因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.  
+
+
+一级缓存的作用：提高Hibernate的执行效率.  
+
+如何提高Hibernate的执行效率:因为它会把查询出来的对象先存放在内存中(一级缓存中).当你调用该对象的set方法时它不会立即发出update语句当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,如果对象的属性值没有发生改变就不会生成update语句.  
+
+
+
+操作一级缓存的方法：
+
+
+session.contains(持久化对象);判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态
+
+void session.clear(): 清空Session中的...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="03_Hibernate_一级缓存"
+              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/" class="read-article">阅读全文</a>
+    
+</div>
+
+        </div>
+        
+    </li>
+    
+    
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255128099&di=a9773cf85a76d23f5b24e6ab0a74d97a&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D1128872364%2C544347617%26fm%3D214%26gp%3D0.jpg>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/">
+                <h2 class="article-title">07_Hibernate_二级缓存</h2>
+            </a>
+            
+            <p class="article-content">
+                Hibernate_二级缓存:
+缓存的是对象.
+作用：提高Hibernate4的查询性能.
+二级缓存默认是关闭的.(因为它是与SessionFactory与关),SessionFactory存活的时间很长.
+
+使用二级缓存的步骤:
+第一步：拷贝jar (4个jar包)lib\optional\ehcache\ehcache-core-2.4.3.jarlib\optional\ehcache\hibernate-ehcache-4.3.8.Final.jarslf4j-api-1.7.2.jarslf4j-jdk14-1.7.2.jarslf4j: Simple Logging Fade for Java : 简单的java日志门面.
+第二步：在hibernate.cfg.xml文件配置开启二级缓存.
+
+1234&lt;!-- 配置开启二级缓存 --&gt;&lt;property ...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="07_Hibernate_二级缓存"
+              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/" class="read-article">阅读全文</a>
+    
+</div>
+
+        </div>
+        
+    </li>
+    
+    
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255109379&di=eeaee45b7dc274f830bc8af7c7392a9a&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Da5dda3cf7bf0f736d8ab44053f659f2f%2Fb03533fa828ba61ea66a5d9f4234970a314e59fd.jpg>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/">
+                <h2 class="article-title">09_Hibernate_Session线程安全问题</h2>
+            </a>
+            
+            <p class="article-content">
+                Hibernate_Session线程安全问题:
+第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.org.hibernate.context.internal.JTASessionContext:JTA: Java Transaction Api java事务api. (全局事务)跨数据库(EJB容器) WebLogic(IBM)org.hibernate.context.internal.ThreadLocalSessionContext:JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)
+
+1234&lt;!-- 配置线程安全的Session thread: org.hibernate.context.internal.ThreadLocalSessionContextjpa:  org.hibernate.conte...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="09_Hibernate_Session线程安全问题"
+              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/" class="read-article">阅读全文</a>
+    
+</div>
+
+        </div>
+        
+    </li>
+    
+    
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/">
         <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255087186&di=227b10e14b0823fc184bc7b950b2186e&imgtype=0&src=http%3A%2F%2Ffile06.16sucai.com%2F2016%2F0222%2Fa06c24ed5231c1b8ce163d75ca62aa24.jpg>
+           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
+        </div>
+        <div class="article-excerpt">
+            
+            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/">
+                <h2 class="article-title">04_Hibernate_JPA注解</h2>
+            </a>
+            
+            <p class="article-content">
+                Hibernate_JPA注解注解的作用: 将持久化类转换成表的相关信息.(表名、索引、唯一约束、列名的相关信息、关联).
+注解加在持久类上:
+@Entity : 把pojo转化成持久化类.
+
+@Table : 把持久化类转化成表的相关表信息.
+
+name(表名)
+indexes(用于指定表的引索列)
+schema(指定将数据表存入哪个数据库)
+catalog(指定将数据表存入哪个数据库)
+uniqueConstraints(用于指定唯一约束)
+
+123456@Table(name=&quot;USER_INFO&quot;, // 指定表名indexes=&#123;@Index(columnList=&quot;name&quot;, // 指定列名                name=&quot;IDX_NAME&quot;) // 指定索引的名称&#125;, // 用于...
+            </p>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Hibernate</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Hibernate
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2017/04/02</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="04_Hibernate_JPA注解"
+              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/04_Hibernate_JPA注解/" class="read-article">阅读全文</a>
+    
+</div>
+
+        </div>
+        
+    </li>
+    
+    
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/05_Hibernate_HQL/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255051851&di=6fcc8602cc3e743e3de4d1860d8655c3&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F60%2F34%2F15Q58PICAS4_1024.png>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -585,27 +717,24 @@ select s from Student as s       –&gt; Listselect ...
     </li>
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242360143&di=25a23cf5c48b249edd1951cdde79003a&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140325%2F235100-14032502205024.jpg>
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_查询缓存/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255109379&di=eeaee45b7dc274f830bc8af7c7392a9a&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Da5dda3cf7bf0f736d8ab44053f659f2f%2Fb03533fa828ba61ea66a5d9f4234970a314e59fd.jpg>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
             
-            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/">
-                <h2 class="article-title">07_Hibernate_二级缓存</h2>
+            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_查询缓存/">
+                <h2 class="article-title">08_Hibernate_查询缓存</h2>
             </a>
             
             <p class="article-content">
-                Hibernate_二级缓存:
-缓存的是对象.
-作用：提高Hibernate4的查询性能.
-二级缓存默认是关闭的.(因为它是与SessionFactory与关),SessionFactory存活的时间很长.
+                Hibernate_查询缓存:
+默认是关闭的.
+它缓存得是hql语句.(内存中)
 
-使用二级缓存的步骤:
-第一步：拷贝jar (4个jar包)lib\optional\ehcache\ehcache-core-2.4.3.jarlib\optional\ehcache\hibernate-ehcache-4.3.8.Final.jarslf4j-api-1.7.2.jarslf4j-jdk14-1.7.2.jarslf4j: Simple Logging Fade for Java : 简单的java日志门面.
-第二步：在hibernate.cfg.xml文件配置开启二级缓存.
-
-1234&lt;!-- 配置开启二级缓存 --&gt;&lt;property ...
+使用查询缓存的步骤:第一步：配置开启查询缓存(hibernate.cfg.xml)12&lt;!-- 配置开启查询缓存 --&gt;&lt;property name=&quot;hibernate.cache.use_query_cache&quot;&gt;true&lt;/property&gt;
+第二步：查询时需要指定哪些hql语句存入查询缓存中123session.createQuery(hql)       .setCacheable(true) // 存入查询缓存       .list(); // 把所有的学生存入一级缓存
+缓存格式：Map
             </p>
             <div class="article-meta">
     
@@ -634,123 +763,12 @@ select s from Student as s       –&gt; Listselect ...
     
     <span class="fa-wrap">
             <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="07_Hibernate_二级缓存"
-              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="hits hits-meta " data-leadcloud-title="08_Hibernate_查询缓存"
+              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_查询缓存/"><i class="fa fa-spinner fa-spin"></i></span>
     </span>
     
     
-    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/07_Hibernate_二级缓存/" class="read-article">阅读全文</a>
-    
-</div>
-
-        </div>
-        
-    </li>
-    
-    
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255128099&di=a9773cf85a76d23f5b24e6ab0a74d97a&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D1128872364%2C544347617%26fm%3D214%26gp%3D0.jpg>
-           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
-        </div>
-        <div class="article-excerpt">
-            
-            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/">
-                <h2 class="article-title">06_Hibernate_批量处理</h2>
-            </a>
-            
-            <p class="article-content">
-                Hibernate_批量处理(Hibernate的性能调优):批量添加：假如有10w条数据需要用Hibernate这个框架实现批量添加的话，有可能会出现内存溢出。123456789101112131415/**  * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中), * 这样内存中就要存放10w个对象  */session.save(t); // t --&gt; 持久化状态/** * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中,  * 再调用clear()清空一级缓存，就释放内存  */if (i % 20 == 0)&#123;    // 把一级缓存中的对象同步到底层数据库表中    session.flush();    // 清空一级缓存，就释放内存    session.clear();&...
-            </p>
-            <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Hibernate</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Hibernate
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2017/04/02</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-            <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="06_Hibernate_批量处理"
-              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/"><i class="fa fa-spinner fa-spin"></i></span>
-    </span>
-    
-    
-    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/" class="read-article">阅读全文</a>
-    
-</div>
-
-        </div>
-        
-    </li>
-    
-    
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242360143&di=25a23cf5c48b249edd1951cdde79003a&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140325%2F235100-14032502205024.jpg>
-           <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
-        </div>
-        <div class="article-excerpt">
-            
-            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/">
-                <h2 class="article-title">09_Hibernate_Session线程安全问题</h2>
-            </a>
-            
-            <p class="article-content">
-                Hibernate_Session线程安全问题:
-第一步：在hbernate.cfg.xml文件把Session配置成线程安全的Session.org.hibernate.context.internal.JTASessionContext:JTA: Java Transaction Api java事务api. (全局事务)跨数据库(EJB容器) WebLogic(IBM)org.hibernate.context.internal.ThreadLocalSessionContext:JDBC事务(局部事务)： 针对一个数据库中的表. (Web容器)
-
-1234&lt;!-- 配置线程安全的Session thread: org.hibernate.context.internal.ThreadLocalSessionContextjpa:  org.hibernate.conte...
-            </p>
-            <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Hibernate</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Hibernate
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2017/04/02</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-            <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="09_Hibernate_Session线程安全问题"
-              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/"><i class="fa fa-spinner fa-spin"></i></span>
-    </span>
-    
-    
-    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/09_Hibernate_Session线程安全/" class="read-article">阅读全文</a>
+    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/08_Hibernate_查询缓存/" class="read-article">阅读全文</a>
     
 </div>
 
@@ -760,7 +778,7 @@ select s from Student as s       –&gt; Listselect ...
     
     
     <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Mybatis/Mybatis/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491242360143&di=25a23cf5c48b249edd1951cdde79003a&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140325%2F235100-14032502205024.jpg>
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255109379&di=eeaee45b7dc274f830bc8af7c7392a9a&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Da5dda3cf7bf0f736d8ab44053f659f2f%2Fb03533fa828ba61ea66a5d9f4234970a314e59fd.jpg>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
@@ -813,35 +831,18 @@ select s from Student as s       –&gt; Listselect ...
     </li>
     
     
-    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/">
-        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255128099&di=a9773cf85a76d23f5b24e6ab0a74d97a&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D1128872364%2C544347617%26fm%3D214%26gp%3D0.jpg>
+    <li  class="article-excerpt-wrap " _href = "/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/">
+        <div class="article-img img-ajax" data-src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491255155249&di=ecb38db71be7b5de262d509aee8ed9a4&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D4019228056%2C1867106425%26fm%3D214%26gp%3D0.jpg>
            <div class="loading-img"><i class="fa fa-pulse fa-spinner"></i></div>
         </div>
         <div class="article-excerpt">
             
-            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/">
-                <h2 class="article-title">03_Hibernate_一级缓存</h2>
+            <a class="article-title-link" href="/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/">
+                <h2 class="article-title">06_Hibernate_批量处理</h2>
             </a>
             
             <p class="article-content">
-                Hibernate的一级缓存.
-一级缓存，默认是开启的.
-它是跟Session相关(一级缓存是放在Session对象中).
-一级缓存是存放在内存中.因为Session的存活的时间比较短,用完就关闭.关闭时一级缓存就清空.  
-
-
-一级缓存的作用：提高Hibernate的执行效率.  
-
-如何提高Hibernate的执行效率:因为它会把查询出来的对象先存放在内存中(一级缓存中).当你调用该对象的set方法时它不会立即发出update语句当事务提交时，它先会把你修改的对象与缓存中的对象进行比较,如果对象的属性值没有发生改变就不会生成update语句.  
-
-
-
-操作一级缓存的方法：
-
-
-session.contains(持久化对象);判断一级缓存中是否包含一个对象，返回true就是持久化状态，false:不是持久化状态
-
-void session.clear(): 清空Session中的...
+                Hibernate_批量处理(Hibernate的性能调优):批量添加：假如有10w条数据需要用Hibernate这个框架实现批量添加的话，有可能会出现内存溢出。123456789101112131415/**  * 调用save方法，t就是持久化状态，持久化状态的对象都是放存一级缓存中(内存中), * 这样内存中就要存放10w个对象  */session.save(t); // t --&gt; 持久化状态/** * 当一级缓存中的对象达到20个，就调用flush()方法把一级缓存中的对象同步到底层数据库表中,  * 再调用clear()清空一级缓存，就释放内存  */if (i % 20 == 0)&#123;    // 把一级缓存中的对象同步到底层数据库表中    session.flush();    // 清空一级缓存，就释放内存    session.clear();&...
             </p>
             <div class="article-meta">
     
@@ -870,12 +871,12 @@ void session.clear(): 清空Session中的...
     
     <span class="fa-wrap">
             <i class="fa fa-thermometer-three-quarters"></i>
-        <span class="hits hits-meta " data-leadcloud-title="03_Hibernate_一级缓存"
-              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/"><i class="fa fa-spinner fa-spin"></i></span>
+        <span class="hits hits-meta " data-leadcloud-title="06_Hibernate_批量处理"
+              data-leadcloud-url="/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/"><i class="fa fa-spinner fa-spin"></i></span>
     </span>
     
     
-    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/03_Hibernate_一级缓存/" class="read-article">阅读全文</a>
+    <a href="/2017/04/02/Backend/Java/ORM/Hibernate/06_Hibernate_批量处理/" class="read-article">阅读全文</a>
     
 </div>
 
